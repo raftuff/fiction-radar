@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>作品詳細｜FICTION RADAR</title>
+  <meta name="description" content="FICTION RADAR の作品詳細ページ。書影・出版情報・受賞歴・管理人メモなどを掲載。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ ヘッダー ============ -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__radar" aria-hidden="true"></span>
+        <span class="logo__text">FICTION&nbsp;RADAR</span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="メニュー" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="main-nav">
+        <a href="index.html">トップ</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <span class="nav__updated">最終更新：<span data-last-updated>2026.06.15</span></span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ 作品詳細（JSで描画） ============ -->
+  <main class="container container--detail" id="book-detail">
+    <p class="empty">読み込み中…</p>
+  </main>
+
+  <!-- ============ フッター ============ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo__radar" aria-hidden="true"></span>
+        <span class="logo__text">FICTION RADAR</span>
+        <p class="footer__tag">海外小説の話題作・名作ガイド</p>
+      </div>
+      <div class="footer__links">
+        <a href="index.html#about">About</a>
+        <a href="mailto:hello@fictionradar.example">Contact</a>
+        <a href="index.html">トップへ</a>
+      </div>
+    </div>
+    <p class="footer__copy">© <span id="year">2026</span> FICTION RADAR. 掲載情報は変更される場合があります。</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

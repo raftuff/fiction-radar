@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FICTION RADAR｜海外小説の話題作・名作ガイド</title>
+  <meta name="description" content="海外の受賞作、映像化原作、注目の新刊から、日本語で読める次の一冊を探すWebマガジン。サスペンス・犯罪小説・社会派文学・ディストピアを中心に紹介。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ ヘッダー ============ -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="#top" class="logo" id="show-all">
+        <span class="logo__radar" aria-hidden="true"></span>
+        <span class="logo__text">FICTION&nbsp;RADAR</span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="メニュー" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="main-nav">
+        <a href="#sections" data-section="今週の注目翻訳小説">新着翻訳本</a>
+        <a href="#sections" data-section="話題の新刊">話題の新刊</a>
+        <a href="#sections" data-section="受賞作">受賞作</a>
+        <a href="#sections" data-section="映像化原作">映像化原作</a>
+        <a href="#sections" data-section="サスペンス・犯罪小説">サスペンス</a>
+        <a href="#sections" data-section="社会派・ディストピア">社会派・ディストピア</a>
+        <a href="#sections" data-section="名作・定番">名作</a>
+        <a href="#sections" data-section="翻訳待ちウォッチ">翻訳待ち</a>
+        <a href="#sections" data-section="__curator" class="nav__pick">管理人おすすめ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ ファーストビュー ============ -->
+  <section class="hero" id="top">
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <p class="hero__eyebrow">海外小説・翻訳小説のWebマガジン</p>
+        <h1 class="hero__title">海外小説の<br />話題作・名作ガイド</h1>
+        <p class="hero__sub">海外の受賞作、映像化原作、注目の新刊から、<br class="pc-only" />日本語で読める「次の一冊」を探すWebマガジン。</p>
+        <p class="hero__updated">📡 最終更新：<span data-last-updated>2026.06.15</span>｜週1回更新中</p>
+
+        <div class="hero__controls">
+          <input type="search" id="search" class="search" placeholder="🔍 タイトル・著者・キーワードで探す" />
+          <select id="genre-filter" class="genre-filter" aria-label="ジャンルで絞り込む">
+            <option value="all">すべてのジャンル</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- メインビジュアル枠（あとで線画イラストを差し込む） -->
+      <div class="hero__visual" id="main-visual">
+        <!-- 後から <img src="main-visual.svg" alt=""> などに差し替え可能 -->
+        <div class="visual-placeholder">
+          <svg viewBox="0 0 200 200" class="visual-svg" aria-hidden="true">
+            <circle cx="100" cy="100" r="78" class="vs-ring" />
+            <circle cx="100" cy="100" r="52" class="vs-ring" />
+            <circle cx="100" cy="100" r="26" class="vs-ring" />
+            <line x1="100" y1="100" x2="158" y2="58" class="vs-sweep" />
+            <g class="vs-book">
+              <rect x="78" y="120" width="44" height="30" rx="3" />
+              <line x1="100" y1="120" x2="100" y2="150" />
+            </g>
+            <circle cx="150" cy="62" r="4" class="vs-dot" />
+            <circle cx="70" cy="78" r="3" class="vs-dot" />
+            <circle cx="128" cy="132" r="3" class="vs-dot" />
+          </svg>
+          <p class="visual-placeholder__text">[ Main Visual Coming Soon ]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ セクション（JSで描画） ============ -->
+  <main class="container" id="sections"></main>
+
+  <!-- ============ About ============ -->
+  <section class="about" id="about">
+    <div class="about__inner">
+      <h2 class="about__title">FICTION RADAR について</h2>
+      <p>FICTION RADARは、海外小説の話題作・受賞作・映像化原作・名作を、日本語で読める翻訳本を中心に紹介するWebマガジンです。</p>
+      <p>海外文学賞やミステリー賞、映像化ニュース、日本国内のランキングや読者レビューも参考にしながら、次に読む一冊を探しやすく整理します。</p>
+      <p>サスペンス、犯罪小説、社会派文学、ディストピアを中心に、読書の入口になる作品を紹介していきます。</p>
+    </div>
+  </section>
+
+  <!-- ============ フッター ============ -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo__radar" aria-hidden="true"></span>
+        <span class="logo__text">FICTION RADAR</span>
+        <p class="footer__tag">海外小説の話題作・名作ガイド</p>
+      </div>
+      <div class="footer__links">
+        <a href="#about">About</a>
+        <a href="mailto:hello@fictionradar.example">Contact</a>
+        <a href="#top" id="back-top">トップへ</a>
+      </div>
+    </div>
+    <p class="footer__copy">© <span id="year">2026</span> FICTION RADAR. 掲載情報は変更される場合があります。</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
