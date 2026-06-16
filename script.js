@@ -61,7 +61,7 @@ const books = [
     publicationDateJa: "",
     formatJa: "単行本",
     translationStatus: "translated",
-    isbnJa: "9784152104176",   // 日本語版ISBN（13桁推奨）。入れると NDLサーチ／Google Books 経由で書影自動取得を試行
+    isbnJa: "9784152105141",   // 日本語版ISBN（13桁推奨）。入れると NDLサーチ／Google Books 経由で書影自動取得を試行
 
     coverJa: "assets/covers/prophet-song-ja.jpg",
     coverOriginal: "assets/covers/prophet-song-original.jpg",
@@ -109,7 +109,7 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
-    isbnJa: "9784594097531",
+    isbnJa: "9784151867019",
     coverJa: "assets/covers/the-housemaid-ja.jpg",
     coverOriginal: "assets/covers/the-housemaid-original.jpg",
     coverAlt: "『ハウスメイド』書影",
