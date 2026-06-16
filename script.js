@@ -61,10 +61,14 @@ const books = [
     publicationDateJa: "",
     formatJa: "単行本",
     translationStatus: "translated",
+    isbnJa: "9784152104176",   // 日本語版ISBN（13桁推奨）。入れると NDLサーチ／Google Books 経由で書影自動取得を試行
 
     coverJa: "assets/covers/prophet-song-ja.jpg",
     coverOriginal: "assets/covers/prophet-song-original.jpg",
     coverAlt: "『預言者の歌』書影",
+    coverJaUrl: "",        // 外部の日本語版書影URL（例：出版社公式 / Amazonアソシエイト / 楽天アフィリエイト）
+    coverOriginalUrl: "",  // 外部の原書版書影URL
+    purchaseUrl: "",       // 書影クリックで開く商品ページURL
 
     genre: ["社会派文学", "ディストピア"],
     mood: ["不穏", "重い", "社会派"],
@@ -105,9 +109,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "9784594097531",
     coverJa: "assets/covers/the-housemaid-ja.jpg",
     coverOriginal: "assets/covers/the-housemaid-original.jpg",
     coverAlt: "『ハウスメイド』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["心理スリラー", "サスペンス"],
     mood: ["どんでん返し", "イッキ読み", "不穏"],
@@ -148,9 +156,13 @@ const books = [
     formatJa: "単行本",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/babayaga-no-yoru-ja.jpg",
     coverOriginal: "",
     coverAlt: "『ババヤガの夜』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["犯罪小説", "サスペンス"],
     mood: ["疾走感", "バイオレンス", "痛快"],
@@ -191,9 +203,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/where-the-crawdads-sing-ja.jpg",
     coverOriginal: "assets/covers/where-the-crawdads-sing-original.jpg",
     coverAlt: "『ザリガニの鳴くところ』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["ミステリー", "翻訳文学"],
     mood: ["叙情的", "切ない", "謎解き"],
@@ -234,9 +250,13 @@ const books = [
     formatJa: "単行本／文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/santi-ja.jpg",
     coverOriginal: "assets/covers/santi-original.jpg",
     coverAlt: "『三体』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["社会派文学", "ディストピア"],
     mood: ["スケール大", "硬派", "知的興奮"],
@@ -277,9 +297,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/the-handmaids-tale-ja.jpg",
     coverOriginal: "assets/covers/the-handmaids-tale-original.jpg",
     coverAlt: "『侍女の物語』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["ディストピア", "社会派文学"],
     mood: ["不穏", "静かな恐怖", "社会派"],
@@ -320,9 +344,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/nineteen-eighty-four-ja.jpg",
     coverOriginal: "assets/covers/nineteen-eighty-four-original.jpg",
     coverAlt: "『1984年』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["ディストピア", "社会派文学"],
     mood: ["不穏", "重い", "古典"],
@@ -363,9 +391,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/millennium-1-ja.jpg",
     coverOriginal: "assets/covers/millennium-1-original.jpg",
     coverAlt: "『ミレニアム1 ドラゴン・タトゥーの女』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["犯罪小説", "サスペンス", "ミステリー"],
     mood: ["北欧ノワール", "重厚", "謎解き"],
@@ -406,9 +438,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/alex-ja.jpg",
     coverOriginal: "assets/covers/alex-original.jpg",
     coverAlt: "『その女アレックス』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["犯罪小説", "心理スリラー", "ミステリー"],
     mood: ["どんでん返し", "緊迫", "イッキ読み"],
@@ -449,9 +485,13 @@ const books = [
     formatJa: "文庫",
     translationStatus: "translated",
 
+    isbnJa: "",
     coverJa: "assets/covers/silence-of-the-lambs-ja.jpg",
     coverOriginal: "assets/covers/silence-of-the-lambs-original.jpg",
     coverAlt: "『羊たちの沈黙』書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["犯罪小説", "サスペンス", "心理スリラー"],
     mood: ["緊迫", "恐怖", "心理戦"],
@@ -493,10 +533,14 @@ const books = [
     publicationDateJa: "",
     formatJa: "",
     translationStatus: "untranslated",
+    isbnJa: "",   // 日本語版なし
 
     coverJa: "",
     coverOriginal: "assets/covers/untranslated-watch-1-original.jpg",
     coverAlt: "翻訳待ち作品の原書書影",
+    coverJaUrl: "",
+    coverOriginalUrl: "",
+    purchaseUrl: "",
 
     genre: ["サスペンス"],
     mood: ["注目"],
@@ -564,21 +608,95 @@ function badgeHtml(label) {
   return `<span class="badge ${cls}">${label}</span>`;
 }
 
-/* 使うべき書影パスを返す（日本語版優先→原書→なし） */
-function coverSrc(book) {
-  if (book.translationStatus === "translated" && book.coverJa) return book.coverJa;
-  if (book.coverOriginal) return book.coverOriginal;
-  return book.coverJa || ""; // 念のため
+/* ISBN を NDLサーチ書影API のURLに変換 */
+function ndlThumb(isbn) {
+  return isbn ? `https://ndlsearch.ndl.go.jp/thumbnail/${encodeURIComponent(isbn)}.jpg` : "";
 }
 
-/* 書影HTML（画像未設定・読み込み失敗でもプレースホルダーが出る） */
-function coverHtml(book, sizeClass = "") {
-  const src = coverSrc(book);
+/* 書影の候補を優先度順に返す。
+   各要素は「画像URL文字列」または「"gb:{isbn}"（Google Books API取得トークン）」。
+   優先順位：
+     1. coverJa         ローカル画像
+     2. coverJaUrl      手入力の外部画像URL
+     3. NDLサーチ書影    isbnJa から生成
+     4. Google Books    isbnJa から取得（"gb:" トークン）
+     5. coverOriginal
+     6. coverOriginalUrl
+     7. （尽きたら No Image）
+   翻訳待ち等で coverJa/isbnJa が空なら、原書版が先頭に来る。 */
+function coverCandidates(book) {
+  const isbn = String(book.isbnJa || "").replace(/[-\s]/g, "");
+  return [
+    book.coverJa,
+    book.coverJaUrl,
+    isbn ? ndlThumb(isbn) : "",
+    isbn ? "gb:" + isbn : "",
+    book.coverOriginal,
+    book.coverOriginalUrl,
+  ].filter(Boolean);
+}
+
+/* 最初に表示する書影src（gbトークンは初期srcには来ない設計） */
+function coverSrc(book) {
+  const c = coverCandidates(book);
+  const first = c.find((x) => !String(x).startsWith("gb:"));
+  return first || "";
+}
+
+/* 商品ページURL（purchaseUrl 優先、なければ links[0]） */
+function productUrl(book) {
+  if (book.purchaseUrl) return book.purchaseUrl;
+  if (book.links && book.links.length && book.links[0] && book.links[0].url) return book.links[0].url;
+  return "";
+}
+
+/* Google Books API から書影サムネイルURLを取得（http→httpsに正規化） */
+function fetchGoogleBooksThumb(isbn) {
+  const api = `https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}`;
+  return fetch(api)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (!d || !d.items || !d.items.length) return "";
+      const il = (d.items[0].volumeInfo || {}).imageLinks || {};
+      let u = il.thumbnail || il.smallThumbnail || "";
+      return u ? u.replace(/^http:/, "https:") : "";
+    })
+    .catch(() => "");
+}
+if (typeof window !== "undefined") window.fetchGoogleBooksThumb = fetchGoogleBooksThumb;
+
+/* 読み込み失敗時に次の候補へ。"gb:" トークンは Google Books を非同期取得し、
+   取得できれば差し替え、ダメなら次へ。候補が尽きたらプレースホルダー表示。
+   inline onerror から呼ぶためグローバル関数として定義。 */
+function coverFallback(img) {
+  let fb = [];
+  try { fb = JSON.parse(img.getAttribute("data-fallbacks") || "[]"); } catch (e) {}
+  if (!fb.length) { img.classList.add("is-missing"); return; }
+  const next = fb.shift();
+  img.setAttribute("data-fallbacks", JSON.stringify(fb));
+  if (typeof next === "string" && next.startsWith("gb:")) {
+    fetchGoogleBooksThumb(next.slice(3)).then((url) => {
+      if (url) { img.src = url; } else { coverFallback(img); }
+    }).catch(() => coverFallback(img));
+  } else {
+    img.src = next;
+  }
+}
+if (typeof window !== "undefined") window.coverFallback = coverFallback;
+
+/* 書影HTML（画像未設定・読み込み失敗でもプレースホルダーが出る）
+   linkUrl を渡すと書影クリックで商品ページ等へ遷移（別タブ）。 */
+function coverHtml(book, sizeClass = "", linkUrl = "") {
+  const cand = coverCandidates(book);
   const alt = book.coverAlt || (book.titleJa || book.titleOriginal || "") + " 書影";
-  const img = src
-    ? `<img class="cover__img" src="${src}" alt="${alt}" loading="lazy" onerror="this.classList.add('is-missing')">`
+  // 初期srcは実URLを採用（"gb:"トークンは初期srcにしない）。残りはフォールバックへ。
+  const startIdx = cand.findIndex((x) => !String(x).startsWith("gb:"));
+  const first = startIdx >= 0 ? cand[startIdx] : "";
+  const rest = JSON.stringify(startIdx >= 0 ? cand.slice(startIdx + 1) : []).replace(/'/g, "&#39;");
+  const img = first
+    ? `<img class="cover__img" src="${first}" alt="${alt}" loading="lazy" data-fallbacks='${rest}' onerror="coverFallback(this)">`
     : "";
-  return `
+  const inner = `
     <div class="cover ${sizeClass}">
       ${img}
       <div class="cover__ph" aria-hidden="true">
@@ -586,6 +704,10 @@ function coverHtml(book, sizeClass = "") {
         <span class="cover__ph-text">No Image</span>
       </div>
     </div>`;
+  if (linkUrl) {
+    return `<a class="cover-link" href="${linkUrl}" target="_blank" rel="noopener" title="商品ページを開く">${inner}</a>`;
+  }
+  return inner;
 }
 
 /* カード上の出版元・翻訳者の簡潔表示 */
@@ -851,7 +973,9 @@ function renderDetail() {
     <p class="d-back"><a class="back-link" href="index.html">← 一覧に戻る</a></p>
 
     <div class="d-hero">
-      <div class="d-cover">${coverHtml(book, "cover--detail")}</div>
+      <div class="d-cover">${coverHtml(book, "cover--detail", productUrl(book))}
+        ${productUrl(book) ? `<p class="d-cover-note">画像クリックで商品ページへ</p>` : ""}
+      </div>
       <div class="d-head">
         <div class="card__badges">${badges}</div>
         <h1 class="d-title">${title}</h1>
