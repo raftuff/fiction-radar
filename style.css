@@ -72,6 +72,14 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: .02em;
   flex-shrink: 0;
 }
+/* ヘッダー／フッターのロゴアイコン画像（巨大化防止のため必ずサイズ指定） */
+.logo__icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
 .logo__radar {
   width: 22px; height: 22px;
   border-radius: 50%;
@@ -187,43 +195,17 @@ a { color: inherit; text-decoration: none; }
 .search:focus, .genre-filter:focus { border-color: var(--accent); }
 .genre-filter { cursor: pointer; }
 
-/* メインビジュアル枠 */
+/* メインビジュアル */
 .hero__visual {
   display: flex;
   justify-content: center;
 }
-.visual-placeholder {
+.visual-img {
   width: 100%;
-  max-width: 340px;
-  aspect-ratio: 1 / 1;
-  background: var(--bg-soft);
-  border: 3px dashed var(--accent-2);
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.visual-svg {
-  width: 62%;
-  max-width: 200px;
-  fill: none;
-  stroke: var(--accent-2);
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.vs-ring { stroke: var(--accent-2); opacity: .55; }
-.vs-sweep { stroke: var(--accent); stroke-width: 5; }
-.vs-book { stroke: var(--accent-4); }
-.vs-dot { fill: var(--accent-3); stroke: none; }
-.visual-placeholder__text {
-  font-family: var(--font-round);
-  font-weight: 700;
-  color: var(--ink-soft);
-  font-size: .92rem;
-  margin: 0;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* ============ セクション ============ */
@@ -491,7 +473,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 860px) {
   .hero__inner { grid-template-columns: 1fr; }
   .hero__visual { order: -1; }
-  .visual-placeholder { max-width: 280px; }
+  .visual-img { max-width: 320px; }
 
   .menu-toggle { display: flex; }
   .nav {
