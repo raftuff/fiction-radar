@@ -68,7 +68,7 @@ const books = [
     coverAlt: "『預言者の歌』書影",
     coverJaUrl: "https://www.hayakawa-online.co.jp/img/goods/L/5210514.jpg",  // 外部の日本語版書影URL
     coverOriginalUrl: "",  // 外部の原書版書影URL
-    purchaseUrl: "https://www.hayakawa-online.co.jp/shop/g/g00005210514/",    // 書影クリックで開く商品ページURL
+    purchaseUrl: "https://www.hayakawa-online.co.jp/shop/g/g0005210514/",    // 書影クリックで開く商品ページURL
 
     genre: ["社会派文学", "ディストピア"],
     mood: ["不穏", "重い", "社会派"],
@@ -998,7 +998,7 @@ function renderDetail() {
 
     <div class="d-hero">
       <div class="d-cover">${coverHtml(book, "cover--detail", productUrl(book))}
-        ${productUrl(book) ? `<p class="d-cover-note">画像クリックで商品ページへ</p>` : ""}
+        ${productUrl(book) ? `<a class="d-cover-btn" href="${productUrl(book)}" target="_blank" rel="noopener">商品ページを見る</a>` : ""}
       </div>
       <div class="d-head">
         <div class="card__badges">${badges}</div>

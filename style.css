@@ -591,6 +591,10 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   display: block;
 }
+/* カードの書影は表紙全体を見せる（トリミングしない） */
+.cover--card .cover__img {
+  object-fit: contain;
+}
 .cover__img.is-missing { display: none; } /* 読み込み失敗時はプレースホルダーを見せる */
 
 /* カード上の書影（上部・横長サムネ。本文とのバランスを取り、やや低め） */
@@ -608,6 +612,28 @@ a { color: inherit; text-decoration: none; }
   border-radius: 12px;
   box-shadow: 0 10px 26px rgba(60, 45, 30, .22);
 }
+
+/* 書影クリックで商品ページへ飛ぶリンク */
+.cover-link { display: block; transition: transform .15s, box-shadow .15s; }
+.cover-link:hover { transform: translateY(-3px); }
+.cover-link:hover .cover--detail { box-shadow: 0 14px 32px rgba(255,107,74,.30); }
+/* 書影下の「商品ページを見る」ボタン */
+.d-cover-btn {
+  display: block;
+  width: 100%;
+  margin: 12px 0 0;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;       /* 「へ」だけ改行されないように */
+  box-sizing: border-box;
+  transition: filter .15s, transform .15s;
+}
+.d-cover-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
 
 /* ---- ファーストビューの更新日 ---- */
 .hero__updated {
