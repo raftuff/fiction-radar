@@ -482,6 +482,102 @@ const books = [
     links: [],
   },
 
+  /* ---- 管理人おすすめ（追加） ---- */
+  {
+    id: "stone-circle",
+    titleJa: "ストーンサークルの殺人",
+    titleOriginal: "",
+    author: "",
+    country: "イギリス",
+
+    publisherJa: "早川書房",
+    translator: "",
+    publicationDateJa: "",
+    formatJa: "",
+    translationStatus: "translated",
+
+    coverJa: "",
+    coverJaUrl: "https://www.hayakawa-online.co.jp/img/goods/L/613012.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『ストーンサークルの殺人』書影",
+    purchaseUrl: "https://www.hayakawa-online.co.jp/shop/g/g0000613012/",
+
+    genre: ["犯罪小説", "ミステリー", "サスペンス"],
+    mood: ["不穏", "ページターナー", "英国ミステリー"],
+    badges: ["管理人おすすめ", "日本語版あり"],
+    awards: [],
+    japanRecognition: [],
+    readerReaction: "",
+
+    adaptation: "",
+    section: ["管理人おすすめ", "サスペンス・犯罪小説"],
+    primarySection: "管理人おすすめ",
+
+    summary: "英国ミステリーらしい不穏さと謎解きの面白さを楽しめる、管理人おすすめの一冊。",
+    recommendedFor: "海外ミステリーのシリーズものや、じっくり読ませる犯罪小説が好きな人に。",
+
+    curatorPick: true,
+    weeklyPick: false,
+    weeklyIssue: "",
+    addedDate: "2026-06-17",
+    isNew: true,
+
+    hasAdminComment: true,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "ここに管理人コメントを入れられるようにしておいてください。",
+
+    relatedBooks: ["殺人者の顔", "ミレニアム1 ドラゴン・タトゥーの女", "その女アレックス"],
+    links: [],
+  },
+  {
+    id: "faceless-killers",
+    titleJa: "殺人者の顔",
+    titleOriginal: "",
+    author: "",
+    country: "スウェーデン",
+
+    publisherJa: "東京創元社",
+    translator: "",
+    publicationDateJa: "",
+    formatJa: "",
+    translationStatus: "translated",
+
+    coverJa: "",
+    coverJaUrl: "https://www.tsogen.co.jp/img/cover_image_l/20902.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『殺人者の顔』書影",
+    purchaseUrl: "https://www.tsogen.co.jp/np/isbn/9784488209025",
+
+    genre: ["犯罪小説", "ミステリー", "北欧ミステリー"],
+    mood: ["重厚", "硬派", "北欧ノワール"],
+    badges: ["管理人おすすめ", "日本語版あり", "名作"],
+    awards: [],
+    japanRecognition: [],
+    readerReaction: "",
+
+    adaptation: "",
+    section: ["管理人おすすめ", "サスペンス・犯罪小説", "名作"],
+    primarySection: "管理人おすすめ",
+
+    summary: "北欧ミステリーの代表的シリーズの入口として読みたい、重厚な犯罪小説。",
+    recommendedFor: "北欧ミステリー、警察小説、硬派な犯罪小説が好きな人に。",
+
+    curatorPick: true,
+    weeklyPick: false,
+    weeklyIssue: "",
+    addedDate: "2026-06-17",
+    isNew: true,
+
+    hasAdminComment: true,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "ここに管理人コメントを入れられるようにしておいてください。",
+
+    relatedBooks: ["ストーンサークルの殺人", "ミレニアム1 ドラゴン・タトゥーの女", "その女アレックス"],
+    links: [],
+  },
+
   /* ---- 翻訳待ちウォッチ（日本語版がまだない想定の例） ---- */
   {
     id: "untranslated-watch-1",
