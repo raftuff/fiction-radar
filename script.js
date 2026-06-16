@@ -608,28 +608,29 @@ function badgeHtml(label) {
   return `<span class="badge ${cls}">${label}</span>`;
 }
 
-/* ISBN を NDLサーチ書影API のURLに変換 */
-function ndlThumb(isbn) {
-  return isbn ? `https://ndlsearch.ndl.go.jp/thumbnail/${encodeURIComponent(isbn)}.jpg` : "";
-}
+/* ［廃止］NDLサーチ書影APIは2026年3月31日で終了したため使用しません。
+   参考までに関数だけ残しています（呼び出していません）。
+   function ndlThumb(isbn) {
+     return isbn ? `https://ndlsearch.ndl.go.jp/thumbnail/${encodeURIComponent(isbn)}.jpg` : "";
+   }
+*/
 
 /* 書影の候補を優先度順に返す。
    各要素は「画像URL文字列」または「"gb:{isbn}"（Google Books API取得トークン）」。
    優先順位：
      1. coverJa         ローカル画像
      2. coverJaUrl      手入力の外部画像URL
-     3. NDLサーチ書影    isbnJa から生成
-     4. Google Books    isbnJa から取得（"gb:" トークン）
-     5. coverOriginal
-     6. coverOriginalUrl
-     7. （尽きたら No Image）
+     3. Google Books    isbnJa から取得（"gb:" トークン）
+     4. coverOriginal
+     5. coverOriginalUrl
+     6. （尽きたら No Image）
+   ※ NDLサーチ書影API（旧3番）はサービス終了のため除外。
    翻訳待ち等で coverJa/isbnJa が空なら、原書版が先頭に来る。 */
 function coverCandidates(book) {
   const isbn = String(book.isbnJa || "").replace(/[-\s]/g, "");
   return [
     book.coverJa,
     book.coverJaUrl,
-    isbn ? ndlThumb(isbn) : "",
     isbn ? "gb:" + isbn : "",
     book.coverOriginal,
     book.coverOriginalUrl,
@@ -684,17 +685,26 @@ function coverFallback(img) {
 }
 if (typeof window !== "undefined") window.coverFallback = coverFallback;
 
+/* 描画後、各書影imgの先頭候補を読み込み開始する（URLでもgbトークンでも対応）。 */
+function initCovers(scope) {
+  const ctx = scope || document;
+  $$(".cover__img[data-fallbacks]", ctx).forEach((img) => {
+    if (img.getAttribute("data-cover-started")) return;
+    img.setAttribute("data-cover-started", "1");
+    coverFallback(img); // 先頭候補を読み込む（失敗時は onerror で次へ）
+  });
+}
+
 /* 書影HTML（画像未設定・読み込み失敗でもプレースホルダーが出る）
    linkUrl を渡すと書影クリックで商品ページ等へ遷移（別タブ）。 */
 function coverHtml(book, sizeClass = "", linkUrl = "") {
   const cand = coverCandidates(book);
   const alt = book.coverAlt || (book.titleJa || book.titleOriginal || "") + " 書影";
-  // 初期srcは実URLを採用（"gb:"トークンは初期srcにしない）。残りはフォールバックへ。
-  const startIdx = cand.findIndex((x) => !String(x).startsWith("gb:"));
-  const first = startIdx >= 0 ? cand[startIdx] : "";
-  const rest = JSON.stringify(startIdx >= 0 ? cand.slice(startIdx + 1) : []).replace(/'/g, "&#39;");
-  const img = first
-    ? `<img class="cover__img" src="${first}" alt="${alt}" loading="lazy" data-fallbacks='${rest}' onerror="coverFallback(this)">`
+  // 候補すべてを data-fallbacks に入れておき、描画後に initCovers() が
+  // 先頭から順に読み込む。これにより「候補がGoogle Booksトークンだけ」でも取得できる。
+  const fb = JSON.stringify(cand).replace(/'/g, "&#39;");
+  const img = cand.length
+    ? `<img class="cover__img" alt="${alt}" loading="lazy" data-fallbacks='${fb}' onerror="coverFallback(this)">`
     : "";
   const inner = `
     <div class="cover ${sizeClass}">
@@ -795,6 +805,7 @@ function renderIndex() {
   if (state.activeSection === CURATOR_KEY) {
     const list = applyFilters(books.filter((b) => b.curatorPick === true));
     root.innerHTML = sectionBlock("サイト管理人おすすめ", "サイトの方向性に合う、管理人が推したい作品。", list, false);
+    initCovers(root);
     return;
   }
 
@@ -811,6 +822,7 @@ function renderIndex() {
   if (!anyResult) {
     root.innerHTML = `<p class="empty empty--big">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
   }
+  initCovers(root);
 }
 
 function sectionBlock(label, note, list, feature) {
@@ -1003,6 +1015,7 @@ function renderDetail() {
 
     <p class="d-back d-back--bottom"><a class="back-link" href="index.html">← 一覧に戻る</a></p>
   `;
+  initCovers(root);
 }
 
 /* =========================================================
