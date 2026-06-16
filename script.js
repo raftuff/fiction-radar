@@ -51,6 +51,7 @@ const BADGE_CLASS = {
 const books = [
   {
     id: "prophet-song",
+    primarySection: "今週の注目翻訳小説",   // TOP初期表示で出すセクション（重複防止）
     titleJa: "預言者の歌",
     titleOriginal: "Prophet Song",
     author: "ポール・リンチ",
@@ -98,6 +99,7 @@ const books = [
   },
   {
     id: "the-housemaid",
+    primarySection: "話題の新刊",
     titleJa: "ハウスメイド",
     titleOriginal: "The Housemaid",
     author: "フリーダ・マクファデン",
@@ -145,6 +147,7 @@ const books = [
   },
   {
     id: "babayaga-no-yoru",
+    primarySection: "受賞作",
     titleJa: "ババヤガの夜",
     titleOriginal: "",
     author: "王谷晶",
@@ -192,6 +195,7 @@ const books = [
   },
   {
     id: "where-the-crawdads-sing",
+    primarySection: "映像化原作",
     titleJa: "ザリガニの鳴くところ",
     titleOriginal: "Where the Crawdads Sing",
     author: "ディーリア・オーエンズ",
@@ -239,6 +243,7 @@ const books = [
   },
   {
     id: "santi",
+    primarySection: "日本で読まれている海外小説",
     titleJa: "三体",
     titleOriginal: "三体 / The Three-Body Problem",
     author: "劉慈欣（リウ・ツーシン）",
@@ -286,6 +291,7 @@ const books = [
   },
   {
     id: "the-handmaids-tale",
+    primarySection: "社会派・ディストピア",
     titleJa: "侍女の物語",
     titleOriginal: "The Handmaid's Tale",
     author: "マーガレット・アトウッド",
@@ -333,6 +339,7 @@ const books = [
   },
   {
     id: "nineteen-eighty-four",
+    primarySection: "名作・定番",
     titleJa: "1984年",
     titleOriginal: "Nineteen Eighty-Four",
     author: "ジョージ・オーウェル",
@@ -380,6 +387,7 @@ const books = [
   },
   {
     id: "millennium-1",
+    primarySection: "サスペンス・犯罪小説",
     titleJa: "ミレニアム1 ドラゴン・タトゥーの女",
     titleOriginal: "Män som hatar kvinnor / The Girl with the Dragon Tattoo",
     author: "スティーグ・ラーソン",
@@ -427,6 +435,7 @@ const books = [
   },
   {
     id: "alex",
+    primarySection: "受賞作",
     titleJa: "その女アレックス",
     titleOriginal: "Alex",
     author: "ピエール・ルメートル",
@@ -474,6 +483,7 @@ const books = [
   },
   {
     id: "silence-of-the-lambs",
+    primarySection: "名作・定番",
     titleJa: "羊たちの沈黙",
     titleOriginal: "The Silence of the Lambs",
     author: "トマス・ハリス",
@@ -523,6 +533,7 @@ const books = [
   /* ---- 翻訳待ちウォッチ（日本語版がまだない想定の例） ---- */
   {
     id: "untranslated-watch-1",
+    primarySection: "翻訳待ちウォッチ",
     titleJa: "",
     titleOriginal: "（翻訳待ちの注目作）",
     author: "海外の注目作家",
@@ -796,6 +807,12 @@ function applyFilters(list) {
   });
 }
 
+/* TOP初期表示用：その作品を1箇所だけ出すためのセクション。
+   primarySection 未設定なら section[0] を使う。 */
+function primaryOf(book) {
+  return book.primarySection || (book.section && book.section[0]) || "";
+}
+
 function booksForSection(sec) {
   let base;
   if (sec.weekly) {
@@ -821,11 +838,22 @@ function renderIndex() {
     return;
   }
 
+  const isAll = state.activeSection === "all";
   let anyResult = false;
   SECTIONS.forEach((sec) => {
-    if (state.activeSection !== "all" && state.activeSection !== sec.id) return;
-    const list = booksForSection(sec);
-    if (list.length === 0 && (state.query || state.genre !== "all")) return;
+    if (!isAll && state.activeSection !== sec.id) return;
+
+    let list;
+    if (isAll) {
+      // TOP初期表示：primarySection が一致する作品だけ＝重複なし
+      list = applyFilters(books.filter((b) => primaryOf(b) === sec.id));
+      if (list.length === 0) return; // 空セクションは出さない
+    } else {
+      // 単一セクション表示（ナビ/カテゴリ）：section 所属で横断的に表示
+      list = booksForSection(sec);
+      if (list.length === 0 && (state.query || state.genre !== "all")) return;
+    }
+
     anyResult = anyResult || list.length > 0;
     const noteExtra = sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "";
     root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly));
