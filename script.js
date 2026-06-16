@@ -695,16 +695,28 @@ function initCovers(scope) {
   });
 }
 
+/* HTML属性に安全に埋め込むためのエスケープ */
+function escapeHtml(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 /* 書影HTML（画像未設定・読み込み失敗でもプレースホルダーが出る）
    linkUrl を渡すと書影クリックで商品ページ等へ遷移（別タブ）。 */
 function coverHtml(book, sizeClass = "", linkUrl = "") {
   const cand = coverCandidates(book);
   const alt = book.coverAlt || (book.titleJa || book.titleOriginal || "") + " 書影";
   // 候補すべてを data-fallbacks に入れておき、描画後に initCovers() が
-  // 先頭から順に読み込む。これにより「候補がGoogle Booksトークンだけ」でも取得できる。
-  const fb = JSON.stringify(cand).replace(/'/g, "&#39;");
+  // 先頭から順に読み込む。これにより coverJaUrl があれば必ずそれを読み込み、
+  // 「候補がGoogle Booksトークンだけ」でも取得できる。
+  // JSON はHTMLエスケープして二重引用符属性に安全に埋め込む（getAttribute時に復号される）。
+  const fb = escapeHtml(JSON.stringify(cand));
   const img = cand.length
-    ? `<img class="cover__img" alt="${alt}" loading="lazy" data-fallbacks='${fb}' onerror="coverFallback(this)">`
+    ? `<img class="cover__img" alt="${escapeHtml(alt)}" loading="lazy" data-fallbacks="${fb}" onerror="coverFallback(this)">`
     : "";
   const inner = `
     <div class="cover ${sizeClass}">
