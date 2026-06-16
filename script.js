@@ -63,12 +63,12 @@ const books = [
     translationStatus: "translated",
     isbnJa: "9784152105141",   // 日本語版ISBN（13桁推奨）。入れると NDLサーチ／Google Books 経由で書影自動取得を試行
 
-    coverJa: "assets/covers/prophet-song-ja.jpg",
+    coverJa: "",
     coverOriginal: "assets/covers/prophet-song-original.jpg",
     coverAlt: "『預言者の歌』書影",
-    coverJaUrl: "",        // 外部の日本語版書影URL（例：出版社公式 / Amazonアソシエイト / 楽天アフィリエイト）
+    coverJaUrl: "https://www.hayakawa-online.co.jp/img/goods/L/5210514.jpg",  // 外部の日本語版書影URL
     coverOriginalUrl: "",  // 外部の原書版書影URL
-    purchaseUrl: "",       // 書影クリックで開く商品ページURL
+    purchaseUrl: "https://www.hayakawa-online.co.jp/shop/g/g00005210514/",    // 書影クリックで開く商品ページURL
 
     genre: ["社会派文学", "ディストピア"],
     mood: ["不穏", "重い", "社会派"],
