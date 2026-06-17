@@ -248,14 +248,15 @@ a { color: inherit; text-decoration: none; }
 }
 /* 作品カード一覧の最後に並ぶ「もっと見るカード」 */
 .more-card {
+  align-self: start;          /* 高さを作品カードに合わせず、中身ぶんだけに */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 8px;
-  padding: 24px 18px;
-  border: 1.5px dashed var(--accent-2);
+  gap: 6px;
+  padding: 22px 18px;
+  border: 1px dashed rgba(46, 163, 160, .35);  /* 点線を薄めに */
   border-radius: var(--radius);
   background: linear-gradient(160deg, #fffaf0 0%, #fbf2e0 100%);
   color: var(--ink);
@@ -268,14 +269,7 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent);
   background: #fff6ec;
 }
-.more-card__radar {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  border: 2.5px solid var(--accent-2);
-  background:
-    radial-gradient(circle at center, transparent 28%, var(--accent) 29%, var(--accent) 33%, transparent 34%),
-    conic-gradient(from 0deg, rgba(46,163,160,.35) 0deg 70deg, transparent 70deg 360deg);
-}
+.more-card__radar { display: none; }  /* アイコンは非表示（文字だけ） */
 .more-card__title {
   font-family: var(--font-round);
   font-weight: 900;
