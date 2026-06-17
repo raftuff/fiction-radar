@@ -161,15 +161,15 @@ const books = [
     summary: "裕福な家庭の住み込み家政婦として働き始めた女性。屋根裏部屋の鍵は、なぜ内側からかからないのか。",
     recommendedFor: "二転三転するイッキ読み系の心理スリラーが好きな人に。",
 
-    curatorPick: true,
+    curatorPick: false,
     weeklyPick: true,
     weeklyIssue: "2026-06-15",
     addedDate: "2026-06-12",
     isNew: true,
 
-    hasAdminComment: true,
-    adminCommentTitle: "管理人メモ",
-    adminComment: "とにかく一気読みできるタイプ。ここに1000字程度の管理人コメントを入れられます。（※サンプルテキスト。公開前に差し替えてください。）",
+    hasAdminComment: false,
+    adminCommentTitle: "",
+    adminComment: "",
 
     relatedBooks: ["その女アレックス"],
     links: [],
@@ -401,15 +401,21 @@ const books = [
     summary: "失踪事件を追うジャーナリストと、天才ハッカーの女性。北欧ミステリーブームを牽引した一作。",
     recommendedFor: "硬派でボリュームのある北欧ノワールに浸りたい人に。",
 
-    curatorPick: false,
+    curatorPick: true,
     weeklyPick: false,
     weeklyIssue: "",
     addedDate: "2026-04-01",
     isNew: false,
 
-    hasAdminComment: false,
+    hasAdminComment: true,
     adminCommentTitle: "管理人メモ",
-    adminComment: "",
+    adminComment: `【管理人メモ】
+
+映画版のヒットで『ドラゴン・タトゥーの女』を知った人は多いと思う。映像作品としての完成度も高いが、原作には映画だけでは拾いきれない面白さがかなりある。
+
+原作の魅力は、事件の背景、人物の心理、社会の暗部が細かく積み上げられていくところにある。リスベット・サランデルというキャラクターの異物感、傷、怒り、そして圧倒的な存在感も、活字で読むことでより深く伝わってくる。サスペンスとしての引きはもちろん強いが、それだけでなく、北欧社会の影や暴力性をスタイリッシュかつ重厚に読ませる作品でもある。
+
+映画ではテンポよく整理されていた部分も、原作ではよりエグく、より複雑で、心理描写も緻密。映画版が好きな人ほど、原作を読むとこの作品世界の厚みが増すはず。映像化原作としても、北欧ミステリーの入口としても、かなりおすすめしたい一冊。`,
 
     relatedBooks: ["その女アレックス"],
     links: [],
@@ -449,15 +455,15 @@ const books = [
     summary: "監禁された女アレックス。物語の構図がまるごとひっくり返る、フレンチ・サスペンスの代表作。",
     recommendedFor: "予想を裏切られる構成のミステリーが好きな人に。",
 
-    curatorPick: true,
+    curatorPick: false,
     weeklyPick: false,
     weeklyIssue: "",
     addedDate: "2026-03-20",
     isNew: false,
 
-    hasAdminComment: true,
-    adminCommentTitle: "管理人メモ",
-    adminComment: "とにかく構成の妙。ここに1000字程度の管理人コメントを入れられます。前情報をできるだけ入れずに読むのがおすすめ、といった案内も書けます。（※サンプルテキスト。公開前に差し替えてください。）",
+    hasAdminComment: false,
+    adminCommentTitle: "",
+    adminComment: "",
 
     relatedBooks: ["ハウスメイド", "羊たちの沈黙"],
     links: [],
@@ -554,7 +560,13 @@ const books = [
 
     hasAdminComment: true,
     adminCommentTitle: "管理人メモ",
-    adminComment: "ここに管理人コメントを入れられるようにしておいてください。",
+    adminComment: `【管理人メモ】
+
+主人公のワシントン・ポーをはじめ、登場人物たちの凹凸のあるキャラクターがとにかく魅力的。完璧なヒーローではなく、それぞれにクセや不器用さ、偏りがある。その人物像が事件の捜査と絡み合い、単なる謎解き以上に「この人たちをもっと見ていたい」と思わせてくれる。
+
+事件そのものの謎もかなり強い。猟奇性や不穏さで引っ張るだけではなく、なぜそうなったのか、次に何が明かされるのかというサスペンスの推進力が抜群にある。1センテンスが比較的短く、文末ごとに小さなクリフハンガーが仕込まれているようなリズムがあり、文章そのものにもスピード感がある。
+
+英国ミステリーらしい暗さと、ページターナーとしての読みやすさのバランスがかなり良い。重たい事件を扱いながらも、とにかく読む手が止まらない。ワシントン・ポーのシリーズは、キャラクター、謎、テンポの三拍子が揃っていて、個人的にはシリーズすべてが最高と言いたくなるくらい好きな作品。`,
 
     relatedBooks: ["殺人者の顔", "ミレニアム1 ドラゴン・タトゥーの女", "その女アレックス"],
     links: [],
