@@ -1080,6 +1080,60 @@ function detailRow(label, value) {
   return `<div class="d-row"><dt>${label}</dt><dd>${value}</dd></div>`;
 }
 
+/* adminComment を構造化HTMLに変換する。
+   - 「【○○】」の行は見出しとして <h2>○○</h2>（角括弧は表示しない）
+   - 登場人物セクションでは「名前：」で始まるブロックを <h3>名前</h3>＋<p>説明</p> に
+   - それ以外（管理人メモ等）は段落ごとに <p> に
+   ※ adminComment の文章内容自体は変更しない（表示構造のみ整える）。 */
+function renderAdminComment(book) {
+  const raw = String(book.adminComment || "");
+  const blocks = raw.split(/\n\s*\n/);          // 空行で段落・項目を分割
+  const hasHeadings = /^\s*【.+?】\s*$/m.test(raw);
+  let inner = "";
+  let mode = "memo";
+
+  if (!hasHeadings) {
+    // 見出しが無い場合：adminCommentTitle を H2 にして本文を段落表示
+    inner += `<h2 class="d-h2">${escapeHtml(book.adminCommentTitle || "管理人メモ")}</h2>`;
+    blocks.forEach((blk) => {
+      const t = blk.trim();
+      if (t) inner += `<p class="admin-p">${escapeHtml(t).replace(/\n/g, "<br>")}</p>`;
+    });
+    return `<section class="d-section d-admin admin-note">${inner}</section>`;
+  }
+
+  blocks.forEach((blk) => {
+    const block = blk.trim();
+    if (!block) return;
+
+    const head = block.match(/^【(.+?)】$/);
+    if (head) {
+      const title = head[1];
+      mode = title.indexOf("登場人物") >= 0 ? "chars" : "memo";
+      inner += `<h2 class="d-h2">${escapeHtml(title)}</h2>`;
+      return;
+    }
+
+    if (mode === "chars") {
+      const nl = block.indexOf("\n");
+      const first = (nl >= 0 ? block.slice(0, nl) : block).trim();
+      const rest = (nl >= 0 ? block.slice(nl + 1) : "").trim();
+      if (/[：:]$/.test(first)) {                // 「名前：」を人物見出しとして検出
+        const name = first.replace(/[：:]\s*$/, "").trim();
+        const desc = escapeHtml(rest).replace(/\n/g, "<br>");
+        inner += `<div class="character-item">` +
+                 `<h3 class="character-name">${escapeHtml(name)}</h3>` +
+                 (desc ? `<p>${desc}</p>` : "") +
+                 `</div>`;
+        return;
+      }
+    }
+    inner += `<p class="admin-p">${escapeHtml(block).replace(/\n/g, "<br>")}</p>`;
+  });
+
+  return `<section class="d-section d-admin admin-note">${inner}</section>`;
+}
+
 function renderDetail() {
   const root = $("#book-detail");
   if (!root) return;
@@ -1119,14 +1173,10 @@ function renderDetail() {
     detailRow("映像化", book.adaptation),
   ].join("");
 
-  // 管理人メモ
+  // 管理人メモ（登場人物リスト＝H2＋人物名H3、管理人メモ＝H2＋本文に構造化）
   let adminBlock = "";
   if (book.hasAdminComment && book.adminComment) {
-    adminBlock = `
-      <section class="d-section d-admin">
-        <h2 class="d-h2">${book.adminCommentTitle || "管理人メモ"}</h2>
-        <div class="d-admin__body">${book.adminComment.replace(/\n/g, "<br>")}</div>
-      </section>`;
+    adminBlock = renderAdminComment(book);
   }
 
   // 関連作品
