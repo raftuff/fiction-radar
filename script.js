@@ -966,7 +966,9 @@ function renderIndex() {
 
     anyResult = anyResult || list.length > 0;
     const noteExtra = sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "";
-    root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly));
+    // TOP初期表示のみ「すべて見る →」を表示。管理人おすすめはナビと同じ __curator へ
+    const moreTarget = isAll ? (sec.id === "管理人おすすめ" ? CURATOR_KEY : sec.id) : "";
+    root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly, moreTarget));
   });
 
   if (!anyResult) {
@@ -975,13 +977,18 @@ function renderIndex() {
   initCovers(root);
 }
 
-function sectionBlock(label, note, list, feature) {
+function sectionBlock(label, note, list, feature, moreTarget) {
   const cards = list.map(cardHtml).join("") || `<p class="empty">該当する作品はまだありません。</p>`;
+  // moreTarget を渡すと「すべて見る →」リンクを表示（クリックでそのカテゴリの一覧へ）
+  const more = moreTarget
+    ? `<a class="section-more" href="#sections" data-more="${escapeHtml(moreTarget)}">すべて見る →</a>`
+    : "";
   return `
     <section class="section">
       <div class="section__head">
         <h2 class="section__title">${label}</h2>
         <p class="section__note">${note}</p>
+        ${more}
       </div>
       <div class="cards ${feature ? "cards--feature" : ""}">${cards}</div>
     </section>`;
@@ -1003,19 +1010,36 @@ function setupIndexControls() {
     genreSel.addEventListener("change", (e) => { state.genre = e.target.value; renderIndex(); });
   }
 
+  // 指定セクションへ切り替え（ナビ・「すべて見る →」共通）
+  function activateSection(target) {
+    state.activeSection = target;
+    $$("[data-section]").forEach((n) =>
+      n.classList.toggle("is-active", n.getAttribute("data-section") === target));
+    renderIndex();
+    const sectionsEl = $("#sections");
+    const top = (sectionsEl ? sectionsEl.offsetTop : 0) - 80;
+    window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+    const nav = $("#main-nav");
+    if (nav) nav.classList.remove("is-open");
+  }
+
   $$("[data-section]").forEach((a) => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
-      state.activeSection = a.getAttribute("data-section");
-      $$("[data-section]").forEach((n) => n.classList.remove("is-active"));
-      a.classList.add("is-active");
-      renderIndex();
-      const top = $("#sections").offsetTop - 80;
-      window.scrollTo({ top, behavior: "smooth" });
-      const nav = $("#main-nav");
-      if (nav) nav.classList.remove("is-open");
+      activateSection(a.getAttribute("data-section"));
     });
   });
+
+  // 「すべて見る →」リンク（動的生成のためイベント委譲）
+  const sectionsRoot = $("#sections");
+  if (sectionsRoot) {
+    sectionsRoot.addEventListener("click", (e) => {
+      const link = e.target.closest("[data-more]");
+      if (!link) return;
+      e.preventDefault();
+      activateSection(link.getAttribute("data-more"));
+    });
+  }
 
   const reset = $("#show-all");
   if (reset) {
