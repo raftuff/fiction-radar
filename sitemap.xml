@@ -7,12 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://raftuff.github.io/fiction-radar/index.html#about</loc>
+    <loc>https://raftuff.github.io/fiction-radar/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://raftuff.github.io/fiction-radar/index.html#contact</loc>
+    <loc>https://raftuff.github.io/fiction-radar/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
