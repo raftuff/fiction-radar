@@ -686,11 +686,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---- ナビ：管理人おすすめ / 更新日 ---- */
-.nav__pick {
-  background: var(--accent) !important;
-  color: #fff !important;
-}
-.nav__pick:hover { filter: brightness(1.05); }
+/* 既定は他ナビと同じ通常表示。選択中（.is-active）のときだけオレンジのピル型になる */
+.nav__pick.is-active { background: var(--accent); color: #fff; }
 .nav__updated {
   font-size: .76rem;
   color: var(--ink-soft);
