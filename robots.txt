@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raftuff.github.io/fiction-radar/sitemap.xml

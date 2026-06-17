@@ -1093,6 +1093,60 @@ function buildDescription(book, title) {
   return `『${title}』の作品情報、登場人物リスト、管理人メモを紹介。${author}${award}を、日本語で読むための海外小説ガイド。`;
 }
 
+/* ===== SEO（canonical / OGP / Twitter / JSON-LD）===== */
+const SITE_BASE = "https://raftuff.github.io/fiction-radar/";
+
+/* OGP/Twitter用の画像URL（書影があればそれ、なければメインビジュアル） */
+function ogImageFor(book) {
+  const c = coverCandidates(book).find((x) => !String(x).startsWith("gb:")) || "";
+  if (!c) return SITE_BASE + "assets/images/main-visual.png";
+  if (/^https?:/i.test(c)) return c;
+  return SITE_BASE + String(c).replace(/^\//, "");
+}
+
+function setAttrBySel(sel, attr, val) {
+  const el = document.querySelector(sel);
+  if (el) el.setAttribute(attr, val);
+}
+
+/* 詳細ページの canonical / OGP / Twitter / JSON-LD を作品に合わせて更新 */
+function updateDetailSeo(book, title, desc) {
+  const fullTitle = `${title}｜FICTION RADAR`;
+  const url = SITE_BASE + "book.html?id=" + encodeURIComponent(book.id);
+  const img = ogImageFor(book);
+  setAttrBySel("#seo-canonical", "href", url);
+  setAttrBySel("#seo-og-title", "content", fullTitle);
+  setAttrBySel("#seo-og-desc", "content", desc);
+  setAttrBySel("#seo-og-url", "content", url);
+  setAttrBySel("#seo-og-image", "content", img);
+  setAttrBySel("#seo-tw-title", "content", fullTitle);
+  setAttrBySel("#seo-tw-desc", "content", desc);
+  setAttrBySel("#seo-tw-image", "content", img);
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": title,
+    "url": url,
+    "image": img,
+    "inLanguage": "ja",
+    "description": desc,
+  };
+  if (book.author) data.author = { "@type": "Person", "name": book.author };
+  if (book.publisherJa) data.publisher = { "@type": "Organization", "name": book.publisherJa };
+  if (book.genre && book.genre.length) data.genre = book.genre;
+  if (book.awards && book.awards.length) data.award = book.awards;
+
+  let s = document.getElementById("ld-book");
+  if (!s) {
+    s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "ld-book";
+    (document.head || document.getElementsByTagName("head")[0]).appendChild(s);
+  }
+  s.textContent = JSON.stringify(data);
+}
+
 function detailRow(label, value) {
   if (!value) return "";
   return `<div class="d-row"><dt>${label}</dt><dd>${value}</dd></div>`;
@@ -1168,8 +1222,10 @@ function renderDetail() {
   }
 
   const title = mainTitle(book);
+  const desc = buildDescription(book, title);
   document.title = `${title}｜FICTION RADAR`;
-  setMetaDescription(buildDescription(book, title));
+  setMetaDescription(desc);
+  updateDetailSeo(book, title, desc);
 
   const badges = displayBadges(book).map(badgeHtml).join("");
   const genreLine = book.genre.join("・");
