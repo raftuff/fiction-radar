@@ -577,12 +577,12 @@ a { color: inherit; text-decoration: none; }
 
 /* カード上の書影：表紙を展示するような淡いベージュのエリアに中央配置 */
 .cover--card {
-  aspect-ratio: 4 / 3;
-  background: #f5ead5;        /* 淡いベージュの展示エリア */
+  aspect-ratio: 3 / 2;        /* 高さを少しだけ詰める */
+  background: linear-gradient(160deg, #f8f0df 0%, #f3e6cd 100%);  /* ごく薄いグラデーション */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 14px;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
@@ -590,11 +590,11 @@ a { color: inherit; text-decoration: none; }
   position: static;           /* 全面配置をやめて中央に収める */
   width: auto;
   height: auto;
-  max-width: 70%;             /* 上下左右に余白を確保 */
-  max-height: 86%;
+  max-width: 78%;             /* 少しだけ大きく（上下左右の余白は維持） */
+  max-height: 92%;
   object-fit: contain;        /* 表紙全体を切らずに表示 */
   border-radius: 3px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .18);  /* 本らしい軽いドロップシャドウ */
+  box-shadow: 0 11px 26px rgba(0, 0, 0, .26);  /* 本の表紙らしく少し強めの影 */
 }
 /* 書影が表示できている場合は点線プレースホルダーを隠す */
 .cover--card .cover__img:not(.is-missing) ~ .cover__ph { display: none; }
