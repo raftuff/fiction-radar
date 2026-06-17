@@ -573,18 +573,32 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   display: block;
 }
-/* カードの書影は表紙全体を見せる（トリミングしない） */
-.cover--card .cover__img {
-  object-fit: contain;
-}
 .cover__img.is-missing { display: none; } /* 読み込み失敗時はプレースホルダーを見せる */
 
-/* カード上の書影（上部・横長サムネ。本文とのバランスを取り、やや低め） */
+/* カード上の書影：表紙を展示するような淡いベージュのエリアに中央配置 */
 .cover--card {
-  aspect-ratio: 16 / 9;
-  max-height: 168px;
+  aspect-ratio: 4 / 3;
+  background: #f5ead5;        /* 淡いベージュの展示エリア */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
+.cover--card .cover__img {
+  position: static;           /* 全面配置をやめて中央に収める */
+  width: auto;
+  height: auto;
+  max-width: 70%;             /* 上下左右に余白を確保 */
+  max-height: 86%;
+  object-fit: contain;        /* 表紙全体を切らずに表示 */
+  border-radius: 3px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .18);  /* 本らしい軽いドロップシャドウ */
+}
+/* 書影が表示できている場合は点線プレースホルダーを隠す */
+.cover--card .cover__img:not(.is-missing) ~ .cover__ph { display: none; }
+/* No Image の場合のみプレースホルダー（点線枠）を表示 */
 .cover--card .cover__ph-icon { width: 42px; height: 42px; font-size: 1.4rem; }
 .cover--card .cover__ph-text { font-size: .68rem; }
 
