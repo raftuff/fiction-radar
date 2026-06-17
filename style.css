@@ -246,22 +246,53 @@ a { color: inherit; text-decoration: none; }
   font-size: .9rem;
   color: var(--ink-soft);
 }
-/* セクション見出しの「すべて見る →」リンク */
-.section-more {
-  margin-left: auto;          /* 右端へ寄せる（スマホでは下に回り込む） */
-  align-self: center;
-  flex-shrink: 0;
-  font-size: .9rem;
+/* 作品カード一覧の最後に並ぶ「もっと見るカード」 */
+.more-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  padding: 24px 18px;
+  border: 1.5px dashed var(--accent-2);
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, #fffaf0 0%, #fbf2e0 100%);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, border-color .15s, background .15s;
+}
+.more-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+  background: #fff6ec;
+}
+.more-card__radar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-2);
+  background:
+    radial-gradient(circle at center, transparent 28%, var(--accent) 29%, var(--accent) 33%, transparent 34%),
+    conic-gradient(from 0deg, rgba(46,163,160,.35) 0deg 70deg, transparent 70deg 360deg);
+}
+.more-card__title {
+  font-family: var(--font-round);
+  font-weight: 900;
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+.more-card__sub {
+  font-size: .8rem;
+  color: var(--ink-soft);
+}
+.more-card__cta {
+  margin-top: 4px;
   font-weight: 700;
+  font-size: .9rem;
   color: var(--accent-2);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color .15s;
 }
-.section-more:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
+.more-card:hover .more-card__cta { color: var(--accent); }
 
 /* カードグリッド */
 .cards {

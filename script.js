@@ -966,9 +966,9 @@ function renderIndex() {
 
     anyResult = anyResult || list.length > 0;
     const noteExtra = sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "";
-    // TOP初期表示のみ「すべて見る →」を表示。管理人おすすめはナビと同じ __curator へ
+    // TOP初期表示のみ「もっと見るカード」を表示。管理人おすすめはナビと同じ __curator へ
     const moreTarget = isAll ? (sec.id === "管理人おすすめ" ? CURATOR_KEY : sec.id) : "";
-    root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly, moreTarget));
+    root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly, moreTarget, sec.id));
   });
 
   if (!anyResult) {
@@ -977,18 +977,23 @@ function renderIndex() {
   initCovers(root);
 }
 
-function sectionBlock(label, note, list, feature, moreTarget) {
-  const cards = list.map(cardHtml).join("") || `<p class="empty">該当する作品はまだありません。</p>`;
-  // moreTarget を渡すと「すべて見る →」リンクを表示（クリックでそのカテゴリの一覧へ）
-  const more = moreTarget
-    ? `<a class="section-more" href="#sections" data-more="${escapeHtml(moreTarget)}">すべて見る →</a>`
-    : "";
+function sectionBlock(label, note, list, feature, moreTarget, moreLabel) {
+  let cards = list.map(cardHtml).join("") || `<p class="empty">該当する作品はまだありません。</p>`;
+  // moreTarget を渡すと、カード一覧の最後に「もっと見るカード」を追加
+  if (moreTarget) {
+    cards += `
+      <a class="more-card" href="#sections" data-more="${escapeHtml(moreTarget)}">
+        <span class="more-card__radar" aria-hidden="true"></span>
+        <span class="more-card__title">${escapeHtml(moreLabel || label)}をもっと見る</span>
+        <span class="more-card__sub">このカテゴリの作品をもっと探す</span>
+        <span class="more-card__cta">すべて見る →</span>
+      </a>`;
+  }
   return `
     <section class="section">
       <div class="section__head">
         <h2 class="section__title">${label}</h2>
         <p class="section__note">${note}</p>
-        ${more}
       </div>
       <div class="cards ${feature ? "cards--feature" : ""}">${cards}</div>
     </section>`;
