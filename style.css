@@ -248,7 +248,8 @@ a { color: inherit; text-decoration: none; }
 }
 /* 作品カード一覧の最後に並ぶ「もっと見るカード」 */
 .more-card {
-  align-self: start;          /* 高さを作品カードに合わせず、中身ぶんだけに */
+  align-self: center;         /* 上揃えではなく中央に配置 */
+  min-height: 220px;          /* ほどよく高さを出す */
   display: flex;
   flex-direction: column;
   align-items: center;
