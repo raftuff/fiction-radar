@@ -1075,6 +1075,24 @@ function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 
+/* meta[name="description"] を更新（無ければ作成） */
+function setMetaDescription(text) {
+  let m = document.querySelector('meta[name="description"]');
+  if (!m) {
+    m = document.createElement("meta");
+    m.setAttribute("name", "description");
+    (document.head || document.getElementsByTagName("head")[0]).appendChild(m);
+  }
+  m.setAttribute("content", text);
+}
+
+/* 作品ごとの meta description を生成（80〜120字目安・事実のみ） */
+function buildDescription(book, title) {
+  const author = book.author ? `${book.author}による` : "";
+  const award = (book.awards && book.awards.length) ? `${book.awards[0]}受賞作` : "作品";
+  return `『${title}』の作品情報、登場人物リスト、管理人メモを紹介。${author}${award}を、日本語で読むための海外小説ガイド。`;
+}
+
 function detailRow(label, value) {
   if (!value) return "";
   return `<div class="d-row"><dt>${label}</dt><dd>${value}</dd></div>`;
@@ -1151,6 +1169,7 @@ function renderDetail() {
 
   const title = mainTitle(book);
   document.title = `${title}｜FICTION RADAR`;
+  setMetaDescription(buildDescription(book, title));
 
   const badges = displayBadges(book).map(badgeHtml).join("");
   const genreLine = book.genre.join("・");

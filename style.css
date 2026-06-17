@@ -720,17 +720,18 @@ a { color: inherit; text-decoration: none; }
 .d-hero {
   display: grid;
   grid-template-columns: 200px 1fr;
-  gap: 28px;
+  gap: 32px;
   align-items: start;
-  margin-bottom: 30px;
+  margin-bottom: 34px;
 }
 .d-cover { width: 200px; }
+.d-head .card__badges { margin-bottom: 12px; }
 .d-title {
   font-family: var(--font-round);
   font-weight: 900;
-  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
-  line-height: 1.3;
-  margin: 8px 0 6px;
+  font-size: clamp(1.6rem, 3.8vw, 2.3rem);  /* タイトルを少し大きく */
+  line-height: 1.28;
+  margin: 6px 0 10px;
 }
 .d-original {
   font-size: .9rem;
@@ -832,18 +833,19 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 4px 16px rgba(60, 45, 30, .06);
   padding: 26px clamp(20px, 4vw, 36px) 30px;
 }
-.admin-note { max-width: 820px; }          /* 本文幅を広げすぎない */
+/* カードは広くてOK。本文テキストだけ読みやすい幅に絞る */
+.admin-note > * { max-width: 780px; }
 .admin-note .d-h2 {
-  margin: 26px 0 14px;
+  margin: 28px 0 14px;
 }
 .admin-note .d-h2:first-child { margin-top: 0; }
 .admin-note .d-h2::before { background: var(--accent-3); }
 
 /* 管理人メモ本文（エッセイ風） */
 .admin-p {
-  margin: 0 0 1.25em;
+  margin: 0 0 1.45em;
   font-size: 1rem;
-  line-height: 2;
+  line-height: 2.05;          /* ややゆったりした行間 */
   letter-spacing: .01em;
   color: #4a4338;
 }
