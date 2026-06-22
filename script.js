@@ -693,9 +693,15 @@ const books = [
     addedDate: "2026-06-22",
     isNew: true,
 
-    hasAdminComment: false,
+    hasAdminComment: true,
     adminCommentTitle: "管理人メモ",
-    adminComment: "",
+    adminComment: `【管理人メモ】
+
+スウェーデン推理作家アカデミー最優秀長篇賞とガラスの鍵賞を受賞しているだけあって、北欧ミステリーらしい不穏さと社会性はしっかりある。ただ、読後の印象としては、重厚すぎて読み進めるのに体力がいるタイプというより、かなりサクサク読める作品だった。
+
+事件の背景には重さがあり、扱っているテーマも軽くはない。それでも、構成の見通しがよく、次に何が分かるのか、誰が何を隠しているのかを追っていく推進力がある。ページをめくる手が止まらないタイプの北欧ミステリーで、受賞作だからと身構えすぎずに読めるのがいい。
+
+北欧ミステリーというと、社会の暗部、過去の傷、沈んだ空気感が魅力だが、本作はそこに読みやすさもある。重さとテンポのバランスがよく、ミステリーとしての引きも十分。北欧ものを読みたいけれど、あまりに重すぎる作品は少し構えてしまう、という人にもすすめやすい一冊。`,
 
     relatedBooks: ["殺人者の顔", "ミレニアム1 ドラゴン・タトゥーの女"],
     links: [],
@@ -1016,13 +1022,19 @@ function cardHtml(book) {
 }
 
 function applyFilters(list) {
-  return list.filter((b) => {
+  const filtered = list.filter((b) => {
     if (state.genre !== "all" && !b.genre.includes(state.genre)) return false;
     if (state.query) {
       const hay = (b.titleJa + " " + b.titleOriginal + " " + b.author + " " + b.genre.join(" ") + " " + b.summary).toLowerCase();
       if (!hay.includes(state.query.toLowerCase())) return false;
     }
     return true;
+  });
+  // 追加日の新しい順に並べ替え（新しく追加した作品を各ジャンルの先頭＝PC左端／SP最上部に）
+  return filtered.sort((a, b) => {
+    const da = new Date(a.addedDate || 0).getTime();
+    const db = new Date(b.addedDate || 0).getTime();
+    return db - da;
   });
 }
 
