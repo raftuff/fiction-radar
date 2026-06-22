@@ -12,7 +12,7 @@
 /* ---------------------------------------------------------
    サイト全体設定
    --------------------------------------------------------- */
-const siteLastUpdated = "2026-06-15"; // 最終更新日（毎週ここを更新）
+const siteLastUpdated = "2026-06-22"; // 最終更新日（毎週ここを更新）
 const NEW_DAYS = 21;                  // addedDate からこの日数以内は自動でNEW扱い
 
 /* セクション定義（トップページの表示順） */
@@ -648,6 +648,104 @@ const books = [
 北欧ミステリらしい重厚さは、事件そのものの残酷さだけではなく、「なぜこういう事件が起きる社会になってしまったのか」という問いにあると思う。ヴァランダー刑事シリーズは『刑事ヴァランダー』や『新米刑事ヴァランダー』など映像化作品にもつながっているが、原作の魅力はやはりこの暗さと厚み。静かで重いのに、読み進める手が止まらないタイプの犯罪小説。`,
 
     relatedBooks: ["ストーンサークルの殺人", "ミレニアム1 ドラゴン・タトゥーの女", "その女アレックス"],
+    links: [],
+  },
+
+  /* ---- 今週の追加（2026-06-22） ---- */
+  {
+    id: "wasureta-towa-iwasenai",
+    primarySection: "管理人おすすめ",
+    titleJa: "忘れたとは言わせない",
+    titleOriginal: "",
+    author: "トーヴェ・アルステルダール",
+    country: "スウェーデン",
+
+    publisherJa: "KADOKAWA",
+    translator: "染田屋茂",
+    publicationDateJa: "2023年12月（角川文庫）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784041145593",
+
+    coverJa: "",
+    coverJaUrl: "https://cdn.kdkw.jp/cover_1000/322309/322309001227.webp",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『忘れたとは言わせない』書影",
+    purchaseUrl: "https://www.kadokawa.co.jp/product/322309001227/",
+
+    genre: ["犯罪小説", "ミステリー", "サスペンス"],
+    mood: ["北欧ミステリー", "警察小説", "重厚"],
+    badges: ["管理人おすすめ", "日本語版あり", "受賞作"],
+    awards: ["スウェーデン推理作家アカデミー最優秀長篇賞", "ガラスの鍵賞"],
+    japanRecognition: [],
+    readerReaction: "国内でも読まれる北欧ミステリー",
+
+    adaptation: "",
+    section: ["管理人おすすめ", "受賞作", "サスペンス・犯罪小説", "新着・注目の翻訳本"],
+
+    summary: "14歳で凶悪事件を自白し施設で育った男が、23年後に釈放され帰郷した矢先、父親が死体で発見される。同郷の女性警察官が捜査を進めるうち、過去の別の事件が浮かび上がる、北欧の警察小説。",
+    recommendedFor: "閉鎖的な地方を舞台にした北欧ミステリーや、骨太な警察小説が好きな人に。",
+
+    curatorPick: true,
+    weeklyPick: true,
+    weeklyIssue: "2026-06-22",
+    addedDate: "2026-06-22",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["殺人者の顔", "ミレニアム1 ドラゴン・タトゥーの女"],
+    links: [],
+  },
+  {
+    id: "mabataki-sura-yurusanai",
+    primarySection: "新着・注目の翻訳本",
+    titleJa: "瞬きすら許さない",
+    titleOriginal: "In the Blink of an Eye",
+    author: "ジョー・キャラハン",
+    country: "イギリス",
+
+    publisherJa: "東京創元社",
+    translator: "吉野弘人",
+    publicationDateJa: "2026年3月",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784488259051",
+
+    coverJa: "",
+    coverJaUrl: "https://www.tsogen.co.jp/img/cover_image_l/25905.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『瞬きすら許さない』書影",
+    purchaseUrl: "https://www.tsogen.co.jp/np/isbn/9784488259051",
+
+    genre: ["犯罪小説", "ミステリー", "サスペンス"],
+    mood: ["英国ミステリー", "バディ", "ページターナー"],
+    badges: ["日本語版あり", "受賞作", "話題の新刊"],
+    awards: ["英国推理作家協会賞（CWA）最優秀新人賞", "シークストン・オールドペキュリア犯罪小説賞"],
+    japanRecognition: [],
+    readerReaction: "刊行前から注目を集めた話題作",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "受賞作", "サスペンス・犯罪小説"],
+
+    summary: "百戦錬磨の警視正と、新たに導入されたAI捜査官がバディを組み、難事件に挑む。英国発の近未来クライム・ミステリー。",
+    recommendedFor: "英国ミステリーやバディもの、新感覚のクライム・ミステリーを試したい人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-06-22",
+    addedDate: "2026-06-22",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["その女アレックス", "ストーンサークルの殺人"],
     links: [],
   },
 
