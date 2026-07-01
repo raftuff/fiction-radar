@@ -1138,7 +1138,8 @@ function mainTitle(book) {
 /* =========================================================
    一覧ページ（index.html）
    ========================================================= */
-const state = { query: "", genre: "all", activeSection: "all" };
+const state = { query: "", genre: "all", activeSection: "all", showAllTop: false };
+const TOP_CATALOG_LIMIT = 12; // TOPカタログの初期表示件数
 
 function cardHtml(book) {
   const title = mainTitle(book);
@@ -1246,25 +1247,40 @@ function renderIndex() {
     return;
   }
 
-  // ---- TOP初期表示：各カテゴリを更新日の新しい順で上位3件だけ表示 ----
-  // 一覧（ナビ）と同じ categoryList を使うので、先頭からの並び順は完全一致。
-  // 検索／絞り込み中はカテゴリ内の全該当作を表示する。
-  let anyResult = false;
-  SECTIONS.forEach((sec) => {
-    const full = categoryList(sec);
-    if (full.length === 0) return;
-    const list = filtering ? full : full.slice(0, TOP_CATEGORY_LIMIT);
-    anyResult = true;
-    const noteExtra = sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "";
-    // 表示しきれていない作品がある場合のみ「もっと見るカード」を出す
-    const hasMore = full.length > list.length;
-    const moreTarget = hasMore ? (sec.id === "管理人おすすめ" ? CURATOR_KEY : sec.id) : "";
-    root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly, moreTarget, sec.id));
-  });
+  // ---- TOP初期表示：カタログ型（ジャンル分けせず1つの一覧・重複なし）----
+  // 全作品を更新日の新しい順に、各作品1回だけ表示。まず12件、「もっと見る」で全件。
+  // カテゴリは棚ではなくカード上のタグ＋一覧ページへの導線として扱う。
+  const catalog = applyFilters(books.filter((b) => b.translationStatus === "translated"));
+  const limit = (filtering || state.showAllTop) ? Infinity : TOP_CATALOG_LIMIT;
+  const list = catalog.slice(0, limit);
+  const hasMore = catalog.length > list.length;
 
-  if (!anyResult) {
-    root.innerHTML = `<p class="empty empty--big">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
-  }
+  const cards = list.map(cardHtml).join("") || `<p class="empty">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
+  const moreBtn = hasMore
+    ? `<div class="top-more"><button type="button" class="top-more__btn" id="top-more-btn">もっと見る（残り${catalog.length - list.length}件）</button></div>`
+    : "";
+
+  // カテゴリ一覧への導線
+  const catItems = SECTIONS
+    .filter((s) => !s.weekly)
+    .map((s) => `<a class="cat-link" href="#sections" data-more="${escapeHtml(s.id === "管理人おすすめ" ? CURATOR_KEY : s.id)}">${escapeHtml(s.label.replace("から探す", ""))}</a>`)
+    .join("");
+  const catNav = `<nav class="cat-nav" aria-label="カテゴリから探す"><span class="cat-nav__label">カテゴリから探す：</span>${catItems}</nav>`;
+
+  root.innerHTML = `
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title">新着・注目の翻訳本</h2>
+        <p class="section__note">${formatDot(siteLastUpdated)} 更新｜刊行されたばかりの翻訳本や、いま注目したい海外小説。</p>
+      </div>
+      <div class="cards">${cards}</div>
+      ${moreBtn}
+      ${catNav}
+    </section>`;
+
+  const moreEl = $("#top-more-btn");
+  if (moreEl) moreEl.addEventListener("click", () => { state.showAllTop = true; renderIndex(); });
+
   initCovers(root);
 }
 
@@ -1341,7 +1357,7 @@ function setupIndexControls() {
   if (reset) {
     reset.addEventListener("click", (e) => {
       e.preventDefault();
-      state.activeSection = "all"; state.query = ""; state.genre = "all";
+      state.activeSection = "all"; state.query = ""; state.genre = "all"; state.showAllTop = false;
       if (search) search.value = "";
       if (genreSel) genreSel.value = "all";
       $$("[data-section]").forEach((n) => n.classList.remove("is-active"));
