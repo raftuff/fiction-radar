@@ -12,7 +12,7 @@
 /* ---------------------------------------------------------
    サイト全体設定
    --------------------------------------------------------- */
-const siteLastUpdated = "2026-06-22"; // 最終更新日（毎週ここを更新）
+const siteLastUpdated = "2026-07-01"; // 最終更新日（毎週ここを更新）
 const NEW_DAYS = 21;                  // addedDate からこの日数以内は自動でNEW扱い
 
 /* セクション定義（トップページの表示順） */
@@ -1201,39 +1201,64 @@ function booksForSection(sec) {
   return applyFilters(base);
 }
 
+/* カテゴリの作品リスト（TOP・一覧で共通利用）。
+   同じデータソース＋同じソート（applyFilters＝更新日の新しい順）を使うため、
+   TOPと一覧ページで並び順が完全に一致する。
+   ・管理人おすすめ … curatorPick:true
+   ・新着・注目の翻訳本（weekly） … weeklyPick:true
+   ・その他 … section 所属 */
+function categoryList(sec) {
+  if (!sec) return [];
+  if (sec.id === "管理人おすすめ") return applyFilters(books.filter((b) => b.curatorPick === true));
+  return booksForSection(sec);
+}
+
+const TOP_CATEGORY_LIMIT = 3; // TOP初期表示で各カテゴリに出す件数
+
 function renderIndex() {
   const root = $("#sections");
   if (!root) return;
   root.innerHTML = "";
 
-  // 管理人おすすめの絞り込み
-  if (state.activeSection === CURATOR_KEY) {
-    const list = applyFilters(books.filter((b) => b.curatorPick === true));
-    root.innerHTML = sectionBlock("サイト管理人おすすめ", "サイトの方向性に合う、管理人が推したい作品。", list, false);
+  const filtering = state.query !== "" || state.genre !== "all";
+
+  // ---- 単一カテゴリ表示（ナビ／「すべて見る」）----
+  if (state.activeSection !== "all") {
+    let label, note = "", list, feature = false;
+    if (state.activeSection === CURATOR_KEY) {
+      label = "サイト管理人おすすめ";
+      note = "サイトの方向性に合う、管理人が推したい作品。";
+      list = applyFilters(books.filter((b) => b.curatorPick === true));
+    } else {
+      const sec = SECTIONS.find((s) => s.id === state.activeSection);
+      if (!sec) { initCovers(root); return; }
+      label = sec.label;
+      note = (sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "") + sec.note;
+      list = categoryList(sec);
+      feature = sec.weekly;
+    }
+    if (list.length) {
+      root.insertAdjacentHTML("beforeend", sectionBlock(label, note, list, feature));
+    } else {
+      root.innerHTML = `<p class="empty empty--big">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
+    }
     initCovers(root);
     return;
   }
 
-  const isAll = state.activeSection === "all";
+  // ---- TOP初期表示：各カテゴリを更新日の新しい順で上位3件だけ表示 ----
+  // 一覧（ナビ）と同じ categoryList を使うので、先頭からの並び順は完全一致。
+  // 検索／絞り込み中はカテゴリ内の全該当作を表示する。
   let anyResult = false;
   SECTIONS.forEach((sec) => {
-    if (!isAll && state.activeSection !== sec.id) return;
-
-    let list;
-    if (isAll) {
-      // TOP初期表示：primarySection が一致する作品だけ＝重複なし
-      list = applyFilters(books.filter((b) => primaryOf(b) === sec.id));
-      if (list.length === 0) return; // 空セクションは出さない
-    } else {
-      // 単一セクション表示（ナビ/カテゴリ）：section 所属で横断的に表示
-      list = booksForSection(sec);
-      if (list.length === 0 && (state.query || state.genre !== "all")) return;
-    }
-
-    anyResult = anyResult || list.length > 0;
+    const full = categoryList(sec);
+    if (full.length === 0) return;
+    const list = filtering ? full : full.slice(0, TOP_CATEGORY_LIMIT);
+    anyResult = true;
     const noteExtra = sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "";
-    // TOP初期表示のみ「もっと見るカード」を表示。管理人おすすめはナビと同じ __curator へ
-    const moreTarget = isAll ? (sec.id === "管理人おすすめ" ? CURATOR_KEY : sec.id) : "";
+    // 表示しきれていない作品がある場合のみ「もっと見るカード」を出す
+    const hasMore = full.length > list.length;
+    const moreTarget = hasMore ? (sec.id === "管理人おすすめ" ? CURATOR_KEY : sec.id) : "";
     root.insertAdjacentHTML("beforeend", sectionBlock(sec.label, noteExtra + sec.note, list, sec.weekly, moreTarget, sec.id));
   });
 
