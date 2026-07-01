@@ -959,6 +959,20 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
 const CURATOR_KEY = "__curator"; // 「管理人おすすめ」絞り込み用の擬似セクションID
 
+/* カテゴリページ定義（category.html?cat=<key> で固有URL）。
+   データは books 一元管理。各カテゴリは sectionId で books から抽出する。 */
+const CATEGORIES = {
+  "new":         { sectionId: "新着・注目の翻訳本",     h1: "新着・注目の翻訳本", title: "新着・注目の翻訳本｜FICTION RADAR", desc: "いま話題の翻訳本や、いまあらためて注目したい海外小説をピックアップ。FICTION RADARの新着・注目カテゴリ。" },
+  "awards":      { sectionId: "受賞作",                 h1: "受賞作",             title: "受賞作｜FICTION RADAR",             desc: "ブッカー賞、ダガー賞など、海外文学賞・ミステリー賞の受賞作を日本語で読めるガイド。" },
+  "adaptations": { sectionId: "映像化原作",             h1: "映像化原作",         title: "映像化原作｜FICTION RADAR",         desc: "ドラマ化・映画化された海外小説の原作を紹介する翻訳小説ガイド。" },
+  "suspense":    { sectionId: "サスペンス・犯罪小説",   h1: "サスペンス・犯罪小説", title: "サスペンス小説｜FICTION RADAR",     desc: "サスペンス・犯罪小説・心理スリラーの海外作品を日本語で読めるガイド。" },
+  "dystopia":    { sectionId: "社会派・ディストピア",   h1: "社会派・ディストピア", title: "社会派・ディストピア小説｜FICTION RADAR", desc: "社会派文学・ディストピア小説の海外作品を紹介する翻訳小説ガイド。" },
+  "classics":    { sectionId: "名作・定番",             h1: "名作・定番",         title: "名作・定番｜FICTION RADAR",         desc: "いつ読んでも色あせない海外小説の名作・定番を紹介する翻訳小説ガイド。" },
+  "popular":     { sectionId: "日本で読まれている海外小説", h1: "日本で読まれている海外小説", title: "日本で読まれている海外小説｜FICTION RADAR", desc: "国内でも広く読まれている海外小説を紹介する翻訳小説ガイド。" },
+  "wishlist":    { sectionId: "翻訳待ちウォッチ",       h1: "翻訳待ちウォッチ",   title: "翻訳待ちウォッチ｜FICTION RADAR",   desc: "まだ日本語版が出ていない、翻訳が待たれる海外小説をウォッチ。" },
+  "recommend":   { sectionId: "管理人おすすめ",         h1: "管理人おすすめ",     title: "管理人おすすめ｜FICTION RADAR",     desc: "サイト管理人が実際に読んで推したい海外小説を紹介。" },
+};
+
 /* "2026-06-15" → "2026.06.15" */
 function formatDot(d) {
   if (!d) return "";
@@ -1261,18 +1275,17 @@ function renderIndex() {
     ? `<div class="top-more"><button type="button" class="top-more__btn" id="top-more-btn">もっと見る（あと${catalog.length - list.length}件）</button></div>`
     : "";
 
-  // カテゴリ一覧への導線
-  const catItems = SECTIONS
-    .filter((s) => !s.weekly)
-    .map((s) => `<a class="cat-link" href="#sections" data-more="${escapeHtml(s.id === "管理人おすすめ" ? CURATOR_KEY : s.id)}">${escapeHtml(s.label.replace("から探す", ""))}</a>`)
+  // カテゴリページへの導線（固有URL）
+  const catItems = Object.keys(CATEGORIES)
+    .map((key) => `<a class="cat-link" href="category.html?cat=${key}">${escapeHtml(CATEGORIES[key].h1)}</a>`)
     .join("");
   const catNav = `<nav class="cat-nav" aria-label="カテゴリから探す"><span class="cat-nav__label">カテゴリから探す：</span>${catItems}</nav>`;
 
   root.innerHTML = `
     <section class="section">
       <div class="section__head">
-        <h2 class="section__title">新着・注目の翻訳本</h2>
-        <p class="section__note">${formatDot(siteLastUpdated)} 更新｜いま話題の翻訳本や、あらためて読みたい海外小説をピックアップ。</p>
+        <h2 class="section__title">作品一覧</h2>
+        <p class="section__note">いま話題の翻訳本や、いまあらためて注目したい海外小説を紹介します。</p>
       </div>
       <div class="cards">${cards}</div>
       ${moreBtn}
@@ -1631,6 +1644,58 @@ function renderDetail() {
 }
 
 /* =========================================================
+   カテゴリページ（category.html?cat=<key>）
+   ========================================================= */
+function markActiveCatNav(key) {
+  $$("[data-cat]").forEach((a) => a.classList.toggle("is-active", a.getAttribute("data-cat") === key));
+}
+
+function updateCategorySeo(key, conf) {
+  const url = SITE_BASE + "category.html?cat=" + encodeURIComponent(key);
+  setAttrBySel("#seo-canonical", "href", url);
+  setAttrBySel("#seo-og-title", "content", conf.title);
+  setAttrBySel("#seo-og-desc", "content", conf.desc);
+  setAttrBySel("#seo-og-url", "content", url);
+  setAttrBySel("#seo-tw-title", "content", conf.title);
+  setAttrBySel("#seo-tw-desc", "content", conf.desc);
+}
+
+function renderCategory() {
+  const root = $("#category-list");
+  if (!root) return;
+  const key = getParam("cat");
+  const conf = CATEGORIES[key];
+
+  if (!conf) {
+    document.title = "カテゴリ｜FICTION RADAR";
+    root.innerHTML = `<p class="empty empty--big">カテゴリが見つかりませんでした。<br>
+      <a class="back-link" href="index.html">← 作品一覧に戻る</a></p>`;
+    return;
+  }
+
+  const sec = SECTIONS.find((s) => s.id === conf.sectionId);
+  const list = categoryList(sec);
+
+  document.title = conf.title;
+  setMetaDescription(conf.desc);
+  updateCategorySeo(key, conf);
+  markActiveCatNav(key);
+
+  const note = (sec && sec.weekly ? `${formatDot(siteLastUpdated)} 更新｜` : "") + (sec ? sec.note : "");
+  const cards = list.map(cardHtml).join("") || `<p class="empty">このカテゴリの作品はまだありません。</p>`;
+
+  root.innerHTML = `
+    <p class="d-back"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>
+    <div class="section__head">
+      <h1 class="section__title">${escapeHtml(conf.h1)}</h1>
+      <p class="section__note">${escapeHtml(note)}</p>
+    </div>
+    <div class="cards">${cards}</div>
+    <p class="d-back d-back--bottom"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>`;
+  initCovers(root);
+}
+
+/* =========================================================
    起動
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
@@ -1647,6 +1712,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if ($("#book-detail")) {        // 詳細ページ
     renderDetail();
+    const menuBtn = $("#menu-toggle");
+    const nav = $("#main-nav");
+    if (menuBtn && nav) {
+      menuBtn.addEventListener("click", () => nav.classList.toggle("is-open"));
+    }
+  }
+  if ($("#category-list")) {       // カテゴリページ
+    renderCategory();
     const menuBtn = $("#menu-toggle");
     const nav = $("#main-nav");
     if (menuBtn && nav) {

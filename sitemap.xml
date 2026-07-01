@@ -17,6 +17,51 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=new</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=awards</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=adaptations</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=suspense</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=dystopia</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=classics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=popular</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=wishlist</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raftuff.github.io/fiction-radar/category.html?cat=recommend</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://raftuff.github.io/fiction-radar/book.html?id=prophet-song</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
