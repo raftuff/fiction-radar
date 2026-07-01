@@ -924,18 +924,18 @@ const books = [
 
     genre: ["翻訳文学", "サスペンス", "社会派文学"],
     mood: ["知的", "不穏", "仕掛け"],
-    badges: ["日本語版あり", "受賞作", "話題の新刊"],
+    badges: ["管理人おすすめ", "日本語版あり", "受賞作"],
     awards: ["ゴンクール賞"],
     japanRecognition: [],
     readerReaction: "世界的ベストセラーの受賞作",
 
     adaptation: "",
-    section: ["受賞作", "新着・注目の翻訳本", "サスペンス・犯罪小説"],
+    section: ["管理人おすすめ", "受賞作", "新着・注目の翻訳本", "サスペンス・犯罪小説"],
 
     summary: "殺し屋、歌手、作家、軍人の妻——互いに無関係な乗客を乗せた飛行機が巨大乱気流に遭遇する。そこから始まる不可解な出来事。ゴンクール賞に輝いた、知的で不穏な話題作。",
     recommendedFor: "仕掛けのある知的なサスペンス・受賞作の文学を読みたい人に。",
 
-    curatorPick: false,
+    curatorPick: true,
     weeklyPick: true,
     weeklyIssue: "2026-07-01",
     addedDate: "2026-07-01",
@@ -978,18 +978,18 @@ const books = [
 
     genre: ["犯罪小説", "ミステリー", "サスペンス"],
     mood: ["謎", "北極圏", "陰謀"],
-    badges: ["日本語版あり", "話題の新刊"],
+    badges: ["管理人おすすめ", "日本語版あり"],
     awards: [],
     japanRecognition: [],
     readerReaction: "翻訳ミステリーで話題",
 
     adaptation: "",
-    section: ["新着・注目の翻訳本", "サスペンス・犯罪小説"],
+    section: ["管理人おすすめ", "新着・注目の翻訳本", "サスペンス・犯罪小説"],
 
     summary: "1967年、北極圏の極秘基地で起きた火災。唯一の生存者は顔に重傷を負い、記憶を失っていた。精神科医が真相に迫る、謎と陰謀が渦巻く北極ミステリ。",
     recommendedFor: "閉ざされた極限状況の謎解きや、陰謀渦巻くミステリが好きな人に。",
 
-    curatorPick: false,
+    curatorPick: true,
     weeklyPick: true,
     weeklyIssue: "2026-07-01",
     addedDate: "2026-07-01",
