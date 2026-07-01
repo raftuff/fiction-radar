@@ -913,10 +913,10 @@ const books = [
     publicationDateJa: "",
     formatJa: "文庫",
     translationStatus: "translated",
-    isbnJa: "",
+    isbnJa: "9784152100795",
 
     coverJa: "",
-    coverJaUrl: "https://www.hayakawa-online.co.jp/img/goods/L/5210079.jpg",
+    coverJaUrl: "https://www.hayakawa-online.co.jp/img/goods/L/613921.jpg",
     coverOriginal: "",
     coverOriginalUrl: "",
     coverAlt: "『異常【アノマリー】』書影",
@@ -941,9 +941,15 @@ const books = [
     addedDate: "2026-07-01",
     isNew: true,
 
-    hasAdminComment: false,
+    hasAdminComment: true,
     adminCommentTitle: "管理人メモ",
-    adminComment: "",
+    adminComment: `【管理人メモ】
+
+最近読んだ中でも、抜群に面白かった一冊。謎が謎を呼び、読んでいると場面が映像のように浮かんでくる。ジャンルはうまく言い表せない——ミステリのようでもあり、SFのようでもあり、純文学のようでもある。それでも、とにかく面白くてページをめくる手が止まらない。
+
+そして、なんとも言えないオチ。儚くもあり、ハッとさせられもする。腑に落ちる人もいれば、落ちない人もいると思う。そこは読み手によって受け取り方が分かれるはず。ただ、どちらであっても、読み終えたあとに考えさせられる余韻が長く残る。
+
+ジャンルを気にせず、まずは物語に巻き込まれてみてほしい。ゴンクール賞という肩書きに身構えず、純粋に「面白い小説」として楽しめる一作。`,
 
     relatedBooks: ["三体", "侍女の物語"],
     links: [],
@@ -989,9 +995,13 @@ const books = [
     addedDate: "2026-07-01",
     isNew: true,
 
-    hasAdminComment: false,
+    hasAdminComment: true,
     adminCommentTitle: "管理人メモ",
-    adminComment: "",
+    adminComment: `【管理人メモ】
+
+とにかく、極寒のなかに閉じ込められた密閉空間で「何があったのか?」というプロットが、最後まで生き生きと描かれている。極限状態で人間はどうなるのか、極寒で人間はどうなるのか——それ自体はよくあるテーマだけれど、本作はそこに様々な謎が散りばめられていて、ひとつずつ読み解きたくなる。
+
+映像的な描写が濃く、寒さや閉塞感、現場の張りつめた空気までが伝わってくる。閉ざされた場所のミステリとしても、極限状況のサスペンスとしても楽しめる一冊。ページを追うごとに、その場に立ち会っているような感覚になる。`,
 
     relatedBooks: ["祖国なき者たちへ", "瞬きすら許さない"],
     links: [],
