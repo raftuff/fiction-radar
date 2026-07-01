@@ -755,6 +755,151 @@ const books = [
     links: [],
   },
 
+  {
+    id: "taiwan-manyu",
+    primarySection: "日本で読まれている海外小説",
+    titleJa: "台湾漫遊鉄道のふたり",
+    titleOriginal: "臺灣漫遊錄",
+    author: "楊双子",
+    country: "台湾",
+
+    publisherJa: "中央公論新社",
+    translator: "三浦裕子",
+    publicationDateJa: "2023年4月",
+    formatJa: "単行本",
+    translationStatus: "translated",
+    isbnJa: "9784120056529",
+
+    coverJa: "",
+    coverJaUrl: "https://www.chuko.co.jp/book/005652.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『台湾漫遊鉄道のふたり』書影",
+    purchaseUrl: "https://www.chuko.co.jp/tanko/2023/04/005652.html",
+
+    genre: ["翻訳文学", "社会派文学"],
+    mood: ["叙情的", "食と旅", "文芸"],
+    badges: ["日本語版あり", "受賞作"],
+    awards: ["国際ブッカー賞", "全米図書賞（翻訳部門）", "日本翻訳大賞"],
+    japanRecognition: [],
+    readerReaction: "国際的な受賞で世界的に注目",
+
+    adaptation: "",
+    section: ["日本で読まれている海外小説", "受賞作", "新着・注目の翻訳本"],
+
+    summary: "1938年、日本統治下の台湾。縦貫鉄道で各地を巡る日本人作家と、通訳を務める台湾人女性。食と旅を通して、二人の間に静かで深い絆が育っていく。国際ブッカー賞・全米図書賞に輝いた話題作。",
+    recommendedFor: "食や旅の描写が好きな人、静かに沁みる翻訳文学・受賞作を読みたい人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-06-22",
+    addedDate: "2026-06-22",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: [],
+    links: [],
+  },
+  {
+    id: "sokoku-naki-monotachi-e",
+    primarySection: "受賞作",
+    titleJa: "祖国なき者たちへ",
+    titleOriginal: "Stateless",
+    author: "エリザベス・ウェイン",
+    country: "イギリス",
+
+    publisherJa: "東京創元社",
+    translator: "吉澤康子",
+    publicationDateJa: "2026年4月",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784488252069",
+
+    coverJa: "",
+    coverJaUrl: "https://www.tsogen.co.jp/img/cover_image_l/25206.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『祖国なき者たちへ』書影",
+    purchaseUrl: "https://www.tsogen.co.jp/np/isbn/9784488252069",
+
+    genre: ["ミステリー", "サスペンス"],
+    mood: ["歴史ミステリ", "爽快", "空と冒険"],
+    badges: ["日本語版あり", "受賞作", "話題の新刊"],
+    awards: ["国際スリラー作家協会賞（YA部門）"],
+    japanRecognition: [],
+    readerReaction: "刊行時に話題",
+
+    adaptation: "",
+    section: ["受賞作", "新着・注目の翻訳本", "サスペンス・犯罪小説"],
+
+    summary: "1937年、ヨーロッパの青少年エアレースのさなか、飛行機を使った不審な墜落死が起きる。唯一の女性パイロットが真相を追う、『コードネーム・ヴェリティ』の著者による爽快な歴史ミステリ。",
+    recommendedFor: "歴史ミステリや、空と冒険を舞台にした謎解きが好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-06-22",
+    addedDate: "2026-06-22",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["瞬きすら許さない", "ストーンサークルの殺人"],
+    links: [],
+  },
+  {
+    id: "anna-o",
+    primarySection: "映像化原作",
+    titleJa: "眠れるアンナ・O",
+    titleOriginal: "Anna O",
+    author: "マシュー・ブレイク",
+    country: "イギリス",
+
+    publisherJa: "新潮社",
+    translator: "池田真紀子",
+    publicationDateJa: "2025年7月（新潮文庫）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784102410219",
+
+    coverJa: "",
+    coverJaUrl: "https://www.shinchosha.co.jp/images_v2/book/cover/241021/241021_l.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『眠れるアンナ・O』書影",
+    purchaseUrl: "https://www.shinchosha.co.jp/book/241021/",
+
+    genre: ["心理スリラー", "サスペンス", "ミステリー"],
+    mood: ["不穏", "どんでん返し", "イッキ読み"],
+    badges: ["日本語版あり", "映像化原作", "話題の新刊"],
+    awards: [],
+    japanRecognition: ["翻訳ミステリーで話題"],
+    readerReaction: "ドラマ化で再注目",
+
+    adaptation: "ドラマ化",
+    section: ["映像化原作", "新着・注目の翻訳本", "サスペンス・犯罪小説", "日本で読まれている海外小説"],
+
+    summary: "友人殺害の容疑をかけられたまま4年間眠り続ける女性アンナ。眠りと犯罪の専門家が、彼女を目覚めさせる任務に挑む。ドラマ化も話題の英国発・心理スリラー。",
+    recommendedFor: "『ハウスメイド』のようなイッキ読み系の心理スリラーが好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-06-22",
+    addedDate: "2026-06-22",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["ハウスメイド", "その女アレックス"],
+    links: [],
+  },
+
   /* ---- 翻訳待ちウォッチ（日本語版がまだない想定の例） ---- */
   {
     id: "untranslated-watch-1",
