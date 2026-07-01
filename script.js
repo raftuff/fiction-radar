@@ -1138,8 +1138,8 @@ function mainTitle(book) {
 /* =========================================================
    一覧ページ（index.html）
    ========================================================= */
-const state = { query: "", genre: "all", activeSection: "all", showAllTop: false };
-const TOP_CATALOG_LIMIT = 12; // TOPカタログの初期表示件数
+const TOP_CATALOG_STEP = 24; // TOPカタログの初期表示件数＝「もっと見る」1回で追加する件数
+const state = { query: "", genre: "all", activeSection: "all", topCount: TOP_CATALOG_STEP };
 
 function cardHtml(book) {
   const title = mainTitle(book);
@@ -1251,13 +1251,14 @@ function renderIndex() {
   // 全作品を更新日の新しい順に、各作品1回だけ表示。まず12件、「もっと見る」で全件。
   // カテゴリは棚ではなくカード上のタグ＋一覧ページへの導線として扱う。
   const catalog = applyFilters(books.filter((b) => b.translationStatus === "translated"));
-  const limit = (filtering || state.showAllTop) ? Infinity : TOP_CATALOG_LIMIT;
+  // 検索／絞り込み中は全件、通常は topCount 件（初期24件、もっと見るで＋24件ずつ）
+  const limit = filtering ? Infinity : state.topCount;
   const list = catalog.slice(0, limit);
   const hasMore = catalog.length > list.length;
 
   const cards = list.map(cardHtml).join("") || `<p class="empty">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
   const moreBtn = hasMore
-    ? `<div class="top-more"><button type="button" class="top-more__btn" id="top-more-btn">もっと見る（残り${catalog.length - list.length}件）</button></div>`
+    ? `<div class="top-more"><button type="button" class="top-more__btn" id="top-more-btn">もっと見る（あと${catalog.length - list.length}件）</button></div>`
     : "";
 
   // カテゴリ一覧への導線
@@ -1279,7 +1280,7 @@ function renderIndex() {
     </section>`;
 
   const moreEl = $("#top-more-btn");
-  if (moreEl) moreEl.addEventListener("click", () => { state.showAllTop = true; renderIndex(); });
+  if (moreEl) moreEl.addEventListener("click", () => { state.topCount += TOP_CATALOG_STEP; renderIndex(); });
 
   initCovers(root);
 }
@@ -1357,7 +1358,7 @@ function setupIndexControls() {
   if (reset) {
     reset.addEventListener("click", (e) => {
       e.preventDefault();
-      state.activeSection = "all"; state.query = ""; state.genre = "all"; state.showAllTop = false;
+      state.activeSection = "all"; state.query = ""; state.genre = "all"; state.topCount = TOP_CATALOG_STEP;
       if (search) search.value = "";
       if (genreSel) genreSel.value = "all";
       $$("[data-section]").forEach((n) => n.classList.remove("is-active"));
