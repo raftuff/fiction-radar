@@ -12,7 +12,7 @@
 /* ---------------------------------------------------------
    サイト全体設定
    --------------------------------------------------------- */
-const siteLastUpdated = "2026-07-01"; // 最終更新日（毎週ここを更新）
+const siteLastUpdated = "2026-07-08"; // 最終更新日（毎週ここを更新）
 const NEW_DAYS = 21;                  // addedDate からこの日数以内は自動でNEW扱い
 
 /* セクション定義（トップページの表示順） */
@@ -1004,6 +1004,295 @@ const books = [
 映像的な描写が濃く、寒さや閉塞感、現場の張りつめた空気までが伝わってくる。閉ざされた場所のミステリとしても、極限状況のサスペンスとしても楽しめる一冊。ページを追うごとに、その場に立ち会っているような感覚になる。`,
 
     relatedBooks: ["祖国なき者たちへ", "瞬きすら許さない"],
+    links: [],
+  },
+
+  {
+    id: "ansatsu-no-fuyu",
+    primarySection: "受賞作",
+    titleJa: "暗殺の冬",
+    titleOriginal: "",
+    author: "クリストフェル・カールソン",
+    country: "スウェーデン",
+
+    publisherJa: "文藝春秋",
+    translator: "棚橋志行",
+    publicationDateJa: "2026年5月（文春文庫）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784167925147",
+
+    coverJa: "",
+    coverJaUrl: "https://b-bunshun.ismcdn.jp/mwimgs/c/e/480/img_cec081fdd50f50ad3af60a4c57c3801a4841269.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『暗殺の冬』書影",
+    purchaseUrl: "https://books.bunshun.jp/ud/book/num/9784167925147",
+
+    genre: ["犯罪小説", "ミステリー", "サスペンス"],
+    mood: ["北欧ミステリー", "警察小説", "重厚"],
+    badges: ["日本語版あり", "受賞作", "話題の新刊"],
+    awards: ["最優秀スウェーデン・ミステリー賞", "NYT年間ベストミステリー選出"],
+    japanRecognition: [],
+    readerReaction: "北欧ミステリーの傑作として話題",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "受賞作", "サスペンス・犯罪小説"],
+
+    summary: "1986年、スウェーデン首相暗殺の夜、寒村で女性が殺された。それは長い連続殺人の始まりだった。二世代の刑事と、帰郷した作家が封印された罪に迫る、北欧の重厚な警察小説。",
+    recommendedFor: "『殺人者の顔』のような、社会の影を描く骨太な北欧ミステリーが好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-07-08",
+    addedDate: "2026-07-08",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["殺人者の顔", "ミレニアム1 ドラゴン・タトゥーの女"],
+    links: [],
+  },
+  {
+    id: "hai-no-o",
+    primarySection: "サスペンス・犯罪小説",
+    titleJa: "灰の王",
+    titleOriginal: "King of Ashes",
+    author: "S・A・コスビー",
+    country: "アメリカ",
+
+    publisherJa: "ハーパーコリンズ・ジャパン",
+    translator: "加賀山卓朗",
+    publicationDateJa: "2026年6月",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784302121892",
+
+    coverJa: "",
+    coverJaUrl: "https://www.harpercollins.co.jp/upload/save_image/h_h250_l.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『灰の王』書影",
+    purchaseUrl: "https://www.harpercollins.co.jp/hc/books/detail/16735",
+
+    genre: ["犯罪小説", "サスペンス"],
+    mood: ["ノワール", "バイオレンス", "ページターナー"],
+    badges: ["日本語版あり", "受賞作", "話題の新刊"],
+    awards: ["英国推理作家協会賞（CWA）最優秀スリラー賞"],
+    japanRecognition: ["『このミス』1位作家の最新作"],
+    readerReaction: "刊行前から話題",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "受賞作", "サスペンス・犯罪小説"],
+
+    summary: "投資会社を成功に導いた男が、父の事故をきっかけに故郷へ帰る。弟が抱えたギャングとのトラブルから、彼は暴力の支配する裏社会へと引きずり込まれていく。『このミス』1位作家によるクライム・ノワール。",
+    recommendedFor: "『その女アレックス』のような、緊迫感と暴力の渦巻くクライム小説が好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-07-08",
+    addedDate: "2026-07-08",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["その女アレックス", "ストーンサークルの殺人"],
+    links: [],
+  },
+  {
+    id: "titan-noir",
+    primarySection: "サスペンス・犯罪小説",
+    titleJa: "タイタン・ノワール",
+    titleOriginal: "Titanium Noir",
+    author: "ニック・ハーカウェイ",
+    country: "イギリス",
+
+    publisherJa: "早川書房",
+    translator: "酒井昭伸",
+    publicationDateJa: "2024年12月（ハヤカワ文庫SF）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784150124656",
+
+    coverJa: "",
+    coverJaUrl: "https://www.hayakawa-online.co.jp/img/goods/L/12465.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『タイタン・ノワール』書影",
+    purchaseUrl: "https://www.hayakawa-online.co.jp/shop/g/g0000012465/",
+
+    genre: ["サスペンス", "ミステリー", "社会派文学"],
+    mood: ["SFノワール", "近未来", "ハードボイルド"],
+    badges: ["日本語版あり", "話題の新刊"],
+    awards: [],
+    japanRecognition: [],
+    readerReaction: "ウィリアム・ギブスン絶賛",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "サスペンス・犯罪小説", "社会派・ディストピア"],
+
+    summary: "特別な処置で若返り、巨大化した富裕層「タイタン」。壮年にしか見えない90代の巨人の死をきっかけに、探偵サウンダーは技術を独占する一族の闇へ踏み込む。近未来を舞台にした傑作SFノワール。",
+    recommendedFor: "近未来ディストピアとハードボイルド探偵小説の両方が好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-07-08",
+    addedDate: "2026-07-08",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["三体", "1984年"],
+    links: [],
+  },
+  {
+    id: "marble-hall",
+    primarySection: "サスペンス・犯罪小説",
+    titleJa: "マーブル館殺人事件",
+    titleOriginal: "Marble Hall Murders",
+    author: "アンソニー・ホロヴィッツ",
+    country: "イギリス",
+
+    publisherJa: "東京創元社",
+    translator: "山田蘭",
+    publicationDateJa: "2025年9月（創元推理文庫）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784488265168",
+
+    coverJa: "",
+    coverJaUrl: "https://www.tsogen.co.jp/img/cover_image_l/26516.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『マーブル館殺人事件』書影",
+    purchaseUrl: "https://www.tsogen.co.jp/np/isbn/9784488265168",
+
+    genre: ["ミステリー", "サスペンス"],
+    mood: ["本格ミステリ", "作中作", "英国ミステリー"],
+    badges: ["日本語版あり", "話題の新刊", "このミス海外編"],
+    awards: [],
+    japanRecognition: ["このミステリーがすごい！2026 海外編 上位"],
+    readerReaction: "国内でも高評価",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "サスペンス・犯罪小説", "日本で読まれている海外小説"],
+
+    summary: "『カササギ殺人事件』『ヨルガオ殺人事件』に続く、編集者スーザン・ライランドと名探偵アティカス・ピュントのシリーズ完結編。作中作と現実の事件が二重に絡み合う本格ミステリ。",
+    recommendedFor: "凝った構成の本格ミステリ、英国ミステリーの読みごたえを求める人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-07-08",
+    addedDate: "2026-07-08",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["ストーンサークルの殺人", "その女アレックス"],
+    links: [],
+  },
+  {
+    id: "alperton-angels",
+    primarySection: "サスペンス・犯罪小説",
+    titleJa: "アルパートンの天使たち",
+    titleOriginal: "The Mysterious Case of the Alperton Angels",
+    author: "ジャニス・ハレット",
+    country: "イギリス",
+
+    publisherJa: "集英社",
+    translator: "山田蘭",
+    publicationDateJa: "2024年11月（集英社文庫）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784087607949",
+
+    coverJa: "",
+    coverJaUrl: "https://dosbg3xlm0x1t.cloudfront.net/images/items/9784087607949/500/9784087607949.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『アルパートンの天使たち』書影",
+    purchaseUrl: "https://www.shueisha.co.jp/books/items/contents.html?isbn=978-4-08-760794-9",
+
+    genre: ["犯罪小説", "ミステリー", "サスペンス"],
+    mood: ["カルト", "取材録形式", "不穏"],
+    badges: ["日本語版あり", "話題の新刊"],
+    awards: [],
+    japanRecognition: [],
+    readerReaction: "凝った形式で話題",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "サスペンス・犯罪小説"],
+
+    summary: "18年前、ロンドンで起きたカルト教団《アルパートンの天使》の凄惨な事件。犯罪ノンフィクション作家の取材記録という形式で、隠された真相が少しずつあぶり出されていく、実験的なミステリー。",
+    recommendedFor: "書簡・記録形式など、凝った構成のミステリーが好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-07-08",
+    addedDate: "2026-07-08",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["その女アレックス", "マーブル館殺人事件"],
+    links: [],
+  },
+  {
+    id: "yoake-madeni-dareka-ga",
+    primarySection: "サスペンス・犯罪小説",
+    titleJa: "夜明けまでに誰かが",
+    titleOriginal: "",
+    author: "ホリー・ジャクソン",
+    country: "イギリス",
+
+    publisherJa: "東京創元社",
+    translator: "服部京子",
+    publicationDateJa: "2025年7月（創元推理文庫）",
+    formatJa: "文庫",
+    translationStatus: "translated",
+    isbnJa: "9784488135096",
+
+    coverJa: "",
+    coverJaUrl: "https://www.tsogen.co.jp/img/cover_image_l/13509.jpg",
+    coverOriginal: "",
+    coverOriginalUrl: "",
+    coverAlt: "『夜明けまでに誰かが』書影",
+    purchaseUrl: "https://www.tsogen.co.jp/np/isbn/9784488135096",
+
+    genre: ["サスペンス", "ミステリー", "心理スリラー"],
+    mood: ["密室", "イッキ読み", "緊迫"],
+    badges: ["日本語版あり", "話題の新刊"],
+    awards: [],
+    japanRecognition: [],
+    readerReaction: "『自由研究には向かない殺人』著者の新作",
+
+    adaptation: "",
+    section: ["新着・注目の翻訳本", "サスペンス・犯罪小説"],
+
+    summary: "人里離れた場所でキャンピングカーに閉じ込められた6人。狙撃者は「誰かが秘密を抱えている。命が惜しければ明かせ」と迫る。夜明けまでの極限の一夜を描く、緊迫の密室サスペンス。",
+    recommendedFor: "『ハウスメイド』のような、一気読み必至の密室・心理スリラーが好きな人に。",
+
+    curatorPick: false,
+    weeklyPick: true,
+    weeklyIssue: "2026-07-08",
+    addedDate: "2026-07-08",
+    isNew: true,
+
+    hasAdminComment: false,
+    adminCommentTitle: "管理人メモ",
+    adminComment: "",
+
+    relatedBooks: ["ハウスメイド", "瞬きすら許さない"],
     links: [],
   },
 
