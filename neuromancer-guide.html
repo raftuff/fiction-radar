@@ -140,6 +140,48 @@
     .rel-card b { font-family:var(--font-round); }
     .rel-card span { display:block; font-size:.88rem; color:var(--ink-soft); margin-top:4px; }
 
+    /* 書籍情報カード（ダーク・少しサイバーパンク寄り） */
+    .book-card { display:flex; gap:22px; align-items:flex-start; background:linear-gradient(135deg,#161122 0%, #1d1233 55%, #241443 100%); color:#f2eef8; border:1px solid #3b2b5c; border-radius:16px; padding:22px; margin:0 0 26px; box-shadow:0 10px 30px rgba(20,10,40,.25); }
+    .book-card__cover { flex:0 0 140px; width:140px; }
+    .book-card__cover img { width:100%; height:auto; display:block; border-radius:8px; box-shadow:0 10px 26px rgba(0,0,0,.55); }
+    .book-card__info { flex:1 1 240px; min-width:0; }
+    .book-card__label { font-size:.74rem; font-weight:700; letter-spacing:.08em; color:#b9a9e6; margin:0 0 6px; }
+    .book-card__title { font-family:var(--font-round); font-weight:900; font-size:1.35rem; line-height:1.35; margin:0 0 10px; color:#fff; }
+    .book-card__meta { list-style:none; margin:0 0 10px; padding:0; }
+    .book-card__meta li { font-size:.92rem; line-height:1.8; color:#d7cfe8; }
+    .book-card__meta b { color:#fff; font-weight:700; }
+    .book-card__note { font-size:.82rem; color:#a99fc4; margin:0 0 14px; line-height:1.7; }
+    .book-card__btn { display:inline-block; background:linear-gradient(120deg, var(--accent) 0%, var(--accent-4) 100%); color:#fff; font-weight:800; font-size:.9rem; padding:10px 20px; border-radius:999px; box-shadow:0 6px 16px rgba(108,92,231,.35); transition:filter .15s, transform .15s; }
+    .book-card__btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+
+    /* ネタバレ案内 */
+    .spoiler-notice { background:#fff7e0; border:1px solid #f0d98a; border-left:5px solid var(--accent-3); border-radius:12px; padding:16px 18px; margin:0 0 26px; }
+    .spoiler-notice__title { font-family:var(--font-round); font-weight:900; color:#8a6d1e; margin:0 0 8px; }
+    .spoiler-notice ul { margin:0; padding-left:1.2em; }
+    .spoiler-notice li { font-size:.95rem; line-height:1.8; margin:0 0 .3em; }
+
+    /* 主要人物・AI関係図 */
+    .rel-map { background:var(--bg-soft); border:1px solid var(--line); border-radius:14px; padding:20px 18px; margin:0 0 22px; box-shadow:var(--shadow); }
+    .rel-map__title { font-family:var(--font-round); font-weight:900; font-size:1.05rem; margin:0 0 16px; text-align:center; }
+    .rel-node { border-radius:10px; padding:9px 12px; font-weight:700; text-align:center; font-size:.95rem; }
+    .rel-node small { display:block; font-weight:400; font-size:.76rem; color:var(--ink-soft); margin-top:2px; }
+    .rel-node--ai { background:#eef2ff; border:1.5px solid var(--accent-4); }
+    .rel-node--human { background:#e6f6f0; border:1.5px solid var(--accent-2); }
+    .rel-node--key { background:#fff6ec; border:1.5px solid var(--accent-3); }
+    .rel-pair { display:flex; gap:12px; align-items:stretch; }
+    .rel-pair .rel-node { flex:1; min-width:0; }
+    .rel-arrow { text-align:center; font-size:.8rem; color:var(--ink-soft); font-weight:700; margin:8px 0; }
+    .rel-fuse { text-align:center; font-size:.78rem; color:var(--accent-4); font-weight:800; margin:8px 0; }
+    .rel-row { display:flex; gap:12px; flex-wrap:wrap; }
+    .rel-row .rel-node { flex:1 1 140px; }
+    .rel-map__caption { font-size:.88rem; color:#4a4338; line-height:1.85; margin:16px 0 0; background:#fbf3e6; border-radius:8px; padding:10px 12px; }
+
+    /* 現在地ナビ（物語の舞台） */
+    .loc-nav { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:.78rem; margin:0 0 14px; }
+    .loc-nav__step { padding:3px 11px; border-radius:999px; background:#f0ece3; color:var(--ink-soft); }
+    .loc-nav__step--now { background:var(--accent); color:#fff; font-weight:700; }
+    .loc-nav__sep { color:#c9bfaf; }
+
     @media (max-width: 560px) {
       .art-wrap { padding:18px 16px 40px; }
       .art-content p, .art-content li { font-size:16px; }
@@ -148,6 +190,10 @@
       .part-divider { flex-direction:column; align-items:flex-start; gap:4px; }
       .diagram { font-size:.9rem; }
       details.spoiler > summary { padding:14px; }
+      .book-card { flex-direction:column; align-items:center; text-align:center; gap:16px; }
+      .book-card__cover { width:150px; flex-basis:auto; }
+      .book-card__info { text-align:left; width:100%; }
+      .rel-pair { flex-direction:column; }
     }
   </style>
 </head>
@@ -200,7 +246,36 @@
 
     <div class="art-content">
 
+      <!-- 書籍情報カード -->
+      <aside class="book-card" aria-label="書籍情報">
+        <div class="book-card__cover">
+          <img src="images/guides/neuromancer-cover.png" alt="『ニューロマンサー〔新版〕』書影" width="140" />
+        </div>
+        <div class="book-card__info">
+          <p class="book-card__label">この記事で扱う本</p>
+          <p class="book-card__title">ニューロマンサー〔新版〕</p>
+          <ul class="book-card__meta">
+            <li><b>著者</b>：ウィリアム・ギブスン</li>
+            <li><b>訳者</b>：黒丸 尚 訳</li>
+            <li><b>レーベル</b>：ハヤカワ文庫SF</li>
+          </ul>
+          <p class="book-card__note">新版／約576ページ／巻末にシリーズ用語集を収録。ヒューゴー賞・ネビュラ賞受賞作。</p>
+          <a class="book-card__btn" href="https://www.hayakawa-online.co.jp/shop/g/g0000012489/" target="_blank" rel="noopener">書籍情報を見る →</a>
+        </div>
+      </aside>
+
       <p class="art-lead">この記事は「作品紹介」ではなく、<strong>初読で途中から分からなくなった人が、最後まで理解しながら読み切るための"攻略本"</strong>です。私が初読でつまずいた場所に、そのまま「💬管理人メモ」を置いていきます。隣で一緒に読むつもりで書きました。</p>
+
+      <!-- ネタバレ案内 -->
+      <div class="spoiler-notice" role="note">
+        <p class="spoiler-notice__title">⚠ ネタバレについて</p>
+        <ul>
+          <li>この記事は『ニューロマンサー』を理解しやすくするための読書ガイドです。</li>
+          <li><strong>「読む前に知っておきたい5つのこと」までは、できるだけネタバレを抑えています。</strong></li>
+          <li>「登場人物一覧」以降は、人物の正体・物語の核心・結末にふれます。</li>
+          <li>未読の方は、まず前半だけ読むのがおすすめです。</li>
+        </ul>
+      </div>
 
       <nav class="toc-card" aria-label="目次">
         <p class="toc-card__title">この記事の目次</p>
@@ -278,6 +353,27 @@
       <h2 id="sec3">③ 登場人物一覧｜「誰が味方で、誰がAIなのか」だけ分かればいい</h2>
       <p>各人物を <strong>📖 初読で知ってよい情報</strong>と、折りたたみの <strong>🔒 正体・結末【ネタバレ】</strong> に分けました。まだ本編の途中の人は、折りたたみは開かずに📖だけ読んでください。</p>
       <div class="guide-box guide-box--point"><p>📌 大前提：この物語の"本当の主役"は、実は人間ではなく <strong>2体のAI</strong>。人間たちは、そのAIの計画に動かされる駒——この構図がつかめると一気に読めます。</p></div>
+
+      <!-- 主要人物・AI関係図 -->
+      <figure class="rel-map">
+        <figcaption class="rel-map__title">主要人物・AI関係図</figcaption>
+        <div class="rel-pair">
+          <div class="rel-node rel-node--ai">ウィンターミュート<small>融合を目指すAI</small></div>
+          <div class="rel-node rel-node--ai">ニューロマンサー<small>人格・記憶に関わるAI</small></div>
+        </div>
+        <div class="rel-fuse">⇅ 最終的に「融合」する2体 ⇅</div>
+        <div class="rel-arrow">↓ ウィンターミュートが人間を裏で動かす</div>
+        <div class="rel-node rel-node--human">アーミテージ<small>依頼主……実はAIに操られている</small></div>
+        <div class="rel-arrow">↓ 依頼して任務をやらせる</div>
+        <div class="rel-row">
+          <div class="rel-node rel-node--human">ケイス<small>主人公</small></div>
+          <div class="rel-node rel-node--human">モリイ<small>相棒／戦闘要員</small></div>
+          <div class="rel-node rel-node--ai">ディキシー<small>サポート役（人格データ）</small></div>
+        </div>
+        <div class="rel-arrow">↓ 融合の「合言葉（鍵）」を握るのは……</div>
+        <div class="rel-node rel-node--key">3ジェイン<small>鍵を握る令嬢（どちらに転ぶか読めない）</small></div>
+        <figcaption class="rel-map__caption">この作品で混乱しやすいのは、「<strong>誰が誰を動かしているのか</strong>」「<strong>人間とAIがどう関わるのか</strong>」の2点です。まずはこの図で大枠をつかめばOKです。</figcaption>
+      </figure>
 
       <div class="char-card">
         <div class="char-card__head"><span class="char-card__name">ケイス</span><span class="char-card__role">主人公／元天才ハッカー</span></div>
@@ -465,6 +561,7 @@
       <p>ここからは本編を部ごとに歩きます。各部は「この部では何が起きる？／理解しておくこと／登場人物／重要ワード／初読つまずきポイント」の順です。<strong>迷ったら、その部の「初読つまずきポイント」だけ読めば復帰できます。</strong></p>
 
       <div class="part-divider"><span class="part-divider__num">PART 1</span><span class="part-divider__title">第一部 千葉市憂愁</span></div>
+      <nav class="loc-nav" aria-label="現在地"><span class="loc-nav__step loc-nav__step--now">📍千葉</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">スプロール</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">フリーサイド</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">ストレイライト</span></nav>
       <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>落ちぶれた元天才ハッカーのケイスは、鏡の目を持つ女モリイと、謎の男アーミテージに出会う。ネットに潜れない体になっていたケイスは、神経を治してもらう代わりに、正体不明の仕事を引き受ける。再びマトリックスへ戻れるようになったが、途中で降りられないよう体に"枷"まで仕込まれ、危険な依頼へ足を踏み入れていく。舞台は日本の裏町・千葉。ここから物語が大きく動き出す。</p></div>
       <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>押さえるのは<strong>「主人公が、体を治す代わりに正体不明の依頼に乗った」</strong>ことだけ。依頼の目的もアーミテージの正体も、まだ分からなくて当然です。用語の洪水は気にせず、"世界観に慣れる部"と割り切ってOK。</p></div>
       <div class="part-sub"><span class="part-sub__label">👥 登場人物</span><p>ケイス／モリイ／アーミテージ／リンダ・リー／ラーツ</p></div>
@@ -480,6 +577,7 @@
       </div>
 
       <div class="part-divider"><span class="part-divider__num">PART 2</span><span class="part-divider__title">第二部 買物遠征</span></div>
+      <nav class="loc-nav" aria-label="現在地"><span class="loc-nav__step">千葉</span><span class="loc-nav__sep">→</span><span class="loc-nav__step loc-nav__step--now">📍スプロール</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">フリーサイド</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">ストレイライト</span></nav>
       <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>舞台はアメリカの超巨大都市スプロール。ネットに戻ったケイスは、チームの最初の大仕事に挑む——伝説の死んだハッカー「ディキシー」の人格データを、大企業の倉庫から盗み出す作戦だ。モリイが現場に潜入し、ケイスがネット側から支援する。その裏でケイスは、この仕事の背後に、人間ではなく人工知能「ウィンターミュート」が関わっていることに気づきはじめる。さらにチームは、幻を操る危険な男リヴィエラを引き入れ、宇宙のリゾートへ向かう準備を進める。</p></div>
       <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>核心は2つだけ。<strong>①相棒として使う「ディキシー（死者の人格データ）」を手に入れた。②この仕事の背後に、人間ではなくAI（ウィンターミュート）がいると少しずつ分かってくる。</strong> 細かい作戦の段取りは覚えなくてOK。</p></div>
       <div class="part-sub"><span class="part-sub__label">👥 登場人物</span><p>ケイス／モリイ／ディキシー（新加入）／フィン（情報屋）／リヴィエラ（新加入）／パンサー・モダン（脇）</p></div>
@@ -495,6 +593,7 @@
       </div>
 
       <div class="part-divider"><span class="part-divider__num">PART 3</span><span class="part-divider__title">第三部 真夜中のジュール・ヴェルヌ通り</span></div>
+      <nav class="loc-nav" aria-label="現在地"><span class="loc-nav__step">千葉</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">スプロール</span><span class="loc-nav__sep">→</span><span class="loc-nav__step loc-nav__step--now">📍フリーサイド</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">ストレイライト</span></nav>
       <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>舞台は宇宙のリゾート「フリーサイド」。チームはいよいよ、AIを作った一族の私邸「ストレイライト」への潜入にかかる。リヴィエラが令嬢3ジェインに近づき、モリイは単身で邸内へ踏み込む。一方ケイスはネットの中で防壁に挑むが、そこで"もう一体のAI"ニューロマンサーに引き込まれ、死んだはずの恋人リンダと過ごす砂浜の世界に留められそうになる。現実・ネット・仮想世界が交錯する、もっとも幻惑的な場面に突入する。さらにリヴィエラの裏切りが牙をむき、モリイが窮地に陥る。</p></div>
       <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>要点は<strong>「もう一体のAI・ニューロマンサーが登場し、ケイスを"死者リンダのいる仮想世界"に留めようとする」</strong>こと。ニューロマンサーは、騙すというより、そこで本当に生き続けられる世界を差し出してきます。テーマは<strong>「AIが提示する仮想世界（人格が存在し続ける世界）に留まるか、現実へ戻るか」</strong>。</p></div>
       <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部では、世界が3層になります</span>
@@ -520,6 +619,7 @@
       </div>
 
       <div class="part-divider"><span class="part-divider__num">PART 4</span><span class="part-divider__title">第四部 迷光仕掛け</span></div>
+      <nav class="loc-nav" aria-label="現在地"><span class="loc-nav__step">千葉</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">スプロール</span><span class="loc-nav__sep">→</span><span class="loc-nav__step">フリーサイド</span><span class="loc-nav__sep">→</span><span class="loc-nav__step loc-nav__step--now">📍ストレイライト</span></nav>
       <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>最終決戦。舞台はAIを作った一族の私邸ストレイライト。ケイスは切り札のプログラムでAIの最後の壁を破りにかかり、負傷したモリイは邸内で3ジェインやリヴィエラたちと対峙する。目的は、AI融合に必要な"合言葉"を3ジェインから引き出すこと。すべての糸が、一点へ集まっていく。</p></div>
       <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>ゴールは1つだけ。<strong>「3ジェインから"合言葉（＝最後の壁を破る鍵）"を引き出すこと」</strong>。場面が高速で切り替わりますが、追うのはこれだけ。依頼主アーミテージは姿を消し、ケイスたちは自分たちだけで最後の局面へ向かいます（何があったのかは⑥で）。</p></div>
       <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部は「説明」より「勢い」で読んで大丈夫</span><p>クライマックスなので、細かい理屈より<strong>「仲間たちが最後の作戦を実行している」</strong>という流れだけ追えば十分。分からない用語が飛んできても、止まらず走り抜けてOK。</p></div>
