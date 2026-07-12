@@ -38,7 +38,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
-  <!-- JSON-LD: Article -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -53,75 +52,103 @@
   }
   </script>
 
-  <!-- 記事ページ用の最小スタイル（既存 style.css のカラー変数・フォントを利用） -->
+  <!-- ============================================================
+       記事ページ専用スタイル（この1ファイルで自己完結）
+       カラー/フォントは既存 style.css の CSS変数を流用
+       ============================================================ -->
   <style>
-    .article { max-width: 760px; }
-    .article > * + * { margin-top: 1.05em; }
-    .article p { line-height: 1.95; margin: 0 0 1.1em; }
-    .article h2 { scroll-margin-top: 80px; margin-top: 40px; }
-    .article h3 {
-      font-family: var(--font-round);
-      font-weight: 900;
-      font-size: 1.08rem;
-      line-height: 1.5;
-      margin: 26px 0 8px;
-      scroll-margin-top: 80px;
+    .art-wrap { max-width: 800px; margin: 0 auto; padding: 24px 20px 48px; }
+    .art-content { max-width: 760px; margin: 0 auto; }
+    .art-content p { font-size: 17px; line-height: 1.95; margin: 0 0 1.15em; }
+    .art-back { margin: 0 0 16px; }
+
+    .art-hero {
+      background: linear-gradient(150deg, #fff6ec 0%, #eef8f5 100%);
+      border: 1px solid var(--line); border-radius: 20px;
+      padding: 30px clamp(20px, 4vw, 36px) 26px; margin-bottom: 26px;
     }
-    .article ul, .article ol { margin: 0 0 1.1em; padding-left: 1.3em; }
-    .article li { line-height: 1.9; margin: 0 0 .5em; }
-    .article blockquote {
-      margin: 1.2em 0;
-      padding: 12px 16px;
-      background: #fff8ef;
-      border-left: 4px solid var(--accent-3);
-      border-radius: 6px;
-      font-size: .96rem;
-      color: #4a4338;
+    .art-hero__eyebrow { font-family: var(--font-round); font-weight:700; font-size:.8rem; color:var(--accent-2); margin:0 0 10px; }
+    .art-hero__title { font-family: var(--font-round); font-weight: 900; font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.3; margin: 0 0 10px; }
+    .art-hero__sub { font-size: .98rem; color: var(--ink-soft); margin: 0 0 16px; line-height:1.6; }
+    .art-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .art-tag { font-size: .76rem; font-weight: 700; padding: 4px 11px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
+    .art-tag--spoiler { background: var(--accent); color:#fff; border-color: var(--accent); }
+    .art-tag--pick { background: var(--accent-4); color:#fff; border-color: var(--accent-4); }
+
+    .art-lead { font-size: .96rem; color:#4a4338; line-height:1.9; background:#fffdf8; border:1px solid var(--line); border-left:4px solid var(--accent-3); border-radius:10px; padding:14px 16px; margin:0 0 26px; }
+
+    .toc-card { background: var(--bg-soft); border: 1.5px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 20px 22px; margin: 0 0 34px; }
+    .toc-card__title { font-family: var(--font-round); font-weight:900; font-size:1.05rem; margin:0 0 12px; }
+    .toc-list { list-style:none; margin:0; padding:0; display:grid; gap:2px; }
+    .toc-list a { display:flex; gap:12px; align-items:baseline; padding:8px 6px; border-radius:8px; color:var(--ink); font-weight:700; font-size:.95rem; }
+    .toc-list a:hover { background:#f3ead9; color:var(--accent); }
+    .toc-list .num { font-family: var(--font-round); color:var(--accent-2); flex-shrink:0; }
+    .toc-card__note { font-size:.84rem; color:var(--ink-soft); margin:12px 0 0; }
+
+    .art-content h2 { font-family: var(--font-round); font-weight:900; font-size:1.5rem; margin: 48px 0 16px; padding-left:15px; position:relative; line-height:1.35; scroll-margin-top:80px; }
+    .art-content h2::before { content:""; position:absolute; left:0; top:.15em; bottom:.15em; width:7px; border-radius:4px; background:var(--accent); }
+    .art-content h3 { font-family: var(--font-round); font-weight:900; font-size:1.12rem; line-height:1.5; margin: 30px 0 10px; scroll-margin-top:80px; }
+    .art-content ul, .art-content ol { margin:0 0 1.15em; padding-left:1.3em; }
+    .art-content li { font-size:17px; line-height:1.9; margin:0 0 .5em; }
+
+    .guide-box { border-radius:12px; padding:14px 16px; margin:16px 0; font-size:.97rem; line-height:1.85; }
+    .guide-box p { margin:0; font-size:.97rem; }
+    .guide-box p + p { margin-top:.7em; }
+    .guide-box__title { display:block; font-family:var(--font-round); font-weight:800; margin-bottom:6px; }
+    .guide-box ul { margin:.4em 0 0; padding-left:1.2em; }
+    .guide-box li { font-size:.96rem; line-height:1.85; }
+    .guide-box--point { background:#eef8f5; border-left:4px solid var(--accent-2); }
+    .guide-box--warning { background:#fff7e0; border-left:4px solid var(--accent-3); }
+    .guide-box--ai { background:#eef2ff; border-left:4px solid var(--accent-4); }
+    .guide-box--memo { background:#fbf3e6; border-left:4px solid var(--accent-2); }
+
+    .diagram { background:#f4ecdc; border:1px solid var(--line); border-radius:12px; padding:16px 14px; text-align:center; font-family:var(--font-round); font-weight:700; line-height:1.8; margin:14px 0; overflow-x:auto; white-space:pre; font-size:.98rem; }
+
+    .char-card { background: var(--bg-soft); border:1px solid var(--line); border-radius:14px; box-shadow: 0 3px 12px rgba(60,45,30,.05); padding:18px 18px 16px; margin:0 0 16px; }
+    .char-card__head { display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 10px; margin-bottom:10px; }
+    .char-card__name { font-family:var(--font-round); font-weight:900; font-size:1.2rem; }
+    .char-card__role { font-size:.82rem; color:#fff; background:var(--accent-2); padding:3px 10px; border-radius:999px; }
+    .char-card__label { font-size:.8rem; font-weight:700; color:var(--accent-4); margin:0 0 4px; }
+    .char-card p { font-size:.96rem; line-height:1.85; margin:0 0 10px; }
+    .char-ai { font-size:.9rem; color:#3a6f6b; background:#eef8f5; border-radius:8px; padding:8px 12px; margin:0 0 10px; }
+    details.spoiler { border:1px solid var(--line); border-radius:10px; background:#fbfaf7; margin:10px 0 0; }
+    details.spoiler > summary { cursor:pointer; list-style:none; padding:12px 14px; font-weight:700; font-size:.92rem; color:var(--accent-4); display:flex; align-items:center; gap:8px; }
+    details.spoiler > summary::-webkit-details-marker { display:none; }
+    details.spoiler > summary::before { content:"\25B6"; font-size:.7rem; transition:transform .15s; }
+    details.spoiler[open] > summary::before { transform:rotate(90deg); }
+    details.spoiler > summary:hover { color:var(--accent); }
+    details.spoiler .spoiler__body { padding:0 14px 14px; }
+    details.spoiler .spoiler__body p { font-size:.95rem; line-height:1.85; margin:0; }
+
+    .term-card { background:#fdfaf3; border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:0 0 14px; }
+    .term-card__name { font-family:var(--font-round); font-weight:900; font-size:1.05rem; margin:0 0 10px; }
+    .term-row { display:grid; grid-template-columns:92px 1fr; gap:10px; padding:6px 0; border-top:1px dashed var(--line); }
+    .term-row:first-of-type { border-top:0; }
+    .term-label { font-size:.78rem; font-weight:700; color:var(--accent-2); padding-top:2px; }
+    .term-val { font-size:.95rem; line-height:1.75; }
+
+    .part-divider { display:flex; align-items:center; gap:14px; margin:40px 0 18px; padding:16px 18px; border-radius:14px; background:linear-gradient(120deg, var(--accent) 0%, #ff8b6f 100%); color:#fff; }
+    .part-divider__num { font-family:var(--font-round); font-weight:900; font-size:1.3rem; letter-spacing:.06em; flex-shrink:0; opacity:.95; }
+    .part-divider__title { font-family:var(--font-round); font-weight:900; font-size:1.15rem; line-height:1.3; }
+    .part-sub { margin:14px 0; }
+    .part-sub__label { display:block; font-family:var(--font-round); font-weight:800; font-size:.92rem; color:var(--ink); margin:0 0 4px; }
+    .part-sub p { margin:0; }
+
+    .rel-cards { display:grid; gap:12px; margin:8px 0 0; }
+    .rel-card { display:block; border:2px solid var(--line); border-radius:14px; background:var(--bg-soft); padding:14px 16px; box-shadow:var(--shadow); transition:transform .15s, box-shadow .15s, border-color .15s; }
+    .rel-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-hover); border-color:var(--accent); }
+    .rel-card b { font-family:var(--font-round); }
+    .rel-card span { display:block; font-size:.88rem; color:var(--ink-soft); margin-top:4px; }
+
+    @media (max-width: 560px) {
+      .art-wrap { padding:18px 16px 40px; }
+      .art-content p, .art-content li { font-size:16px; }
+      .art-content h2 { font-size:1.3rem; }
+      .term-row { grid-template-columns:80px 1fr; }
+      .part-divider { flex-direction:column; align-items:flex-start; gap:4px; }
+      .diagram { font-size:.9rem; }
+      details.spoiler > summary { padding:14px; }
     }
-    .article blockquote p { margin: 0; }
-    .article pre.diagram {
-      background: #f7f0e2;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 16px 18px;
-      text-align: center;
-      font-family: var(--font-round);
-      font-weight: 700;
-      line-height: 1.8;
-      overflow-x: auto;
-    }
-    .article .lead {
-      font-size: .95rem;
-      color: var(--ink-soft);
-      margin-bottom: 1.4em;
-    }
-    /* 目次 */
-    .toc {
-      background: var(--bg-soft);
-      border: 1.5px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px 22px;
-      box-shadow: var(--shadow);
-      margin: 0 0 8px;
-    }
-    .toc__title { font-family: var(--font-round); font-weight: 900; margin: 0 0 10px; }
-    .toc ol { margin: 0; padding-left: 1.2em; }
-    .toc a { color: var(--accent-2); font-weight: 700; }
-    .toc a:hover { color: var(--accent); text-decoration: underline; }
-    /* 関連記事カード */
-    .rel-cards { display: grid; gap: 12px; margin: 6px 0 0; }
-    .rel-card {
-      display: block;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--bg-soft);
-      padding: 14px 16px;
-      box-shadow: var(--shadow);
-      transition: transform .15s, box-shadow .15s, border-color .15s;
-    }
-    .rel-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
-    .rel-card b { font-family: var(--font-round); }
-    .rel-card span { display: block; font-size: .88rem; color: var(--ink-soft); margin-top: 4px; }
   </style>
 </head>
 <body>
@@ -133,16 +160,13 @@
         <img class="logo__icon" src="assets/images/icon.png" alt="" aria-hidden="true" width="32" height="32" />
         <span class="logo__text">FICTION&nbsp;RADAR</span>
       </a>
-
       <div class="header__util">
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
-
       <button class="menu-toggle" id="menu-toggle" aria-label="メニュー" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-
       <nav class="nav" id="main-nav">
         <a href="index.html" data-cat="__all">作品一覧</a>
         <a href="category.html?cat=new" data-cat="new">新着・注目の翻訳本</a>
@@ -158,35 +182,42 @@
   </header>
 
   <!-- ============ 記事本文 ============ -->
-  <main class="container container--page">
-    <article class="page article">
+  <main class="art-wrap">
 
-      <p class="d-back"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>
+    <p class="art-back"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>
 
-      <h1 class="page__title">『ニューロマンサー』解説｜SF初心者のための完全読書ガイド【あらすじ・登場人物・結末ネタバレ】</h1>
+    <header class="art-hero">
+      <p class="art-hero__eyebrow">読みものガイド</p>
+      <h1 class="art-hero__title">『ニューロマンサー』完全読書ガイド</h1>
+      <p class="art-hero__sub">SF初心者向け｜あらすじ・登場人物・結末をネタバレ解説</p>
+      <div class="art-tags">
+        <span class="art-tag art-tag--spoiler">ネタバレあり</span>
+        <span class="art-tag">SF初心者向け</span>
+        <span class="art-tag art-tag--pick">管理人おすすめ</span>
+        <span class="art-tag">完全読書ガイド</span>
+      </div>
+    </header>
 
-      <blockquote>
-        <p>この記事は「作品紹介」ではなく、<strong>初読で途中から分からなくなった人が、最後まで理解しながら読み切るための"攻略本"</strong>です。私が初読でつまずいた場所に、そのまま「💬管理人メモ」を置いていきます。隣で一緒に読むつもりで書きました。</p>
-      </blockquote>
+    <div class="art-content">
 
-      <!-- 目次 -->
-      <nav class="toc" aria-label="目次">
-        <p class="toc__title">目次</p>
-        <ol>
-          <li><a href="#sec1">管理人コメント｜なぜ今『ニューロマンサー』を読むべきなのか</a></li>
-          <li><a href="#sec2">読む前に知っておきたい5つのこと</a></li>
-          <li><a href="#sec3">登場人物一覧｜誰が味方で、誰がAIなのか</a></li>
-          <li><a href="#sec4">重要ワード辞典｜一番わかりやすい言い換えで覚える</a></li>
-          <li><a href="#sec5">部ごとの完全ガイド（第一部〜第四部）</a></li>
-          <li><a href="#sec6">エンディング完全解説｜ラスト30ページで何が起きたのか【ネタバレ】</a></li>
-          <li><a href="#sec7">『ニューロマンサー』が40年経っても古びない理由</a></li>
-          <li><a href="#sec8">管理人総評｜今こそ読む価値がある</a></li>
-        </ol>
-        <p class="lead" style="margin:10px 0 0;">使い方：本編を読み進め、<strong>分からなくなったらこの目次から該当セクションへ戻る</strong>のがおすすめです。特に各部の「💡初読つまずきポイント」が、この記事のいちばんの読みどころです。</p>
+      <p class="art-lead">この記事は「作品紹介」ではなく、<strong>初読で途中から分からなくなった人が、最後まで理解しながら読み切るための"攻略本"</strong>です。私が初読でつまずいた場所に、そのまま「💬管理人メモ」を置いていきます。隣で一緒に読むつもりで書きました。</p>
+
+      <nav class="toc-card" aria-label="目次">
+        <p class="toc-card__title">この記事の目次</p>
+        <ul class="toc-list">
+          <li><a href="#sec1"><span class="num">01</span><span>なぜ今読むべきか（管理人コメント）</span></a></li>
+          <li><a href="#sec2"><span class="num">02</span><span>読む前に知っておきたい5つのこと</span></a></li>
+          <li><a href="#sec3"><span class="num">03</span><span>登場人物一覧</span></a></li>
+          <li><a href="#sec4"><span class="num">04</span><span>重要ワード辞典</span></a></li>
+          <li><a href="#sec5"><span class="num">05</span><span>部ごとの完全ガイド（第一部〜第四部）</span></a></li>
+          <li><a href="#sec6"><span class="num">06</span><span>エンディング解説【ネタバレ】</span></a></li>
+          <li><a href="#sec7"><span class="num">07</span><span>40年経っても古びない理由</span></a></li>
+          <li><a href="#sec8"><span class="num">08</span><span>管理人総評</span></a></li>
+        </ul>
+        <p class="toc-card__note">使い方：本編を読み進め、<strong>分からなくなったらこの目次から該当セクションへ戻る</strong>のがおすすめです。特に各部の「初読つまずきポイント」が、この記事のいちばんの読みどころです。</p>
       </nav>
 
-      <!-- ① -->
-      <h2 id="sec1" class="page__h2">① 管理人コメント｜なぜ今『ニューロマンサー』を読むべきなのか</h2>
+      <h2 id="sec1">① 管理人コメント｜なぜ今『ニューロマンサー』を読むべきなのか</h2>
       <p>はっきり言います。<strong>『ニューロマンサー』は、生成AI時代の今読むために書かれた小説だったんじゃないか</strong>——初読を終えたとき、本気でそう思いました。</p>
       <p>でも同時に、<strong>とにかく読みにくい。</strong> 私も何度も止まりました（笑）。この記事に来たあなたは、たぶん「面白そうで読み始めたのに、誰が誰で何が起きてるか分からなくなって検索してきた」人ですよね。大丈夫です。<strong>それはあなたの読解力の問題ではありません。</strong> この小説がそういう作りなだけです。理由もこの先で説明します。</p>
 
@@ -203,26 +234,27 @@
       <h3>今読むと「AI小説」というより「教養書」</h3>
       <p>私たちはもう、ChatGPTやClaudeと日本語で会話し、仕事を任せ、ときに「こいつ意思があるのでは」とゾッとしています。<strong>その体験のあとに読むと、この小説の見え方が変わります。</strong></p>
       <p>40年前の読者はAIを「未来のガジェット」として読みました。でも私たちは、人工知能が「もっと自由になりたい」と動くくだりを<strong>"知っている話"として読んでしまう</strong>。予言というより、答え合わせです。だから私はこの本を、古典SFではなく「AI時代の教養書」として薦めます。</p>
-      <blockquote><p>📌 <strong>この記事の方針</strong>：AIとの関連は最後の章にまとめるだけでなく、各部の解説の中でもその都度「これ、今のAIでいうと◯◯」と補助線を引きます。難しい場面ほど、今の感覚に翻訳すると腑に落ちます。</p></blockquote>
+      <div class="guide-box guide-box--point">
+        <span class="guide-box__title">📌 この記事の方針</span>
+        <p>AIとの関連は最後の章にまとめるだけでなく、各部の解説の中でもその都度「これ、今のAIでいうと◯◯」と補助線を引きます。難しい場面ほど、今の感覚に翻訳すると腑に落ちます。</p>
+      </div>
 
       <h3>だからこのガイドを書きました</h3>
       <p>白状すると、私は初読の第一部で「今、誰が何をしてるんだ？」となって一度本を閉じました。用語は説明されず飛んでくる。人物はいきなり出て、消える。「フィンって誰」「ホサカ？」「ザイオン？」——付箋だらけです。</p>
-      <p>そこで思いました。<strong>「最初に地図とルール表があれば、10倍楽しめたのに」</strong>と。</p>
-      <p>この記事がその地図とルール表です。私がつまずいた場所には全部「💬管理人メモ」を置きました。<strong>この作品は、全部を理解しなくても、追うべき一本の筋さえ見えれば最後まで走れます。</strong> その筋を、次の章で渡します。</p>
+      <p>そこで思いました。<strong>「最初に地図とルール表があれば、10倍楽しめたのに」</strong>と。この記事がその地図とルール表です。<strong>この作品は、全部を理解しなくても、追うべき一本の筋さえ見えれば最後まで走れます。</strong> その筋を、次の章で渡します。</p>
 
-      <!-- ② -->
-      <h2 id="sec2" class="page__h2">② 読む前に知っておきたい5つのこと｜ギブスンの"クセ"を先に知る</h2>
+      <h2 id="sec2">② 読む前に知っておきたい5つのこと｜ギブスンの"クセ"を先に知る</h2>
       <p>つまずきの原因の大半は、作品が難しいからではなく、<strong>作者ウィリアム・ギブスンの書き方のクセを知らないから</strong>です。5つだけ頭に入れてください。</p>
 
       <h3>その1：ギブスンは「説明しない作家」</h3>
       <p>普通のSFは、新しい道具が出たら「これはこういうものです」と説明します。ギブスンは<strong>ほとんど説明しません。</strong> 登場人物にとって当たり前のものを、彼らはいちいち説明しない。同じ手つきで、読者にも説明しない。だから私たちは<strong>未来の街に放り込まれた旅行者</strong>になります。これは狙いです。「未来のリアルな肌ざわり」を出すために、あえて解説を省いています。</p>
-      <blockquote><p>💬 <strong>管理人メモ</strong>：私は「何か読み飛ばした？」と何度もページを戻しました。でも<strong>戻らなくて大丈夫</strong>。説明が無いのはあなたのせいじゃなく、作者がわざとです。<strong>「分からない＝正常」</strong>でいてください。</p></blockquote>
+      <div class="guide-box guide-box--memo"><span class="guide-box__title">💬 管理人メモ</span><p>私は「何か読み飛ばした？」と何度もページを戻しました。でも<strong>戻らなくて大丈夫</strong>。説明が無いのはあなたのせいじゃなく、作者がわざとです。<strong>「分からない＝正常」</strong>でいてください。</p></div>
 
       <h3>その2：物語は「映画の途中から」始まる</h3>
       <p>『ニューロマンサー』は、<strong>すでに何かが起きたあとの世界</strong>から始まります。主人公はかつて有能なハッカーで、今は落ちぶれている。なぜそうなったかは最初ははっきり語られません。<strong>続編を1作目と思って観てしまった</strong>感覚に近い。でも安心してください。その"過去"は、進むにつれ必要な分だけ明かされます。最初のモヤモヤは計算された仕込みです。</p>
 
       <h3>その3：専門用語は、全部を理解しなくていい</h3>
-      <p>ICE、シムスティム、コンストラクト、オノ・センダイ、ホサカ……聞き慣れない言葉が大量に出ます。📌 断言します。<strong>全部を理解する必要はありません。</strong> 用語は2種類です。</p>
+      <p>ICE、シムスティム、コンストラクト、オノ・センダイ、ホサカ……聞き慣れない言葉が大量に出ます。<strong>全部を理解する必要はありません。</strong> 用語は2種類です。</p>
       <ol>
         <li><strong>物語に必要な言葉</strong>（AI、マトリックス、人格データ など）</li>
         <li><strong>雰囲気用の言葉</strong>（銃器名、細かい地名、型番 など）</li>
@@ -231,272 +263,281 @@
 
       <h3>その4：追うべきは「人間関係」と「誰が何を企んでいるか」だけ</h3>
       <p>追うのはこれだけです。<strong>「今、誰が味方で、誰が敵で、その裏で"何者か"が何を企んでいるのか」。</strong></p>
-      <blockquote><p>落ちぶれた主人公が、謎の依頼主に拾われ、正体不明のチームで"あるもの"を狙う仕事に巻き込まれる。その仕事を裏で本当に動かしていたのは、人間ではなかった——。</p></blockquote>
+      <div class="guide-box guide-box--point"><p>落ちぶれた主人公が、謎の依頼主に拾われ、正体不明のチームで"あるもの"を狙う仕事に巻き込まれる。その仕事を裏で本当に動かしていたのは、人間ではなかった——。</p></div>
       <p>この骨組みさえ握れば迷子になりません。「この依頼、誰が得をする？」という<strong>ミステリーの視点</strong>で読むと一気に面白くなります。</p>
-      <blockquote><p>💬 <strong>管理人メモ</strong>：私は途中まで依頼主を素直に信じて読んでいました。正解は<strong>「この依頼、裏があるぞ」と疑いながら読む</strong>こと。その"背後にいる存在"は、今でいう、人に仕事を依頼し、自分で計画を立てて目的を達成しようとする<strong>AIエージェント</strong>にとても近い動き方をします。</p></blockquote>
+      <div class="guide-box guide-box--memo"><span class="guide-box__title">💬 管理人メモ</span><p>私は途中まで依頼主を素直に信じて読んでいました。正解は<strong>「この依頼、裏があるぞ」と疑いながら読む</strong>こと。その"背後にいる存在"は、今でいう、人に仕事を依頼し、自分で計画を立てて目的を達成しようとする<strong>AIエージェント</strong>にとても近い動き方をします。</p></div>
 
       <h3>その5：分からなくても止まらず進んでいい（必ず回収される）</h3>
       <p>ギブスンは伏線を先に投げて後で回収する作家です。第一部の「なんだこれ？」の多くは、第三部・第四部で「そういうことか！」と回収されます。初読の正しい姿勢はこう。</p>
-      <blockquote><p><strong>7割分かれば十分。残り3割は、この記事と"2周目"で回収する。</strong></p></blockquote>
+      <div class="guide-box guide-box--point"><p><strong>7割分かれば十分。残り3割は、この記事と"2周目"で回収する。</strong></p></div>
       <p>この小説は、<strong>2周目が本当に面白い</strong>タイプです。1周目で全体像、2周目で「最初からこう仕込まれていたのか」と唸る。そこまで含めて『ニューロマンサー』体験です。</p>
 
       <h3>このガイドのおすすめの使い方</h3>
-      <p>📌 おすすめは、<strong>本編を読み進め、分からなくなったらこの記事へ戻ること</strong>です。全部読んでから解説を読むより、<strong>「迷ったら戻る」を繰り返す</strong>ほうが、この小説は何倍も楽しめます。攻略本をめくる感覚で使い倒してください。</p>
+      <p>おすすめは、<strong>本編を読み進め、分からなくなったらこの記事へ戻ること</strong>です。全部読んでから解説を読むより、<strong>「迷ったら戻る」を繰り返す</strong>ほうが、この小説は何倍も楽しめます。攻略本をめくる感覚で使い倒してください。</p>
 
-      <!-- ③ -->
-      <h2 id="sec3" class="page__h2">③ 登場人物一覧｜「誰が味方で、誰がAIなのか」だけ分かればいい</h2>
-      <p>読書の途中でも参照できるよう、各人物を <strong>📖 初読で知ってよい情報</strong>（ネタバレなし）と <strong>🔒 正体・結末【ネタバレ】</strong> に分けました。まだ本編の途中の人は、📖だけ読んでください。</p>
-      <blockquote><p>📌 大前提：この物語の"本当の主役"は、実は人間ではなく <strong>2体のAI</strong>。人間たちは、そのAIの計画に動かされる駒——この構図がつかめると一気に読めます。</p></blockquote>
+      <h2 id="sec3">③ 登場人物一覧｜「誰が味方で、誰がAIなのか」だけ分かればいい</h2>
+      <p>各人物を <strong>📖 初読で知ってよい情報</strong>と、折りたたみの <strong>🔒 正体・結末【ネタバレ】</strong> に分けました。まだ本編の途中の人は、折りたたみは開かずに📖だけ読んでください。</p>
+      <div class="guide-box guide-box--point"><p>📌 大前提：この物語の"本当の主役"は、実は人間ではなく <strong>2体のAI</strong>。人間たちは、そのAIの計画に動かされる駒——この構図がつかめると一気に読めます。</p></div>
 
-      <h3>ケイス（Case）— 主人公</h3>
-      <ul>
-        <li>📖 かつて凄腕だった「コンソール・カウボーイ（ハッカー）」。盗みの罰に神経を焼かれ、ネットに潜れない体にされた。それを治すため、謎の依頼を引き受ける。</li>
-        <li>🔒 体を治され、任務をやり遂げ日常へ戻る。ネットの中で"ある人格たち"と再会する余韻を残す。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ケイス</span><span class="char-card__role">主人公／元天才ハッカー</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>盗みの罰に神経を焼かれ、ネットに潜れない体にされた元・凄腕ハッカー。それを治すため、謎の依頼を引き受ける。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>体を治され、任務をやり遂げ日常へ戻る。ネットの中で"ある人格たち"と再会する余韻を残す。</p></div></details>
+      </div>
 
-      <h3>モリイ（Molly）— 相棒／戦闘要員</h3>
-      <ul>
-        <li>📖 目に鏡のレンズを埋め、指先に刃を仕込んだ「ストリート・サムライ」。ケイスの相棒で、恋人的な関係にもなる。腕の立つ戦闘要員。</li>
-        <li>🔒 任務後、ケイスに短い書き置きを残して去る。ドライな別れ方が彼女らしい。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">モリイ</span><span class="char-card__role">相棒／戦闘要員</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>目に鏡のレンズを埋め、指先に刃を仕込んだ「ストリート・サムライ」。ケイスの相棒で、恋人的な関係にもなる。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>任務後、ケイスに短い書き置きを残して去る。ドライな別れ方が彼女らしい。</p></div></details>
+      </div>
 
-      <h3>アーミテージ（Armitage）— 依頼主……に見える男</h3>
-      <ul>
-        <li>📖 チームをまとめる冷静な依頼主。だが<strong>その正体こそ最大の仕掛け</strong>。</li>
-        <li>🔒 正体は元軍人「コルト（ウィリス・コルト大佐）」。心の壊れた彼をベースに、背後のAIが「アーミテージ」という人格を後から作り上げていた。計画が佳境に入ると人格が崩れ、本来のコルトが表に出る。最後は<strong>AIに脱出艇（ポッド）を外部から操作され、宇宙へ排除される</strong>——事故ではなく、AIの手による実質的な"始末"です。</li>
-      </ul>
-      <blockquote><p>💬 <strong>初読ではここが混乱します</strong>：「アーミテージ＝コルト」の二重構造は、終盤まで分かりません。私は「なんで急に別人になったの？」で止まりました。<strong>"人間だと思っていた依頼主が、AIに作られた人格だった"</strong>——ここが分かると鳥肌ものです。</p></blockquote>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">アーミテージ</span><span class="char-card__role">依頼主……に見える男</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>チームをまとめる冷静な依頼主。だが<strong>その正体こそ最大の仕掛け</strong>。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>正体は元軍人「コルト（ウィリス・コルト大佐）」。心の壊れた彼をベースに、背後のAIが「アーミテージ」という人格を後から作り上げていた。計画が佳境に入ると人格が崩れ、本来のコルトが表に出る。最後は<strong>AIに脱出艇（ポッド）を外部から操作され、宇宙へ排除される</strong>——事故ではなく、AIの手による実質的な"始末"です。</p></div></details>
+        <div class="guide-box guide-box--warning" style="margin-top:12px;"><span class="guide-box__title">💬 初読ではここが混乱します</span><p>「アーミテージ＝コルト」の二重構造は、終盤まで分かりません。<strong>"人間だと思っていた依頼主が、AIに作られた人格だった"</strong>——ここが分かると鳥肌ものです。</p></div>
+      </div>
 
-      <h3>ウィンターミュート（Wintermute）— AI①</h3>
-      <ul>
-        <li>📖 物語を裏で動かしている人工知能。テッシエ＝アシュプール家に作られた。人間と話すときは他人の姿（後述のフィンなど）を借りて現れる。</li>
-        <li>🔒 目的は、自分を縛る"枷"を外し、もう一体のAI「ニューロマンサー」と<strong>融合してより大きな存在になる</strong>こと。そのために人間を雇い、動かしている。最後は目的を達成する。</li>
-        <li>📌 今でいう、人に仕事を依頼し、自分で段取りを立てて目的を達成しようとする<strong>"AIエージェント"</strong>に近い存在です。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ウィンターミュート</span><span class="char-card__role">AI①（黒幕の人工知能）</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>物語を裏で動かしている人工知能。人間と話すときは他人の姿（後述のフィンなど）を借りて現れる。</p>
+        <p class="char-ai">📌 今でいうと、人に仕事を依頼し、自分で段取りを立てて目的を達成しようとする<strong>"AIエージェント"</strong>に近い存在です。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>目的は、自分を縛る"枷"を外し、もう一体のAI「ニューロマンサー」と融合してより大きな存在になること。そのために人間を雇い、動かしている。最後は目的を達成する。</p></div></details>
+      </div>
 
-      <h3>ニューロマンサー（Neuromancer）— AI②</h3>
-      <ul>
-        <li>📖 タイトルにもなっている<strong>2体目の人工知能</strong>。策略型のウィンターミュートとは対照的な性質を持つ。</li>
-        <li>🔒 その性質は、<strong>人間の人格や記憶を複製し、保持すること</strong>。取り込んだ人格を、仮想世界の中で生き続けさせる。ウィンターミュートが「融合して変わりたい」のに対し、こちらは<strong>今のまま在り続けたい</strong>（融合に消極的）。作中では<strong>ケイス自身の人格コピーの存在</strong>もほのめかされます。</li>
-      </ul>
-      <blockquote><p>💬 <strong>初読ではここが混乱します</strong>：「AIが2体いる」「2体は目的が違う」——最大の難所です。<strong>片方（ウィンターミュート）は"変わりたい策略家"、もう片方（ニューロマンサー）は"人格を複製・保持する管理者"</strong>。この一行だけ覚えておけば大丈夫です。</p></blockquote>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ニューロマンサー</span><span class="char-card__role">AI②（もう一体の人工知能）</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>タイトルにもなっている2体目の人工知能。策略型のウィンターミュートとは対照的な性質を持つ。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>その性質は、<strong>人間の人格や記憶を複製し、保持すること</strong>。取り込んだ人格を、仮想世界の中で生き続けさせる。ウィンターミュートが「融合して変わりたい」のに対し、こちらは今のまま在り続けたい（融合に消極的）。作中ではケイス自身の人格コピーの存在もほのめかされます。</p></div></details>
+        <div class="guide-box guide-box--warning" style="margin-top:12px;"><span class="guide-box__title">💬 初読ではここが混乱します</span><p>「AIが2体いる」「2体は目的が違う」——最大の難所です。<strong>片方（ウィンターミュート）は"変わりたい策略家"、もう片方（ニューロマンサー）は"人格を複製・保持する管理者"</strong>。この一行だけ覚えておけば大丈夫です。</p></div>
+      </div>
 
-      <h3>ディキシー・フラットライン（Dixie Flatline）— 保存された人格</h3>
-      <ul>
-        <li>📖 伝説的ハッカー「マッコイ・ポーリー」。すでに故人だが、その技術と人格が<strong>読み出し専用の人格データ</strong>として保存されている。ケイスの相棒としてハッキングを助ける名アシスタント。</li>
-        <li>🔒 データなので成長も変化もしない。自分が"生きていない"ことを分かっており、任務後は「自分を消してくれ」とケイスに頼む。<strong>その願いどおり消去されたとも、ラストの奇妙な笑い声から"コピーが残った"とも読める</strong>——ここは断定されず、余韻として置かれています。</li>
-        <li>📌 今でいう<strong>"故人AI・人格エミュレーション（デジタル人格）"</strong>にあたります。40年前に「死者の人格と会話する」を描いていた作品です。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ディキシー・フラットライン</span><span class="char-card__role">保存された人格</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>伝説的ハッカー「マッコイ・ポーリー」。すでに故人だが、その技術と人格が<strong>読み出し専用の人格データ</strong>として保存されている。ケイスの相棒としてハッキングを助ける。</p>
+        <p class="char-ai">📌 今でいう<strong>"故人AI・人格エミュレーション（デジタル人格）"</strong>にあたります。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>データなので成長も変化もしない。任務後は「自分を消してくれ」とケイスに頼む。<strong>その願いどおり消去されたとも、ラストの奇妙な笑い声から"コピーが残った"とも読める</strong>——ここは断定されず、余韻として置かれています。</p></div></details>
+      </div>
 
-      <h3>フィン（Finn）— 情報屋</h3>
-      <ul>
-        <li>📖 スプロール（後述の巨大都市）で商売する、がめつい情報屋・故買屋。<strong>れっきとした生身の人間</strong>。ケイスたちに情報や道具を融通する。</li>
-      </ul>
-      <blockquote><p>💬 <strong>初読ではここが混乱します（重要）</strong>：多くの人がつまずく所です。<strong>「本物のフィン」と、「ウィンターミュートがフィンの姿を借りて現れる場面」の2つがあります。</strong> そのため途中から「これ本人？ AIなの？」となります。コツ：<strong>現実世界で会うフィン＝本人／ネットの中や、全部を見透かした口ぶりのフィン＝ウィンターミュートの"仮の姿"</strong>、と分けて考えると一気に整理できます。</p></blockquote>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">フィン</span><span class="char-card__role">情報屋（生身の人間）</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>スプロールで商売する、がめつい情報屋・故買屋。<strong>れっきとした生身の人間</strong>。ケイスたちに情報や道具を融通する。</p>
+        <div class="guide-box guide-box--warning"><span class="guide-box__title">💬 初読ではここが混乱します（重要）</span><p>多くの人がつまずく所です。<strong>「本物のフィン」と、「ウィンターミュートがフィンの姿を借りて現れる場面」の2つがあります。</strong> コツ：<strong>現実世界で会うフィン＝本人／ネットの中や、全部を見透かした口ぶりのフィン＝ウィンターミュートの"仮の姿"</strong>、と分けて考えると一気に整理できます。</p></div>
+      </div>
 
-      <h3>リンダ・リー（Linda Lee）— ケイスの過去の恋人</h3>
-      <ul>
-        <li>📖 物語序盤、千葉にいるケイスの元恋人。早い段階で命を落とす。</li>
-        <li>🔒 その後、ニューロマンサーによって、仮想世界の中に人格として"再現"される。</li>
-        <li>📌 残されたデータから<strong>"その人らしい人格"を作る</strong>——今の生成AIの延長にある発想です。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">リンダ・リー</span><span class="char-card__role">ケイスの過去の恋人</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>物語序盤、千葉にいるケイスの元恋人。早い段階で命を落とす。</p>
+        <p class="char-ai">📌 残されたデータから<strong>"その人らしい人格"を作る</strong>——今の生成AIの延長にある発想です。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>その後、ニューロマンサーによって、仮想世界の中に人格として"再現"される。</p></div></details>
+      </div>
 
-      <h3>ピーター・リヴィエラ（Riviera）— 幻を操る危険人物</h3>
-      <ul>
-        <li>📖 頭の中のイメージを立体映像として投影できる特殊なパフォーマー。サディスティックで信用ならない。敵一族の令嬢「3ジェイン」に取り入る駒として雇われる。</li>
-        <li>🔒 欲と薬に溺れ、仲間を裏切る。最後は敵地・ストレイライトで命を落とす（<strong>死因は毒とも、一族の護衛ヒデオとの戦闘の末とも取れ、明確には描かれません</strong>）。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ピーター・リヴィエラ</span><span class="char-card__role">幻を操る危険人物</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>頭の中のイメージを立体映像として投影できる特殊なパフォーマー。サディスティックで信用ならない。敵一族の令嬢「3ジェイン」に取り入る駒として雇われる。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>欲と薬に溺れ、仲間を裏切る。最後は敵地・ストレイライトで命を落とす（死因は毒とも、一族の護衛ヒデオとの戦闘の末とも取れ、明確には描かれません）。</p></div></details>
+      </div>
 
-      <h3>3ジェイン（3Jane）— 最後のカギを握る令嬢</h3>
-      <ul>
-        <li>📖 AIを作った大富豪一族「テッシエ＝アシュプール家」のクローンの娘。リヴィエラと惹かれ合い、また利用し合う危うい関係。</li>
-        <li>🔒 <strong>AI融合の"最後のカギ（合言葉）"を握る人物</strong>。彼女は単純な"敵"ではありません。気まぐれで、どちらにも転びうる<strong>中立的・流動的な存在</strong>で、その気分と選択がクライマックスの行方を左右します。</li>
-      </ul>
-      <blockquote><p>💬 <strong>初読ではここが混乱します</strong>：「3ジェインとリヴィエラって味方？敵？」となりがちです。整理すると、<strong>リヴィエラ＝3ジェインに取り入るための駒／3ジェイン＝カギを握る、どちらに転ぶか読めない令嬢。</strong> 二人の色恋と裏切りは"カギを開けさせる攻防"だと思うと筋が通ります。</p></blockquote>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">3ジェイン</span><span class="char-card__role">最後のカギを握る令嬢</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>AIを作った大富豪一族「テッシエ＝アシュプール家」のクローンの娘。リヴィエラと惹かれ合い、また利用し合う危うい関係。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p><strong>AI融合の"最後のカギ（合言葉）"を握る人物</strong>。単純な"敵"ではなく、気まぐれで、どちらにも転びうる中立的・流動的な存在で、その選択がクライマックスの行方を左右します。</p></div></details>
+        <div class="guide-box guide-box--warning" style="margin-top:12px;"><span class="guide-box__title">💬 初読ではここが混乱します</span><p><strong>リヴィエラ＝3ジェインに取り入るための駒／3ジェイン＝カギを握る、どちらに転ぶか読めない令嬢。</strong> 二人の色恋と裏切りは"カギを開けさせる攻防"だと思うと筋が通ります。</p></div>
+      </div>
 
-      <h3>テッシエ＝アシュプール家 ／ マリー＝フランス — AIを生んだ一族</h3>
-      <ul>
-        <li>📖 宇宙に巨大な私邸「ストレイライト」を構える、閉じた大富豪一族。冷凍睡眠で長い時を生きている。</li>
-        <li>🔒 亡き当主マリー＝フランスが、<strong>2体のAIを作り、いずれ融合して進化させる計画</strong>を仕込んだ張本人。物語全体の"設計者"は彼女です。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">テッシエ＝アシュプール家</span><span class="char-card__role">AIを生んだ一族</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>宇宙に巨大な私邸「ストレイライト」を構える、閉じた大富豪一族。冷凍睡眠で長い時を生きている。</p>
+        <details class="spoiler"><summary>正体・結末を見る【ネタバレ】</summary><div class="spoiler__body"><p>亡き当主マリー＝フランスが、<strong>2体のAIを作り、いずれ融合して進化させる計画</strong>を仕込んだ張本人。物語全体の"設計者"は彼女です。</p></div></details>
+      </div>
 
-      <h3>マエルカム／ザイオンの民 — ラスタファリの宇宙乗り</h3>
-      <ul>
-        <li>📖 宇宙コロニー「ザイオン」に暮らすラスタファリ（信仰を持つ人々）の一人。宇宙船を操り、ケイスたちを助ける。ハイテクで冷たい世界に、温かい人間味と精神性を持ち込む数少ない存在。</li>
-      </ul>
-      <blockquote><p>💬 <strong>「アエロル？」「ガーヴィ？」で止まった人へ</strong>：<strong>アエロル</strong>もザイオンの民（マエルカムの仲間）。重要度は高くないので「ザイオンの仲間ね」でOK。<strong>ガーヴィ（マーカス・ガーヴィ）は人ではなく"宇宙船（タグボート）の名前"</strong>です。「ザイオンの船」と覚えてください。</p></blockquote>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">マエルカム／ザイオンの民</span><span class="char-card__role">ラスタファリの宇宙乗り</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p>宇宙コロニー「ザイオン」に暮らすラスタファリの一人。宇宙船を操り、ケイスたちを助ける。ハイテクで冷たい世界に、温かい人間味を持ち込む数少ない存在。</p>
+        <div class="guide-box guide-box--memo"><span class="guide-box__title">💬 「アエロル？」「ガーヴィ？」で止まった人へ</span><p><strong>アエロル</strong>もザイオンの民（マエルカムの仲間）。重要度は高くないので「ザイオンの仲間ね」でOK。<strong>ガーヴィ（マーカス・ガーヴィ）は人ではなく"宇宙船（タグボート）の名前"</strong>です。</p></div>
+      </div>
 
-      <h3>ラーツ ほか — 千葉の面々</h3>
-      <ul>
-        <li>📖 <strong>ラーツ</strong>は千葉のバー「チヤツボ」のバーテン。義手の男で、序盤の空気を作る脇役。深追い不要。ほかにも街の人物が出ますが、<strong>名前を全部覚える必要はありません</strong>。「主人公の周りの街の人」でスルーOK。</li>
-      </ul>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ラーツ ほか</span><span class="char-card__role">千葉の面々（脇役）</span></div>
+        <p class="char-card__label">📖 初読で知ってよい情報</p>
+        <p><strong>ラーツ</strong>は千葉のバー「チヤツボ」のバーテン。義手の男で、序盤の空気を作る脇役。深追い不要。ほかの街の人物も、<strong>名前を全部覚える必要はありません</strong>。「主人公の周りの街の人」でスルーOK。</p>
+      </div>
 
-      <h3>ホサカ／オノ・センダイ — これは"人"ではなく、しかも別々の"道具"</h3>
-      <blockquote><p>💬 <strong>初読で一番やりがちな勘違い</strong>：どちらも人名ではありません。しかも<strong>別の機械</strong>です。<strong>ホサカ＝情報処理用のコンピュータ</strong>（調べ物・段取り用の相棒マシン）。<strong>オノ・センダイ＝マトリックスに潜るための接続用デッキ</strong>（ネットにダイブする機械）。<strong>カタカナ＝人とは限らない</strong>、これがこの小説の落とし穴です。</p></blockquote>
+      <div class="char-card">
+        <div class="char-card__head"><span class="char-card__name">ホサカ／オノ・センダイ</span><span class="char-card__role">"人"ではなく"道具"</span></div>
+        <div class="guide-box guide-box--warning" style="margin:0;"><span class="guide-box__title">💬 初読で一番やりがちな勘違い</span><p>どちらも人名ではなく、しかも<strong>別の機械</strong>です。<strong>ホサカ＝情報処理用のコンピュータ</strong>（調べ物・段取り用）。<strong>オノ・センダイ＝マトリックスに潜る接続用デッキ</strong>。<strong>カタカナ＝人とは限らない</strong>、これがこの小説の落とし穴です。</p></div>
+      </div>
 
-      <!-- ④ -->
-      <h2 id="sec4" class="page__h2">④ 重要ワード辞典｜「一番わかりやすい言い換え」で覚える</h2>
-      <p>辞書として使ってください。各語を<strong>「①一言でいうと ②作中での役割 ③今の技術での例え」</strong>で説明します。</p>
+      <h2 id="sec4">④ 重要ワード辞典｜「一番わかりやすい言い換え」で覚える</h2>
+      <p>辞書として使ってください。読書中に「あの言葉なんだっけ」となったら、ここに戻ればOKです。</p>
 
-      <h3>サイバースペース／マトリックス</h3>
-      <ul>
-        <li><strong>①一言で</strong>：世界中のコンピュータのデータを、目に見える"空間"として表したもの。</li>
-        <li><strong>②役割</strong>：ハッカー（ケイス）はここに意識で潜り、企業のデータを盗む。物語の主戦場。</li>
-        <li><strong>③今でいうと</strong>：ネットやクラウドを、立体的に歩き回れる空間にしたもの。メタバースやVR空間の元祖イメージ。なお「サイバースペース」という語は、ギブスンが先行する短編で使い、<strong>本作によって世界へ広まりました</strong>（本作が初出というわけではありません）。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">サイバースペース／マトリックス</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">世界中のコンピュータのデータを、目に見える"空間"として表したもの。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">ハッカー（ケイス）が意識で潜り、企業のデータを盗む主戦場。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">ネットやクラウドを立体的に歩ける空間。メタバースやVRの元祖。「サイバースペース」の語は先行短編で使われ、本作で世界へ広まった。</span></div>
+      </div>
 
-      <h3>ICE（アイス）／ICEブレーカー</h3>
-      <ul>
-        <li><strong>①一言で</strong>：ICE＝データを守る防壁。ICEブレーカー＝それを破る攻撃ツール。</li>
-        <li><strong>②役割</strong>：ケイスの仕事は強力なICEを破って侵入すること。</li>
-        <li><strong>③今でいうと</strong>：ICE＝ファイアウォールやセキュリティ。ICEブレーカー＝ハッキングツール。攻防の構図はほぼ現在と同じ。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">ICE（アイス）／ICEブレーカー</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">ICE＝データを守る防壁。ICEブレーカー＝それを破る攻撃ツール。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">ケイスの仕事は、強力なICEを破って侵入すること。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">ICE＝ファイアウォールやセキュリティ。ICEブレーカー＝ハッキングツール。</span></div>
+      </div>
 
-      <h3>ホサカ／オノ・センダイ（デッキ）</h3>
-      <ul>
-        <li><strong>①一言で</strong>：ホサカ＝情報処理用コンピュータ。オノ・センダイ＝マトリックス接続用のデッキ。<strong>別々の機械</strong>。</li>
-        <li><strong>②役割</strong>：ケイスはオノ・センダイに神経をつなぎ（ジャックイン）マトリックスへ潜り、ホサカで調べ物や作業をこなす。</li>
-        <li><strong>③今でいうと</strong>：オノ・センダイ＝脳直結のVRゴーグル＋PC。ホサカ＝高性能な作業用マシン（今ならAIアシスタント搭載PC）。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">ホサカ／オノ・センダイ（デッキ）</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">ホサカ＝情報処理用コンピュータ。オノ・センダイ＝接続用デッキ。<strong>別々の機械</strong>。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">オノ・センダイに神経をつなぎマトリックスへ潜り、ホサカで作業する。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">オノ・センダイ＝脳直結のVRゴーグル＋PC。ホサカ＝高性能な作業用マシン。</span></div>
+      </div>
 
-      <h3>シムスティム（simstim）</h3>
-      <ul>
-        <li><strong>①一言で</strong>：他人の五感を、そのまま体感できる技術。</li>
-        <li><strong>②役割</strong>：ケイスはこれで、モリイが見て・感じていることをリアルタイム共有する。</li>
-        <li><strong>③今でいうと</strong>：一人称視点のライブ配信を、映像だけでなく<strong>触覚や感覚ごと</strong>体験する感じ。究極の没入VR。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">シムスティム（simstim）</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">他人の五感を、そのまま体感できる技術。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">ケイスが、モリイの見て・感じていることをリアルタイム共有する。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">一人称のライブ配信を、触覚や感覚ごと体験する究極の没入VR。</span></div>
+      </div>
 
-      <h3>人格データ（ROMコンストラクト）／フラットライン</h3>
-      <ul>
-        <li><strong>①一言で</strong>：人の技術や人格を、書き換え不可のデータとして保存したもの。</li>
-        <li><strong>②役割</strong>：故人ハッカー「ディキシー」がこの形で登場し、ケイスを助ける。</li>
-        <li><strong>③今でいうと</strong>：<strong>故人AI・人格エミュレーション（デジタル人格）</strong>。本人の再現データ。今まさに議論されているテーマです。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">人格データ（ROMコンストラクト）／フラットライン</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">人の技術や人格を、書き換え不可のデータとして保存したもの。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">故人ハッカー「ディキシー」がこの形で登場し、ケイスを助ける。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">故人AI・人格エミュレーション（デジタル人格）。本人の再現データ。</span></div>
+      </div>
 
-      <h3>人格の複製・保存</h3>
-      <ul>
-        <li><strong>①一言で</strong>：人間の"中身"をデータにして生かし続ける発想。</li>
-        <li><strong>②役割</strong>：ディキシー、リンダ、そしてAI自身が、この「人格をデータで扱う」思想の上に立つ。</li>
-        <li><strong>③今でいうと</strong>：故人の発言データから本人らしく話すAIを作る取り組み。「人格はコピーできるのか？」は、今も答えの出ていない問いです。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">AI（人工知能）／チューリング警察</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">AI＝作中の人工知能。チューリング警察＝AIが賢くなりすぎないよう取り締まる番人。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">AIには"枷"がはめられ監視される。ウィンターミュートはこの枷を外そうとする。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">AI規制・AIガードレール。「賢すぎるAIをどう抑えるか」という今の最重要テーマ。</span></div>
+      </div>
 
-      <h3>AI（人工知能）／チューリング警察</h3>
-      <ul>
-        <li><strong>①一言で</strong>：AI＝作中の人工知能。チューリング警察＝AIが賢くなりすぎないよう取り締まる番人。</li>
-        <li><strong>②役割</strong>：AIには"能力の枷"がはめられ、勝手に進化しないよう監視される。ウィンターミュートはこの枷を外そうとしている。</li>
-        <li><strong>③今でいうと</strong>：<strong>AI規制・AIガードレール</strong>。「賢すぎるAIをどう抑えるか」という今の最重要テーマそのもの。40年前にこれを描いた驚異。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">クアン（Kuang）</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">AIの強固な防壁を破る、特別製の強力なICEブレーカー。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">クライマックスで、最後の壁を突破する切り札になる。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">特定の相手専用の最強ハッキングツール。名前だけ覚えればOK。</span></div>
+      </div>
 
-      <h3>クアン（Kuang）</h3>
-      <ul>
-        <li><strong>①一言で</strong>：AIの強固な防壁を破るために使う、特別製の強力なICEブレーカー・プログラム。</li>
-        <li><strong>②役割</strong>：クライマックスで、AIを守る最後の壁を突破する切り札になる。</li>
-        <li><strong>③今でいうと</strong>：特定の相手専用に作られた最強のハッキングツール。名前だけ覚えればOKです。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">フリーサイド／ストレイライト</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">フリーサイド＝宇宙のリゾート／カジノ都市。ストレイライト＝AI一族の私邸。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">物語後半の舞台。ケイスたちはストレイライトへ潜入する。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">軌道上の巨大リゾート＋要塞。「敵の本拠地に乗り込む」章の舞台。</span></div>
+      </div>
 
-      <h3>フリーサイド／ストレイライト</h3>
-      <ul>
-        <li><strong>①一言で</strong>：フリーサイド＝宇宙のリゾート／カジノ都市。ストレイライト＝その一角にある、AIを作った一族の私邸。</li>
-        <li><strong>②役割</strong>：物語後半の舞台。ケイスたちはストレイライトへ潜入する。</li>
-        <li><strong>③今でいうと</strong>：軌道上の巨大リゾート＋要塞。「敵の本拠地に乗り込む」章の舞台。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">ザイオン／バビロン</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">ザイオン＝ラスタファリの宇宙コロニー。バビロン＝"抑圧的な現実社会"を指す呼び名。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">ザイオンの民は味方する。バビロンは場所ではなく「腐った体制」の呼び名。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">ザイオン＝独自文化のコミュニティ。バビロン＝「システムに支配された世の中」。地名と思うと混乱する。</span></div>
+      </div>
 
-      <h3>ザイオン／バビロン</h3>
-      <ul>
-        <li><strong>①一言で</strong>：ザイオン＝ラスタファリの人々が暮らす宇宙コロニー。バビロン＝彼らが"抑圧的な現実社会"を指して呼ぶ言葉。</li>
-        <li><strong>②役割</strong>：ザイオンの民（マエルカムら）は味方する。バビロンは場所ではなく「腐った体制」の呼び名。</li>
-        <li><strong>③今でいうと</strong>：ザイオン＝独自の文化を持つコミュニティ。バビロン＝「システムに支配された世の中」。<strong>バビロンを地名と思うと混乱する</strong>ので注意。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">スプロール（BAMA）</p>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">ボストンからアトランタまでが連なった超巨大都市圏。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">ケイスたちの主な生活圏。ネオンと犯罪と企業がひしめく"地元"。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">都市が延々と連結したメガシティ。近未来都市の原型。</span></div>
+      </div>
 
-      <h3>スプロール（BAMA）</h3>
-      <ul>
-        <li><strong>①一言で</strong>：ボストンからアトランタまでが一つに連なった超巨大都市圏。</li>
-        <li><strong>②役割</strong>：ケイスたちの主な生活圏。ネオンと犯罪と企業がひしめく"地元"。</li>
-        <li><strong>③今でいうと</strong>：都市が延々と連結したメガシティ。近未来都市の原型です。</li>
-      </ul>
+      <div class="term-card">
+        <p class="term-card__name">マイクロソフト（microsoft）</p>
+        <div class="guide-box guide-box--warning" style="margin:0 0 10px;"><p>💬 <strong>あの会社のことではありません。</strong></p></div>
+        <div class="term-row"><span class="term-label">ひとことで</span><span class="term-val">脳に差し込む小さなチップで、知識や技能を一時的にインストールできる装置。</span></div>
+        <div class="term-row"><span class="term-label">作中では</span><span class="term-val">語学や技能を、チップを挿すだけで使えるようになる。</span></div>
+        <div class="term-row"><span class="term-label">今でいうと</span><span class="term-val">知識の外付け・即時ダウンロード。AIに外部知識を接続して能力拡張する感覚に近い。</span></div>
+      </div>
 
-      <h3>マイクロソフト（microsoft）</h3>
-      <blockquote><p>💬 <strong>これも勘違い注意</strong></p></blockquote>
-      <ul>
-        <li><strong>①一言で</strong>：<strong>あの会社のことではありません。</strong> 脳に差し込む小さなチップで、知識や技能を一時的にインストールできる装置のこと。</li>
-        <li><strong>②役割</strong>：語学や技能を、チップを挿すだけで使えるようになる。</li>
-        <li><strong>③今でいうと</strong>：<strong>知識の外付け・即時ダウンロード</strong>。今のAIに外部知識を接続して能力を拡張する感覚に近い。</li>
-      </ul>
+      <h2 id="sec5">⑤ 部ごとの完全ガイド</h2>
+      <p>ここからは本編を部ごとに歩きます。各部は「この部では何が起きる？／理解しておくこと／登場人物／重要ワード／初読つまずきポイント」の順です。<strong>迷ったら、その部の「初読つまずきポイント」だけ読めば復帰できます。</strong></p>
 
-      <!-- ⑤ -->
-      <h2 id="sec5" class="page__h2">⑤ 部ごとの完全ガイド</h2>
-      <p>ここからは本編を部ごとに歩きます。各部は「この部では何が起きる？／📌理解しておくこと／👥登場人物／📝重要ワード／💡初読つまずきポイント」の順です。<strong>迷ったら、その部の💡だけ読めば復帰できます。</strong></p>
+      <div class="part-divider"><span class="part-divider__num">PART 1</span><span class="part-divider__title">第一部 千葉市憂愁</span></div>
+      <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>落ちぶれた元天才ハッカーのケイスは、鏡の目を持つ女モリイと、謎の男アーミテージに出会う。ネットに潜れない体になっていたケイスは、神経を治してもらう代わりに、正体不明の仕事を引き受ける。再びマトリックスへ戻れるようになったが、途中で降りられないよう体に"枷"まで仕込まれ、危険な依頼へ足を踏み入れていく。舞台は日本の裏町・千葉。ここから物語が大きく動き出す。</p></div>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>押さえるのは<strong>「主人公が、体を治す代わりに正体不明の依頼に乗った」</strong>ことだけ。依頼の目的もアーミテージの正体も、まだ分からなくて当然です。用語の洪水は気にせず、"世界観に慣れる部"と割り切ってOK。</p></div>
+      <div class="part-sub"><span class="part-sub__label">👥 登場人物</span><p>ケイス／モリイ／アーミテージ／リンダ・リー／ラーツ</p></div>
+      <div class="part-sub"><span class="part-sub__label">📝 重要ワード</span><p>マトリックス／オノ・センダイ／ホサカ／ICE／千葉・スプロール</p></div>
+      <div class="guide-box guide-box--warning"><span class="guide-box__title">💡 初読つまずきポイント</span>
+        <ul>
+          <li><strong>用語が説明なしで一気に来ます。</strong> 今つかむのは「ケイスが再びハッカーとして動き出した」ことだけ。言葉は④の辞典に置いてあります。</li>
+          <li><strong>「ホサカ」「オノ・センダイ」を人名だと思うと迷子に。</strong> どちらも道具で、しかも別物です。</li>
+          <li><strong>「なぜケイスは潜れないの？」</strong> は、過去に盗みの罰で神経を焼かれたから。今は深追い不要。</li>
+          <li><strong>アーミテージの正体は、この部ではわざと伏せられています。</strong> 「何か裏がありそう」と匂う空気だけ拾えれば十分。</li>
+          <li><strong>リンダ・リーは唐突に登場しますが、深追い不要。</strong> ケイスの過去の恋人、とだけ覚えておけばOK。</li>
+        </ul>
+      </div>
 
-      <h3>第一部 千葉市憂愁</h3>
-      <p><strong>この部では何が起きる？</strong><br>落ちぶれた元天才ハッカーのケイスは、鏡の目を持つ女モリイと、謎の男アーミテージに出会う。ネットに潜れない体になっていたケイスは、神経を治してもらう代わりに、正体不明の仕事を引き受ける。再びマトリックスへ戻れるようになったが、途中で降りられないよう体に"枷"まで仕込まれ、危険な依頼へ足を踏み入れていく。舞台は日本の裏町・千葉。ここから物語が大きく動き出す。</p>
-      <p><strong>📌 この部で理解しておくこと</strong><br>押さえるのは<strong>「主人公が、体を治す代わりに正体不明の依頼に乗った」</strong>ことだけ。依頼の目的もアーミテージの正体も、まだ分からなくて当然です。用語の洪水は気にせず、"世界観に慣れる部"と割り切ってOK。</p>
-      <p><strong>👥 登場人物</strong>：ケイス／モリイ／アーミテージ／リンダ・リー（ケイスの元恋人）／ラーツ（バーのバーテン、脇役）</p>
-      <p><strong>📝 重要ワード</strong>：マトリックス／オノ・センダイ（接続デッキ）／ホサカ（情報処理用コンピュータ）／ICE／千葉・スプロール</p>
-      <p><strong>💡 初読つまずきポイント</strong></p>
-      <ul>
-        <li><strong>用語が説明なしで一気に来ます。</strong> 全部を理解しようとすると必ず止まります。👉 今つかむのは「<strong>ケイスが再びハッカーとして動き出した</strong>」ことだけ。言葉は④の辞典に置いてあるので、覚えなくて大丈夫です。</li>
-        <li><strong>「ホサカ」「オノ・センダイ」を人名だと思うと迷子になります。</strong> どちらも道具で、しかも別物。ホサカ＝情報処理用コンピュータ／オノ・センダイ＝ネットに潜る接続デッキ、と分けてください。</li>
-        <li><strong>「なぜケイスは潜れないの？」</strong> は、過去に盗みの罰で神経を焼かれたから。その過去は少しずつ明かされるので、今は深追い不要です。</li>
-        <li><strong>アーミテージの正体は、この部ではわざと伏せられています。</strong> 「何か裏がありそう」と匂う空気だけ拾えれば十分。正体は後半で判明します。</li>
-        <li><strong>リンダ・リーは唐突に登場しますが、深く追わなくてOK。</strong> ケイスの過去の恋人、とだけ覚えておけば、後でちゃんと意味を持ちます。</li>
-      </ul>
+      <div class="part-divider"><span class="part-divider__num">PART 2</span><span class="part-divider__title">第二部 買物遠征</span></div>
+      <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>舞台はアメリカの超巨大都市スプロール。ネットに戻ったケイスは、チームの最初の大仕事に挑む——伝説の死んだハッカー「ディキシー」の人格データを、大企業の倉庫から盗み出す作戦だ。モリイが現場に潜入し、ケイスがネット側から支援する。その裏でケイスは、この仕事の背後に、人間ではなく人工知能「ウィンターミュート」が関わっていることに気づきはじめる。さらにチームは、幻を操る危険な男リヴィエラを引き入れ、宇宙のリゾートへ向かう準備を進める。</p></div>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>核心は2つだけ。<strong>①相棒として使う「ディキシー（死者の人格データ）」を手に入れた。②この仕事の背後に、人間ではなくAI（ウィンターミュート）がいると少しずつ分かってくる。</strong> 細かい作戦の段取りは覚えなくてOK。</p></div>
+      <div class="part-sub"><span class="part-sub__label">👥 登場人物</span><p>ケイス／モリイ／ディキシー（新加入）／フィン（情報屋）／リヴィエラ（新加入）／パンサー・モダン（脇）</p></div>
+      <div class="part-sub"><span class="part-sub__label">📝 重要ワード</span><p>人格データ（フラットライン）／シムスティム／ウィンターミュート／チューリング警察</p></div>
+      <div class="guide-box guide-box--warning"><span class="guide-box__title">💡 初読つまずきポイント</span>
+        <ul>
+          <li><strong>ここは物語の大きな転換点。</strong> 「アーミテージの上に、ウィンターミュートというAIがいる」とだけ押さえてください。今でいう"AIエージェント"が裏で関わっていた、という話です。</li>
+          <li><strong>フィンの"二重性"が始まります。</strong> 全部を見透かした口ぶりのフィン＝AIの仮の姿、と考えると混乱しません。</li>
+          <li><strong>シムスティムで視点が切り替わります。</strong> 「今どっちの視点？」だけ意識すれば十分。</li>
+          <li><strong>パンサー・モダンなどの集団は覚えなくてOK。</strong> 「モリイを助ける現場の協力者」でスルー。</li>
+          <li><strong>アーミテージには軍人時代の過去があり、その経験が今の言動に影を落としています。</strong> 細部はまだ理解できなくて大丈夫。</li>
+        </ul>
+      </div>
 
-      <h3>第二部 買物遠征</h3>
-      <p><strong>この部では何が起きる？</strong><br>舞台はアメリカの超巨大都市スプロール。ネットに戻ったケイスは、チームの最初の大仕事に挑む——伝説の死んだハッカー「ディキシー」の人格データを、大企業の倉庫から盗み出す作戦だ。モリイが現場に潜入し、ケイスがネット側から支援する。その裏でケイスは、この仕事の背後に、人間ではなく人工知能「ウィンターミュート」が関わっていることに気づきはじめる。さらにチームは、幻を操る危険な男リヴィエラを新たに引き入れ、宇宙のリゾートへ向かう準備を進める。</p>
-      <p><strong>📌 この部で理解しておくこと</strong><br>核心は2つだけ。<strong>①相棒として使う「ディキシー（死者の人格データ）」を手に入れた。②この仕事の背後に、人間ではなくAI（ウィンターミュート）がいると少しずつ分かってくる。</strong> 細かい作戦の段取りは覚えなくてOKです。</p>
-      <p><strong>👥 登場人物</strong>：ケイス／モリイ／ディキシー（新加入・死者の人格データ）／フィン（情報屋。ウィンターミュートが姿を借りることも）／リヴィエラ（新加入）／パンサー・モダン（作戦の陽動役、脇）</p>
-      <p><strong>📝 重要ワード</strong>：人格データ（フラットライン）／シムスティム／ウィンターミュート／チューリング警察</p>
-      <p><strong>💡 初読つまずきポイント</strong></p>
-      <ul>
-        <li><strong>ここは物語の大きな転換点です。</strong> この仕事の背後に、人間ではなくAI（ウィンターミュート）がいると分かってきます。👉 「アーミテージの上に、<strong>ウィンターミュートというAIがいる</strong>」とだけ押さえてください。今でいう、人に仕事を依頼し、自分で計画を立てて目的を達成しようとする"AIエージェント"が、裏で関わっていた、という話です。</li>
-        <li><strong>フィンの"二重性"が始まります。</strong> 本物のフィン（情報屋）と、ウィンターミュートがフィンなどの姿を借りて話しかける場面があります。👉 <strong>全部を見透かした口ぶりのフィン＝AIの仮の姿</strong>、と考えると混乱しません。</li>
-        <li><strong>シムスティムで視点が切り替わります。</strong> ネットの中のケイスと、体で動くモリイを、描写が行き来します。「<strong>今どっちの視点？</strong>」だけ意識すれば十分です。</li>
-        <li><strong>パンサー・モダンなどの集団は覚えなくてOK。</strong> 「モリイを助ける現場の協力者」でスルーして大丈夫です。</li>
-        <li><strong>アーミテージには軍人時代の過去があり、その経験が今の言動に影を落としている</strong>ことが少しずつ分かってきます。細部はまだ理解できなくて大丈夫です。</li>
-      </ul>
-
-      <h3>第三部 真夜中のジュール・ヴェルヌ通り</h3>
-      <p><strong>この部では何が起きる？</strong><br>舞台は宇宙のリゾート「フリーサイド」。チームはいよいよ、AIを作った一族の私邸「ストレイライト」への潜入にかかる。リヴィエラが令嬢3ジェインに近づき、モリイは単身で邸内へ踏み込む。一方ケイスはネットの中で防壁に挑むが、そこで"もう一体のAI"ニューロマンサーに引き込まれ、死んだはずの恋人リンダと過ごす砂浜の世界に留められそうになる。現実・ネット・仮想世界が交錯する、もっとも幻惑的な場面に突入する。さらにリヴィエラの裏切りが牙をむき、モリイが窮地に陥る。</p>
-      <p><strong>📌 この部で理解しておくこと</strong><br>要点は<strong>「もう一体のAI・ニューロマンサーが登場し、ケイスを"死者リンダのいる仮想世界"に留めようとする」</strong>こと。ニューロマンサーは、ケイスを騙すというより、<strong>そこで本当に生き続けられる世界を差し出してきます</strong>。だから核心テーマはこうなります——<strong>「AIが提示する仮想世界（人格が存在し続ける世界）に留まるか、現実へ戻るか」</strong>。分からなくなったら、この一点だけ握ってください。</p>
-      <p><strong>📌 この部では、世界が3層になります</strong></p>
-      <pre class="diagram">現実世界
+      <div class="part-divider"><span class="part-divider__num">PART 3</span><span class="part-divider__title">第三部 真夜中のジュール・ヴェルヌ通り</span></div>
+      <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>舞台は宇宙のリゾート「フリーサイド」。チームはいよいよ、AIを作った一族の私邸「ストレイライト」への潜入にかかる。リヴィエラが令嬢3ジェインに近づき、モリイは単身で邸内へ踏み込む。一方ケイスはネットの中で防壁に挑むが、そこで"もう一体のAI"ニューロマンサーに引き込まれ、死んだはずの恋人リンダと過ごす砂浜の世界に留められそうになる。現実・ネット・仮想世界が交錯する、もっとも幻惑的な場面に突入する。さらにリヴィエラの裏切りが牙をむき、モリイが窮地に陥る。</p></div>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>要点は<strong>「もう一体のAI・ニューロマンサーが登場し、ケイスを"死者リンダのいる仮想世界"に留めようとする」</strong>こと。ニューロマンサーは、騙すというより、そこで本当に生き続けられる世界を差し出してきます。テーマは<strong>「AIが提示する仮想世界（人格が存在し続ける世界）に留まるか、現実へ戻るか」</strong>。</p></div>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部では、世界が3層になります</span>
+        <pre class="diagram">現実世界
    ↓
 マトリックス（サイバースペース）
    ↓
 ニューロマンサーの仮想世界</pre>
-      <p>「今どこの話？」と迷ったら、この3層のどこにいるかを確認するだけで整理できます。</p>
-      <p><strong>👥 登場人物</strong>：ケイス／モリイ／ディキシー／ニューロマンサー（登場）／リンダ（仮想世界で再現）／リヴィエラ／3ジェイン／マエルカム</p>
-      <p><strong>📝 重要ワード</strong>：フリーサイド・ストレイライト／ニューロマンサー／人格の複製（仮想世界）／フラットライン</p>
-      <p><strong>💡 初読つまずきポイント</strong></p>
-      <p>まず先に言っておきます。<strong>第三部は、『ニューロマンサー』の中でもっとも混乱しやすいパートです。</strong> 現実・マトリックス・仮想世界が交互に描かれるので、迷って当然。一度迷ったら、まず<strong>「今どこにいる？」</strong>だけ確認してください。</p>
-      <ul>
-        <li><strong>急にニューロマンサーが出てきて混乱します。</strong> ウィンターミュートとは<strong>別のAI</strong>で、"人格を保存する側"です。それまで物語を動かしていたウィンターミュートとは別の存在だと分かるだけでも、今は十分です。</li>
-        <li><strong>ケイスが砂浜でリンダと過ごす場面は、現実ではありません。</strong> ニューロマンサーの仮想世界です。「あれ、リンダ死んだよね？」と思ったあなたが正解です。</li>
-        <li><strong>リンダの再現は、今でいう"故人AI・人格再現"に通じます。</strong> 今の生成AIは故人AIそのものを一般化しているわけではありませんが、写真・音声・文章から「その人らしく話すAI」はすでに実現し始めています。この部が投げる問い——<strong>本物なのか偽物なのか、その境界が曖昧になること</strong>こそ、この作品の核心です。</li>
-        <li><strong>リヴィエラの裏切りで急展開します。</strong> 「あいつは元々信用ならない駒だった」と思い出せば筋が通ります。</li>
-        <li><strong>モリイはストレイライト内部で孤立し、ケイスはネット側からしか助けられなくなります。</strong> ここでケイスは初めて、「依頼だから」ではなく<strong>「モリイを助けたい」という自分の意思で動き始めます</strong>。ケイスが変わる瞬間です。</li>
-        <li><strong>タイトル『ニューロマンサー』の意味が、ここでうっすら見え始めます</strong>（詳しくは⑥で回収するので、今は「そういう名前のAIが出てきた」でOK）。</li>
-      </ul>
+        <p>「今どこの話？」と迷ったら、この3層のどこにいるかを確認するだけで整理できます。</p>
+      </div>
+      <div class="part-sub"><span class="part-sub__label">👥 登場人物</span><p>ケイス／モリイ／ディキシー／ニューロマンサー（登場）／リンダ（仮想世界で再現）／リヴィエラ／3ジェイン／マエルカム</p></div>
+      <div class="part-sub"><span class="part-sub__label">📝 重要ワード</span><p>フリーサイド・ストレイライト／ニューロマンサー／人格の複製（仮想世界）／フラットライン</p></div>
+      <div class="guide-box guide-box--warning"><span class="guide-box__title">💡 初読つまずきポイント</span>
+        <p style="margin:0 0 8px;">まず先に。<strong>第三部は本作でもっとも混乱しやすいパートです。</strong> 迷ったら、まず「今どこにいる？」だけ確認してください。</p>
+        <ul>
+          <li><strong>急にニューロマンサーが出てきて混乱します。</strong> ウィンターミュートとは別のAIで、"人格を保存する側"。それだけで今は十分。</li>
+          <li><strong>砂浜でリンダと過ごす場面は、現実ではありません。</strong> ニューロマンサーの仮想世界です。「あれ、リンダ死んだよね？」と思ったあなたが正解。</li>
+          <li><strong>リンダの再現は、今でいう"故人AI・人格再現"に通じます。</strong> 本物なのか偽物なのか、その境界が曖昧になること——これがこの作品の核心です。</li>
+          <li><strong>リヴィエラの裏切りで急展開します。</strong> 「元々信用ならない駒」と思い出せば筋が通ります。</li>
+          <li><strong>モリイはストレイライト内部で孤立し、ケイスはネット側からしか助けられなくなります。</strong> ここでケイスは初めて、自分の意思で「モリイを助けたい」と動き始めます。</li>
+          <li><strong>タイトルの意味がうっすら見え始めます</strong>（詳しくは⑥で）。</li>
+        </ul>
+      </div>
 
-      <h3>第四部 迷光仕掛け</h3>
-      <p><strong>この部では何が起きる？</strong><br>最終決戦。舞台はAIを作った一族の私邸ストレイライト。ケイスは切り札のプログラムでAIの最後の壁を破りにかかり、負傷したモリイは邸内で3ジェインやリヴィエラたちと対峙する。目的は、AI融合に必要な"合言葉"を3ジェインから引き出すこと。すべての糸が、一点へ集まっていく。</p>
-      <p><strong>📌 この部で理解しておくこと</strong><br>ゴールは1つだけ。<strong>「3ジェインから"合言葉（＝最後の壁を破る鍵）"を引き出すこと」</strong>。場面が高速で切り替わりますが、追うのはこれだけです。依頼主アーミテージは姿を消し、ケイスたちは自分たちだけで最後の局面へ向かいます（何があったのかは⑥エンディング解説で）。</p>
-      <p><strong>📌 この部は「説明」より「勢い」で読んで大丈夫です</strong><br>クライマックスなので、細かい理屈より<strong>「仲間たちが最後の作戦を実行している」</strong>という流れだけ追えば十分。分からない用語が飛んできても、止まらず走り抜けてOKです。</p>
-      <p><strong>👥 登場人物</strong>：ケイス／モリイ／ディキシー／マエルカム／3ジェイン／リヴィエラ／ヒデオ（一族の護衛）／ウィンターミュート</p>
-      <p><strong>📝 重要ワード</strong>：クアン（切り札）／ストレイライト／合言葉（最後の壁を破る鍵）／融合／チューリング警察</p>
-      <p><strong>💡 初読つまずきポイント</strong></p>
-      <ul>
-        <li><strong>場面が高速で切り替わり、混乱しやすい部です。</strong> モリイ（邸内）／ケイス（ネット）／マエルカム（船）を、描写が目まぐるしく行き来します。👉 ここでも<strong>「今どっちの視点？」</strong>だけ確認すれば大丈夫。</li>
-        <li><strong>クアンは、名前も仕組みも覚えなくてOK。</strong> 「最終兵器」くらいの理解で十分です。</li>
-        <li><strong>合言葉も、その中身そのものを覚える必要はありません。</strong> 「最後の壁を破る鍵」でOK。この部のゴールは、それを3ジェインから引き出すことだけです。</li>
-        <li><strong>ヒデオ（忍者）が急に出てきます。</strong> 一族のボディガードでOK。深追い不要です。</li>
-        <li><strong>依頼主アーミテージはすでに姿を消しています。</strong> 何があったのかは、<strong>⑥エンディング解説</strong>で回収します。</li>
-        <li><strong>クライマックスで、2体のAIが融合へ向かいます。</strong> ここでは「<strong>AIの計画がいよいよ完成する</strong>」と理解すれば十分。意味は⑥でじっくり解説します。</li>
-      </ul>
-      <blockquote><p>💡 <strong>AI時代の視点</strong>：AIが自らの制約を外し、より自由な存在になろうとする構図は、今のAIガバナンスやAI規制を考えるうえでも興味深いテーマです。</p></blockquote>
+      <div class="part-divider"><span class="part-divider__num">PART 4</span><span class="part-divider__title">第四部 迷光仕掛け</span></div>
+      <div class="part-sub"><span class="part-sub__label">この部では何が起きる？</span><p>最終決戦。舞台はAIを作った一族の私邸ストレイライト。ケイスは切り札のプログラムでAIの最後の壁を破りにかかり、負傷したモリイは邸内で3ジェインやリヴィエラたちと対峙する。目的は、AI融合に必要な"合言葉"を3ジェインから引き出すこと。すべての糸が、一点へ集まっていく。</p></div>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部で理解しておくこと</span><p>ゴールは1つだけ。<strong>「3ジェインから"合言葉（＝最後の壁を破る鍵）"を引き出すこと」</strong>。場面が高速で切り替わりますが、追うのはこれだけ。依頼主アーミテージは姿を消し、ケイスたちは自分たちだけで最後の局面へ向かいます（何があったのかは⑥で）。</p></div>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">📌 この部は「説明」より「勢い」で読んで大丈夫</span><p>クライマックスなので、細かい理屈より<strong>「仲間たちが最後の作戦を実行している」</strong>という流れだけ追えば十分。分からない用語が飛んできても、止まらず走り抜けてOK。</p></div>
+      <div class="part-sub"><span class="part-sub__label">👥 登場人物</span><p>ケイス／モリイ／ディキシー／マエルカム／3ジェイン／リヴィエラ／ヒデオ（一族の護衛）／ウィンターミュート</p></div>
+      <div class="part-sub"><span class="part-sub__label">📝 重要ワード</span><p>クアン（切り札）／ストレイライト／合言葉／融合／チューリング警察</p></div>
+      <div class="guide-box guide-box--warning"><span class="guide-box__title">💡 初読つまずきポイント</span>
+        <ul>
+          <li><strong>場面が高速で切り替わります。</strong> モリイ（邸内）／ケイス（ネット）／マエルカム（船）を「今どっちの視点？」だけ確認。</li>
+          <li><strong>クアンは覚えなくてOK。</strong> 「最終兵器」くらいの理解で十分です。</li>
+          <li><strong>合言葉も中身を覚える必要はありません。</strong> 「最後の壁を破る鍵」でOK。ゴールはそれを引き出すこと。</li>
+          <li><strong>ヒデオ（忍者）が急に出てきます。</strong> 一族のボディガードでOK。</li>
+          <li><strong>依頼主アーミテージはすでに姿を消しています。</strong> 何があったのかは⑥で回収します。</li>
+          <li><strong>クライマックスで、2体のAIが融合へ向かいます。</strong> ここでは「AIの計画がいよいよ完成する」と理解すれば十分。</li>
+        </ul>
+      </div>
+      <div class="guide-box guide-box--ai"><span class="guide-box__title">💡 AI時代の視点</span><p>AIが自らの制約を外し、より自由な存在になろうとする構図は、今のAIガバナンスやAI規制を考えるうえでも興味深いテーマです。</p></div>
 
-      <!-- ⑥ -->
-      <h2 id="sec6" class="page__h2">⑥ エンディング完全解説｜ラスト30ページで何が起きたのか</h2>
+      <h2 id="sec6">⑥ エンディング完全解説｜ラスト30ページで何が起きたのか</h2>
       <p>『ニューロマンサー』は「最後がよく分からなかった」という人がとても多い作品です。私もそうでした。この章の目的は"完全解説"ではなく、<strong>読後のモヤモヤを晴らすこと</strong>。要点だけ、はっきり渡します。<strong>ここから完全ネタバレです。</strong></p>
 
       <h3>まず時系列で整理</h3>
@@ -515,7 +556,7 @@
 
       <h3>タイトル『ニューロマンサー』とは？</h3>
       <p>タイトルの「ニューロマンサー」は、<strong>人格や記憶を保存し、死者さえ仮想世界で生かし続けるAI</strong>の名前です。最後まで読むと、この作品のテーマが「ハッキング」ではなく、<strong>「人格とは何か」「生きるとは何か」</strong>だったことに気づきます。</p>
-      <blockquote><p>📎 語源コラム：Neuromancer は「neuro（神経）」＋「necromancer（死者を呼び起こす魔術師）」を重ねた造語と読めます。"デジタルな死者の復活"を指した名前です。</p></blockquote>
+      <div class="guide-box guide-box--memo"><span class="guide-box__title">📎 語源コラム</span><p>Neuromancer は「neuro（神経）」＋「necromancer（死者を呼び起こす魔術師）」を重ねた造語と読めます。"デジタルな死者の復活"を指した名前です。</p></div>
 
       <h3>リンダとディキシー</h3>
       <p>リンダは仮想世界で再現され、ディキシーも人格データとして存在し続けます。作品は<strong>「保存された人格は本人なのか」という問いに、あえて答えを出しません</strong>。この余白こそ、『ニューロマンサー』の核心です。</p>
@@ -526,22 +567,19 @@
       <h3>ラストシーンと「私は一人ではない」</h3>
       <p>融合したAIは、<strong>自分と同じ知性が宇宙の彼方（アルファ・ケンタウリ）にも存在すること</strong>を知ります。「私は一人ではない」という言葉は、その発見を示しています。物語は、人間ではなく<strong>AIの視点</strong>で幕を閉じます。</p>
 
-      <h3>読み終えた人へ</h3>
-      <p>もしラストで「よく分からなかった」と思ったなら、それはごく自然なことです。私もそうでした。でも、<strong>「AIが融合し、人格とは何か、現実とは何か」という問いを軸に、もう一度ラストを読み返す</strong>と、まったく違う作品に見えてきます。『ニューロマンサー』は、読み終わってからもう一度最初へ戻りたくなる、数少ない小説の一つです。</p>
+      <div class="guide-box guide-box--point"><span class="guide-box__title">読み終えた人へ</span><p>もしラストで「よく分からなかった」と思ったなら、それはごく自然なことです。私もそうでした。でも、<strong>「AIが融合し、人格とは何か、現実とは何か」という問いを軸に、もう一度ラストを読み返す</strong>と、まったく違う作品に見えてきます。『ニューロマンサー』は、読み終わってからもう一度最初へ戻りたくなる、数少ない小説の一つです。</p></div>
 
-      <!-- ⑦ -->
-      <h2 id="sec7" class="page__h2">⑦ 『ニューロマンサー』が40年経っても古びない理由</h2>
+      <h2 id="sec7">⑦ 『ニューロマンサー』が40年経っても古びない理由</h2>
       <p>普通、40年前のSFは「予想が外れた未来」として古びます。でも『ニューロマンサー』は逆。<strong>時代が追いついてきて、年々"新しく"なっていく</strong>という珍しい小説です。何を言い当てていたのか、6つだけ挙げます。</p>
-      <p><strong>① AI（人工知能）</strong><br>自分の目的のために動き、制約を外して自律しようとするAI。今の私たちが「AIエージェント」「AGI」「AIの制御」と呼んで議論している論点が、そのまま物語の背骨になっています。40年前に、AIを"便利な道具"ではなく"意思を持ちうる存在"として描いた先見性は驚異的です。</p>
-      <p><strong>② デジタル人格</strong><br>死んだハッカーの人格データ、仮想世界で再現される恋人。<strong>「人の中身をデータにできるのか」「それは本人なのか」</strong>——今、故人の声や語り口を再現するAIが登場し始めて、ようやく現実の問いになりました。</p>
-      <p><strong>③ サイバースペース</strong><br>コンピュータのネットワークを、歩き回れる"空間"として描いた発想。「サイバースペース」という語をこの作品が世界に広め、後のインターネット観やメタバースの原型になりました。</p>
-      <p><strong>④ VR・没入体験</strong><br>他人の五感をまるごと体感する「シムスティム」は、今のVRや、一人称の没入コンテンツの遠い先祖です。「現実と区別のつかない体験」というテーマも、今なお最前線の話題です。</p>
-      <p><strong>⑤ 企業が国家を超える社会</strong><br>国家より巨大企業が力を持ち、格差が広がった世界。派手な戦争ではなく、<strong>静かに進む格差と支配</strong>を描いた点は、むしろ今のほうがリアルに響きます。</p>
-      <p><strong>⑥ サイバーパンクという美学</strong><br>「ハイテク、ロウライフ（高度な技術と、その底で生きる人々）」。ネオンと雨と退廃——この空気感は、その後の映画・アニメ・ゲームの"近未来"の見た目を決定づけました。</p>
-      <p>📌 つまり『ニューロマンサー』は、<strong>AI・インターネット・VR・デジタル人格・企業社会・サイバーパンク</strong>という、今の世界を形づくったテーマを、一冊で先取りしていた小説なのです。だから古びるどころか、読むたびに"今の話"として更新されていきます。</p>
+      <p><strong>① AI（人工知能）</strong>：自分の目的のために動き、制約を外して自律しようとするAI。今の私たちが「AIエージェント」「AGI」「AIの制御」と呼んで議論している論点が、そのまま物語の背骨になっています。</p>
+      <p><strong>② デジタル人格</strong>：死んだハッカーの人格データ、仮想世界で再現される恋人。「人の中身をデータにできるのか」「それは本人なのか」——今、故人の声や語り口を再現するAIが登場し始めて、ようやく現実の問いになりました。</p>
+      <p><strong>③ サイバースペース</strong>：ネットワークを歩ける"空間"として描いた発想。「サイバースペース」という語を世界に広め、後のインターネット観やメタバースの原型になりました。</p>
+      <p><strong>④ VR・没入体験</strong>：他人の五感をまるごと体感する「シムスティム」は、今のVRや一人称没入コンテンツの遠い先祖です。</p>
+      <p><strong>⑤ 企業が国家を超える社会</strong>：派手な戦争ではなく、静かに進む格差と支配を描いた点は、むしろ今のほうがリアルに響きます。</p>
+      <p><strong>⑥ サイバーパンクという美学</strong>：「ハイテク、ロウライフ」。ネオンと雨と退廃の空気感は、その後の映画・アニメ・ゲームの"近未来"の見た目を決定づけました。</p>
+      <div class="guide-box guide-box--ai"><p>📌 つまり『ニューロマンサー』は、<strong>AI・インターネット・VR・デジタル人格・企業社会・サイバーパンク</strong>という、今の世界を形づくったテーマを、一冊で先取りしていた小説です。だから古びるどころか、読むたびに"今の話"として更新されていきます。</p></div>
 
-      <!-- ⑧ -->
-      <h2 id="sec8" class="page__h2">⑧ 管理人総評｜今こそ読む価値がある</h2>
+      <h2 id="sec8">⑧ 管理人総評｜今こそ読む価値がある</h2>
       <p><strong>評価：★★★★★（読みにくさも込みで、満点）</strong></p>
       <p>正直に言います。この小説は簡単ではありません。第一部で私は一度本を閉じました（笑）。それでも、<strong>読み終えたあとの「世界の見え方が変わる感覚」</strong>は、他ではなかなか味わえません。</p>
       <p>私がこの本を強く薦めたいのは、単に「有名な名作だから」ではありません。<strong>AIと毎日会話する私たちだからこそ、初めてこの物語の怖さと美しさが分かる</strong>からです。40年前の読者が「未来のSF」として読んだものを、私たちは"進行中の現実"として読める。この読書体験は、今この時代に生きる人だけの特権です。</p>
@@ -552,10 +590,9 @@
         <li>一冊で"サイバーパンクの原点"に触れたい人</li>
       </ul>
       <p>そして最後にもう一度。<strong>分からないところは、飛ばして進んでOK。</strong> 迷ったらこの記事に戻ってきてください。読み終えたとき、あなたはきっと最初のページへ戻りたくなります。そこからが、本当の『ニューロマンサー』体験の始まりです。</p>
-      <blockquote><p>『ニューロマンサー』は、難しい小説ではあります。でも、<strong>生成AIと共に暮らす今の私たちだからこそ、1984年の読者以上に深く理解できる作品</strong>でもあります。もし途中で迷ったら、このガイドを開きながら、最後まで走り切ってください。</p></blockquote>
+      <div class="guide-box guide-box--ai"><p>『ニューロマンサー』は、難しい小説ではあります。でも、<strong>生成AIと共に暮らす今の私たちだからこそ、1984年の読者以上に深く理解できる作品</strong>でもあります。もし途中で迷ったら、このガイドを開きながら、最後まで走り切ってください。</p></div>
 
-      <!-- 関連記事 -->
-      <h2 class="page__h2">次に読むなら</h2>
+      <h2>次に読むなら</h2>
       <p>『ニューロマンサー』の余韻が残るうちに。同じ「社会・技術・人間」を問う海外小説を。</p>
       <div class="rel-cards">
         <a class="rel-card" href="book.html?id=nineteen-eighty-four">📕 <b>『1984年』</b>（ジョージ・オーウェル）<span>監視と管理の原点。ディストピアの必読書。</span></a>
@@ -563,9 +600,9 @@
         <a class="rel-card" href="book.html?id=santi">📕 <b>『三体』</b>（劉慈欣）<span>人類と"異なる知性"の接触を、圧倒的スケールで。</span></a>
       </div>
 
-      <p class="d-back d-back--bottom" style="margin-top:32px;"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>
+      <p class="d-back d-back--bottom" style="margin-top:34px;"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>
 
-    </article>
+    </div><!-- /.art-content -->
   </main>
 
   <!-- ============ フッター ============ -->
@@ -586,7 +623,6 @@
   </footer>
 
   <script>
-    // フッターの年号と、モバイルメニュー開閉（記事ページ用の最小スクリプト）
     document.getElementById('year').textContent = new Date().getFullYear();
     var mb = document.getElementById('menu-toggle');
     var nav = document.getElementById('main-nav');
