@@ -12,7 +12,7 @@
 /* ---------------------------------------------------------
    サイト全体設定
    --------------------------------------------------------- */
-const siteLastUpdated = "2026-09-17"; // 最終更新日（毎週ここを更新）
+const siteLastUpdated = "2026-10-02"; // 最終更新日（毎週ここを更新）
 const NEW_DAYS = 21;                  // addedDate からこの日数以内は自動でNEW扱い
 
 /* セクション定義（トップページの表示順） */
@@ -599,7 +599,7 @@ const books = [
     readerReaction: "",
 
     adaptation: "『刑事ヴァランダー』『新米刑事ヴァランダー』など、ヴァランダー刑事シリーズとして映像化。",
-    section: ["管理人おすすめ", "サスペンス・犯罪小説", "受賞作", "映像化原作", "名作"],
+    section: ["管理人おすすめ", "サスペンス・犯罪小説", "受賞作", "映像化原作", "名作・定番"],
     primarySection: "管理人おすすめ",
 
     summary: "北欧ミステリーの代表的シリーズの入口として読みたい、重厚な犯罪小説。ヴァランダー刑事シリーズとして映像化もされている。",
@@ -1295,56 +1295,6 @@ const books = [
     relatedBooks: ["ハウスメイド", "瞬きすら許さない"],
     links: [],
   },
-
-  /* ---- 翻訳待ちウォッチ（日本語版がまだない想定の例） ---- */
-  {
-    id: "untranslated-watch-1",
-    primarySection: "翻訳待ちウォッチ",
-    titleJa: "",
-    titleOriginal: "（翻訳待ちの注目作）",
-    author: "海外の注目作家",
-    country: "—",
-
-    publisherJa: "",
-    translator: "",
-    publicationDateJa: "",
-    formatJa: "",
-    translationStatus: "untranslated",
-    isbnJa: "",   // 日本語版なし
-
-    coverJa: "",
-    coverOriginal: "assets/covers/untranslated-watch-1-original.jpg",
-    coverAlt: "翻訳待ち作品の原書書影",
-    coverJaUrl: "",
-    coverOriginalUrl: "",
-    purchaseUrl: "",
-
-    genre: ["サスペンス"],
-    mood: ["注目"],
-    badges: ["翻訳待ち"],
-    awards: ["海外で受賞・候補"],
-    japanRecognition: [],
-    readerReaction: "海外で話題",
-
-    adaptation: "",
-    section: ["翻訳待ちウォッチ"],
-
-    summary: "海外で高く評価されつつ、まだ日本語版が出ていない作品をウォッチする枠。邦訳決定の報を待ちたい一冊。",
-    recommendedFor: "原書でいち早く読みたい人、邦訳ニュースを追いたい人に。",
-
-    curatorPick: false,
-    weeklyPick: false,
-    weeklyIssue: "",
-    addedDate: "2026-06-14",
-    isNew: true,
-
-    hasAdminComment: false,
-    adminCommentTitle: "管理人メモ",
-    adminComment: "",
-
-    relatedBooks: [],
-    links: [],
-  },
 ];
 
 /* =========================================================
@@ -1365,7 +1315,8 @@ const CATEGORIES = {
   "dystopia":    { sectionId: "社会派・ディストピア",   h1: "社会派・ディストピア", title: "社会派・ディストピア小説｜FICTION RADAR", desc: "社会派文学・ディストピア小説の海外作品を紹介する翻訳小説ガイド。" },
   "classics":    { sectionId: "名作・定番",             h1: "名作・定番",         title: "名作・定番｜FICTION RADAR",         desc: "いつ読んでも色あせない海外小説の名作・定番を紹介する翻訳小説ガイド。" },
   "popular":     { sectionId: "日本で読まれている海外小説", h1: "日本で読まれている海外小説", title: "日本で読まれている海外小説｜FICTION RADAR", desc: "国内でも広く読まれている海外小説を紹介する翻訳小説ガイド。" },
-  "wishlist":    { sectionId: "翻訳待ちウォッチ",       h1: "翻訳待ちウォッチ",   title: "翻訳待ちウォッチ｜FICTION RADAR",   desc: "まだ日本語版が出ていない、翻訳が待たれる海外小説をウォッチ。" },
+  // hidden: true … ページは残すが導線（TOPのカテゴリ一覧）に出さない。実在作品を掲載したら外す
+  "wishlist":    { sectionId: "翻訳待ちウォッチ",       h1: "翻訳待ちウォッチ",   title: "翻訳待ちウォッチ｜FICTION RADAR",   desc: "まだ日本語版が出ていない、翻訳が待たれる海外小説をウォッチ。", hidden: true },
   "recommend":   { sectionId: "管理人おすすめ",         h1: "管理人おすすめ",     title: "管理人おすすめ｜FICTION RADAR",     desc: "サイト管理人が実際に読んで推したい海外小説を紹介。" },
 };
 
@@ -1673,6 +1624,7 @@ function renderIndex() {
 
   // カテゴリページへの導線（固有URL）
   const catItems = Object.keys(CATEGORIES)
+    .filter((key) => !CATEGORIES[key].hidden)
     .map((key) => `<a class="cat-link" href="category.html?cat=${key}">${escapeHtml(CATEGORIES[key].h1)}</a>`)
     .join("");
   const catNav = `<nav class="cat-nav" aria-label="カテゴリから探す"><span class="cat-nav__label">カテゴリから探す：</span>${catItems}</nav>`;
