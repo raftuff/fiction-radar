@@ -493,6 +493,17 @@ a.feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hov
   border-radius: 12px;
   background: #efe7d7;
 }
+/* PC：横長（16:9）に揃えてファーストビューを圧迫しない。
+   トリミング位置は記事ごとに img の style="--hero-pos: 50% 65%;" で調整（既定は中央）。
+   SP は上の既定（元画像の縦横比のまま）を使う。 */
+@media (min-width: 721px) {
+  .article-hero__image {
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: var(--hero-pos, 50% 50%);
+  }
+}
 
 /* カードグリッド */
 .cards {
