@@ -473,13 +473,15 @@
     .art-tag { font-size: .76rem; font-weight: 700; padding: 4px 11px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
 
     /* 掲載基準ボックス */
-    .policy-box { background: var(--bg-soft); border:1px solid var(--line); border-left:5px solid var(--accent-2); border-radius:12px; padding:18px 20px; margin:22px 0 14px; }
+    .policy-box { background: var(--bg-soft); border:1px solid var(--line); border-left:5px solid var(--accent-2); border-radius:12px; padding:14px 18px; margin:0 0 32px; }
     .policy-box__title { font-family:var(--font-round); font-weight:900; font-size:1rem; margin:0 0 8px; color:#1f5a52; }
-    .policy-box p { font-size:.92rem; line-height:1.8; margin:0 0 .5em; color:#3a4a45; }
+    .policy-box p { font-size:.86rem; line-height:1.8; margin:0 0 .5em; color:#3a4a45; }
+    .policy-box__legend { font-size:.78rem !important; color:var(--ink-soft) !important; line-height:2 !important; border-top:1px dashed var(--line); padding-top:8px; }
+    .policy-box__legend .why-label { margin-right:3px; }
     .policy-box p:last-child { margin-bottom:0; }
 
     /* 10選への導線 */
-    .crosslink { display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; background:#f4ecdc; border-radius:12px; padding:12px 16px; margin:0 0 26px; font-size:.92rem; }
+    .crosslink { display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; background:#f4ecdc; border-radius:12px; padding:12px 16px; margin:0 0 16px; font-size:.92rem; }
     .crosslink b { font-family:var(--font-round); }
     .crosslink a { font-weight:800; color:var(--accent); }
 
@@ -493,9 +495,6 @@
     .month-nav li a { display:block; font-family:var(--font-round); font-weight:700; font-size:.9rem; padding:6px 14px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--ink); }
     .month-nav li a:hover { border-color:var(--accent-2); color:var(--accent-2); }
 
-    /* 実績ラベルの凡例 */
-    .radar-legend { font-size:.8rem; color:var(--ink-soft); line-height:1.9; margin:0 0 30px; }
-    .radar-legend .why-label { margin-right:3px; }
 
     /* 月セクション */
     .radar-month { scroll-margin-top:120px; margin:0 0 44px; }
@@ -503,6 +502,9 @@
     .radar-month__lead { font-size:.95rem; line-height:1.85; margin:0 0 4px; }
     .radar-month__count { font-size:.78rem; color:var(--ink-soft); margin:0 0 16px; }
     .radar-sub { font-family:var(--font-round); font-weight:900; font-size:1rem; color:var(--ink-soft); margin:26px 0 12px; }
+    .radar-sub--pick { display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; color:var(--ink); margin:6px 0 12px; }
+    .radar-sub__badge { font-size:.95rem; letter-spacing:.03em; color:#4a3a10; background:var(--accent-3); border-radius:8px; padding:3px 12px; }
+    .radar-sub__note { flex-basis:100%; font-family:var(--font-body); font-weight:500; font-size:.76rem; color:var(--ink-soft); }
     .radar-totop { text-align:right; font-size:.82rem; margin:16px 0 0; }
     .radar-totop a { color:var(--ink-soft); }
 
@@ -523,10 +525,10 @@
     .radar-tag { font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--ink-soft); }
     .radar-tag--key { color:#8a3a26; border-color:#f3d2c6; }
 
-    .radar-why { background:#fffaf2; border:1px solid #f1e3c8; border-radius:10px; padding:8px 12px; margin:0 0 9px; }
-    .radar-why__label { font-family:var(--font-round); font-weight:900; font-size:.74rem; color:var(--accent-4); margin:0 0 3px; }
+    .radar-why { background:#f7f5ff; border:1px solid #e2ddfb; border-left:4px solid var(--accent-4); border-radius:10px; padding:9px 13px 10px; margin:0 0 10px; }
+    .radar-why__label { display:inline-block; font-family:var(--font-round); font-weight:900; font-size:.74rem; color:#fff; background:var(--accent-4); border-radius:999px; padding:2px 10px; margin:0 0 6px; }
     .radar-why ul { list-style:none; margin:0; padding:0; }
-    .radar-why li { font-size:.86rem; line-height:1.7; margin:0 0 3px; color:#3a3352; }
+    .radar-why li { font-size:.88rem; font-weight:500; line-height:1.7; margin:0 0 4px; color:#2f2849; }
     .radar-why li:last-child { margin-bottom:0; }
     .why-label { display:inline-block; font-size:.66rem; font-weight:800; padding:1px 7px; border-radius:6px; margin-right:6px; vertical-align:1px; white-space:nowrap; }
     .why-label--work    { background:var(--accent-4); color:#fff; }
@@ -608,7 +610,7 @@
     <header class="art-hero">
       <p class="art-hero__eyebrow">特集｜年間カタログ</p>
       <h1 class="art-hero__title"><span class="nb">2026年注目の</span><span class="nb">海外小説・翻訳小説</span><br /><span class="nb">受賞作・映像化・</span><span class="nb">話題の新刊を厳選</span></h1>
-      <p class="art-hero__sub">文学賞の受賞作・候補作、映画や海外ドラマにつながる作品、売上や口コミで広がった新刊まで。「今年注目する理由」がある海外小説を、月ごとに拾っていく年間カタログです。</p>
+      <p class="art-hero__sub">受賞作・映像化・話題の新刊を、刊行月ごとに。随時更新の年間カタログです。</p>
       <p class="art-hero__meta">公開：2026年10月3日｜最終更新：2026年10月3日｜選・文：FICTION RADAR</p>
       <div class="art-tags">
         <span class="art-tag">海外小説 2026</span>
@@ -619,14 +621,7 @@
     </header>
 
     <div class="art-content">
-      <p class="art-lead">2026年、どんな海外小説を読もう？　ここでは話題の新刊に加えて、文学賞やミステリ賞の受賞作・候補作、映画や海外ドラマにつながる作品、売上や口コミで広がった作品を、刊行月ごとに並べています。</p>
-      <p>いまは2026年6月以降に出た作品を掲載中です。新刊が出るたびに、月を足しながら更新していきます。各作品の「なぜ注目？」に、拾った理由を短くまとめました。気になる一冊を見つける入口として使ってください。</p>
-
-      <div class="policy-box">
-        <p class="policy-box__title">FICTION RADARの掲載基準</p>
-        <p>受賞・候補だけでなく、映像化、売上、口コミ、著名人の紹介、シリーズや著者の実績など、「今注目する理由」を確認できた作品を載せています。文庫化・新訳・新装版も対象です。</p>
-        <p>作品そのものの実績と、シリーズや著者の実績は分けて書いています。事実は出版社・文学賞・映像作品の公式情報などで確認し、確認できなかったことは載せていません。</p>
-      </div>
+      <p class="art-lead">2026年のFICTION RADAR的視点の良書推薦ガイドです。話題の新刊に加えて、文学賞やミステリ賞の受賞作・候補作、映画や海外ドラマにつながる作品、売上や口コミで広がった作品を、刊行月ごとに並べています。2026年6月以降に出た作品を掲載中です。各作品の注目の理由を短くまとめました。気になる一冊を見つける入口として使ってください。</p>
 
       <p class="crosslink"><b>どれから読むか迷ったら</b><span>まず10冊に絞って知りたい人はこちら →</span><a href="best-translated-fiction-2026.html">2026年に読むべき海外小説10選</a></p>
 
@@ -644,19 +639,24 @@
         </ul>
       </nav>
 
-      <p class="radar-legend">
-        <span class="why-label why-label--work">作品</span>その作品自身の実績
-        <span class="why-label why-label--series">シリーズ</span>シリーズの実績
-        <span class="why-label why-label--author">著者</span>著者の実績
-        <span class="why-label why-label--edition">この版</span>文庫化・新訳など<br />
-        受賞・賞候補・映像化などのタグは、作品自身の実績にだけ付けています。書影をクリックすると出版社の紹介ページが開きます。
-      </p>
+      <div class="policy-box">
+        <p class="policy-box__title">FICTION RADARの掲載基準</p>
+        <p>受賞・候補だけでなく、映像化、売上、口コミ、著名人の紹介、シリーズや著者の実績など、「今注目する理由」を確認できた作品を載せています。文庫化・新訳・新装版も対象です。<strong>作品そのものの実績と、シリーズや著者の実績は分けて書いています。</strong>事実は出版社・文学賞・映像作品の公式情報などで確認し、確認できなかったことは載せていません。</p>
+        <p class="policy-box__legend">
+          <span class="why-label why-label--work">作品</span>その作品自身の実績　
+          <span class="why-label why-label--series">シリーズ</span>シリーズの実績　
+          <span class="why-label why-label--author">著者</span>著者の実績　
+          <span class="why-label why-label--edition">この版</span>文庫化・新訳など<br />
+          受賞・賞候補・映像化などのタグは、作品自身の実績にだけ付けています。書影をクリックすると出版社の紹介ページが開きます。
+        </p>
+      </div>
 
       <!-- ===== 6月（2026-06）===== ここから -->
       <section class="radar-month" id="m2026-06" aria-labelledby="h-m2026-06">
         <h2 class="radar-month__title" id="h-m2026-06">2026年6月の注目海外小説</h2>
         <p class="radar-month__lead">ノーベル文学賞作家の代表作がついに初邦訳。ダブリン文学賞の最終候補や、HBO Maxで映像化が進む警察小説も同じ月に出ました。文学とミステリの両方で収穫の多い月です。</p>
         <p class="radar-month__count">14作品を掲載</p>
+        <p class="radar-sub radar-sub--pick"><span class="radar-sub__badge">6月のPICK UP</span><span class="radar-sub__note">掲載根拠がとくに強い作品を大きく紹介しています（順位ではありません）</span></p>
         <div class="radar-list radar-list--pick">
           <article class="radar-card radar-card--pick" id="b-morir-amor">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000615045/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/5210526.jpg" alt="『死んでよ、アモール』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -739,7 +739,7 @@
             </div>
           </article>
         </div>
-        <h3 class="radar-sub">6月のほかの注目作</h3>
+        <p class="radar-sub">6月のほかの注目作</p>
         <div class="radar-list radar-list--grid">
           <article class="radar-card" id="b-listen-for-the-lie">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000615046/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/212028.jpg" alt="『記憶にない殺人』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -945,6 +945,7 @@
         <h2 class="radar-month__title" id="h-m2026-07">2026年7月の注目海外小説</h2>
         <p class="radar-month__lead">映画公開を控えた終末小説の文庫化、ゴールド・ダガー候補のタイムリミット・ミステリ、ドイツの受賞作。中国・韓国からも実績のある作品が届いています。</p>
         <p class="radar-month__count">16作品を掲載</p>
+        <p class="radar-sub radar-sub--pick"><span class="radar-sub__badge">7月のPICK UP</span><span class="radar-sub__note">掲載根拠がとくに強い作品を大きく紹介しています（順位ではありません）</span></p>
         <div class="radar-list radar-list--pick">
           <article class="radar-card radar-card--pick" id="b-the-dog-stars">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000614973/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/31553.jpg" alt="『ラスト・サバイバー（上・下）』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1006,7 +1007,7 @@
             </div>
           </article>
         </div>
-        <h3 class="radar-sub">7月のほかの注目作</h3>
+        <p class="radar-sub">7月のほかの注目作</p>
         <div class="radar-list radar-list--grid">
           <article class="radar-card" id="b-antimemetics-division">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000615063/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/12526.jpg" alt="『反ミーム部門は存在しない』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1039,7 +1040,7 @@
               <div class="radar-why">
                 <p class="radar-why__label">なぜ注目？</p>
                 <ul>
-                <li><span class="why-label why-label--series">シリーズ</span>第1作『ハウスメイド』の映画（シドニー・スウィーニー、アマンダ・セイフライド出演）が2026年11月27日に日本公開予定。</li>
+                <li><span class="why-label why-label--series">シリーズ</span>第1作『ハウスメイド』が2026年本屋大賞・翻訳小説部門2位。その映画版（シドニー・スウィーニー、アマンダ・セイフライド出演）が2026年11月27日に日本公開予定。</li>
                 </ul>
               </div>
               <p class="radar-card__intro">ふたりの子どもと穏やかに暮らすミリー。ある日、隣家のハウスメイドが何かにおびえている姿を目にして……。シリーズ第3作。</p>
@@ -1267,6 +1268,7 @@
         <h2 class="radar-month__title" id="h-m2026-08">2026年8月の注目海外小説</h2>
         <p class="radar-month__lead">エドガー賞候補の孤島サスペンスと、英国の本格ミステリ賞受賞作。ブッカー賞や全米図書賞の候補になった文学作品も並びました。</p>
         <p class="radar-month__count">12作品を掲載</p>
+        <p class="radar-sub radar-sub--pick"><span class="radar-sub__badge">8月のPICK UP</span><span class="radar-sub__note">掲載根拠がとくに強い作品を大きく紹介しています（順位ではありません）</span></p>
         <div class="radar-list radar-list--pick">
           <article class="radar-card radar-card--pick" id="b-wild-dark-shore">
             <a class="radar-card__cover" href="https://www.shogakukan.co.jp/books/09407530" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09407530" alt="『野生の暗き岸辺』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1328,7 +1330,7 @@
             </div>
           </article>
         </div>
-        <h3 class="radar-sub">8月のほかの注目作</h3>
+        <p class="radar-sub">8月のほかの注目作</p>
         <div class="radar-list radar-list--grid">
           <article class="radar-card" id="b-assassin-eighteen">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000615074/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/31557.jpg" alt="『アサシン18』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1446,7 +1448,7 @@
             </div>
           </article>
           <article class="radar-card" id="b-i-saw-her-that-night">
-            <span class="radar-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <a class="radar-card__cover" href="https://www.genki-shobou.co.jp/books/978-4-86488-353-5" target="_blank" rel="noopener"><img src="https://www.genki-shobou.co.jp/wp-content/uploads/2026/08/2608_R_SakuyaKanojo.jpg" alt="『昨夜、彼女を見た』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="radar-card__head">
               <p class="radar-card__cat">スロヴェニア ・ 文学</p>
               <h3 class="radar-card__title">昨夜、彼女を見た</h3>
@@ -1461,7 +1463,7 @@
                 </ul>
               </div>
               <p class="radar-card__intro">第二次大戦下で姿を消した美しい女性。愛人やパルチザンなど、彼女を知る人々の語りから、その素顔が少しずつ浮かび上がる。スロヴェニアの巨匠の本邦初訳。</p>
-              <p class="radar-links"><a href="https://note.com/genkishobou/n/n392bfd4e7156" target="_blank" rel="noopener" class="is-ext">出版社の紹介ページ ↗</a></p>
+              <p class="radar-links"><a href="https://www.genki-shobou.co.jp/books/978-4-86488-353-5" target="_blank" rel="noopener" class="is-ext">出版社の紹介ページ ↗</a></p>
             </div>
           </article>
           <article class="radar-card" id="b-street-kids">
@@ -1513,6 +1515,7 @@
         <h2 class="radar-month__title" id="h-m2026-09">2026年9月の注目海外小説</h2>
         <p class="radar-month__lead">映画『メッセージ』の脚本家によるSF、ゴールド・ダガーの最終候補、100万部を超えた犯罪小説。秋の大型新刊が続きます。</p>
         <p class="radar-month__count">12作品を掲載</p>
+        <p class="radar-sub radar-sub--pick"><span class="radar-sub__badge">9月のPICK UP</span><span class="radar-sub__note">掲載根拠がとくに強い作品を大きく紹介しています（順位ではありません）</span></p>
         <div class="radar-list radar-list--pick">
           <article class="radar-card radar-card--pick" id="b-simultaneous">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000615100/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/12532.jpg" alt="『同時世界 重なりあう記憶』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1594,7 +1597,7 @@
             </div>
           </article>
         </div>
-        <h3 class="radar-sub">9月のほかの注目作</h3>
+        <p class="radar-sub">9月のほかの注目作</p>
         <div class="radar-list radar-list--grid">
           <article class="radar-card" id="b-a-deadly-episode">
             <a class="radar-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488265182" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/26518.jpg" alt="『命取りのエピソード』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1763,6 +1766,7 @@
         <h2 class="radar-month__title" id="h-m2026-10">2026年10月の注目海外小説</h2>
         <p class="radar-month__lead">国際ブッカー賞受賞作に、「ガラスの鍵」賞作家の初邦訳、映像化シリーズの文庫化。10月は刊行予定の作品を含みます（発売日は変更になる場合があります）。</p>
         <p class="radar-month__count">8作品を掲載</p>
+        <p class="radar-sub radar-sub--pick"><span class="radar-sub__badge">10月のPICK UP</span><span class="radar-sub__note">掲載根拠がとくに強い作品を大きく紹介しています（順位ではありません）</span></p>
         <div class="radar-list radar-list--pick">
           <article class="radar-card radar-card--pick" id="b-kairos">
             <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0005210563/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/5210563.jpg" alt="『カイロス』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1803,7 +1807,7 @@
             </div>
           </article>
           <article class="radar-card radar-card--pick" id="b-millennium-7">
-            <span class="radar-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <a class="radar-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000615123/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/0000454001.jpg" alt="『ミレニアム7 鉤爪に捕らわれた女（上・下）』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="radar-card__head">
               <p class="radar-card__cat">スウェーデン ・ 北欧ミステリ</p>
               <h3 class="radar-card__title">ミレニアム7 鉤爪に捕らわれた女（上・下）</h3>
@@ -1819,11 +1823,11 @@
                 </ul>
               </div>
               <p class="radar-card__intro">リスベット・サランデルとミカエル・ブルムクヴィストが、それぞれの事情でスウェーデン北部の町に向かい、再び事件に関わっていく。書き手が替わった新章を、文庫で試しやすくなった。</p>
-              <p class="radar-links"><a href="book.html?id=millennium-1">シリーズ第1作を見る →</a><a href="https://www.hayakawa-online.co.jp/shop/g/g0000614521/" target="_blank" rel="noopener" class="is-ext">出版社の紹介ページ ↗</a></p>
+              <p class="radar-links"><a href="book.html?id=millennium-1">シリーズ第1作を見る →</a><a href="https://www.hayakawa-online.co.jp/shop/g/g0000615123/" target="_blank" rel="noopener" class="is-ext">出版社の紹介ページ ↗</a></p>
             </div>
           </article>
         </div>
-        <h3 class="radar-sub">10月のほかの注目作</h3>
+        <p class="radar-sub">10月のほかの注目作</p>
         <div class="radar-list radar-list--grid">
           <article class="radar-card" id="b-apartment-bestiary">
             <a class="radar-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488014728" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/1472.jpg" alt="『アパートメント暮らしの動物寓話集 その他の物語』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1903,11 +1907,11 @@
             </div>
           </article>
           <article class="radar-card" id="b-mao-ii">
-            <span class="radar-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <a class="radar-card__cover" href="https://www.suiseisha.net/blog/?p=23735" target="_blank" rel="noopener"><img src="https://www.suiseisha.net/_sys/wp/wp-content/uploads/2026/09/%E3%83%9E%E3%82%AA%E2%85%A1%EF%BC%BF%E6%9B%B8%E5%BD%B11.png" alt="『マオⅡ』書影" loading="lazy" onerror="this.parentNode.innerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="radar-card__head">
               <p class="radar-card__cat">アメリカ ・ 文学</p>
               <h3 class="radar-card__title">マオⅡ</h3>
-              <p class="radar-card__meta">ドン・デリーロ｜水声社｜2026年10月</p>
+              <p class="radar-card__meta">ドン・デリーロ｜訳 渡辺克昭｜水声社（ドン・デリーロ・コレクション）｜2026年10月</p>
               <div class="radar-tags"><span class="radar-tag radar-tag--key">受賞</span><span class="radar-tag">文学</span></div>
             </div>
             <div class="radar-card__main">
@@ -1915,10 +1919,11 @@
                 <p class="radar-why__label">なぜ注目？</p>
                 <ul>
                 <li><span class="why-label why-label--work">作品</span>1992年PEN／フォークナー賞受賞作。</li>
-                <li><span class="why-label why-label--edition">この版</span>邦訳は2000年に本の友社から出ており、今回は水声社からの刊行。</li>
+                <li><span class="why-label why-label--edition">この版</span>邦訳は2000年に本の友社から出ており、今回は水声社《ドン・デリーロ・コレクション》の一冊として刊行。</li>
                 </ul>
               </div>
-              <p class="radar-card__intro">隠遁を続ける作家ビル・グレイが、ベイルートで人質となった詩人の解放をめぐる計画に引き込まれていく。作家と群衆、テロの時代を描く長篇。</p>
+              <p class="radar-card__intro">人前に姿を見せない作家ビル・グレイが、長い沈黙を破って肖像写真の撮影に応じたことから、拘束された詩人の解放をめぐる計画に巻き込まれていく。メディアと群衆、テロの時代を描く長篇。</p>
+              <p class="radar-links"><a href="https://www.suiseisha.net/blog/?p=23735" target="_blank" rel="noopener" class="is-ext">出版社の紹介ページ ↗</a></p>
             </div>
           </article>
         </div>
@@ -1929,6 +1934,7 @@
       <div class="art-outro">
         <h2>更新履歴</h2>
         <ul>
+          <li>2026年10月3日：書影を3点追加、一部作品の情報を更新</li>
           <li>2026年10月3日：2026年6月〜10月の作品（62作品）を掲載して公開</li>
         </ul>
         <p>刊行日・映像化の予定・受賞情報は変わることがあります。購入前に各出版社・書店の情報もあわせてご確認ください。</p>
