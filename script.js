@@ -12,7 +12,7 @@
 /* ---------------------------------------------------------
    サイト全体設定
    --------------------------------------------------------- */
-const siteLastUpdated = "2026-10-02"; // 最終更新日（毎週ここを更新）
+const siteLastUpdated = "2026-10-03"; // 最終更新日（毎週ここを更新）
 const NEW_DAYS = 21;                  // addedDate からこの日数以内は自動でNEW扱い
 
 /* セクション定義（トップページの表示順） */
@@ -172,7 +172,7 @@ const books = [
     adminComment: "",
 
     relatedBooks: ["その女アレックス"],
-    links: [],
+    links: [{ label: "特集：2026年注目の海外小説・翻訳小説（シリーズ第3作『ハウスメイド3 最後の秘密』を掲載）", url: "translated-fiction-2026.html#b-housemaid-3" }],
   },
   {
     id: "where-the-crawdads-sing",
@@ -418,7 +418,7 @@ const books = [
 映画ではテンポよく整理されていた部分も、原作ではよりエグく、より複雑で、心理描写も緻密。映画版が好きな人ほど、原作を読むとこの作品世界の厚みが増すはず。映像化原作としても、北欧ミステリーの入口としても、かなりおすすめしたい一冊。`,
 
     relatedBooks: ["その女アレックス"],
-    links: [],
+    links: [{ label: "特集：2026年注目の海外小説・翻訳小説（シリーズ第7部『ミレニアム7 鉤爪に捕らわれた女』文庫版を掲載）", url: "translated-fiction-2026.html#b-millennium-7" }],
   },
   {
     id: "alex",
@@ -569,7 +569,7 @@ const books = [
 英国ミステリーらしい暗さと、ページターナーとしての読みやすさのバランスがかなり良い。重たい事件を扱いながらも、とにかく読む手が止まらない。ワシントン・ポーのシリーズは、キャラクター、謎、テンポの三拍子が揃っていて、個人的にはシリーズすべてが最高と言いたくなるくらい好きな作品。`,
 
     relatedBooks: ["殺人者の顔", "ミレニアム1 ドラゴン・タトゥーの女", "その女アレックス"],
-    links: [],
+    links: [{ label: "特集：2026年注目の海外小説・翻訳小説（シリーズ最新刊『ブラッディダイスの殺人』を掲載）", url: "translated-fiction-2026.html#b-the-final-vow" }],
   },
   {
     id: "faceless-killers",
@@ -1197,7 +1197,7 @@ const books = [
     adminComment: "",
 
     relatedBooks: ["ストーンサークルの殺人", "その女アレックス"],
-    links: [],
+    links: [{ label: "特集：2026年注目の海外小説・翻訳小説（同じ著者の新刊『命取りのエピソード』を掲載）", url: "translated-fiction-2026.html#b-a-deadly-episode" }],
   },
   {
     id: "alperton-angels",
