@@ -433,6 +433,18 @@ a { color: inherit; text-decoration: none; }
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 a.feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+/* 特集サムネイル（TOPカード用・汎用）：表示領域だけ16:9に揃える */
+.feature-card__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  background: #efe7d7;
+  margin: 0 0 6px;
+}
 .feature-card__tag {
   align-self: flex-start;
   font-family: var(--font-round);
@@ -454,6 +466,32 @@ a.feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hov
   .feature-grid { gap: 8px; }
   .feature-card { padding: 11px 14px; }
   .feature-card__sub { display: none; }
+  /* SP：画像を左、ラベル・タイトルを右に置いてカードの高さを抑える */
+  .feature-card:has(.feature-card__image) {
+    display: grid;
+    grid-template-columns: 38% minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: start;
+  }
+  .feature-card__image { grid-column: 1; grid-row: 1 / span 2; margin: 0; border-radius: 8px; }
+  .feature-card:has(.feature-card__image) .feature-card__tag { grid-column: 2; grid-row: 1; }
+  .feature-card:has(.feature-card__image) .feature-card__title { grid-column: 2; grid-row: 2; font-size: .95rem; }
+}
+
+/* 記事ヒーロービジュアル（特集・ガイド記事用・汎用）
+   元画像の構図を活かすため縦横比はそのまま。PCでは大きくなりすぎないよう最大幅を設定。 */
+.article-hero {
+  margin: 4px 0 16px;
+}
+.article-hero__image {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 12px;
+  background: #efe7d7;
 }
 
 /* カードグリッド */
