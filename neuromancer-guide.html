@@ -153,7 +153,7 @@
 
     .art-lead { font-size: .96rem; color:#4a4338; line-height:1.9; background:#fffdf8; border:1px solid var(--line); border-left:4px solid var(--accent-3); border-radius:10px; padding:14px 16px; margin:0 0 26px; }
 
-    .toc-card { scroll-margin-top: 84px; background: var(--bg-soft); border: 1.5px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 20px 22px; margin: 0 0 34px; }
+    .toc-card { scroll-margin-top: 124px; background: var(--bg-soft); border: 1.5px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 20px 22px; margin: 0 0 34px; }
     .toc-card__title { font-family: var(--font-round); font-weight:900; font-size:1.05rem; margin:0 0 12px; }
     .toc-list { list-style:none; margin:0; padding:0; display:grid; gap:2px; }
     .toc-list a { display:flex; gap:12px; align-items:baseline; padding:8px 6px; border-radius:8px; color:var(--ink); font-weight:700; font-size:.95rem; }
@@ -308,7 +308,30 @@
     .toc-fab:hover { color: var(--accent); border-color: var(--accent); }
     .toc-fab:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
     .toc-fab.is-hidden { opacity: 0; visibility: hidden; transform: translateY(8px); pointer-events: none; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .toc-fab { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .toc-fab, .side-toc { transition: none; } }
+
+    /* 見出しへのアンカー移動で固定ヘッダー（約108px）に隠れないように */
+    .art-content h2, .art-content h3 { scroll-margin-top: 124px; }
+
+    /* 右側の固定目次（幅の広いPCのみ）。本文カラム（760px）の右外に置き、本文には重ねない */
+    .side-toc { display: none; }
+    @media (min-width: 1320px) {
+      .toc-fab { display: none; }
+      .side-toc {
+        display: block; position: fixed; z-index: 30;
+        top: 132px; left: calc(50% + 380px + 40px); width: 210px;
+        max-height: calc(100vh - 132px - 24px); overflow-y: auto; overscroll-behavior: contain;
+        padding: 2px 4px 2px 0;
+        transition: opacity .2s, visibility .2s;
+      }
+      .side-toc.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+    .side-toc__title { font-family: var(--font-round); font-weight: 900; font-size: .85rem; color: var(--ink); margin: 0 0 8px; }
+    .side-toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+    .side-toc a { display: block; padding: 6px 0 6px 12px; margin-left: -1px; border-left: 2px solid transparent; font-size: .82rem; line-height: 1.5; color: #8a8378; }
+    .side-toc a:hover { color: var(--ink); }
+    .side-toc a:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 1px; border-radius: 4px; }
+    .side-toc a[aria-current="location"] { color: var(--accent); border-left-color: var(--accent); font-weight: 700; }
 
     @media (max-width: 560px) {
       .toc-fab { right: calc(12px + env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding: 0 12px; font-size: .8rem; }
@@ -448,11 +471,11 @@
       </nav>
 
       <h2 id="sec1">① なぜ今『ニューロマンサー』を読むべきなのか</h2>
-      <p>『ニューロマンサー』は、生成AI時代の今とぴたりと合う小説。初読を終えて、そう思いました。</p>
-      <p>ただ、SF小説特有の言葉も多く、「誰が誰？」「今、何が起きてる？」となりがち。また作家の特性と良さでもありますが、本編では説明があまりなく、読者を未来へ放り込むように始まる小説です。</p>
+      <p>『ニューロマンサー』は、生成AI全盛の今の時代とぴたりと合う小説です。</p>
+      <p>ただし、SF小説特有でもある独自の単語や言い回しなども多く、「誰が誰？」「今、何が起きてる？」となりがち。作家の特性もあって、本編では説明も少ないため、読者を未来へ放り込むように始まる作品です。</p>
 
       <h3>1984年の作品なのに、今の話！？</h3>
-      <p>発表は1984年。ネットもスマホもAIも無い時代の作品なのに、描かれるのはこんなテーマばかりです。</p>
+      <p>発表は1984年。ネットもスマホもAIも無い時代の作品なのに、描かれるのは以下のテーマ。</p>
       <ul>
         <li>世界中のコンピュータがつながった情報空間（作中の「マトリックス」「サイバースペース」）</li>
         <li>人間を裏で動かし、"自由になろうとする"人工知能</li>
@@ -934,6 +957,22 @@
     <p class="footer__copy">© <span id="year">2026</span> FICTION RADAR. 掲載情報は変更される場合があります。</p>
   </footer>
 
+  <!-- 右側の固定目次（幅1320px以上で表示。それ未満は「↑ 目次」ボタン） -->
+  <nav class="side-toc" id="side-toc" aria-label="目次（固定）">
+    <p class="side-toc__title">目次</p>
+    <ol>
+      <li><a href="#sec1">なぜ今読むべきか</a></li>
+      <li><a href="#sec2">読む前の5つのポイント</a></li>
+      <li><a href="#sec3">登場人物一覧</a></li>
+      <li><a href="#sec4">重要ワード辞典</a></li>
+      <li><a href="#sec5">部ごとの完全ガイド</a></li>
+      <li><a href="#sec6">エンディング解説</a></li>
+      <li><a href="#sec7">古びない理由</a></li>
+      <li><a href="#sec8">FICTION RADAR的総評</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ol>
+  </nav>
+
   <!-- 目次へ戻るボタン（JSなしでも通常の目次リンクとして動く） -->
   <a class="toc-fab" id="toc-fab" href="#toc" aria-label="目次へ戻る"><span aria-hidden="true">↑</span> 目次</a>
 
@@ -943,11 +982,24 @@
       var fab = document.getElementById('toc-fab');
       if (!toc || !fab) return;
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-      // 目次の末尾を通過したら表示、目次より上では非表示
+      var side = document.getElementById('side-toc');
+      var links = side ? Array.prototype.slice.call(side.querySelectorAll('a')) : [];
+      var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+      // 目次の末尾を通過したら表示、目次より上では非表示（固定目次・ボタン共通。どちらを出すかはCSSの画面幅で切り替え）
       function update() {
         var passed = toc.getBoundingClientRect().bottom < 0;
         fab.classList.toggle('is-hidden', !passed);
         if (passed) fab.removeAttribute('tabindex'); else fab.setAttribute('tabindex', '-1');
+        if (!side) return;
+        side.classList.toggle('is-hidden', !passed);
+        side.setAttribute('aria-hidden', passed ? 'false' : 'true');
+        links.forEach(function (a) { if (passed) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
+        // 現在読んでいる章：見出しが画面上部（固定ヘッダーの下）を過ぎた最後の章
+        var line = 140, current = -1;
+        targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= line) current = i; });
+        links.forEach(function (a, i) {
+          if (i === current) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+        });
       }
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
