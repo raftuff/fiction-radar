@@ -173,6 +173,19 @@
     .rel-cards { display: grid; gap: 12px; margin: 14px 0 0; }
     .rel-card { display: block; border: 2px solid var(--line); border-radius: 14px; background: var(--bg-soft); padding: 14px 16px; box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s, border-color .15s; }
     .rel-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+    /* 「歴史をざっくりたどる」の年代タイムライン図版（このページ専用）。PC＝横型、SP（640px以下）＝縦型 */
+    .nm-timeline { margin: 22px 0 34px; padding: 20px 24px 22px; background: #fffaf2; border: 1px solid var(--line); border-radius: 14px; }
+    .nm-timeline__cap { font-family: var(--font-round); font-weight: 700; font-size: .84rem; letter-spacing: .06em; color: var(--ink-soft); margin: 0 0 16px; }
+    .nm-tl { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 20px; }
+    .nm-tl::before { content: ""; position: absolute; left: 0; right: 10px; top: 7px; height: 2px; background: rgba(46,163,160,.45); }
+    .nm-tl::after { content: ""; position: absolute; right: 0; top: 3px; border: 5px solid transparent; border-left: 10px solid rgba(46,163,160,.6); border-right: 0; }
+    .nm-tl__item { position: relative; padding-top: 28px; }
+    .nm-tl__item::before { content: ""; position: absolute; left: 0; top: 0; width: 16px; height: 16px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 3px solid var(--accent); }
+    .nm-tl__era { display: block; font-family: var(--font-round); font-weight: 900; font-size: 1.05rem; line-height: 1.3; color: var(--accent-2); margin: 0 0 8px; }
+    .nm-tl__pt { font-size: .93rem; line-height: 1.65; color: var(--ink); margin: 0; }
+    .nm-tl__pt span { display: inline-block; }
+    .nm-tl__pt + .nm-tl__pt { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
+
     .rel-card b { font-family: var(--font-round); }
     .rel-card span { display: block; font-size: .88rem; color: var(--ink-soft); margin-top: 4px; }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .side-toc { transition: none; } }
@@ -193,6 +206,13 @@
       .nm-card--big .nm-card__title { font-size: 1.15rem; }
       .nm-card__text, .nm-card__why { font-size: .95rem; }
       .nm-next__item { grid-template-columns: 60px minmax(0, 1fr); column-gap: 12px; padding: 12px 14px; }
+      .nm-timeline { padding: 18px 16px 18px; }
+      .nm-tl { grid-template-columns: 1fr; row-gap: 20px; }
+      .nm-tl::before { left: 7px; right: auto; top: 8px; bottom: 6px; width: 2px; height: auto; }
+      .nm-tl::after { display: none; }
+      .nm-tl__item { padding: 0 0 0 30px; }
+      .nm-tl__item::before { top: 2px; }
+      .nm-tl__era { font-size: 1rem; margin-bottom: 4px; }
     }
   </style>
 </head>
@@ -275,6 +295,15 @@
         <li><b>2000年代</b>：アイスランドのアーナルデュル・インドリダソンが<a href="#n-myrin">『湿地』</a>と<a href="#n-grafarthogn">『緑衣の女』</a>で2年連続ガラスの鍵賞を受賞。2005年には、刊行前年に亡くなったスティーグ・ラーソンの〈ミレニアム〉が出版され、世界的なベストセラーになります。日本語版は2008年に刊行されました。</li>
         <li><b>2010年代以降</b>：ノルウェーのジョー・ネスボ、デンマークのユッシ・エーズラ・オールスン、スウェーデンのラーシュ・ケプレルらの人気シリーズが次々と翻訳され、北欧ミステリは翻訳ミステリの一大ジャンルとして定着しました。</li>
       </ul>
+      <figure class="nm-timeline">
+        <figcaption class="nm-timeline__cap">図｜北欧ミステリの歩み</figcaption>
+        <ol class="nm-tl">
+          <li class="nm-tl__item"><span class="nm-tl__era">1960〜70年代</span><p class="nm-tl__pt"><span>マルティン・ベック</span><span>シリーズ</span></p><p class="nm-tl__pt"><span>北欧警察小説の</span><span>原点</span></p></li>
+          <li class="nm-tl__item"><span class="nm-tl__era">1990年代</span><p class="nm-tl__pt"><span>刑事ヴァランダー</span><span>シリーズ</span></p><p class="nm-tl__pt"><span>ガラスの鍵賞</span><span>創設</span></p></li>
+          <li class="nm-tl__item"><span class="nm-tl__era">2000年代</span><p class="nm-tl__pt"><span>インドリダソンの</span><span>国際的評価</span></p><p class="nm-tl__pt"><span>ミレニアムの</span><span>世界的ヒット</span></p></li>
+          <li class="nm-tl__item"><span class="nm-tl__era">2010年代以降</span><p class="nm-tl__pt"><span>ネスボ、</span><span>特捜部Q、</span><span>ケプレルなど</span><span>人気シリーズの</span><span>多様化</span></p></li>
+        </ol>
+      </figure>
 
       <h2 id="first5">初めて読むなら、この5作品</h2>
       <p>北欧ミステリにまだなじみがない人のために、読みやすさ、話題性、シリーズへの入りやすさを基準に5作品を選びました。国も作風もばらばらなので、気になる一冊から手に取ってみてください。</p>
