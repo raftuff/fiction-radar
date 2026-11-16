@@ -21,12 +21,13 @@
   <meta property="og:title" content="北欧ミステリおすすめ30選｜初心者向け名作・人気シリーズ完全ガイド" />
   <meta property="og:description" content="スウェーデンからアイスランドまで。北欧ミステリの歴史と国ごとの違い、初心者向け5作品、人気シリーズの読み順、ガラスの鍵賞までをまとめた入門ガイド。" />
   <meta property="og:url" content="https://raftuff.github.io/fiction-radar/nordic-mystery-best-30.html" />
-  <!-- 記事専用のOGP画像ができたら差し替える（現在は既存のメインビジュアル） -->
-  <meta property="og:image" content="https://raftuff.github.io/fiction-radar/assets/images/main-visual.png" />
+  <meta property="og:image" content="https://raftuff.github.io/fiction-radar/assets/images/nordic-mystery-ogp.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="北欧ミステリおすすめ30選｜初心者向け名作・人気シリーズ完全ガイド" />
   <meta name="twitter:description" content="スウェーデンからアイスランドまで。北欧ミステリの歴史と国ごとの違い、初心者向け5作品、人気シリーズの読み順、ガラスの鍵賞までをまとめた入門ガイド。" />
-  <meta name="twitter:image" content="https://raftuff.github.io/fiction-radar/assets/images/main-visual.png" />
+  <meta name="twitter:image" content="https://raftuff.github.io/fiction-radar/assets/images/nordic-mystery-ogp.jpg" />
   <link rel="icon" type="image/png" href="assets/images/icon.png" />
   <link rel="apple-touch-icon" href="assets/images/icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,7 +41,7 @@
     "headline": "北欧ミステリ入門｜初心者におすすめの傑作30選と名作・人気シリーズ完全ガイド",
     "description": "北欧ミステリのおすすめ傑作30作品を紹介。スウェーデン、デンマーク、ノルウェー、アイスランド、フィンランドの名作から、初心者向け5選、人気シリーズの読み順、ガラスの鍵賞まで解説。",
     "inLanguage": "ja",
-    "image": "https://raftuff.github.io/fiction-radar/assets/images/main-visual.png",
+    "image": "https://raftuff.github.io/fiction-radar/assets/images/nordic-mystery-ogp.jpg",
     "mainEntityOfPage": "https://raftuff.github.io/fiction-radar/nordic-mystery-best-30.html",
     "datePublished": "2026-11-16",
     "dateModified": "2026-11-16",
@@ -70,8 +71,29 @@
     .nm-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
     .nm-facts li { font-size: .8rem; font-weight: 700; padding: 5px 12px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
     .nm-facts b { color: var(--accent); font-family: var(--font-round); }
-    /* 記事ヒーロー画像を用意したら .art-hero__lead の後に
-       <figure class="article-hero"><img class="article-hero__image" ...></figure> を入れる（共通CSSあり） */
+    /* 記事ヒーロー画像（H1とリードの間）。ヒーロー枠の内幅いっぱい・元画像の16:9のまま表示 */
+    .nm-hero { margin: 0 0 18px; }
+    .nm-hero__image { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px; background: #2c4650; }
+
+    /* 右側の追従目次（neuromancer-guide.html と同じ方式）。本文カラム（800px）の右外に固定し、本文には重ねない。
+       幅1240px未満では非表示（記事冒頭の折りたたみ目次を使う） */
+    .side-toc { display: none; }
+    @media (min-width: 1240px) {
+      .side-toc {
+        display: block; position: fixed; z-index: 30;
+        top: 132px; left: calc(50% + 400px + 28px); width: min(220px, calc(50% - 400px - 28px - 20px));
+        max-height: calc(100vh - 132px - 24px); overflow-y: auto; overscroll-behavior: contain;
+        padding: 2px 4px 2px 0;
+        transition: opacity .2s, visibility .2s;
+      }
+      .side-toc.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+    .side-toc__title { font-family: var(--font-round); font-weight: 900; font-size: .85rem; color: var(--ink); margin: 0 0 8px; }
+    .side-toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+    .side-toc a { display: block; padding: 6px 0 6px 12px; margin-left: -1px; border-left: 2px solid transparent; font-size: .82rem; line-height: 1.5; color: #8a8378; }
+    .side-toc a:hover { color: var(--ink); }
+    .side-toc a:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 1px; border-radius: 4px; }
+    .side-toc a[aria-current="location"] { color: var(--accent); border-left-color: var(--accent); font-weight: 700; }
 
     .toc-card { background: var(--bg-soft); border: 1.5px solid var(--line); border-radius: 16px; padding: 18px 22px; margin: 0 0 36px; scroll-margin-top: 124px; }
     .toc-card summary { font-family: var(--font-round); font-weight: 900; font-size: 1.02rem; cursor: pointer; list-style: none; }
@@ -153,7 +175,7 @@
     .rel-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
     .rel-card b { font-family: var(--font-round); }
     .rel-card span { display: block; font-size: .88rem; color: var(--ink-soft); margin-top: 4px; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .side-toc { transition: none; } }
 
     @media (max-width: 640px) {
       .art-wrap { padding: 18px 16px 44px; }
@@ -210,6 +232,9 @@
     <header class="art-hero">
       <p class="art-hero__eyebrow">北欧ミステリ入門</p>
       <h1 class="art-hero__title"><span class="nb">北欧ミステリ入門｜</span><span class="nb">初心者におすすめの傑作30選と</span><span class="nb">名作・人気シリーズ完全ガイド</span></h1>
+      <figure class="nm-hero">
+        <img class="nm-hero__image" src="assets/images/nordic-mystery-hero.webp" alt="雪をかぶった山々とフィヨルド、灯りのともる水辺の村を描いた北欧ミステリ特集のイラスト" width="1600" height="900" fetchpriority="high" decoding="async" />
+      </figure>
       <div class="art-hero__lead">
         <p>北欧ミステリの魅力は、緻密な犯罪捜査や重厚な人間ドラマだけではありません。雪に覆われた町、広大な森林、フィヨルド、荒涼とした海岸線。美しく、ときに厳しい自然を背景に事件が起こり、その土地ならではの歴史や文化、人々の暮らしが物語に深く関わってきます。</p>
         <p>日本から遠く離れた北欧の風景や社会を、事件の謎を追いながら知ることができる。そんな旅をするような読書体験も、北欧ミステリの大きな醍醐味です。ここでは歴史と国ごとの特徴をたどりながら、読書の入口になる30作品を紹介します。</p>
@@ -917,6 +942,46 @@
       <p class="art-back" style="margin-top:30px;"><a class="back-link" href="index.html">← 作品一覧に戻る</a></p>
     </div><!-- /.art-content -->
   </main>
+
+  <!-- 右側の追従目次（幅1240px以上で表示。それ未満は記事冒頭の折りたたみ目次） -->
+  <nav class="side-toc is-hidden" id="side-toc" aria-label="目次（固定）" aria-hidden="true">
+    <p class="side-toc__title">目次</p>
+    <ol>
+      <li><a href="#about">北欧ミステリとは</a></li>
+      <li><a href="#first5">初めて読むなら5作品</a></li>
+      <li><a href="#best25">傑作25選</a></li>
+      <li><a href="#countries">北欧5か国の違い</a></li>
+      <li><a href="#glass-key">ガラスの鍵賞とは</a></li>
+      <li><a href="#series">人気シリーズの読み順</a></li>
+      <li><a href="#mood">読み味から探す</a></li>
+      <li><a href="#next10">名作・注目作10選</a></li>
+      <li><a href="#summary">まとめ</a></li>
+    </ol>
+  </nav>
+  <script>
+    (function () {
+      var toc = document.getElementById('toc');
+      var side = document.getElementById('side-toc');
+      if (!toc || !side) return;
+      var links = Array.prototype.slice.call(side.querySelectorAll('a'));
+      var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+      // 冒頭の目次を通過したら表示。現在の章＝見出しが固定ヘッダーの下（140px）を過ぎた最後の章
+      function update() {
+        var passed = toc.getBoundingClientRect().bottom < 0;
+        side.classList.toggle('is-hidden', !passed);
+        side.setAttribute('aria-hidden', passed ? 'false' : 'true');
+        links.forEach(function (a) { if (passed) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
+        var line = 140, current = -1;
+        targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= line) current = i; });
+        links.forEach(function (a, i) {
+          if (i === current) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+        });
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
 
   <!-- ============ フッター ============ -->
   <footer class="footer">
