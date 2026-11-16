@@ -445,6 +445,10 @@ a.feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hov
   background: #efe7d7;
   margin: 0 0 6px;
 }
+/* 画像がまだない特集用の色面プレースホルダー（画像ができたら img に差し替える） */
+.feature-card__image--placeholder {
+  background: linear-gradient(135deg, #e6ecef 0%, #d5dfe5 55%, #c9d4db 100%);
+}
 .feature-card__tag {
   align-self: flex-start;
   font-family: var(--font-round);
