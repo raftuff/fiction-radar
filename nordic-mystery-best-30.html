@@ -156,6 +156,7 @@
     .nm-card__meta { font-size: .76rem; font-weight: 700; color: var(--accent-2); margin: 0 0 2px; }
     .nm-card__title { font-family: var(--font-round); font-weight: 900; font-size: 1.15rem; line-height: 1.45; margin: 0 0 4px; }
     .nm-card--big .nm-card__title { font-size: 1.3rem; }
+    .nm-card__title .sp-br { display: none; } /* SPだけ有効にする改行（gen.py の SP_TITLE_BREAK） */
     .nm-card__catch { font-size: .88rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 8px; }
     .nm-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
     .nm-tag { font-size: .7rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
@@ -316,6 +317,7 @@
       .nm-card__info { order: 8; }
       .nm-card__links { order: 9; }
       .nm-card__title, .nm-card--big .nm-card__title { font-size: 24px; line-height: 1.35; text-wrap: balance; word-break: auto-phrase; overflow-wrap: anywhere; }
+      .nm-card__title .sp-br { display: inline; }
       .nm-tags { gap: 6px; margin: 4px 0 12px; }
       .nm-tag { font-size: .76rem; padding: 3px 10px; }
       .nm-card__text, .nm-card__why { font-size: 1rem; line-height: 1.9; margin-bottom: 12px; }
@@ -504,7 +506,7 @@
           <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610275/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610275.jpg" alt="『ミレニアム1 ドラゴン・タトゥーの女』（上巻）の書影（スティーグ・ラーソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">スティーグ・ラーソン</span></p>
-            <h3 class="nm-card__title">『ミレニアム1 ドラゴン・タトゥーの女』</h3>
+            <h3 class="nm-card__title">『ミレニアム1<br class="sp-br" /> ドラゴン・タトゥーの女』</h3>
             <p class="nm-card__catch">北欧ミステリを世界に広めた一冊</p>
             <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">一気読み</span></div>
             <p class="nm-card__text">名誉毀損裁判に敗れたジャーナリストのミカエルは、大企業グループの元会長から、40年前に一族の島で姿を消した少女ハリエットの行方を調べてほしいと依頼される。やがて調査に、天才ハッカーのリスベット・サランデルが加わる。</p>
@@ -590,7 +592,7 @@
           <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カミラ・レックバリ</span></p>
-            <h3 class="nm-card__title">『氷姫 エリカ&amp;パトリック事件簿』</h3>
+            <h3 class="nm-card__title">『氷姫 エリカ&amp;<br class="sp-br" />パトリック事件簿』</h3>
             <p class="nm-card__catch">港町の噂と秘密を生活感豊かに描く</p>
             <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
             <p class="nm-card__text">作家のエリカは、両親の死をきっかけにスウェーデン西海岸の故郷の町へ戻る。そこで幼なじみのアレクスが、凍った浴槽の中で手首を切った姿で見つかる。自殺とされたが、違和感を抱いたエリカは彼女の過去を調べはじめる。</p>
