@@ -1499,7 +1499,7 @@ function mainTitle(book) {
 /* =========================================================
    一覧ページ（index.html）
    ========================================================= */
-const TOP_CATALOG_STEP = 24; // TOPカタログの初期表示件数＝「もっと見る」1回で追加する件数
+const TOP_CATALOG_STEP = 12; // TOPカタログの初期表示件数＝「もっと作品を見る」1回で追加する件数
 const state = { query: "", genre: "all", activeSection: "all", topCount: TOP_CATALOG_STEP };
 
 function cardHtml(book) {
@@ -1590,7 +1590,6 @@ function renderIndex() {
     return true;
   };
 
-  const filtering = state.query !== "" || state.genre !== "all";
 
   // ---- 単一カテゴリ表示（ナビ／「すべて見る」）----
   if (state.activeSection !== "all") {
@@ -1623,14 +1622,15 @@ function renderIndex() {
   // 全作品を更新日の新しい順に、各作品1回だけ表示。まず12件、「もっと見る」で全件。
   // カテゴリは棚ではなくカード上のタグ＋一覧ページへの導線として扱う。
   const catalog = applyFilters(books.filter((b) => b.translationStatus === "translated"));
-  // 検索／絞り込み中は全件、通常は topCount 件（初期24件、もっと見るで＋24件ずつ）
-  const limit = filtering ? Infinity : state.topCount;
+  // 検索・絞り込み中も同じく topCount 件ずつ（初期12件、「もっと作品を見る」で＋12件ずつ）。
+  // 条件を変えたら setupIndexControls 側で topCount を12件に戻す
+  const limit = state.topCount;
   const list = catalog.slice(0, limit);
   const hasMore = catalog.length > list.length;
 
   const cards = list.map(cardHtml).join("") || `<p class="empty">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
   const moreBtn = hasMore
-    ? `<div class="top-more"><button type="button" class="top-more__btn" id="top-more-btn">もっと見る（あと${catalog.length - list.length}件）</button></div>`
+    ? `<div class="top-more"><button type="button" class="top-more__btn" id="top-more-btn">もっと作品を見る（あと${catalog.length - list.length}件）</button></div>`
     : "";
 
   // カテゴリページへの導線（固有URL）
@@ -1656,7 +1656,14 @@ function renderIndex() {
   }
 
   const moreEl = $("#top-more-btn");
-  if (moreEl) moreEl.addEventListener("click", () => { state.topCount += TOP_CATALOG_STEP; renderIndex(); });
+  if (moreEl) moreEl.addEventListener("click", () => {
+    const shown = list.length;
+    state.topCount += TOP_CATALOG_STEP;
+    renderIndex();
+    // 追加された最初の作品へキーボード操作の位置を移す（ボタンが消えても迷わないように）
+    const next = root.querySelectorAll(".cards .card")[shown];
+    if (next) next.focus({ preventScroll: true });
+  });
 
   initCovers(root);
 }
@@ -1686,7 +1693,7 @@ function sectionBlock(label, note, list, feature, moreTarget, moreLabel) {
 function setupIndexControls() {
   const search = $("#search");
   if (search) {
-    search.addEventListener("input", (e) => { state.query = e.target.value.trim(); renderIndex(); });
+    search.addEventListener("input", (e) => { state.query = e.target.value.trim(); state.topCount = TOP_CATALOG_STEP; renderIndex(); });
   }
 
   const genreSel = $("#genre-filter");
@@ -1696,7 +1703,7 @@ function setupIndexControls() {
       opt.value = g; opt.textContent = g;
       genreSel.appendChild(opt);
     });
-    genreSel.addEventListener("change", (e) => { state.genre = e.target.value; renderIndex(); });
+    genreSel.addEventListener("change", (e) => { state.genre = e.target.value; state.topCount = TOP_CATALOG_STEP; renderIndex(); });
   }
 
   // 指定セクションへ切り替え（ナビ・「すべて見る →」共通）
@@ -1743,14 +1750,7 @@ function setupIndexControls() {
     });
   }
 
-  const menuBtn = $("#menu-toggle");
-  const nav = $("#main-nav");
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", () => {
-      nav.classList.toggle("is-open");
-      menuBtn.setAttribute("aria-expanded", nav.classList.contains("is-open"));
-    });
-  }
+  // ハンバーガーメニューの開閉は共通の menu.js で行う
 }
 
 /* =========================================================
@@ -2075,18 +2075,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if ($("#book-detail")) {        // 詳細ページ
     renderDetail();
-    const menuBtn = $("#menu-toggle");
-    const nav = $("#main-nav");
-    if (menuBtn && nav) {
-      menuBtn.addEventListener("click", () => nav.classList.toggle("is-open"));
-    }
   }
   if ($("#category-list")) {       // カテゴリページ
     renderCategory();
-    const menuBtn = $("#menu-toggle");
-    const nav = $("#main-nav");
-    if (menuBtn && nav) {
-      menuBtn.addEventListener("click", () => nav.classList.toggle("is-open"));
-    }
   }
 });

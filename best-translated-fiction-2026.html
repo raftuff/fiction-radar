@@ -178,7 +178,7 @@
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
-      <button class="menu-toggle" id="menu-toggle" aria-label="メニュー" aria-expanded="false">
+      <button class="menu-toggle" id="menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
       </button>
       <nav class="nav" id="main-nav">
@@ -191,6 +191,8 @@
         <a href="category.html?cat=classics" data-cat="classics">名作</a>
         <!-- 翻訳待ちウォッチ：実在作品を掲載したら復活 <a href="category.html?cat=wishlist" data-cat="wishlist">翻訳待ち</a> -->
         <a href="category.html?cat=recommend" data-cat="recommend" class="nav__pick">管理人おすすめ</a>
+        <a href="about.html" class="nav__util nav__util--sep">About</a>
+        <a href="contact.html" class="nav__util">Contact</a>
       </nav>
     </div>
   </header>
@@ -427,11 +429,9 @@
     <p class="footer__copy">© <span id="year">2026</span> FICTION RADAR. 掲載情報は変更される場合があります。</p>
   </footer>
 
+  <script src="menu.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    var mb = document.getElementById('menu-toggle');
-    var nav = document.getElementById('main-nav');
-    if (mb && nav) mb.addEventListener('click', function(){ nav.classList.toggle('is-open'); });
   </script>
 </body>
 </html>

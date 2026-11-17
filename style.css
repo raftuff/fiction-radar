@@ -144,7 +144,15 @@ a { color: inherit; text-decoration: none; }
   width: 24px; height: 3px;
   background: var(--ink);
   border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
 }
+.menu-toggle:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; border-radius: 8px; }
+/* 開いているときは × 印に */
+.menu-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.is-open span:nth-child(2) { opacity: 0; }
+.menu-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+/* About / Contact のメニュー内コピー：PCではヘッダー右上（.header__util）に出すので非表示 */
+.nav__util { display: none; }
 
 /* ============ ファーストビュー ============ */
 .hero {
@@ -735,6 +743,7 @@ a.feature-card:hover .feature-card__title { color: #1f6f6c; }
   border-radius: var(--radius-sm);
   padding: 16px;
   margin: 6px 0 8px !important;
+  overflow-wrap: anywhere; /* 320px幅でもメールアドレスがはみ出さないように */
 }
 .contact__mail a { color: var(--accent); }
 .contact__mail a:hover { text-decoration: underline; }
@@ -819,22 +828,33 @@ a.feature-card:hover .feature-card__title { color: #1f6f6c; }
   .hero__visual { order: -1; }
   .visual-img { max-width: 320px; }
 
-  .menu-toggle { display: flex; }
+  /* SP・タブレットのヘッダー：左にロゴ、右にメニューボタンの1段（高さ約64px）。About/Contactはメニュー内へ */
+  .header__inner { flex-wrap: nowrap; padding: 14px 16px; }
+  .header__util { display: none; }
+  .menu-toggle { display: flex; margin-right: -8px; }
   .nav {
     position: absolute;
     top: 100%;
     left: 0; right: 0;
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch;
     background: var(--bg-soft);
     border-bottom: 2px dashed var(--line);
     padding: 10px 16px 16px;
     gap: 4px;
     margin-left: 0;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     display: none;
   }
   .nav.is-open { display: flex; }
   .nav a { padding: 10px 12px; }
+  .nav .nav__util { display: block; }
+  .nav .nav__util--sep { margin-top: 6px; position: relative; }
+  .nav .nav__util--sep::before { content: ""; position: absolute; left: 12px; right: 12px; top: -6px; border-top: 1px solid var(--line); }
   .pc-only { display: none; }
 }
 
