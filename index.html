@@ -93,13 +93,6 @@
         <p class="hero__eyebrow">海外小説・翻訳小説のWebマガジン</p>
         <h1 class="hero__title">海外小説の<br />話題作・名作ガイド</h1>
         <p class="hero__sub">海外の受賞作、映像化原作、注目の新刊から、<br class="pc-only" />日本語で読める「次の一冊」を探すWebマガジン。</p>
-
-        <div class="hero__controls">
-          <input type="search" id="search" class="search" placeholder="🔍 タイトル・著者・キーワードで探す" />
-          <select id="genre-filter" class="genre-filter" aria-label="ジャンルで絞り込む">
-            <option value="all">すべてのジャンル</option>
-          </select>
-        </div>
       </div>
 
       <!-- メインビジュアル -->
@@ -109,11 +102,12 @@
     </div>
   </section>
 
-  <!-- ============ 特集・ガイド ============
-       カードを1枚追加するだけで増やせる（PC3列／タブレット2列／SP1列）。
+  <!-- ============ 特集・ガイド（サイトのメインコンテンツ） ============
+       カードを1枚追加するだけで増やせる（PC・タブレット2列／SP1列）。
        サムネイルは assets/images/feature-{記事名}-thumb.webp（16:9 で表示。alt="" の装飾扱い）。
        4枚以上になったら、新しいものを先頭に置き、古いものから外すか「特集一覧」ページを作る。 -->
   <section class="container feature-block" aria-labelledby="feature-title">
+    <p class="feature-block__eyebrow" aria-hidden="true">FEATURES</p>
     <h2 class="feature-block__title" id="feature-title">特集・ガイド</h2>
     <div class="feature-grid">
       <a class="feature-card" href="best-translated-fiction-2026.html">
@@ -143,8 +137,23 @@
     </div>
   </section>
 
-  <!-- ============ セクション（JSで描画） ============ -->
-  <main class="container" id="sections"></main>
+  <!-- ============ 作品一覧 ============
+       見出しと検索・絞り込みは固定のHTML。カード部分（#sections）だけをJSで描画する（入力中にフォーカスが外れないように） -->
+  <main class="container catalog" id="catalog">
+    <section class="section section--catalog" aria-labelledby="catalog-title">
+      <div class="section__head">
+        <h2 class="section__title" id="catalog-title">作品一覧</h2>
+        <p class="section__note" id="catalog-note">いま話題の翻訳本や、いまあらためて注目したい海外小説を紹介します。</p>
+      </div>
+      <div class="catalog-tools" role="search">
+        <input type="search" id="search" class="search" placeholder="🔍 タイトル・著者・キーワードで探す" aria-label="作品をタイトル・著者・キーワードで探す" />
+        <select id="genre-filter" class="genre-filter" aria-label="ジャンルで絞り込む">
+          <option value="all">すべてのジャンル</option>
+        </select>
+      </div>
+      <div id="sections"></div>
+    </section>
+  </main>
 
   <!-- ============ About ============ -->
   <section class="about" id="about">

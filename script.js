@@ -1581,6 +1581,14 @@ function renderIndex() {
   const root = $("#sections");
   if (!root) return;
   root.innerHTML = "";
+  // TOPでは見出し（#catalog-title）と検索欄が固定HTML。見出しの文言だけ差し替え、カード部分を描画する
+  const headTitle = $("#catalog-title"), headNote = $("#catalog-note");
+  const setHead = (label, note) => {
+    if (!headTitle) return false;
+    headTitle.textContent = label;
+    if (headNote) headNote.textContent = note;
+    return true;
+  };
 
   const filtering = state.query !== "" || state.genre !== "all";
 
@@ -1599,9 +1607,12 @@ function renderIndex() {
       list = categoryList(sec);
       feature = sec.weekly;
     }
-    if (list.length) {
+    if (list.length && setHead(label, note)) {
+      root.innerHTML = `<div class="cards ${feature ? "cards--feature" : ""}">${list.map(cardHtml).join("")}</div>`;
+    } else if (list.length) {
       root.insertAdjacentHTML("beforeend", sectionBlock(label, note, list, feature));
     } else {
+      setHead(label, note);
       root.innerHTML = `<p class="empty empty--big">条件に合う作品が見つかりませんでした。検索ワードや絞り込みを変えてみてください。</p>`;
     }
     initCovers(root);
@@ -1629,7 +1640,10 @@ function renderIndex() {
     .join("");
   const catNav = `<nav class="cat-nav" aria-label="カテゴリから探す"><span class="cat-nav__label">カテゴリから探す：</span>${catItems}</nav>`;
 
-  root.innerHTML = `
+  if (setHead("作品一覧", "いま話題の翻訳本や、いまあらためて注目したい海外小説を紹介します。")) {
+    root.innerHTML = `<div class="cards">${cards}</div>${moreBtn}${catNav}`;
+  } else {
+    root.innerHTML = `
     <section class="section">
       <div class="section__head">
         <h2 class="section__title">作品一覧</h2>
@@ -1639,6 +1653,7 @@ function renderIndex() {
       ${moreBtn}
       ${catNav}
     </section>`;
+  }
 
   const moreEl = $("#top-more-btn");
   if (moreEl) moreEl.addEventListener("click", () => { state.topCount += TOP_CATALOG_STEP; renderIndex(); });
@@ -1690,7 +1705,7 @@ function setupIndexControls() {
     $$("[data-section]").forEach((n) =>
       n.classList.toggle("is-active", n.getAttribute("data-section") === target));
     renderIndex();
-    const sectionsEl = $("#sections");
+    const sectionsEl = $("#catalog") || $("#sections");
     const top = (sectionsEl ? sectionsEl.offsetTop : 0) - 80;
     window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
     const nav = $("#main-nav");
