@@ -234,17 +234,17 @@
     .nm-map__src { font-size: .76rem; line-height: 1.6; color: #8a8378; margin: 10px 0 0; }
 
     /* 「歴史をざっくりたどる」の年代タイムライン図版（このページ専用）。PC＝横型、SP（640px以下）＝縦型 */
-    .nm-timeline { margin: 22px 0 34px; padding: 20px 24px 22px; background: #fffaf2; border: 1px solid var(--line); border-radius: 14px; }
-    .nm-timeline__cap { font-family: var(--font-round); font-weight: 700; font-size: .84rem; letter-spacing: .06em; color: var(--ink-soft); margin: 0 0 16px; }
+    .nm-timeline { margin: 24px 0 36px; padding: 22px 26px 24px; background: #e8eff0; border: 1px solid #d2dfe1; border-radius: 14px; }
+    .nm-timeline__cap { font-family: var(--font-round); font-weight: 900; font-size: 1rem; letter-spacing: .04em; color: #24363a; margin: 0 0 18px; }
     .nm-tl { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 20px; }
-    .nm-tl::before { content: ""; position: absolute; left: 0; right: 10px; top: 7px; height: 2px; background: rgba(46,163,160,.45); }
-    .nm-tl::after { content: ""; position: absolute; right: 0; top: 3px; border: 5px solid transparent; border-left: 10px solid rgba(46,163,160,.6); border-right: 0; }
+    .nm-tl::before { content: ""; position: absolute; left: 0; right: 10px; top: 7px; height: 3px; border-radius: 2px; background: rgba(23,107,117,.55); }
+    .nm-tl::after { content: ""; position: absolute; right: 0; top: 3.5px; border: 5px solid transparent; border-left: 10px solid rgba(23,107,117,.75); border-right: 0; }
     .nm-tl__item { position: relative; padding-top: 28px; }
-    .nm-tl__item::before { content: ""; position: absolute; left: 0; top: 0; width: 16px; height: 16px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 3px solid var(--accent); }
-    .nm-tl__era { display: block; font-family: var(--font-round); font-weight: 900; font-size: 1.05rem; line-height: 1.3; color: var(--accent-2); margin: 0 0 8px; }
-    .nm-tl__pt { font-size: .93rem; line-height: 1.65; color: var(--ink); margin: 0; }
+    .nm-tl__item::before { content: ""; position: absolute; left: 0; top: 0; width: 17px; height: 17px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 4px solid #176b75; }
+    .nm-tl__era { display: block; font-family: var(--font-round); font-weight: 900; font-size: 1.15rem; line-height: 1.3; color: #176b75; margin: 0 0 8px; }
+    .nm-tl__pt { font-size: .86rem; line-height: 1.65; color: #34474b; margin: 0; }
     .nm-tl__pt span { display: inline-block; }
-    .nm-tl__pt + .nm-tl__pt { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
+    .nm-tl__pt + .nm-tl__pt { margin-top: 6px; padding-top: 6px; border-top: 1px dashed #c3d4d7; }
 
     .rel-card b { font-family: var(--font-round); }
     .rel-card span { display: block; font-size: .88rem; color: var(--ink-soft); margin-top: 4px; }
@@ -289,11 +289,12 @@
       .nm-map__label--se { transform: translate(-30%, -65%); }
       .nm-map__label--fi { transform: translate(-68%, -50%); }
       .nm-tl { grid-template-columns: 1fr; row-gap: 20px; }
-      .nm-tl::before { left: 7px; right: auto; top: 8px; bottom: 6px; width: 2px; height: auto; }
+      .nm-tl::before { left: 7px; right: auto; top: 8px; bottom: 6px; width: 3px; height: auto; }
       .nm-tl::after { display: none; }
       .nm-tl__item { padding: 0 0 0 30px; }
       .nm-tl__item::before { top: 2px; }
-      .nm-tl__era { font-size: 1rem; margin-bottom: 4px; }
+      .nm-tl__era { font-size: 1.08rem; margin-bottom: 4px; }
+      .nm-tl__pt { font-size: .84rem; }
     }
   </style>
 </head>
@@ -402,7 +403,7 @@
         <li><b>2010年代以降</b>：ノルウェーのジョー・ネスボ、デンマークのユッシ・エーズラ・オールスン、スウェーデンのラーシュ・ケプレルらの人気シリーズが次々と翻訳され、北欧ミステリは翻訳ミステリの一大ジャンルとして定着しました。</li>
       </ul>
       <figure class="nm-timeline">
-        <figcaption class="nm-timeline__cap">図｜北欧ミステリの歩み</figcaption>
+        <figcaption class="nm-timeline__cap">北欧ミステリの歩み</figcaption>
         <ol class="nm-tl">
           <li class="nm-tl__item"><span class="nm-tl__era">1960〜70年代</span><p class="nm-tl__pt"><span>マルティン・ベック</span><span>シリーズ</span></p><p class="nm-tl__pt"><span>北欧警察小説の</span><span>原点</span></p></li>
           <li class="nm-tl__item"><span class="nm-tl__era">1990年代</span><p class="nm-tl__pt"><span>刑事ヴァランダー</span><span>シリーズ</span></p><p class="nm-tl__pt"><span>ガラスの鍵賞</span><span>創設</span></p></li>
