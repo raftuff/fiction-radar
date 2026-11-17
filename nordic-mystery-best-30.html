@@ -44,7 +44,7 @@
     "image": "https://raftuff.github.io/fiction-radar/assets/images/nordic-mystery-ogp.jpg",
     "mainEntityOfPage": "https://raftuff.github.io/fiction-radar/nordic-mystery-best-30.html",
     "datePublished": "2026-11-16",
-    "dateModified": "2026-11-16",
+    "dateModified": "2026-11-17",
     "author": {
       "@type": "Organization",
       "name": "FICTION RADAR"
@@ -94,6 +94,34 @@
     .side-toc a:hover { color: var(--ink); }
     .side-toc a:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 1px; border-radius: 4px; }
     .side-toc a[aria-current="location"] { color: var(--accent); border-left-color: var(--accent); font-weight: 700; }
+    .side-toc__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .side-toc__close { display: none; }
+    .toc-dock { display: none; }
+    /* 1240px未満：下部の「目次」ボタン（現在の章名つき）と、同じ目次のボトムシート。iPhoneのセーフエリアに対応 */
+    @media (max-width: 1239px) {
+      .toc-dock { display: flex; justify-content: center; position: fixed; z-index: 45; left: 50%; transform: translateX(-50%);
+        width: min(440px, calc(100% - 24px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); pointer-events: none; transition: opacity .2s, visibility 0s; }
+      /* 表示時は visibility を即時に戻す（直後にボタンへフォーカスを戻せるように）。非表示時だけフェード後に隠す */
+      .toc-dock.is-hidden { opacity: 0; visibility: hidden; transition: opacity .2s, visibility 0s .2s; }
+      .toc-dock__btn { pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 44px; padding: 0 16px;
+        border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.97); box-shadow: 0 6px 18px rgba(60,45,30,.16);
+        font-family: var(--font-round); font-weight: 700; font-size: .86rem; color: var(--ink); cursor: pointer; }
+      .toc-dock__label { color: var(--accent-2); flex-shrink: 0; }
+      .toc-dock__cur { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-soft); font-weight: 500; }
+      .toc-dock__cur:empty { display: none; }
+      .toc-dock__cur::before { content: "｜"; color: var(--line); margin-right: 2px; }
+      .toc-dock__icon { flex-shrink: 0; width: 8px; height: 8px; border-right: 2px solid var(--accent-2); border-bottom: 2px solid var(--accent-2); transform: translateY(2px) rotate(-135deg); transition: transform .2s; }
+      .toc-dock.is-open .toc-dock__icon { transform: translateY(-2px) rotate(45deg); }
+      .toc-dock__btn:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+      .side-toc.is-open { display: block; position: fixed; z-index: 46; left: 50%; transform: translateX(-50%); width: min(440px, calc(100% - 24px));
+        bottom: calc(66px + env(safe-area-inset-bottom, 0px)); max-height: min(62vh, 460px); overflow-y: auto; overscroll-behavior: contain;
+        padding: 12px 16px 10px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 14px 36px rgba(60,45,30,.2); }
+      .side-toc.is-open .side-toc__close { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 999px;
+        border: 1px solid var(--line); background: #fff; font-family: var(--font-round); font-weight: 700; font-size: .8rem; color: var(--ink-soft); cursor: pointer; }
+      .side-toc.is-open .side-toc__close:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 1px; }
+      .side-toc.is-open a { font-size: .92rem; padding: 9px 0 9px 12px; color: var(--ink-soft); }
+      .side-toc.is-open a[aria-current="location"] { color: var(--accent); }
+    }
 
     .toc-card { background: var(--bg-soft); border: 1.5px solid var(--line); border-radius: 16px; padding: 18px 22px; margin: 0 0 36px; scroll-margin-top: 124px; }
     .toc-card summary { font-family: var(--font-round); font-weight: 900; font-size: 1.02rem; cursor: pointer; list-style: none; }
@@ -104,6 +132,9 @@
     .toc-list a { display: flex; gap: 10px; padding: 7px 6px; border-radius: 8px; color: var(--ink); font-weight: 700; font-size: .93rem; line-height: 1.5; }
     .toc-list a::before { counter-increment: toc; content: counter(toc, decimal-leading-zero); font-family: var(--font-round); color: var(--accent-2); flex-shrink: 0; }
     .toc-list a:hover { background: #f3ead9; color: var(--accent); }
+    .toc-list__sub { display: block; font-size: .76rem; font-weight: 500; color: #8a8378; margin-top: 1px; }
+    .toc-list a { flex-wrap: wrap; }
+    .toc-list a::before { align-self: flex-start; }
     .toc-list a:focus-visible, .nm-mood a:focus-visible, .nm-card a:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
 
     .art-content h2 { font-family: var(--font-round); font-weight: 900; font-size: 1.45rem; line-height: 1.4; margin: 52px 0 16px; padding-left: 15px; position: relative; scroll-margin-top: 124px; }
@@ -248,7 +279,7 @@
 
     .rel-card b { font-family: var(--font-round); }
     .rel-card span { display: block; font-size: .88rem; color: var(--ink-soft); margin-top: 4px; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .side-toc { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .side-toc, .toc-dock, .toc-dock__icon { transition: none; } }
 
     @media (max-width: 640px) {
       .art-wrap { padding: 18px 16px 44px; }
@@ -341,7 +372,7 @@
         <p>北欧ミステリの魅力は、緻密な犯罪捜査や重厚な人間ドラマだけではありません。雪に覆われた町、広大な森林、フィヨルド、荒涼とした海岸線。美しく、ときに厳しい自然を背景に事件が起こり、その土地ならではの歴史や文化、人々の暮らしが物語に深く関わってきます。</p>
         <p>日本から遠く離れた北欧の風景や社会を、事件の謎を追いながら知ることができる。そんな旅をするような読書体験も、北欧ミステリの大きな醍醐味です。ここでは歴史と国ごとの特徴をたどりながら、読書の入口になる30作品を紹介します。</p>
       </div>
-      <p class="art-hero__meta">公開：<time datetime="2026-11-16">2026年11月16日</time>｜最終更新：<time datetime="2026-11-16">2026年11月16日</time>｜選・文：FICTION RADAR</p>
+      <p class="art-hero__meta">公開：<time datetime="2026-11-16">2026年11月16日</time>｜最終更新：<time datetime="2026-11-17">2026年11月17日</time>｜選・文：FICTION RADAR</p>
       <ul class="nm-facts">
         <li><b>30</b> 作品＋次点10作品</li>
         <li>北欧<b>5</b>か国</li>
@@ -356,8 +387,8 @@
         <summary>この記事の目次</summary>
         <ol class="toc-list">
           <li><a href="#about">北欧ミステリとは？ その魅力と歴史</a></li>
-          <li><a href="#first5">初めて読むなら、この5作品</a></li>
-          <li><a href="#best25">北欧ミステリの傑作25選</a></li>
+          <li><a href="#first5">初めて読むなら、この5作品<span class="toc-list__sub">30選のうち入門の5作品</span></a></li>
+          <li><a href="#best25">北欧ミステリの傑作25選<span class="toc-list__sub">30選の残り25作品を国別に</span></a></li>
           <li><a href="#countries">北欧5か国のミステリはどう違う？</a></li>
           <li><a href="#glass-key">ガラスの鍵賞とは？</a></li>
           <li><a href="#series">人気シリーズはどこから読む？</a></li>
@@ -413,7 +444,7 @@
       </figure>
 
       <h2 id="first5">初めて読むなら、この5作品</h2>
-      <p>北欧ミステリにまだなじみがない人のために、読みやすさ、話題性、シリーズへの入りやすさを基準に5作品を選びました。国も作風もばらばらなので、気になる一冊から手に取ってみてください。</p>
+      <p>北欧ミステリにまだなじみがない人のために、読みやすさ、話題性、シリーズへの入りやすさを基準に5作品を選びました。国も作風もばらばらなので、気になる一冊から手に取ってみてください。後半の「北欧ミステリの傑作25選」と合わせて、全30作品を紹介します。</p>
       <div class="nm-list-cards">
         <article class="nm-card nm-card--big" id="n-faceless-killers">
           <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488209025" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/20902.jpg" alt="『殺人者の顔』の書影（ヘニング・マンケル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
@@ -1114,13 +1145,13 @@
     </div><!-- /.art-content -->
   </main>
 
-  <!-- 右側の追従目次（幅1240px以上で表示。それ未満は記事冒頭の折りたたみ目次） -->
+  <!-- 追従目次：幅1240px以上は本文の右側に固定。それ未満は下部の「目次」ボタンで同じ目次をシート表示 -->
   <nav class="side-toc is-hidden" id="side-toc" aria-label="目次（固定）" aria-hidden="true">
-    <p class="side-toc__title">目次</p>
+    <div class="side-toc__head"><p class="side-toc__title">目次</p><button type="button" class="side-toc__close" id="toc-dock-close" aria-label="目次を閉じる">閉じる<span aria-hidden="true"> ✕</span></button></div>
     <ol>
       <li><a href="#about">北欧ミステリとは</a></li>
-      <li><a href="#first5">初めて読むなら5作品</a></li>
-      <li><a href="#best25">傑作25選</a></li>
+      <li><a href="#first5">30選｜入門の5作品</a></li>
+      <li><a href="#best25">30選｜国別の25作品</a></li>
       <li><a href="#countries">北欧5か国の違い</a></li>
       <li><a href="#glass-key">ガラスの鍵賞とは</a></li>
       <li><a href="#series">人気シリーズの読み順</a></li>
@@ -1129,25 +1160,64 @@
       <li><a href="#summary">まとめ</a></li>
     </ol>
   </nav>
+  <div class="toc-dock is-hidden" id="toc-dock">
+    <button type="button" class="toc-dock__btn" id="toc-dock-btn" aria-expanded="false" aria-controls="side-toc">
+      <span class="toc-dock__label">目次</span><span class="toc-dock__cur" id="toc-dock-cur"></span><span class="toc-dock__icon" aria-hidden="true"></span>
+    </button>
+  </div>
   <script>
     (function () {
       var toc = document.getElementById('toc');
       var side = document.getElementById('side-toc');
-      if (!toc || !side) return;
+      var dock = document.getElementById('toc-dock');
+      var btn = document.getElementById('toc-dock-btn');
+      var cur = document.getElementById('toc-dock-cur');
+      var closeBtn = document.getElementById('toc-dock-close');
+      if (!toc || !side || !dock || !btn) return;
+      var wideMq = window.matchMedia('(min-width: 1240px)');
       var links = Array.prototype.slice.call(side.querySelectorAll('a'));
       var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
-      // 冒頭の目次を通過したら表示。現在の章＝見出しが固定ヘッダーの下（140px）を過ぎた最後の章
+      var open = false;
+      function setOpen(v, focusBtn) {
+        open = v;
+        side.classList.toggle('is-open', v);
+        dock.classList.toggle('is-open', v);
+        btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+        btn.setAttribute('aria-label', v ? '目次を閉じる' : '目次を開く');
+        if (!v && focusBtn) { btn.focus({ preventScroll: true }); }
+        update();
+        if (v) { (side.querySelector('[aria-current]') || links[0]).focus({ preventScroll: true }); }
+      }
+      // PC：冒頭の目次を通過したら右側に表示。スマホ等：冒頭の目次を通過したら下部ボタンを表示（フッターが見えたら隠す）
+      // 現在の章＝見出しが固定ヘッダーの下（140px）を過ぎた最後の章
       function update() {
+        var wide = wideMq.matches;
+        if (wide && open) { open = false; side.classList.remove('is-open'); dock.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); }
         var passed = toc.getBoundingClientRect().bottom < 0;
-        side.classList.toggle('is-hidden', !passed);
-        side.setAttribute('aria-hidden', passed ? 'false' : 'true');
-        links.forEach(function (a) { if (passed) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
+        var visible = wide ? passed : open;
+        side.classList.toggle('is-hidden', !visible);
+        side.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        links.forEach(function (a) { if (visible) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
         var line = 140, current = -1;
         targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= line) current = i; });
         links.forEach(function (a, i) {
           if (i === current) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
         });
+        cur.textContent = current >= 0 ? links[current].textContent : '';
+        var footer = document.querySelector('.footer'); // このスクリプトはフッターより前にあるため、毎回取得する
+        var nearFooter = footer && footer.getBoundingClientRect().top < window.innerHeight;
+        var showDock = !wide && (open || (passed && !nearFooter));
+        dock.classList.toggle('is-hidden', !showDock);
+        btn.tabIndex = showDock ? 0 : -1;
       }
+      btn.addEventListener('click', function () { setOpen(!open); });
+      if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false, true); });
+      // 目次の項目を押したら、通常のページ内リンクで移動したあとシートを閉じる
+      links.forEach(function (a) { a.addEventListener('click', function () { if (open) setOpen(false); }); });
+      document.addEventListener('keydown', function (e) { if (open && e.key === 'Escape') setOpen(false, true); });
+      document.addEventListener('click', function (e) {
+        if (open && !side.contains(e.target) && !dock.contains(e.target)) setOpen(false);
+      });
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       update();
