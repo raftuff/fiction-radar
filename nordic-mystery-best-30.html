@@ -57,6 +57,7 @@
   </script>
   <!-- 記事専用スタイル（このページだけ）。生成元：fiction-radar/plans/nordic-generator/ -->
   <style>
+    :root { --nocover-bg: linear-gradient(160deg, #3b5a66 0%, #233a44 100%); }
     .art-wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 56px; }
     .art-content { max-width: 800px; margin: 0 auto; }
     .art-content > p, .art-content > section > p { font-size: 16.5px; line-height: 1.95; margin: 0 0 1.1em; }
@@ -151,7 +152,16 @@
     .nm-card--big { grid-template-columns: 116px minmax(0, 1fr); }
     .nm-card__cover { display: block; align-self: start; }
     .nm-card__cover img { width: 100%; height: auto; display: block; border-radius: 5px; box-shadow: 0 4px 12px rgba(60,45,30,.16); background: #f0ece3; }
-    .no-cover { display: flex; width: 100%; aspect-ratio: 5 / 7; border-radius: 5px; background: #efe7d7; border: 1px dashed var(--line); align-items: center; justify-content: center; text-align: center; font-size: .68rem; color: var(--ink-soft); line-height: 1.5; }
+    /* 書影がない作品：書名と著者名を入れた表紙風の枠（gen.py の text_cover）。文字は枠の幅に合わせて伸縮（cqw） */
+    .no-cover { container-type: inline-size; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 100%; aspect-ratio: 5 / 7; box-sizing: border-box; padding: 14% 12% 18%; border-radius: 5px; overflow: hidden;
+      background: var(--nocover-bg); color: #f6efe2; text-align: center; box-shadow: 0 4px 12px rgba(60,45,30,.16); font-size: .7rem; line-height: 1.4; }
+    .no-cover::before { content: ""; position: absolute; inset: 6%; border: 1px solid rgba(246,239,226,.32); border-radius: 3px; pointer-events: none; }
+    .no-cover__title { font-family: var(--font-round); font-weight: 900; font-size: 12px; font-size: 11cqw; line-height: 1.35; word-break: auto-phrase; overflow-wrap: anywhere;
+      display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .no-cover__rule { display: block; width: 22%; height: 2px; border-radius: 1px; background: var(--accent); margin: 10px 0 8px; margin: 9cqw 0 7cqw; }
+    .no-cover__author { font-size: 9px; font-size: 7.5cqw; line-height: 1.4; opacity: .88; overflow-wrap: anywhere; }
+    .no-cover__note { position: absolute; left: 0; right: 0; bottom: 9%; font-size: 7px; font-size: 6cqw; letter-spacing: .08em; opacity: .55; }
     .nm-card__body { min-width: 0; }
     .nm-card__meta { font-size: .76rem; font-weight: 700; color: var(--accent-2); margin: 0 0 2px; }
     .nm-card__title { font-family: var(--font-round); font-weight: 900; font-size: 1.15rem; line-height: 1.45; margin: 0 0 4px; }
@@ -300,7 +310,6 @@
       .nm-card:first-child, .nm-country-img + .nm-card { border-top: 1px solid var(--line); }
       .nm-card__cover { width: 172px; margin: 0 auto 16px; }
       .nm-card--big .nm-card__cover { width: 184px; }
-      .nm-card__cover .no-cover { font-size: .8rem; }
       /* SPの表示順：キャッチ → 作品名 → 書影 → 著者｜国 → タグ → 以下は従来どおり（HTMLの順序はPCのまま、CSSのorderで並べ替え） */
       .nm-card, .nm-card--big { display: flex; flex-direction: column; }
       .nm-card__body { display: contents; }
@@ -589,7 +598,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-isprinsessan">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">氷姫 エリカ&amp;パトリック事件簿</span><span class="no-cover__rule"></span><span class="no-cover__author">カミラ・レックバリ</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カミラ・レックバリ</span></p>
             <h3 class="nm-card__title">『氷姫 エリカ&amp;<br class="sp-br" />パトリック事件簿』</h3>
@@ -604,7 +613,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-solstorm">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">オーロラの向こう側</span><span class="no-cover__rule"></span><span class="no-cover__author">オーサ・ラーソン</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">オーサ・ラーソン</span></p>
             <h3 class="nm-card__title">『オーロラの向こう側』</h3>
@@ -651,7 +660,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-hypnotisoren">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">催眠</span><span class="no-cover__rule"></span><span class="no-cover__author">ラーシュ・ケプレル</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ラーシュ・ケプレル</span></p>
             <h3 class="nm-card__title">『催眠』</h3>
@@ -717,7 +726,7 @@
       <h3 class="nm-country" id="c-denmark"><svg class="nm-flag" viewBox="0 0 37 28" width="18.5" height="14" aria-hidden="true" focusable="false"><rect width="37" height="28" fill="#c8102e"/><rect x="12" y="0" width="4" height="28" fill="#fff"/><rect x="0" y="12" width="37" height="4" fill="#fff"/></svg>デンマーク<span>（4作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-denmark.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-smilla">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">スミラの雪の感覚</span><span class="no-cover__rule"></span><span class="no-cover__author">ペーター・ホゥ</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ペーター・ホゥ</span></p>
             <h3 class="nm-card__title">『スミラの雪の感覚』</h3>
@@ -783,7 +792,7 @@
       <h3 class="nm-country" id="c-norway"><svg class="nm-flag" viewBox="0 0 22 16" width="19.2" height="14" aria-hidden="true" focusable="false"><rect width="22" height="16" fill="#ba0c2f"/><rect x="6" y="0" width="4" height="16" fill="#fff"/><rect x="0" y="6" width="22" height="4" fill="#fff"/><rect x="7" y="0" width="2" height="16" fill="#00205b"/><rect x="0" y="7" width="22" height="2" fill="#00205b"/></svg>ノルウェー<span>（5作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-norway.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-flaggermusmannen">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">ザ・バット 神話の殺人</span><span class="no-cover__rule"></span><span class="no-cover__author">ジョー・ネスボ</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ジョー・ネスボ</span></p>
             <h3 class="nm-card__title">『ザ・バット 神話の殺人』</h3>
@@ -798,7 +807,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-snomannen">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">スノーマン</span><span class="no-cover__rule"></span><span class="no-cover__author">ジョー・ネスボ</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ジョー・ネスボ</span></p>
             <h3 class="nm-card__title">『スノーマン』</h3>
@@ -845,7 +854,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-im-traveling-alone">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">オスロ警察殺人捜査課特別班 アイム・トラベリング・アローン</span><span class="no-cover__rule"></span><span class="no-cover__author">サムエル・ビョルク</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">サムエル・ビョルク</span></p>
             <h3 class="nm-card__title">『オスロ警察殺人捜査課特別班 アイム・トラベリング・アローン』</h3>
@@ -895,7 +904,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-thridja-taknid">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">魔女遊戯</span><span class="no-cover__rule"></span><span class="no-cover__author">イルサ・シグルザルドッティル</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">イルサ・シグルザルドッティル</span></p>
             <h3 class="nm-card__title">『魔女遊戯』</h3>
@@ -961,7 +970,7 @@
           </div>
         </article>
         <article class="nm-card" id="n-tappajan-nakoinen-mies">
-          <span class="nm-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">殺人者の顔をした男</span><span class="no-cover__rule"></span><span class="no-cover__author">マッティ・ロンカ</span><span class="no-cover__note">書影準備中</span></span></span>
           <div class="nm-card__body">
             <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">マッティ・ロンカ</span></p>
             <h3 class="nm-card__title">『殺人者の顔をした男』</h3>

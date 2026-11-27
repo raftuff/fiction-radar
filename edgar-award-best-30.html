@@ -57,6 +57,7 @@
   </script>
   <!-- 記事専用スタイル（このページだけ）。生成元：fiction-radar/plans/edgar-generator/ -->
   <style>
+    :root { --nocover-bg: linear-gradient(160deg, #2b3a52 0%, #16233a 100%); }
     .art-wrap { max-width: 860px; margin: 0 auto; padding: 24px 20px 56px; }
     .art-content { max-width: 800px; margin: 0 auto; }
     .art-content > p, .art-content > section > p { font-size: 16.5px; line-height: 1.95; margin: 0 0 1.1em; }
@@ -158,7 +159,16 @@
     .nm-card--big { grid-template-columns: 116px minmax(0, 1fr); }
     .nm-card__cover { display: block; align-self: start; }
     .nm-card__cover img { width: 100%; height: auto; display: block; border-radius: 5px; box-shadow: 0 4px 12px rgba(60,45,30,.16); background: #f0ece3; }
-    .no-cover { display: flex; width: 100%; aspect-ratio: 5 / 7; border-radius: 5px; background: #efe7d7; border: 1px dashed var(--line); align-items: center; justify-content: center; text-align: center; font-size: .68rem; color: var(--ink-soft); line-height: 1.5; }
+    /* 書影がない作品：書名と著者名を入れた表紙風の枠（gen.py の text_cover）。文字は枠の幅に合わせて伸縮（cqw） */
+    .no-cover { container-type: inline-size; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 100%; aspect-ratio: 5 / 7; box-sizing: border-box; padding: 14% 12% 18%; border-radius: 5px; overflow: hidden;
+      background: var(--nocover-bg); color: #f6efe2; text-align: center; box-shadow: 0 4px 12px rgba(60,45,30,.16); font-size: .7rem; line-height: 1.4; }
+    .no-cover::before { content: ""; position: absolute; inset: 6%; border: 1px solid rgba(246,239,226,.32); border-radius: 3px; pointer-events: none; }
+    .no-cover__title { font-family: var(--font-round); font-weight: 900; font-size: 12px; font-size: 11cqw; line-height: 1.35; word-break: auto-phrase; overflow-wrap: anywhere;
+      display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .no-cover__rule { display: block; width: 22%; height: 2px; border-radius: 1px; background: var(--accent); margin: 10px 0 8px; margin: 9cqw 0 7cqw; }
+    .no-cover__author { font-size: 9px; font-size: 7.5cqw; line-height: 1.4; opacity: .88; overflow-wrap: anywhere; }
+    .no-cover__note { position: absolute; left: 0; right: 0; bottom: 9%; font-size: 7px; font-size: 6cqw; letter-spacing: .08em; opacity: .55; }
     .nm-card__body { min-width: 0; }
     .nm-card__meta { font-size: .76rem; font-weight: 700; color: var(--accent-2); margin: 0 0 2px; }
     .nm-card__title { font-family: var(--font-round); font-weight: 900; font-size: 1.15rem; line-height: 1.45; margin: 0 0 4px; }
@@ -290,7 +300,6 @@
       .nm-card:first-child { border-top: 1px solid var(--line); }
       .nm-card__cover { width: 172px; margin: 0 auto 16px; }
       .nm-card--big .nm-card__cover { width: 184px; }
-      .nm-card__cover .no-cover { font-size: .8rem; }
       /* SPの表示順：キャッチ → 作品名 → 書影 → 著者｜国 → タグ → 以下は従来どおり（HTMLの順序はPCのまま、CSSのorderで並べ替え） */
       .nm-card, .nm-card--big { display: flex; flex-direction: column; }
       .nm-card__body { display: contents; }
@@ -507,7 +516,7 @@
         </article>
         <article class="ed-card" id="e-janissary-tree">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">イスタンブールの群狼</span><span class="no-cover__rule"></span><span class="no-cover__author">ジェイソン・グッドウィン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『イスタンブールの群狼』</h4>
               <p class="ed-card__meta">ジェイソン・グッドウィン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2007年受賞</span></p>
@@ -589,7 +598,7 @@
         </article>
         <article class="ed-card" id="e-dark-adapted-eye">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死との抱擁</span><span class="no-cover__rule"></span><span class="no-cover__author">バーバラ・ヴァイン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『死との抱擁』</h4>
               <p class="ed-card__meta">バーバラ・ヴァイン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1987年受賞</span></p>
@@ -629,7 +638,7 @@
         </article>
         <article class="ed-card" id="e-notes-on-an-execution">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死刑執行のノート</span><span class="no-cover__rule"></span><span class="no-cover__author">ダニヤ・クカフカ</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『死刑執行のノート』</h4>
               <p class="ed-card__meta">ダニヤ・クカフカ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2023年受賞</span></p>
@@ -711,7 +720,7 @@
         </article>
         <article class="ed-card" id="e-resurrection-men">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">甦る男</span><span class="no-cover__rule"></span><span class="no-cover__author">イアン・ランキン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『甦る男』</h4>
               <p class="ed-card__meta">イアン・ランキン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2004年受賞</span></p>
@@ -856,7 +865,7 @@
       <h3 class="ed-theme" id="t-society">土地や社会の闇を読みたい<span>（6作品）</span></h3>
         <article class="ed-card" id="e-dance-hall-of-the-dead">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死者の舞踏場</span><span class="no-cover__rule"></span><span class="no-cover__author">トニイ・ヒラーマン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『死者の舞踏場』</h4>
               <p class="ed-card__meta">トニイ・ヒラーマン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1974年受賞</span></p>
@@ -876,7 +885,7 @@
         </article>
         <article class="ed-card" id="e-black-cherry-blues">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">ブラック・チェリー・ブルース</span><span class="no-cover__rule"></span><span class="no-cover__author">ジェイムズ・リー・バーク</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ブラック・チェリー・ブルース』</h4>
               <p class="ed-card__meta">ジェイムズ・リー・バーク<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1990年受賞</span></p>
@@ -896,7 +905,7 @@
         </article>
         <article class="ed-card" id="e-bottoms">
           <div class="ed-card__top">
-            <span class="ed-card__cover"><span class="no-cover">書影<br>準備中</span></span>
+            <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">ボトムズ</span><span class="no-cover__rule"></span><span class="no-cover__author">ジョー・R・ランズデール</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ボトムズ』</h4>
               <p class="ed-card__meta">ジョー・R・ランズデール<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2001年受賞</span></p>
@@ -1068,7 +1077,7 @@
           <li><a class="ed-mini__card" href="#e-old-bones"><span class="ed-mini__year">1988</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610894.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『古い骨』</span><span class="ed-mini__author">アーロン・エルキンズ</span><span class="ed-mini__label">本格謎解き</span></a></li>
           <li><a class="ed-mini__card" href="#e-sculptress"><span class="ed-mini__year">1994</span><span class="ed-mini__cover"><img src="https://www.tsogen.co.jp/img/cover_image_l/18714.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『女彫刻家』</span><span class="ed-mini__author">ミネット・ウォルターズ</span><span class="ed-mini__label">英国心理ミステリ</span></a></li>
           <li><a class="ed-mini__card" href="#e-bluebird-bluebird"><span class="ed-mini__year">2018</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612615.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『ブルーバード、ブルーバード』</span><span class="ed-mini__author">アッティカ・ロック</span><span class="ed-mini__label">社会派犯罪小説</span></a></li>
-          <li><a class="ed-mini__card" href="#e-notes-on-an-execution"><span class="ed-mini__year">2023</span><span class="ed-mini__cover"><span class="no-cover">書影<br>準備中</span></span><span class="ed-mini__title">『死刑執行のノート』</span><span class="ed-mini__author">ダニヤ・クカフカ</span><span class="ed-mini__label">複数視点の犯罪小説</span></a></li>
+          <li><a class="ed-mini__card" href="#e-notes-on-an-execution"><span class="ed-mini__year">2023</span><span class="ed-mini__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死刑執行のノート</span><span class="no-cover__rule"></span><span class="no-cover__author">ダニヤ・クカフカ</span><span class="no-cover__note">書影準備中</span></span></span><span class="ed-mini__title">『死刑執行のノート』</span><span class="ed-mini__author">ダニヤ・クカフカ</span><span class="ed-mini__label">複数視点の犯罪小説</span></a></li>
         </ol>
       </section>
       <p>1954年の第1回から2026年までの受賞作を、新しい順にすべて掲載しました（全73作）。邦題が確認できた作品は72作です。おすすめ30選で紹介した作品は、邦題から紹介へ移動できます。</p>
