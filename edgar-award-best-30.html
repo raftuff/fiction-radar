@@ -263,12 +263,15 @@
     .ed-card__cover img { display: block; width: 100%; height: auto; border-radius: 5px; box-shadow: 0 4px 12px rgba(60,45,30,.16); background: #f0ece3; }
     .ed-card__head { min-width: 0; flex: 1; padding-top: 4px; }
     .ed-card__title { font-family: var(--font-round); font-weight: 900; font-size: 1.3rem; line-height: 1.45; margin: 0 0 6px; overflow-wrap: anywhere; }
-    .ed-card__meta { font-size: .86rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 8px; overflow-wrap: anywhere; }
+    .ed-card__meta { font-size: .86rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 10px; overflow-wrap: anywhere; }
     .ed-card__sep { color: var(--line); margin: 0 4px; }
     .ed-card__year { color: var(--accent-2); white-space: nowrap; }
-    .ed-card__catch { font-size: .95rem; font-weight: 700; color: var(--ink); margin: 0 0 10px; line-height: 1.6; }
+    .ed-card__catch { font-size: 1.05rem; font-weight: 800; color: #4a4540; line-height: 1.5; margin: 0 0 10px; }
+    .ed-card__author { color: #8a8378; word-break: keep-all; overflow-wrap: anywhere; }
     .ed-card .nm-tags { margin: 0; }
-    .ed-card .nm-card__label { margin-right: 8px; }
+    .ed-card .nm-card__label { display: table; margin: 0 0 1px; } /* ラベルは独立した行に（北欧記事と同じ） */
+    .ed-card .nm-card__text, .ed-card .nm-card__why { max-inline-size: 40ic; text-align: start; }
+    .ed-card .ed-card__bottom { font-size: 17px; max-inline-size: 40ic; } /* 書誌・リンクも本文と同じ幅に */
     /* テーマ見出し */
     .ed-theme { font-family: var(--font-round); font-weight: 900; font-size: 1.18rem; margin: 46px 0 6px; padding: 0 0 8px; border-bottom: 1px solid var(--accent-3); scroll-margin-top: 124px; }
     .ed-theme span { font-size: .8rem; color: var(--ink-soft); margin-left: 6px; }
@@ -333,8 +336,9 @@
       .ed-card__cover { flex-basis: clamp(105px, 32vw, 125px); }
       .ed-card__head { padding-top: 0; }
       .ed-card__title { font-size: 1.12rem; line-height: 1.4; margin-bottom: 4px; word-break: auto-phrase; }
-      .ed-card__meta { font-size: .78rem; margin-bottom: 6px; }
-      .ed-card__catch { font-size: .86rem; line-height: 1.55; margin-bottom: 8px; }
+      .ed-card__meta { font-size: .78rem; margin-bottom: 8px; }
+      .ed-card__catch { font-size: .95rem; margin-bottom: 8px; }
+      .ed-card .ed-card__bottom { font-size: 1rem; }
       .ed-card .nm-tags { gap: 4px; }
       .ed-card .nm-tag { font-size: .7rem; padding: 2px 8px; }
       .ed-chips a { min-height: 40px; }
@@ -455,12 +459,12 @@
       <div class="nm-list-cards">
       <h3 class="ed-theme" id="t-puzzle">謎を解く面白さを味わいたい<span>（5作品）</span></h3>
         <article class="ed-card" id="e-old-bones">
+          <p class="ed-card__catch">骨が語る、館に埋もれた過去</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610894/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610894.jpg" alt="『古い骨』の書影（アーロン・エルキンズ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『古い骨』</h4>
-              <p class="ed-card__meta">アーロン・エルキンズ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1988年受賞</span></p>
-              <p class="ed-card__catch">骨が語る、館に埋もれた過去</p>
+              <p class="ed-card__meta"><span class="ed-card__author">アーロン・<wbr>エルキンズ</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1988年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">本格謎解き</span><span class="nm-tag">人類学者探偵</span><span class="nm-tag">フランス</span></div>
             </div>
           </div>
@@ -475,12 +479,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-sculptress">
+          <p class="ed-card__catch">罪を認めた女に、残る謎</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488187149/" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/18714.jpg" alt="『女彫刻家』の書影（ミネット・ウォルターズ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『女彫刻家』</h4>
-              <p class="ed-card__meta">ミネット・ウォルターズ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1994年受賞</span></p>
-              <p class="ed-card__catch">罪を認めた女に、残る謎</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ミネット・<wbr>ウォルターズ</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1994年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">心理ミステリ</span><span class="nm-tag">英国</span><span class="nm-tag">獄中の対話</span></div>
             </div>
           </div>
@@ -495,12 +499,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-winter-and-night">
+          <p class="ed-card__catch">フットボールの町が隠すもの</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488153090/" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/15309.jpg" alt="『冬そして夜』の書影（S・J・ローザン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『冬そして夜』</h4>
-              <p class="ed-card__meta">S・J・ローザン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2003年受賞</span></p>
-              <p class="ed-card__catch">フットボールの町が隠すもの</p>
+              <p class="ed-card__meta"><span class="ed-card__author">S・<wbr>J・<wbr>ローザン</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2003年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">私立探偵</span><span class="nm-tag">ニューヨーク</span><span class="nm-tag">シリーズ</span></div>
             </div>
           </div>
@@ -515,12 +519,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-janissary-tree">
+          <p class="ed-card__catch">19世紀の帝都に挑む宦官探偵</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">イスタンブールの群狼</span><span class="no-cover__rule"></span><span class="no-cover__author">ジェイソン・グッドウィン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『イスタンブールの群狼』</h4>
-              <p class="ed-card__meta">ジェイソン・グッドウィン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2007年受賞</span></p>
-              <p class="ed-card__catch">19世紀の帝都に挑む宦官探偵</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジェイソン・<wbr>グッドウィン</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2007年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">歴史ミステリ</span><span class="nm-tag">オスマン帝国</span><span class="nm-tag">シリーズ第1作</span></div>
             </div>
           </div>
@@ -535,12 +539,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-stranger-diaries">
+          <p class="ed-card__catch">怪奇小説をなぞる殺人</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488170035/" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/17003.jpg" alt="『見知らぬ人』の書影（エリー・グリフィス）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『見知らぬ人』</h4>
-              <p class="ed-card__meta">エリー・グリフィス<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2020年受賞</span></p>
-              <p class="ed-card__catch">怪奇小説をなぞる殺人</p>
+              <p class="ed-card__meta"><span class="ed-card__author">エリー・<wbr>グリフィス</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2020年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">学園ミステリ</span><span class="nm-tag">ゴシック</span><span class="nm-tag">複数視点</span></div>
             </div>
           </div>
@@ -557,12 +561,12 @@
 
       <h3 class="ed-theme" id="t-psycho">心理の奥に潜りたい<span>（5作品）</span></h3>
         <article class="ed-card" id="e-beast-in-view">
+          <p class="ed-card__catch">電話の声が心を追いつめる</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><img src="https://www.tsogen.co.jp/img/cover_image_l/24706.jpg" alt="『狙った獣』の書影（マーガレット・ミラー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『狙った獣』</h4>
-              <p class="ed-card__meta">マーガレット・ミラー<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1956年受賞</span></p>
-              <p class="ed-card__catch">電話の声が心を追いつめる</p>
+              <p class="ed-card__meta"><span class="ed-card__author">マーガレット・<wbr>ミラー</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1956年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">古典</span><span class="nm-tag">ロサンゼルス</span></div>
             </div>
           </div>
@@ -577,12 +581,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-hours-before-dawn">
+          <p class="ed-card__catch">眠れぬ母と、謎めいた下宿人</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><img src="https://www.tsogen.co.jp/img/cover_image_l/27602.jpg" alt="『夜明け前の時』の書影（シーリア・フレムリン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『夜明け前の時』</h4>
-              <p class="ed-card__meta">シーリア・フレムリン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1960年受賞</span></p>
-              <p class="ed-card__catch">眠れぬ母と、謎めいた下宿人</p>
+              <p class="ed-card__meta"><span class="ed-card__author">シーリア・<wbr>フレムリン</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1960年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">家庭</span><span class="nm-tag">ロンドン郊外</span></div>
             </div>
           </div>
@@ -597,12 +601,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-dark-adapted-eye">
+          <p class="ed-card__catch">処刑された叔母と一族の記憶</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死との抱擁</span><span class="no-cover__rule"></span><span class="no-cover__author">バーバラ・ヴァイン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『死との抱擁』</h4>
-              <p class="ed-card__meta">バーバラ・ヴァイン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1987年受賞</span></p>
-              <p class="ed-card__catch">処刑された叔母と一族の記憶</p>
+              <p class="ed-card__meta"><span class="ed-card__author">バーバラ・<wbr>ヴァイン</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1987年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">心理ミステリ</span><span class="nm-tag">英国</span><span class="nm-tag">家族の秘密</span></div>
             </div>
           </div>
@@ -617,12 +621,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-chatham-school">
+          <p class="ed-card__catch">老弁護士が語る、ある夏の悲劇</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000614269/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/614269.jpg" alt="『緋色の記憶』の書影（トマス・H・クック）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『緋色の記憶』</h4>
-              <p class="ed-card__meta">トマス・H・クック<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1997年受賞</span></p>
-              <p class="ed-card__catch">老弁護士が語る、ある夏の悲劇</p>
+              <p class="ed-card__meta"><span class="ed-card__author">トマス・<wbr>H・<wbr>クック</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1997年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">回想ミステリ</span><span class="nm-tag">ニューイングランド</span><span class="nm-tag">文学性</span></div>
             </div>
           </div>
@@ -637,12 +641,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-notes-on-an-execution">
+          <p class="ed-card__catch">処刑までの12時間と女たちの視点</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死刑執行のノート</span><span class="no-cover__rule"></span><span class="no-cover__author">ダニヤ・クカフカ</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『死刑執行のノート』</h4>
-              <p class="ed-card__meta">ダニヤ・クカフカ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2023年受賞</span></p>
-              <p class="ed-card__catch">処刑までの12時間と女たちの視点</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ダニヤ・<wbr>クカフカ</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2023年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">複数視点</span><span class="nm-tag">現代</span></div>
             </div>
           </div>
@@ -659,12 +663,12 @@
 
       <h3 class="ed-theme" id="t-detective">探偵や刑事の仕事を追いたい<span>（5作品）</span></h3>
         <article class="ed-card" id="e-long-goodbye">
+          <p class="ed-card__catch">マーロウと、ひとりの友の物語</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610290/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610290.jpg" alt="『長いお別れ』の書影（レイモンド・チャンドラー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『長いお別れ』</h4>
-              <p class="ed-card__meta">レイモンド・チャンドラー<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1955年受賞</span></p>
-              <p class="ed-card__catch">マーロウと、ひとりの友の物語</p>
+              <p class="ed-card__meta"><span class="ed-card__author">レイモンド・<wbr>チャンドラー</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1955年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">ハードボイルド</span><span class="nm-tag">私立探偵</span><span class="nm-tag">古典</span></div>
             </div>
           </div>
@@ -679,12 +683,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-laughing-policeman">
+          <p class="ed-card__catch">バス大量殺人と地道な捜査</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.kadokawa.co.jp/product/321301000046/" target="_blank" rel="noopener"><img src="https://cdn.kdkw.jp/cover_500/321301/321301000046.webp" alt="『笑う警官』の書影（マイ・シューヴァル＆ペール・ヴァールー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『笑う警官』</h4>
-              <p class="ed-card__meta">マイ・シューヴァル＆ペール・ヴァールー<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1971年受賞</span></p>
-              <p class="ed-card__catch">バス大量殺人と地道な捜査</p>
+              <p class="ed-card__meta"><span class="ed-card__author">マイ・<wbr>シューヴァル＆<wbr>ペール・<wbr>ヴァールー</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1971年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">スウェーデン</span><span class="nm-tag">シリーズ</span></div>
             </div>
           </div>
@@ -699,12 +703,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-promised-land">
+          <p class="ed-card__catch">スペンサー、夫婦の行き違いに挑む</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000051003/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/51003.jpg" alt="『約束の地』の書影（ロバート・B・パーカー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『約束の地』</h4>
-              <p class="ed-card__meta">ロバート・B・パーカー<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1977年受賞</span></p>
-              <p class="ed-card__catch">スペンサー、夫婦の行き違いに挑む</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ロバート・<wbr>B・<wbr>パーカー</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1977年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">私立探偵</span><span class="nm-tag">ボストン</span><span class="nm-tag">シリーズ</span></div>
             </div>
           </div>
@@ -719,12 +723,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-resurrection-men">
+          <p class="ed-card__catch">崖っぷちのリーバス、再研修へ</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">甦る男</span><span class="no-cover__rule"></span><span class="no-cover__author">イアン・ランキン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『甦る男』</h4>
-              <p class="ed-card__meta">イアン・ランキン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2004年受賞</span></p>
-              <p class="ed-card__catch">崖っぷちのリーバス、再研修へ</p>
+              <p class="ed-card__meta"><span class="ed-card__author">イアン・<wbr>ランキン</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2004年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">エディンバラ</span><span class="nm-tag">シリーズ</span></div>
             </div>
           </div>
@@ -739,12 +743,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-in-crowd">
+          <p class="ed-card__catch">上流階級の闇に迫る警部</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000614954/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/614954.jpg" alt="『果てしない残響』の書影（シャーロット・ヴァッセル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『果てしない残響』</h4>
-              <p class="ed-card__meta">シャーロット・ヴァッセル<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2025年受賞</span></p>
-              <p class="ed-card__catch">上流階級の闇に迫る警部</p>
+              <p class="ed-card__meta"><span class="ed-card__author">シャーロット・<wbr>ヴァッセル</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2025年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">ロンドン</span><span class="nm-tag">最新受賞作</span></div>
             </div>
           </div>
@@ -761,12 +765,12 @@
 
       <h3 class="ed-theme" id="t-thrill">緊張感で一気に読みたい<span>（5作品）</span></h3>
         <article class="ed-card" id="e-spy-cold">
+          <p class="ed-card__catch">ベルリンの壁をはさむ諜報戦</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610396/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610396.jpg" alt="『寒い国から帰ってきたスパイ』の書影（ジョン・ル・カレ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『寒い国から帰ってきたスパイ』</h4>
-              <p class="ed-card__meta">ジョン・ル・カレ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1965年受賞</span></p>
-              <p class="ed-card__catch">ベルリンの壁をはさむ諜報戦</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジョン・<wbr>ル・<wbr>カレ</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1965年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">スパイ小説</span><span class="nm-tag">冷戦</span><span class="nm-tag">古典</span></div>
             </div>
           </div>
@@ -781,12 +785,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-day-of-the-jackal">
+          <p class="ed-card__catch">大統領暗殺計画と追跡劇</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.kadokawa.co.jp/product/322207000620/" target="_blank" rel="noopener"><img src="https://cdn.kdkw.jp/cover_500/322207/322207000620.webp" alt="『ジャッカルの日』の書影（フレデリック・フォーサイス）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ジャッカルの日』</h4>
-              <p class="ed-card__meta">フレデリック・フォーサイス<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1972年受賞</span></p>
-              <p class="ed-card__catch">大統領暗殺計画と追跡劇</p>
+              <p class="ed-card__meta"><span class="ed-card__author">フレデリック・<wbr>フォーサイス</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1972年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">スリラー</span><span class="nm-tag">フランス</span><span class="nm-tag">古典</span></div>
             </div>
           </div>
@@ -801,12 +805,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-eye-of-the-needle">
+          <p class="ed-card__catch">上陸作戦の機密を運ぶ男</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488129033/" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/12903.jpg" alt="『針の眼』の書影（ケン・フォレット）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『針の眼』</h4>
-              <p class="ed-card__meta">ケン・フォレット<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1979年受賞</span></p>
-              <p class="ed-card__catch">上陸作戦の機密を運ぶ男</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ケン・<wbr>フォレット</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1979年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">スパイ・スリラー</span><span class="nm-tag">第二次大戦</span><span class="nm-tag">英国</span></div>
             </div>
           </div>
@@ -821,12 +825,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-mr-mercedes">
+          <p class="ed-card__catch">退職刑事と大量殺人犯の対決</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://books.bunshun.jp/ud/book/num/9784167911836" target="_blank" rel="noopener"><img src="https://b-bunshun.ismcdn.jp/mwimgs/1/b/480/img_1bb1f2a62cea733f7ae127d210458670842856.jpg" alt="『ミスター・メルセデス』の書影（スティーヴン・キング）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ミスター・メルセデス』</h4>
-              <p class="ed-card__meta">スティーヴン・キング<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2015年受賞</span></p>
-              <p class="ed-card__catch">退職刑事と大量殺人犯の対決</p>
+              <p class="ed-card__meta"><span class="ed-card__author">スティーヴン・<wbr>キング</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2015年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">サスペンス</span><span class="nm-tag">退職刑事</span><span class="nm-tag">三部作</span></div>
             </div>
           </div>
@@ -841,12 +845,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-before-the-fall">
+          <p class="ed-card__catch">墜落事故の生還者に向く疑惑</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000612094/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612094.jpg" alt="『晩夏の墜落』の書影（ノア・ホーリー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『晩夏の墜落』</h4>
-              <p class="ed-card__meta">ノア・ホーリー<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2017年受賞</span></p>
-              <p class="ed-card__catch">墜落事故の生還者に向く疑惑</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ノア・<wbr>ホーリー</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2017年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">サスペンス</span><span class="nm-tag">メディア</span><span class="nm-tag">群像劇</span></div>
             </div>
           </div>
@@ -864,12 +868,12 @@
 
       <h3 class="ed-theme" id="t-society">土地や社会の闇を読みたい<span>（6作品）</span></h3>
         <article class="ed-card" id="e-dance-hall-of-the-dead">
+          <p class="ed-card__catch">砂漠の居留地をゆく先住民の警官</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死者の舞踏場</span><span class="no-cover__rule"></span><span class="no-cover__author">トニイ・ヒラーマン</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『死者の舞踏場』</h4>
-              <p class="ed-card__meta">トニイ・ヒラーマン<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1974年受賞</span></p>
-              <p class="ed-card__catch">砂漠の居留地をゆく先住民の警官</p>
+              <p class="ed-card__meta"><span class="ed-card__author">トニイ・<wbr>ヒラーマン</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1974年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">ナバホ</span><span class="nm-tag">アメリカ南西部</span></div>
             </div>
           </div>
@@ -884,12 +888,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-black-cherry-blues">
+          <p class="ed-card__catch">ルイジアナからモンタナへ</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">ブラック・チェリー・ブルース</span><span class="no-cover__rule"></span><span class="no-cover__author">ジェイムズ・リー・バーク</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ブラック・チェリー・ブルース』</h4>
-              <p class="ed-card__meta">ジェイムズ・リー・バーク<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1990年受賞</span></p>
-              <p class="ed-card__catch">ルイジアナからモンタナへ</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジェイムズ・<wbr>リー・<wbr>バーク</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">1990年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">ハードボイルド</span><span class="nm-tag">南部</span><span class="nm-tag">シリーズ</span></div>
             </div>
           </div>
@@ -904,12 +908,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-bottoms">
+          <p class="ed-card__catch">大恐慌期テキサスの森の死体</p>
           <div class="ed-card__top">
             <span class="ed-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">ボトムズ</span><span class="no-cover__rule"></span><span class="no-cover__author">ジョー・R・ランズデール</span><span class="no-cover__note">書影準備中</span></span></span>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ボトムズ』</h4>
-              <p class="ed-card__meta">ジョー・R・ランズデール<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2001年受賞</span></p>
-              <p class="ed-card__catch">大恐慌期テキサスの森の死体</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジョー・<wbr>R・<wbr>ランズデール</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2001年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">南部ゴシック</span><span class="nm-tag">少年の視点</span><span class="nm-tag">1930年代</span></div>
             </div>
           </div>
@@ -924,12 +928,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-bluebird-bluebird">
+          <p class="ed-card__catch">人種の壁に挑むテキサス・レンジャー</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000612615/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612615.jpg" alt="『ブルーバード、ブルーバード』の書影（アッティカ・ロック）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ブルーバード、ブルーバード』</h4>
-              <p class="ed-card__meta">アッティカ・ロック<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2018年受賞</span></p>
-              <p class="ed-card__catch">人種の壁に挑むテキサス・レンジャー</p>
+              <p class="ed-card__meta"><span class="ed-card__author">アッティカ・<wbr>ロック</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2018年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">犯罪小説</span><span class="nm-tag">テキサス</span><span class="nm-tag">人種問題</span></div>
             </div>
           </div>
@@ -944,12 +948,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-down-the-river">
+          <p class="ed-card__catch">冤罪を背負った元刑事の再起</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000612842/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612842.jpg" alt="『流れは、いつか海へと』の書影（ウォルター・モズリイ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『流れは、いつか海へと』</h4>
-              <p class="ed-card__meta">ウォルター・モズリイ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2019年受賞</span></p>
-              <p class="ed-card__catch">冤罪を背負った元刑事の再起</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ウォルター・<wbr>モズリイ</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2019年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">私立探偵</span><span class="nm-tag">ニューヨーク</span><span class="nm-tag">冤罪</span></div>
             </div>
           </div>
@@ -964,12 +968,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-djinn-patrol">
+          <p class="ed-card__catch">9歳の探偵がスラムを駆ける</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000613681/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/613681.jpg" alt="『ブート・バザールの少年探偵』の書影（ディーパ・アーナパーラ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ブート・バザールの少年探偵』</h4>
-              <p class="ed-card__meta">ディーパ・アーナパーラ<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2021年受賞</span></p>
-              <p class="ed-card__catch">9歳の探偵がスラムを駆ける</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ディーパ・<wbr>アーナパーラ</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2021年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">少年探偵</span><span class="nm-tag">インド</span><span class="nm-tag">社会派</span></div>
             </div>
           </div>
@@ -986,12 +990,12 @@
 
       <h3 class="ed-theme" id="t-family">家族や時代の物語にも浸りたい<span>（4作品）</span></h3>
         <article class="ed-card" id="e-last-child">
+          <p class="ed-card__catch">妹を探し続ける少年の一年</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610502/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610502.jpg" alt="『ラスト・チャイルド』の書影（ジョン・ハート）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ラスト・チャイルド』</h4>
-              <p class="ed-card__meta">ジョン・ハート<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2010年受賞</span></p>
-              <p class="ed-card__catch">妹を探し続ける少年の一年</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジョン・<wbr>ハート</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2010年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">少年の視点</span><span class="nm-tag">家族</span><span class="nm-tag">ノースカロライナ</span></div>
             </div>
           </div>
@@ -1006,12 +1010,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-ordinary-grace">
+          <p class="ed-card__catch">1961年、少年が過ごしたひと夏</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000444301/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/444301.jpg" alt="『ありふれた祈り』の書影（ウィリアム・ケント・クルーガー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『ありふれた祈り』</h4>
-              <p class="ed-card__meta">ウィリアム・ケント・クルーガー<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2014年受賞</span></p>
-              <p class="ed-card__catch">1961年、少年が過ごしたひと夏</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ウィリアム・<wbr>ケント・<wbr>クルーガー</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2014年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">成長小説</span><span class="nm-tag">ミネソタ</span><span class="nm-tag">回想</span></div>
             </div>
           </div>
@@ -1026,12 +1030,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-five-decembers">
+          <p class="ed-card__catch">戦禍の太平洋をゆく刑事</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000614161/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/614161.jpg" alt="『真珠湾の冬』の書影（ジェイムズ・ケストレル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『真珠湾の冬』</h4>
-              <p class="ed-card__meta">ジェイムズ・ケストレル<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2022年受賞</span></p>
-              <p class="ed-card__catch">戦禍の太平洋をゆく刑事</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジェイムズ・<wbr>ケストレル</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2022年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">歴史ミステリ</span><span class="nm-tag">太平洋戦争</span><span class="nm-tag">大河</span></div>
             </div>
           </div>
@@ -1046,12 +1050,12 @@
           </div>
         </article>
         <article class="ed-card" id="e-flags-on-the-bayou">
+          <p class="ed-card__catch">南北戦争下のルイジアナで</p>
           <div class="ed-card__top">
             <a class="ed-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000614688/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/614688.jpg" alt="『破れざる旗の下に』の書影（ジェイムズ・リー・バーク）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
             <div class="ed-card__head">
               <h4 class="ed-card__title">『破れざる旗の下に』</h4>
-              <p class="ed-card__meta">ジェイムズ・リー・バーク<span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2024年受賞</span></p>
-              <p class="ed-card__catch">南北戦争下のルイジアナで</p>
+              <p class="ed-card__meta"><span class="ed-card__author">ジェイムズ・<wbr>リー・<wbr>バーク</span><span class="ed-card__sep" aria-hidden="true">｜</span><span class="ed-card__year">2024年受賞</span></p>
               <div class="nm-tags"><span class="nm-tag">歴史ミステリ</span><span class="nm-tag">南北戦争</span><span class="nm-tag">南部</span></div>
             </div>
           </div>
