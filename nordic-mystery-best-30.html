@@ -145,12 +145,12 @@
     .art-content ul.nm-list { margin: 0 0 1.2em; padding-left: 1.3em; }
     .art-content ul.nm-list li { font-size: 16px; line-height: 1.85; margin: 0 0 .4em; }
 
-    /* 作品カード：PCは書影＋本文の2カラム、SPは書影とヘッダーを横並びにして本文を全幅に */
+    /* 作品カード（エドガー賞記事と同じ上下2段）：上段＝書影＋国｜著者・作品名・キャッチ・タグ、下段＝あらすじ以降を全幅で */
     .nm-list-cards { display: grid; gap: 0; }
-    .nm-card { display: grid; grid-template-columns: 96px minmax(0, 1fr); column-gap: 22px; padding: 22px 0; border-top: 1px solid var(--line); scroll-margin-top: 124px; }
+    .nm-card { padding: 26px 0; border-top: 1px solid var(--line); scroll-margin-top: 124px; }
     .nm-card:first-child { border-top: 0; }
-    .nm-card--big { grid-template-columns: 116px minmax(0, 1fr); }
-    .nm-card__cover { display: block; align-self: start; }
+    .nm-card__top { display: flex; gap: 22px; align-items: flex-start; margin: 0 0 16px; }
+    .nm-card__cover { display: block; flex: 0 0 164px; }
     .nm-card__cover img { width: 100%; height: auto; display: block; border-radius: 5px; box-shadow: 0 4px 12px rgba(60,45,30,.16); background: #f0ece3; }
     /* 書影がない作品：書名と著者名を入れた表紙風の枠（gen.py の text_cover）。文字は枠の幅に合わせて伸縮（cqw） */
     .no-cover { container-type: inline-size; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -162,12 +162,16 @@
     .no-cover__rule { display: block; width: 22%; height: 2px; border-radius: 1px; background: var(--accent); margin: 10px 0 8px; margin: 9cqw 0 7cqw; }
     .no-cover__author { font-size: 9px; font-size: 7.5cqw; line-height: 1.4; opacity: .88; overflow-wrap: anywhere; }
     .no-cover__note { position: absolute; left: 0; right: 0; bottom: 9%; font-size: 7px; font-size: 6cqw; letter-spacing: .08em; opacity: .55; }
-    .nm-card__body { min-width: 0; }
-    .nm-card__meta { font-size: .76rem; font-weight: 700; color: var(--accent-2); margin: 0 0 2px; }
-    .nm-card__title { font-family: var(--font-round); font-weight: 900; font-size: 1.15rem; line-height: 1.45; margin: 0 0 4px; }
-    .nm-card--big .nm-card__title { font-size: 1.3rem; }
+    .nm-card__head { min-width: 0; flex: 1; padding-top: 4px; }
+    .nm-card__meta { font-size: .86rem; font-weight: 700; color: var(--accent-2); margin: 0 0 6px; overflow-wrap: anywhere; }
+    .nm-card__sep { color: var(--line); margin: 0 4px; }
+    .nm-card__country { white-space: nowrap; }
+    .nm-card__author { word-break: keep-all; overflow-wrap: anywhere; } /* 名前の途中では折り返さず、「・」「＆」の後（<wbr>）で折り返す */
+    .nm-card__title { font-family: var(--font-round); font-weight: 900; font-size: 1.3rem; line-height: 1.45; margin: 0 0 6px; overflow-wrap: anywhere; }
     .nm-card__title .sp-br { display: none; } /* SPだけ有効にする改行（gen.py の SP_TITLE_BREAK） */
-    .nm-card__catch { font-size: .88rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 8px; }
+    .nm-card__catch { font-size: .95rem; font-weight: 700; color: var(--ink); line-height: 1.6; margin: 0 0 10px; }
+    .nm-card .nm-tags { margin: 0; }
+    .nm-card .nm-card__label { margin-right: 8px; }
     .nm-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
     .nm-tag { font-size: .7rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
     .nm-card__text, .nm-card__why { font-size: 17px; line-height: 1.85; margin: 0 0 10px; }
@@ -305,30 +309,18 @@
     @media (max-width: 640px) {
       .art-wrap { padding: 18px 16px 44px; }
       .nm-grid, .nm-next { grid-template-columns: 1fr; }
-      /* 本選カード：SPは書影を大きく中央に置き、本文はその下へ。カードごとに背景と枠で区切る */
-      .nm-card, .nm-card--big { display: block; padding: 20px 16px 18px; margin: 0 0 16px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; }
+      /* 本選カード：SPも上下2段（エドガー賞記事と同じ）。カードごとに背景と枠で区切る */
+      .nm-card { padding: 16px 14px 14px; margin: 0 0 16px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; }
       .nm-card:first-child, .nm-country-img + .nm-card { border-top: 1px solid var(--line); }
-      .nm-card__cover { width: 172px; margin: 0 auto 16px; }
-      .nm-card--big .nm-card__cover { width: 184px; }
-      /* SPの表示順：キャッチ → 作品名 → 書影 → 著者｜国 → タグ → 以下は従来どおり（HTMLの順序はPCのまま、CSSのorderで並べ替え） */
-      .nm-card, .nm-card--big { display: flex; flex-direction: column; }
-      .nm-card__body { display: contents; }
-      .nm-card__catch { order: 1; font-size: 14px; line-height: 1.55; margin: 0 0 4px; text-align: center; }
-      .nm-card__title { order: 2; margin: 0 0 14px; text-align: center; }
-      .nm-card__cover { order: 3; }
-      .nm-card__meta { order: 4; display: flex; flex-wrap: wrap; justify-content: center; text-align: center; font-size: .82rem; margin: 0 0 12px; }
-      .nm-card__author { order: 1; }
-      .nm-card__sep { order: 2; margin: 0 .35em; }
-      .nm-card__country { order: 3; }
-      .nm-tags { order: 5; }
-      .nm-card__text { order: 6; }
-      .nm-card__why { order: 7; }
-      .nm-card__info { order: 8; }
-      .nm-card__links { order: 9; }
-      .nm-card__title, .nm-card--big .nm-card__title { font-size: 24px; line-height: 1.35; text-wrap: balance; word-break: auto-phrase; overflow-wrap: anywhere; }
+      .nm-card__top { gap: 14px; margin-bottom: 14px; }
+      .nm-card__cover { flex-basis: clamp(105px, 32vw, 125px); }
+      .nm-card__head { padding-top: 0; }
+      .nm-card__meta { font-size: .78rem; margin-bottom: 4px; }
+      .nm-card__title { font-size: 1.12rem; line-height: 1.4; margin-bottom: 4px; word-break: auto-phrase; }
       .nm-card__title .sp-br { display: inline; }
-      .nm-tags { gap: 6px; margin: 4px 0 12px; }
-      .nm-tag { font-size: .76rem; padding: 3px 10px; }
+      .nm-card__catch { font-size: .86rem; line-height: 1.55; margin-bottom: 8px; }
+      .nm-card .nm-tags { gap: 4px; }
+      .nm-card .nm-tag { font-size: .7rem; padding: 2px 8px; }
       .nm-card__text, .nm-card__why { font-size: 1rem; line-height: 1.9; margin-bottom: 12px; }
       .nm-card__info { font-size: .84rem; padding: 10px 12px; }
       .nm-card__info div { flex-direction: column; gap: 0; }
@@ -496,13 +488,17 @@
       <p>北欧ミステリにまだなじみがない人のために、読みやすさ、話題性、シリーズへの入りやすさを基準に5作品を選びました。国も作風もばらばらなので、気になる一冊から手に取ってみてください。後半の「北欧ミステリの傑作25選」と合わせて、全30作品を紹介します。</p>
       <div class="nm-list-cards">
         <article class="nm-card nm-card--big" id="n-faceless-killers">
-          <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488209025" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/20902.jpg" alt="『殺人者の顔』の書影（ヘニング・マンケル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヘニング・マンケル</span></p>
-            <h3 class="nm-card__title">『殺人者の顔』</h3>
-            <p class="nm-card__catch">北欧警察小説の流れはここから</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">雪の予感がする冬の早朝、スウェーデン南部の農村で老夫婦が襲われる。夫は殺され、妻は「外国の」という言葉を残して息を引き取る。捜査を担うのは、イースタ署の刑事クルト・ヴァランダー。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488209025" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/20902.jpg" alt="『殺人者の顔』の書影（ヘニング・マンケル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヘニング・<wbr>マンケル</span></p>
+              <h3 class="nm-card__title">『殺人者の顔』</h3>
+              <p class="nm-card__catch">北欧警察小説の流れはここから</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>雪の予感がする冬の早朝、スウェーデン南部の農村で老夫婦が襲われる。夫は殺され、妻は「外国の」という言葉を残して息を引き取る。捜査を担うのは、イースタ署の刑事クルト・ヴァランダー。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>捜査は地道で、事件の行方とともに外国人排斥へ傾く世論や、家族とのすれ違いに悩むヴァランダー自身の姿が描かれる。派手さよりも、社会と個人の疲れが重なる重みで読ませる。巻を追うごとに変わっていくヴァランダーの人生も追いたくなる、北欧警察小説の基本形。第1回ガラスの鍵賞（1992年）の受賞作。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈刑事ヴァランダー〉シリーズ第1作</dd></div>
@@ -512,13 +508,17 @@
           </div>
         </article>
         <article class="nm-card nm-card--big" id="n-millennium-1">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610275/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610275.jpg" alt="『ミレニアム1 ドラゴン・タトゥーの女』（上巻）の書影（スティーグ・ラーソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">スティーグ・ラーソン</span></p>
-            <h3 class="nm-card__title">『ミレニアム1<br class="sp-br" /> ドラゴン・タトゥーの女』</h3>
-            <p class="nm-card__catch">北欧ミステリを世界に広めた一冊</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">一気読み</span></div>
-            <p class="nm-card__text">名誉毀損裁判に敗れたジャーナリストのミカエルは、大企業グループの元会長から、40年前に一族の島で姿を消した少女ハリエットの行方を調べてほしいと依頼される。やがて調査に、天才ハッカーのリスベット・サランデルが加わる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610275/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610275.jpg" alt="『ミレニアム1 ドラゴン・タトゥーの女』（上巻）の書影（スティーグ・ラーソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">スティーグ・<wbr>ラーソン</span></p>
+              <h3 class="nm-card__title">『ミレニアム1<br class="sp-br" /> ドラゴン・タトゥーの女』</h3>
+              <p class="nm-card__catch">北欧ミステリを世界に広めた一冊</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">一気読み</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>名誉毀損裁判に敗れたジャーナリストのミカエルは、大企業グループの元会長から、40年前に一族の島で姿を消した少女ハリエットの行方を調べてほしいと依頼される。やがて調査に、天才ハッカーのリスベット・サランデルが加わる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>閉ざされた一族の過去をたどる謎解きに、経済ジャーナリズムと社会派のテーマが重なり、上下巻の長さを一気に読ませる。リスベットという強烈な主人公の存在感も、シリーズが読み継がれる理由のひとつ。2006年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈ミレニアム〉シリーズ第1作（第3部までがラーソンの作。第4部以降は別の作家が執筆）</dd></div>
@@ -528,13 +528,17 @@
           </div>
         </article>
         <article class="nm-card nm-card--big" id="n-kvinden-i-buret">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610332/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/438501.jpg" alt="『特捜部Q―檻の中の女―』の書影（ユッシ・エーズラ・オールスン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ユッシ・エーズラ・オールスン</span></p>
-            <h3 class="nm-card__title">『特捜部Q―檻の中の女―』</h3>
-            <p class="nm-card__catch">“窓際部署”が未解決事件に挑む</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">捜査への情熱を失っていたコペンハーゲン警察のカール・マークは、未解決の重大事件を専門に扱う新部署「特捜部Q」を任される。オフィスは窓のない地下室、部下はシリア系のアサドひとり。最初に手をつけたのは、5年前に自殺として片づけられた女性議員の失踪事件だった。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610332/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/438501.jpg" alt="『特捜部Q―檻の中の女―』の書影（ユッシ・エーズラ・オールスン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ユッシ・<wbr>エーズラ・<wbr>オールスン</span></p>
+              <h3 class="nm-card__title">『特捜部Q―檻の中の女―』</h3>
+              <p class="nm-card__catch">“窓際部署”が未解決事件に挑む</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>捜査への情熱を失っていたコペンハーゲン警察のカール・マークは、未解決の重大事件を専門に扱う新部署「特捜部Q」を任される。オフィスは窓のない地下室、部下はシリア系のアサドひとり。最初に手をつけたのは、5年前に自殺として片づけられた女性議員の失踪事件だった。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>偏屈なカールと、どこか謎めいたアサドのかけ合いが軽妙で、重い事件でも読み口は意外なほど軽い。過去と現在の二つの時間が交互に描かれ、緊張が途切れない。シリーズの入口として選びやすい一冊。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈特捜部Q〉シリーズ第1作</dd></div>
@@ -544,13 +548,17 @@
           </div>
         </article>
         <article class="nm-card nm-card--big" id="n-myrin">
-          <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488266035" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/26603.jpg" alt="『湿地』の書影（アーナルデュル・インドリダソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">アーナルデュル・インドリダソン</span></p>
-            <h3 class="nm-card__title">『湿地』</h3>
-            <p class="nm-card__catch">雨の首都で掘り返される老人の過去</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">重厚</span><span class="nm-tag">社会派</span></div>
-            <p class="nm-card__text">レイキャヴィクの湿地にある集合住宅で、老人の死体が見つかる。現場には意味のつかめないメッセージが残されていた。捜査官エーレンデュルは、被害者の過去をたどるうちに、長く埋もれていた出来事に行き当たる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488266035" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/26603.jpg" alt="『湿地』の書影（アーナルデュル・インドリダソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">アーナルデュル・<wbr>インドリダソン</span></p>
+              <h3 class="nm-card__title">『湿地』</h3>
+              <p class="nm-card__catch">雨の首都で掘り返される老人の過去</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">重厚</span><span class="nm-tag">社会派</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>レイキャヴィクの湿地にある集合住宅で、老人の死体が見つかる。現場には意味のつかめないメッセージが残されていた。捜査官エーレンデュルは、被害者の過去をたどるうちに、長く埋もれていた出来事に行き当たる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>人口の少ない島国ならではの人間関係の近さと、記録や血縁をめぐるテーマが物語の芯になる。冷えた空気と、寡黙な捜査官の孤独が静かに効いてくる。たどり着く真相は苦く、読後の余韻が長く残る。2002年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈エーレンデュル捜査官〉シリーズ。日本語版はこの作品から（原書ではシリーズ3作目）</dd></div>
@@ -560,13 +568,17 @@
           </div>
         </article>
         <article class="nm-card nm-card--big" id="n-snjoblinda">
-          <span class="nm-card__cover"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09406309" alt="『雪盲』の書影（ラグナル・ヨナソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ラグナル・ヨナソン</span></p>
-            <h3 class="nm-card__title">『雪盲』</h3>
-            <p class="nm-card__catch">雪の港町で起きる古典的な謎解き</p>
-            <div class="nm-tags"><span class="nm-tag">自然・風景</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">警察官になったばかりの青年が、アイスランド北部の小さな港町に赴任する。冬には雪で外への道が途絶えがちな町で、地元の劇団の重鎮だった老作家が劇場で転落死し、さらに雪の中に倒れた女性が見つかる。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09406309" alt="『雪盲』の書影（ラグナル・ヨナソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ラグナル・<wbr>ヨナソン</span></p>
+              <h3 class="nm-card__title">『雪盲』</h3>
+              <p class="nm-card__catch">雪の港町で起きる古典的な謎解き</p>
+              <div class="nm-tags"><span class="nm-tag">自然・風景</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>警察官になったばかりの青年が、アイスランド北部の小さな港町に赴任する。冬には雪で外への道が途絶えがちな町で、地元の劇団の重鎮だった老作家が劇場で転落死し、さらに雪の中に倒れた女性が見つかる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>閉ざされた町と限られた住人という条件が、クラシックな犯人当ての面白さを生む。北の果ての暗さと静けさ、新人警官の心細さが重なり、雪そのものが登場人物のように感じられる。分量も手頃で、北欧の風景を味わう入口に向く。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>新人警官を主人公とするシリーズの第1作（原書）</dd></div>
@@ -582,13 +594,17 @@
       <h3 class="nm-country" id="c-sweden"><svg class="nm-flag" viewBox="0 0 16 10" width="22.4" height="14" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#006aa7"/><rect x="5" y="0" width="2" height="10" fill="#fecc00"/><rect x="0" y="4" width="16" height="2" fill="#fecc00"/></svg>スウェーデン<span>（9作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-sweden.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-roseanna">
-          <a class="nm-card__cover" href="https://www.kadokawa.co.jp/product/321301000043/" target="_blank" rel="noopener"><img src="https://cdn.kdkw.jp/cover_500/321301/321301000043.webp" alt="『ロセアンナ』の書影（マイ・シューヴァル＆ペール・ヴァールー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">マイ・シューヴァル＆ペール・ヴァールー</span></p>
-            <h3 class="nm-card__title">『ロセアンナ』</h3>
-            <p class="nm-card__catch">北欧警察小説の原点にして、いまも新しい</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">ある夏、運河の浚渫作業中に若い女性の遺体が引き上げられる。身元の手がかりはほとんどない。ストックホルム警察のマルティン・ベックは、彼女が誰なのかを突き止めるところから捜査を始める。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.kadokawa.co.jp/product/321301000043/" target="_blank" rel="noopener"><img src="https://cdn.kdkw.jp/cover_500/321301/321301000043.webp" alt="『ロセアンナ』の書影（マイ・シューヴァル＆ペール・ヴァールー）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">マイ・<wbr>シューヴァル＆<wbr>ペール・<wbr>ヴァールー</span></p>
+              <h3 class="nm-card__title">『ロセアンナ』</h3>
+              <p class="nm-card__catch">北欧警察小説の原点にして、いまも新しい</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>ある夏、運河の浚渫作業中に若い女性の遺体が引き上げられる。身元の手がかりはほとんどない。ストックホルム警察のマルティン・ベックは、彼女が誰なのかを突き止めるところから捜査を始める。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>何か月にもわたる照会、空振りに終わる聞き込み、ひたすら待つ時間。捜査の地道な手続きを省かずに積み重ねたリアリズムが、刑事たちの疲れや焦りまで生々しく伝えてくる。この作風が、のちの北欧警察小説の土台になった。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈刑事マルティン・ベック〉シリーズ（全10作）第1作</dd></div>
@@ -598,13 +614,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-isprinsessan">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">氷姫 エリカ&amp;パトリック事件簿</span><span class="no-cover__rule"></span><span class="no-cover__author">カミラ・レックバリ</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カミラ・レックバリ</span></p>
-            <h3 class="nm-card__title">『氷姫 エリカ&amp;<br class="sp-br" />パトリック事件簿』</h3>
-            <p class="nm-card__catch">港町の噂と秘密を生活感豊かに描く</p>
-            <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">作家のエリカは、両親の死をきっかけにスウェーデン西海岸の故郷の町へ戻る。そこで幼なじみのアレクスが、凍った浴槽の中で手首を切った姿で見つかる。自殺とされたが、違和感を抱いたエリカは彼女の過去を調べはじめる。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">氷姫 エリカ&amp;パトリック事件簿</span><span class="no-cover__rule"></span><span class="no-cover__author">カミラ・レックバリ</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カミラ・<wbr>レックバリ</span></p>
+              <h3 class="nm-card__title">『氷姫 エリカ&amp;<br class="sp-br" />パトリック事件簿』</h3>
+              <p class="nm-card__catch">港町の噂と秘密を生活感豊かに描く</p>
+              <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>作家のエリカは、両親の死をきっかけにスウェーデン西海岸の故郷の町へ戻る。そこで幼なじみのアレクスが、凍った浴槽の中で手首を切った姿で見つかる。自殺とされたが、違和感を抱いたエリカは彼女の過去を調べはじめる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>小さな町の人間関係を丁寧に描く“町もの”の味わいに、地元の刑事パトリックとの距離が縮まっていく軽やかさが加わる。北欧ミステリに慣れていない読者でも入りやすい。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈エリカ&amp;パトリック事件簿〉シリーズ第1作</dd></div>
@@ -613,13 +633,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-solstorm">
-          <span class="nm-card__cover"><img src="assets/covers/nordic-solstorm.jpg" alt="『オーロラの向こう側』の書影（オーサ・ラーソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">オーサ・ラーソン</span></p>
-            <h3 class="nm-card__title">『オーロラの向こう側』</h3>
-            <p class="nm-card__catch">キルナで交差する信仰と故郷の傷</p>
-            <div class="nm-tags"><span class="nm-tag">自然・風景</span><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">スウェーデン最北の町キルナの教会で、カリスマ的な若い伝道師が惨殺される。ストックホルムで弁護士として働く女性は、事件に巻き込まれた幼なじみに助けを求められ、二度と戻らないつもりだった故郷へ帰る。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><img src="assets/covers/nordic-solstorm.jpg" alt="『オーロラの向こう側』の書影（オーサ・ラーソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">オーサ・<wbr>ラーソン</span></p>
+              <h3 class="nm-card__title">『オーロラの向こう側』</h3>
+              <p class="nm-card__catch">キルナで交差する信仰と故郷の傷</p>
+              <div class="nm-tags"><span class="nm-tag">自然・風景</span><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>スウェーデン最北の町キルナの教会で、カリスマ的な若い伝道師が惨殺される。ストックホルムで弁護士として働く女性は、事件に巻き込まれた幼なじみに助けを求められ、二度と戻らないつもりだった故郷へ帰る。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>極北の冬の光と闇、信仰共同体の閉じた空気、主人公が故郷に残した傷。謎と同じくらい、土地の気配が強く残る。英訳版は2007年に英国推理作家協会賞インターナショナル・ダガーの最終候補になった。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>弁護士の女性を主人公とするシリーズの第1作</dd></div>
@@ -628,13 +652,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-skumtimmen">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610488/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610488.jpg" alt="『黄昏に眠る秋』の書影（ヨハン・テオリン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヨハン・テオリン</span></p>
-            <h3 class="nm-card__title">『黄昏に眠る秋』</h3>
-            <p class="nm-card__catch">霧の島で、二十数年前に消えた少年を探す</p>
-            <div class="nm-tags"><span class="nm-tag">自然・風景</span><span class="nm-tag">重厚</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">霧に包まれたエーランド島で、幼い少年が姿を消した。二十数年後の秋、少年が当時履いていた靴が、祖父で元船長のイェルロフのもとに届く。イェルロフは、息子を失ってから立ち直れずにいる娘ユリアとともに、もう一度孫を探しはじめる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610488/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610488.jpg" alt="『黄昏に眠る秋』の書影（ヨハン・テオリン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヨハン・<wbr>テオリン</span></p>
+              <h3 class="nm-card__title">『黄昏に眠る秋』</h3>
+              <p class="nm-card__catch">霧の島で、二十数年前に消えた少年を探す</p>
+              <div class="nm-tags"><span class="nm-tag">自然・風景</span><span class="nm-tag">重厚</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>霧に包まれたエーランド島で、幼い少年が姿を消した。二十数年後の秋、少年が当時履いていた靴が、祖父で元船長のイェルロフのもとに届く。イェルロフは、息子を失ってから立ち直れずにいる娘ユリアとともに、もう一度孫を探しはじめる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>島の過去と現在を行き来する構成で、老いた父と娘が少しずつ向き合っていく過程が胸に残る。スウェーデン推理作家アカデミー最優秀新人賞と、英国推理作家協会賞の最優秀新人賞を受賞（出版社の紹介より）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈エーランド島〉四部作の第1作</dd></div>
@@ -644,13 +672,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-odjuret">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000611982/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/611982.jpg" alt="『制裁』の書影（アンデシュ・ルースルンド＆ベリエ・ヘルストレム）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">アンデシュ・ルースルンド＆ベリエ・ヘルストレム</span></p>
-            <h3 class="nm-card__title">『制裁』</h3>
-            <p class="nm-card__catch">法か、報復か。北欧社会派の重い問い</p>
-            <div class="nm-tags"><span class="nm-tag">社会派</span><span class="nm-tag">ダーク</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">少女への凶悪犯罪で服役していた男が、移送中に脱走する。ストックホルム市警のグレーンス警部が行方を追うなか、ある町では、幼い娘をもつ父親の日常に不穏な影が差していく。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000611982/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/611982.jpg" alt="『制裁』の書影（アンデシュ・ルースルンド＆ベリエ・ヘルストレム）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">アンデシュ・<wbr>ルースルンド＆<wbr>ベリエ・<wbr>ヘルストレム</span></p>
+              <h3 class="nm-card__title">『制裁』</h3>
+              <p class="nm-card__catch">法か、報復か。北欧社会派の重い問い</p>
+              <div class="nm-tags"><span class="nm-tag">社会派</span><span class="nm-tag">ダーク</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>少女への凶悪犯罪で服役していた男が、移送中に脱走する。ストックホルム市警のグレーンス警部が行方を追うなか、ある町では、幼い娘をもつ父親の日常に不穏な影が差していく。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>罪を犯した者を社会はどう扱い、被害者の側に立つ人々はそれをどう受け止めるのか。法と報復、世論の揺れを正面から描く。救いの少なさも含めて、強い読後感が残る。登場人物の誰にも簡単には肩入れできない構成が、読む側に判断を迫ってくる。2005年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈グレーンス警部〉シリーズ第1作</dd></div>
@@ -660,13 +692,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-hypnotisoren">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">催眠</span><span class="no-cover__rule"></span><span class="no-cover__author">ラーシュ・ケプレル</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ラーシュ・ケプレル</span></p>
-            <h3 class="nm-card__title">『催眠』</h3>
-            <p class="nm-card__catch">封印した催眠が、医師自身の家族を揺さぶる</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">ストックホルム郊外で一家が惨殺され、ただひとり生き残った少年も重傷を負う。国家警察のヨーナ・リンナ警部は、少年から証言を得るため、かつて催眠療法の第一人者だった医師エリックに協力を求める。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">催眠</span><span class="no-cover__rule"></span><span class="no-cover__author">ラーシュ・ケプレル</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ラーシュ・<wbr>ケプレル</span></p>
+              <h3 class="nm-card__title">『催眠』</h3>
+              <p class="nm-card__catch">封印した催眠が、医師自身の家族を揺さぶる</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>ストックホルム郊外で一家が惨殺され、ただひとり生き残った少年も重傷を負う。国家警察のヨーナ・リンナ警部は、少年から証言を得るため、かつて催眠療法の第一人者だった医師エリックに協力を求める。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>場面と視点がめまぐるしく切り替わる犯罪スリラーで、上下巻を勢いのまま読み切れる。事件の謎と並行して、医師エリックが抱えてきた過去と家族の問題が浮かび上がる。著者名は夫婦作家の共同筆名。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈ヨーナ・リンナ警部〉シリーズ第1作</dd></div>
@@ -675,13 +711,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-saknad">
-          <a class="nm-card__cover" href="https://www.shogakukan.co.jp/books/09405461" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09405461" alt="『喪失』の書影（カーリン・アルヴテーゲン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カーリン・アルヴテーゲン</span></p>
-            <h3 class="nm-card__title">『喪失』</h3>
-            <p class="nm-card__catch">殺人犯として追われる家のない女性</p>
-            <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">一気読み</span></div>
-            <p class="nm-card__text">ストックホルムで住まいを持たずに暮らす32歳のシビラ。ある日突然、彼女は連続猟奇殺人の犯人として警察に追われる身になる。食べ物と寝場所を求めながら、彼女は逃げ続けるしかない。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.shogakukan.co.jp/books/09405461" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09405461" alt="『喪失』の書影（カーリン・アルヴテーゲン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カーリン・<wbr>アルヴテーゲン</span></p>
+              <h3 class="nm-card__title">『喪失』</h3>
+              <p class="nm-card__catch">殺人犯として追われる家のない女性</p>
+              <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">一気読み</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>ストックホルムで住まいを持たずに暮らす32歳のシビラ。ある日突然、彼女は連続猟奇殺人の犯人として警察に追われる身になる。食べ物と寝場所を求めながら、彼女は逃げ続けるしかない。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>真犯人を探す逃亡劇であると同時に、家族との確執から逃れてきたシビラの過去が少しずつ明かされる心理劇でもある。社会からこぼれ落ちた女性の視点が、事件に独特の切実さを与えている。2001年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品</dd></div>
@@ -691,13 +731,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-silvervagen">
-          <a class="nm-card__cover" href="https://www.shogakukan.co.jp/books/09406705" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09406705" alt="『娘を呑んだ道』の書影（スティーナ・ジャクソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">スティーナ・ジャクソン</span></p>
-            <h3 class="nm-card__title">『娘を呑んだ道』</h3>
-            <p class="nm-card__catch">白夜の一本道を、父は今夜も走り続ける</p>
-            <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">自然・風景</span><span class="nm-tag">重厚</span></div>
-            <p class="nm-card__text">3年前、スウェーデン北部の村で17歳のリナが姿を消した。数学教師の父レレは、今もひとりで娘の捜索を続け、夜通し車を走らせている。同じころ、母親とともに村へ越してきた少女メヤも、自分の居場所を求めてもがいていた。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.shogakukan.co.jp/books/09406705" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09406705" alt="『娘を呑んだ道』の書影（スティーナ・ジャクソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">スティーナ・<wbr>ジャクソン</span></p>
+              <h3 class="nm-card__title">『娘を呑んだ道』</h3>
+              <p class="nm-card__catch">白夜の一本道を、父は今夜も走り続ける</p>
+              <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">自然・風景</span><span class="nm-tag">重厚</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>3年前、スウェーデン北部の村で17歳のリナが姿を消した。数学教師の父レレは、今もひとりで娘の捜索を続け、夜通し車を走らせている。同じころ、母親とともに村へ越してきた少女メヤも、自分の居場所を求めてもがいていた。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>果てしない森と一本道、沈まない夏の太陽。二つの視点が少しずつ近づいていく過程が、北の風景とともに静かな緊張を生む。警察小説ではなく、喪失を抱えた人々の物語として読める犯罪小説。2019年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品</dd></div>
@@ -707,13 +751,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-ansatsu-no-fuyu">
-          <a class="nm-card__cover" href="https://books.bunshun.jp/ud/book/num/9784167925147" target="_blank" rel="noopener"><img src="https://b-bunshun.ismcdn.jp/mwimgs/c/e/480/img_cec081fdd50f50ad3af60a4c57c3801a4841269.jpg" alt="『暗殺の冬』の書影（クリストフェル・カールソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">クリストフェル・カールソン</span></p>
-            <h3 class="nm-card__title">『暗殺の冬』</h3>
-            <p class="nm-card__catch">首相暗殺の夜と、小さな村の殺人がつながる</p>
-            <div class="nm-tags"><span class="nm-tag">社会派</span><span class="nm-tag">歴史・文化</span><span class="nm-tag">重厚</span></div>
-            <p class="nm-card__text">1986年、スウェーデン首相が撃たれた夜、小さな村で一人の女性が殺される。それは長い年月をまたぐ連続殺人の入口だった。二世代の刑事と、故郷に戻った作家の視点が重なりながら、封印された罪に迫っていく。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://books.bunshun.jp/ud/book/num/9784167925147" target="_blank" rel="noopener"><img src="https://b-bunshun.ismcdn.jp/mwimgs/c/e/480/img_cec081fdd50f50ad3af60a4c57c3801a4841269.jpg" alt="『暗殺の冬』の書影（クリストフェル・カールソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">スウェーデン</span><span class="nm-card__sep">｜</span><span class="nm-card__author">クリストフェル・<wbr>カールソン</span></p>
+              <h3 class="nm-card__title">『暗殺の冬』</h3>
+              <p class="nm-card__catch">首相暗殺の夜と、小さな村の殺人がつながる</p>
+              <div class="nm-tags"><span class="nm-tag">社会派</span><span class="nm-tag">歴史・文化</span><span class="nm-tag">重厚</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>1986年、スウェーデン首相が撃たれた夜、小さな村で一人の女性が殺される。それは長い年月をまたぐ連続殺人の入口だった。二世代の刑事と、故郷に戻った作家の視点が重なりながら、封印された罪に迫っていく。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>国じゅうを揺るがした事件の記憶が、田舎町に暮らす人々の人生にどんな影を落としたのか。硬質な文体と、時間をかけて積み上がる人物描写が持ち味。著者は2024年にガラスの鍵賞を受賞している（受賞作は別作品）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品として読める</dd></div>
@@ -726,13 +774,17 @@
       <h3 class="nm-country" id="c-denmark"><svg class="nm-flag" viewBox="0 0 37 28" width="18.5" height="14" aria-hidden="true" focusable="false"><rect width="37" height="28" fill="#c8102e"/><rect x="12" y="0" width="4" height="28" fill="#fff"/><rect x="0" y="12" width="37" height="4" fill="#fff"/></svg>デンマーク<span>（4作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-denmark.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-smilla">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">スミラの雪の感覚</span><span class="no-cover__rule"></span><span class="no-cover__author">ペーター・ホゥ</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ペーター・ホゥ</span></p>
-            <h3 class="nm-card__title">『スミラの雪の感覚』</h3>
-            <p class="nm-card__catch">雪を読む女性が、少年の死の真相を追う</p>
-            <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">自然・風景</span><span class="nm-tag">歴史・文化</span></div>
-            <p class="nm-card__text">コペンハーゲンの集合住宅で、グリーンランド出身の少年が屋根から転落死する。警察は事故として処理するが、同じ建物に住むスミラは、屋上の雪に残った足跡に違和感を覚える。雪と氷を読む感覚を頼りに、彼女はひとりで真相を追いはじめる。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">スミラの雪の感覚</span><span class="no-cover__rule"></span><span class="no-cover__author">ペーター・ホゥ</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ペーター・<wbr>ホゥ</span></p>
+              <h3 class="nm-card__title">『スミラの雪の感覚』</h3>
+              <p class="nm-card__catch">雪を読む女性が、少年の死の真相を追う</p>
+              <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">自然・風景</span><span class="nm-tag">歴史・文化</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>コペンハーゲンの集合住宅で、グリーンランド出身の少年が屋根から転落死する。警察は事故として処理するが、同じ建物に住むスミラは、屋上の雪に残った足跡に違和感を覚える。雪と氷を読む感覚を頼りに、彼女はひとりで真相を追いはじめる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>デンマークとグリーンランドの複雑な関係、孤独な主人公の鋭い観察と語りが際立つ。ミステリとしても文学作品としても評価の高い一冊で、物語はやがて北の海へと広がっていく。1993年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品</dd></div>
@@ -741,13 +793,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-harpiks">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000612173/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612173.jpg" alt="『樹脂』の書影（エーネ・リール）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">エーネ・リール</span></p>
-            <h3 class="nm-card__title">『樹脂』</h3>
-            <p class="nm-card__catch">娘を“死んだこと”にした父親の、静かな狂気</p>
-            <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">ダーク</span></div>
-            <p class="nm-card__text">人里離れた半島の森で暮らす一家。つらい喪失を重ねてきた父親は、これ以上何も奪われまいと、幼い娘が死んだと偽って届け出る。そして娘を隠したまま育てはじめる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000612173/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612173.jpg" alt="『樹脂』の書影（エーネ・リール）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">エーネ・<wbr>リール</span></p>
+              <h3 class="nm-card__title">『樹脂』</h3>
+              <p class="nm-card__catch">娘を“死んだこと”にした父親の、静かな狂気</p>
+              <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">ダーク</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>人里離れた半島の森で暮らす一家。つらい喪失を重ねてきた父親は、これ以上何も奪われまいと、幼い娘が死んだと偽って届け出る。そして娘を隠したまま育てはじめる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>冒頭から異様な家族の姿が示され、なぜそうなったのかを娘の語りと周囲の証言でたどっていく。寓話のような静けさと、ものを溜め込み続ける家の息苦しさが忘れがたい。語りが切り替わるたびに、家族の像が少しずつ違って見えてくる。2016年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品</dd></div>
@@ -757,13 +813,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-drengen-i-kufferten">
-          <a class="nm-card__cover" href="https://www.kodansha.co.jp/book/products/0000206308" target="_blank" rel="noopener"><img src="https://dvs-cover.kodansha.co.jp/0000206308/sQ9CY65RDKicffTe6QwhpNqiLHvBS1Z36BCBHnuV.jpg" alt="『スーツケースの中の少年』の書影（レナ・コバブール＆アニタ・フリース）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">レナ・コバブール＆アニタ・フリース</span></p>
-            <h3 class="nm-card__title">『スーツケースの中の少年』</h3>
-            <p class="nm-card__catch">コインロッカーの中に、小さな男の子がいた</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">赤十字で働く看護師のニーナは、友人に頼まれてコペンハーゲン中央駅のコインロッカーを開ける。中にあったスーツケースには、3歳ほどの男の子が入れられていた。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.kodansha.co.jp/book/products/0000206308" target="_blank" rel="noopener"><img src="https://dvs-cover.kodansha.co.jp/0000206308/sQ9CY65RDKicffTe6QwhpNqiLHvBS1Z36BCBHnuV.jpg" alt="『スーツケースの中の少年』の書影（レナ・コバブール＆アニタ・フリース）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">レナ・<wbr>コバブール＆<wbr>アニタ・<wbr>フリース</span></p>
+              <h3 class="nm-card__title">『スーツケースの中の少年』</h3>
+              <p class="nm-card__catch">コインロッカーの中に、小さな男の子がいた</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>赤十字で働く看護師のニーナは、友人に頼まれてコペンハーゲン中央駅のコインロッカーを開ける。中にあったスーツケースには、3歳ほどの男の子が入れられていた。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>誰が、なぜ子どもを運ぼうとしたのか。わが子を捜すリトアニアの母親の視点が並行し、国境を越える犯罪の現実が浮かび上がる。正義感が強すぎて家族とすれ違うニーナの人物像も印象に残る。警察ではなく看護師の立場から事件に関わる点も、独特の緊張感を生んでいる。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>看護師ニーナを主人公とするシリーズの第1作</dd></div>
@@ -773,13 +833,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-det-syvende-barn">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000611224/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/611224.jpg" alt="『7人目の子』（上巻）の書影（エーリク・ヴァレア）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">エーリク・ヴァレア</span></p>
-            <h3 class="nm-card__title">『7人目の子』</h3>
-            <p class="nm-card__catch">一枚の古い写真が、国家の中枢を揺らす</p>
-            <div class="nm-tags"><span class="nm-tag">社会派</span><span class="nm-tag">重厚</span></div>
-            <p class="nm-card__text">児童養護院で撮られた、7人の幼い子どもの写真。その写真が載った古い記事と、ベビーソックスの入った封筒が、デンマーク国務省に届く。封筒には養子縁組の申請書も同封されていた。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000611224/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/611224.jpg" alt="『7人目の子』（上巻）の書影（エーリク・ヴァレア）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">デンマーク</span><span class="nm-card__sep">｜</span><span class="nm-card__author">エーリク・<wbr>ヴァレア</span></p>
+              <h3 class="nm-card__title">『7人目の子』</h3>
+              <p class="nm-card__catch">一枚の古い写真が、国家の中枢を揺らす</p>
+              <div class="nm-tags"><span class="nm-tag">社会派</span><span class="nm-tag">重厚</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>児童養護院で撮られた、7人の幼い子どもの写真。その写真が載った古い記事と、ベビーソックスの入った封筒が、デンマーク国務省に届く。封筒には養子縁組の申請書も同封されていた。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>養護院にいた子どもたちのその後と、国の中枢に隠された秘密が、複数の人物の視点から少しずつつながっていく。デンマーク社会の階層や出自の問題を背景にした、厚みのある群像ミステリ。2012年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品</dd></div>
@@ -792,13 +856,17 @@
       <h3 class="nm-country" id="c-norway"><svg class="nm-flag" viewBox="0 0 22 16" width="19.2" height="14" aria-hidden="true" focusable="false"><rect width="22" height="16" fill="#ba0c2f"/><rect x="6" y="0" width="4" height="16" fill="#fff"/><rect x="0" y="6" width="22" height="4" fill="#fff"/><rect x="7" y="0" width="2" height="16" fill="#00205b"/><rect x="0" y="7" width="22" height="2" fill="#00205b"/></svg>ノルウェー<span>（5作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-norway.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-flaggermusmannen">
-          <span class="nm-card__cover"><img src="assets/covers/nordic-flaggermusmannen.jpg" alt="『ザ・バット 神話の殺人』の書影（ジョー・ネスボ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ジョー・ネスボ</span></p>
-            <h3 class="nm-card__title">『ザ・バット 神話の殺人』</h3>
-            <p class="nm-card__catch">刑事ハリー・ホーレ、最初の事件</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">オスロ警察の刑事ハリー・ホーレは、オーストラリアのシドニーへ派遣される。現地で殺害されたノルウェー人女性の事件に協力するためだ。地元の刑事アンドリューと組んで捜査を進めるうちに、事件の奥に広がる影が見えてくる。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><img src="assets/covers/nordic-flaggermusmannen.jpg" alt="『ザ・バット 神話の殺人』の書影（ジョー・ネスボ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ジョー・<wbr>ネスボ</span></p>
+              <h3 class="nm-card__title">『ザ・バット 神話の殺人』</h3>
+              <p class="nm-card__catch">刑事ハリー・ホーレ、最初の事件</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>オスロ警察の刑事ハリー・ホーレは、オーストラリアのシドニーへ派遣される。現地で殺害されたノルウェー人女性の事件に協力するためだ。地元の刑事アンドリューと組んで捜査を進めるうちに、事件の奥に広がる影が見えてくる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>酒に問題を抱えたハリーの危うさと、先住民の歴史を語るアンドリューとの関係が物語に陰影を与える。シリーズの原書第1作で、1998年ガラスの鍵賞受賞。ハリーの原点を知りたい人に。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈刑事ハリー・ホーレ〉シリーズの原書第1作</dd></div>
@@ -807,13 +875,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-snomannen">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">スノーマン</span><span class="no-cover__rule"></span><span class="no-cover__author">ジョー・ネスボ</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ジョー・ネスボ</span></p>
-            <h3 class="nm-card__title">『スノーマン』</h3>
-            <p class="nm-card__catch">初雪の夜に消えた母と、雪だるま</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">一気読み</span></div>
-            <p class="nm-card__text">その冬最初の雪が降った夜、オスロで一人の母親が姿を消す。家の庭には、彼女のスカーフを巻いた雪だるまが立っていた。刑事ハリー・ホーレは、過去の失踪事件との不気味な共通点に気づく。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">スノーマン</span><span class="no-cover__rule"></span><span class="no-cover__author">ジョー・ネスボ</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ジョー・<wbr>ネスボ</span></p>
+              <h3 class="nm-card__title">『スノーマン』</h3>
+              <p class="nm-card__catch">初雪の夜に消えた母と、雪だるま</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">一気読み</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>その冬最初の雪が降った夜、オスロで一人の母親が姿を消す。家の庭には、彼女のスカーフを巻いた雪だるまが立っていた。刑事ハリー・ホーレは、過去の失踪事件との不気味な共通点に気づく。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>冬のオスロの冷たさと、張りつめた追跡劇。ネスボの持ち味であるどんでん返しと疾走感が強く出た一作で、北欧の犯罪スリラーを代表する人気作。原書ではシリーズ7作目だが、この作品から読みはじめても楽しめる。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈刑事ハリー・ホーレ〉シリーズ（原書7作目）</dd></div>
@@ -822,13 +894,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-se-deg-ikke-tilbake">
-          <a class="nm-card__cover" href="https://www.php.co.jp/books/detail.php?isbn=978-4-569-67618-0" target="_blank" rel="noopener"><img src="https://www.php.co.jp/atch/books/9784569676180.jpg" alt="『湖のほとりで』の書影（カリン・フォッスム）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カリン・フォッスム</span></p>
-            <h3 class="nm-card__title">『湖のほとりで』</h3>
-            <p class="nm-card__catch">穏やかな村の内側にある、沈黙と痛み</p>
-            <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">警察小説</span></div>
-            <p class="nm-card__text">ノルウェーの小さな村で、湖のほとりから少女アニーの遺体が見つかる。村の誰からも好かれていた彼女に、何があったのか。ベテランの警部が、住人ひとりひとりの話に耳を傾けていく。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.php.co.jp/books/detail.php?isbn=978-4-569-67618-0" target="_blank" rel="noopener"><img src="https://www.php.co.jp/atch/books/9784569676180.jpg" alt="『湖のほとりで』の書影（カリン・フォッスム）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">カリン・<wbr>フォッスム</span></p>
+              <h3 class="nm-card__title">『湖のほとりで』</h3>
+              <p class="nm-card__catch">穏やかな村の内側にある、沈黙と痛み</p>
+              <div class="nm-tags"><span class="nm-tag">心理サスペンス</span><span class="nm-tag">警察小説</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>ノルウェーの小さな村で、湖のほとりから少女アニーの遺体が見つかる。村の誰からも好かれていた彼女に、何があったのか。ベテランの警部が、住人ひとりひとりの話に耳を傾けていく。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>犯人探しよりも、穏やかに見える共同体の内側と、家族が抱えていた沈黙に光を当てる作品。抑えた筆致で、人の心の揺れを丁寧にすくい上げる。派手な展開はないが、読み終えたあとも登場人物の顔が長く残る。1997年ガラスの鍵賞受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>警部を主人公とするシリーズの1作（原書2作目）</dd></div>
@@ -838,13 +914,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-jakthundene">
-          <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610255/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610255.jpg" alt="『猟犬』の書影（ヨルン・リーエル・ホルスト）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヨルン・リーエル・ホルスト</span></p>
-            <h3 class="nm-card__title">『猟犬』</h3>
-            <p class="nm-card__catch">自分が挙げた事件の証拠が、偽造されていた</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">社会派</span></div>
-            <p class="nm-card__text">17年前の誘拐殺人事件で、容疑者を有罪にした決め手の証拠が偽造されていたことがわかる。捜査を指揮した刑事ヴィスティングは責任を問われ、停職処分を受ける。新聞記者の娘リーネの助けを借りながら、彼はひとりで真相を追う。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.hayakawa-online.co.jp/shop/g/g0000610255/" target="_blank" rel="noopener"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610255.jpg" alt="『猟犬』の書影（ヨルン・リーエル・ホルスト）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヨルン・<wbr>リーエル・<wbr>ホルスト</span></p>
+              <h3 class="nm-card__title">『猟犬』</h3>
+              <p class="nm-card__catch">自分が挙げた事件の証拠が、偽造されていた</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">社会派</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>17年前の誘拐殺人事件で、容疑者を有罪にした決め手の証拠が偽造されていたことがわかる。捜査を指揮した刑事ヴィスティングは責任を問われ、停職処分を受ける。新聞記者の娘リーネの助けを借りながら、彼はひとりで真相を追う。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>警察官として働いていた著者らしい、手続きと現場の手触りに裏打ちされた捜査小説。父と娘の関係、報道と警察の距離感も読みどころ。2013年ガラスの鍵賞受賞（出版社の紹介ではマルティン・ベック賞、ゴールデン・リボルバー賞と合わせて三冠）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈ヴィスティング〉シリーズ（日本語版の第1作）</dd></div>
@@ -854,13 +934,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-im-traveling-alone">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">オスロ警察殺人捜査課特別班 アイム・トラベリング・アローン</span><span class="no-cover__rule"></span><span class="no-cover__author">サムエル・ビョルク</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">サムエル・ビョルク</span></p>
-            <h3 class="nm-card__title">『オスロ警察殺人捜査課特別班 アイム・トラベリング・アローン』</h3>
-            <p class="nm-card__catch">「ひとりで旅をしています」と書かれた札</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">オスロ近郊の森で、人形のような服を着せられた6歳の少女が、木に吊るされた姿で見つかる。首には「ひとりで旅をしています」と書かれた札。特別班を率いる警部は、心に傷を負って島に引きこもっていた元同僚の女性刑事を呼び戻す。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">オスロ警察殺人捜査課特別班 アイム・トラベリング・アローン</span><span class="no-cover__rule"></span><span class="no-cover__author">サムエル・ビョルク</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">ノルウェー</span><span class="nm-card__sep">｜</span><span class="nm-card__author">サムエル・<wbr>ビョルク</span></p>
+              <h3 class="nm-card__title">『オスロ警察殺人捜査課特別班 アイム・トラベリング・アローン』</h3>
+              <p class="nm-card__catch">「ひとりで旅をしています」と書かれた札</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">一気読み</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>オスロ近郊の森で、人形のような服を着せられた6歳の少女が、木に吊るされた姿で見つかる。首には「ひとりで旅をしています」と書かれた札。特別班を率いる警部は、心に傷を負って島に引きこもっていた元同僚の女性刑事を呼び戻す。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>猟奇的な事件と、癖の強い捜査班の人間ドラマが並行して進む、テンポのよい犯罪スリラー。心に傷を抱えた二人の刑事の関係が、シリーズを通しての読みどころになっている。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>オスロ警察特別班シリーズの第1作</dd></div>
@@ -872,13 +956,17 @@
       <h3 class="nm-country" id="c-iceland"><svg class="nm-flag" viewBox="0 0 25 18" width="19.4" height="14" aria-hidden="true" focusable="false"><rect width="25" height="18" fill="#02529c"/><rect x="7" y="0" width="4" height="18" fill="#fff"/><rect x="0" y="7" width="25" height="4" fill="#fff"/><rect x="8" y="0" width="2" height="18" fill="#dc1e35"/><rect x="0" y="8" width="25" height="2" fill="#dc1e35"/></svg>アイスランド<span>（4作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-iceland.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-grafarthogn">
-          <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488266042" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/26604.jpg" alt="『緑衣の女』の書影（アーナルデュル・インドリダソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">アーナルデュル・インドリダソン</span></p>
-            <h3 class="nm-card__title">『緑衣の女』</h3>
-            <p class="nm-card__catch">土の中から出た骨と、緑のコートの女</p>
-            <div class="nm-tags"><span class="nm-tag">重厚</span><span class="nm-tag">社会派</span><span class="nm-tag">歴史・文化</span></div>
-            <p class="nm-card__text">レイキャヴィク郊外の住宅地で、子どもが人間の骨を拾ってくる。最近埋められたものではない。付近にはかつてサマーハウスがあり、戦時中には英米軍のバラックもあったらしい。住人の証言に、緑のコートを着た女の姿が浮かび上がる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488266042" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/26604.jpg" alt="『緑衣の女』の書影（アーナルデュル・インドリダソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">アーナルデュル・<wbr>インドリダソン</span></p>
+              <h3 class="nm-card__title">『緑衣の女』</h3>
+              <p class="nm-card__catch">土の中から出た骨と、緑のコートの女</p>
+              <div class="nm-tags"><span class="nm-tag">重厚</span><span class="nm-tag">社会派</span><span class="nm-tag">歴史・文化</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>レイキャヴィク郊外の住宅地で、子どもが人間の骨を拾ってくる。最近埋められたものではない。付近にはかつてサマーハウスがあり、戦時中には英米軍のバラックもあったらしい。住人の証言に、緑のコートを着た女の姿が浮かび上がる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>過去の家庭内暴力の記憶と、捜査官エーレンデュル自身の家族の問題が重なり、シリーズでも屈指の痛切さをもつ。2003年ガラスの鍵賞、2005年英国推理作家協会賞ゴールド・ダガー受賞。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈エーレンデュル捜査官〉シリーズ（日本語版第2作）</dd></div>
@@ -888,13 +976,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-marrid-i-stiganum">
-          <a class="nm-card__cover" href="https://www.shogakukan.co.jp/books/09407203" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09407203" alt="『軋み』の書影（エヴァ・ビョルク・アイイスドッティル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">エヴァ・ビョルク・アイイスドッティル</span></p>
-            <h3 class="nm-card__title">『軋み』</h3>
-            <p class="nm-card__catch">故郷の港町の灯台で、女性の遺体が見つかる</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">恋人との暮らしが唐突に終わり、レイキャヴィク警察を辞めて故郷の町アークラネスに戻ったエルマ。地元の警察で働きはじめてまもなく、観光名所の灯台の近くで女性の遺体が見つかる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.shogakukan.co.jp/books/09407203" target="_blank" rel="noopener"><img src="https://www.shogakukan.co.jp/thumbnail/snsbooks/09407203" alt="『軋み』の書影（エヴァ・ビョルク・アイイスドッティル）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">エヴァ・<wbr>ビョルク・<wbr>アイイスドッティル</span></p>
+              <h3 class="nm-card__title">『軋み』</h3>
+              <p class="nm-card__catch">故郷の港町の灯台で、女性の遺体が見つかる</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">心理サスペンス</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>恋人との暮らしが唐突に終わり、レイキャヴィク警察を辞めて故郷の町アークラネスに戻ったエルマ。地元の警察で働きはじめてまもなく、観光名所の灯台の近くで女性の遺体が見つかる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>小さな町が隠してきた過去と、エルマ自身の再出発が並行して描かれる、新しい世代のアイスランド・ミステリ。英訳版は英国推理作家協会賞のジョン・クリーシー（ニューブラッド）・ダガーを受賞した。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>刑事エルマを主人公とするシリーズの第1作</dd></div>
@@ -904,13 +996,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-thridja-taknid">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">魔女遊戯</span><span class="no-cover__rule"></span><span class="no-cover__author">イルサ・シグルザルドッティル</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">イルサ・シグルザルドッティル</span></p>
-            <h3 class="nm-card__title">『魔女遊戯』</h3>
-            <p class="nm-card__catch">魔女狩りの歴史を研究していた留学生の死</p>
-            <div class="nm-tags"><span class="nm-tag">歴史・文化</span><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">アイスランド大学で、ドイツ人留学生の遺体が見つかる。両親から真相の究明を依頼されたのは、二人の子をもつ弁護士の女性。被害者が魔女狩りの歴史を研究していたことから、調査はアイスランドの古い魔術の世界へ踏み込んでいく。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">魔女遊戯</span><span class="no-cover__rule"></span><span class="no-cover__author">イルサ・シグルザルドッティル</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">イルサ・<wbr>シグルザルドッティル</span></p>
+              <h3 class="nm-card__title">『魔女遊戯』</h3>
+              <p class="nm-card__catch">魔女狩りの歴史を研究していた留学生の死</p>
+              <div class="nm-tags"><span class="nm-tag">歴史・文化</span><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>アイスランド大学で、ドイツ人留学生の遺体が見つかる。両親から真相の究明を依頼されたのは、二人の子をもつ弁護士の女性。被害者が魔女狩りの歴史を研究していたことから、調査はアイスランドの古い魔術の世界へ踏み込んでいく。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>猟奇的な事件と、子育てに追われる主人公のユーモアある日常との落差が独特。歴史と伝承を絡めた謎解きを楽しめる。アイスランドの魔術や魔女狩りの歴史に興味がある人には、資料を読むような面白さもある。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>弁護士の女性を主人公とするシリーズの第1作</dd></div>
@@ -919,13 +1015,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-flateyjargata">
-          <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488196035" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/19603.jpg" alt="『フラテイの暗号』の書影（ヴィクトル・アルナル・インゴウルフソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヴィクトル・アルナル・インゴウルフソン</span></p>
-            <h3 class="nm-card__title">『フラテイの暗号』</h3>
-            <p class="nm-card__catch">古写本と死者のポケットの紙切れ</p>
-            <div class="nm-tags"><span class="nm-tag">歴史・文化</span><span class="nm-tag">自然・風景</span></div>
-            <p class="nm-card__text">西アイスランドのフィヨルドに浮かぶフラテイ島。アザラシ猟のために無人島へ渡った少年が、死後かなり時間のたった男性の遺体を見つける。ポケットには、意味の取れない言葉を書いた紙切れが入っていた。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488196035" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/19603.jpg" alt="『フラテイの暗号』の書影（ヴィクトル・アルナル・インゴウルフソン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">アイスランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ヴィクトル・<wbr>アルナル・<wbr>インゴウルフソン</span></p>
+              <h3 class="nm-card__title">『フラテイの暗号』</h3>
+              <p class="nm-card__catch">古写本と死者のポケットの紙切れ</p>
+              <div class="nm-tags"><span class="nm-tag">歴史・文化</span><span class="nm-tag">自然・風景</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>西アイスランドのフィヨルドに浮かぶフラテイ島。アザラシ猟のために無人島へ渡った少年が、死後かなり時間のたった男性の遺体を見つける。ポケットには、意味の取れない言葉を書いた紙切れが入っていた。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>島に伝わる写本『フラテイの書』と暗号をめぐる謎解きに、島の暮らしと人々の距離感が溶け込む。素朴な島の時間を味わえる、風変わりな北欧ミステリ。ガラスの鍵賞の候補作（出版社の紹介より）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品</dd></div>
@@ -938,13 +1038,17 @@
       <h3 class="nm-country" id="c-finland"><svg class="nm-flag" viewBox="0 0 18 11" width="22.9" height="14" aria-hidden="true" focusable="false"><rect width="18" height="11" fill="#fff"/><rect x="5" y="0" width="3" height="11" fill="#002f6c"/><rect x="0" y="4" width="18" height="3" fill="#002f6c"/></svg>フィンランド<span>（3作品）</span></h3>
       <figure class="nm-country-img"><img src="assets/images/nordic-country-finland.webp" alt="" width="1200" height="675" loading="lazy" decoding="async" /></figure>
         <article class="nm-card" id="n-luminainen">
-          <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488280048" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/28004.jpg" alt="『雪の女』の書影（レーナ・レヘトライネン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">レーナ・レヘトライネン</span></p>
-            <h3 class="nm-card__title">『雪の女』</h3>
-            <p class="nm-card__catch">雪深い森で、有名セラピストの遺体</p>
-            <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">自然・風景</span></div>
-            <p class="nm-card__text">エスポー警察の巡査部長マリア・カッリオは、女性限定のセラピーセンターでの講演を頼まれる。数週間後、そのセンターを開いた有名なセラピストが行方不明になり、雪深い森で遺体となって見つかる。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488280048" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/28004.jpg" alt="『雪の女』の書影（レーナ・レヘトライネン）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">レーナ・<wbr>レヘトライネン</span></p>
+              <h3 class="nm-card__title">『雪の女』</h3>
+              <p class="nm-card__catch">雪深い森で、有名セラピストの遺体</p>
+              <div class="nm-tags"><span class="nm-tag">警察小説</span><span class="nm-tag">自然・風景</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>エスポー警察の巡査部長マリア・カッリオは、女性限定のセラピーセンターでの講演を頼まれる。数週間後、そのセンターを開いた有名なセラピストが行方不明になり、雪深い森で遺体となって見つかる。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>訳ありの女性たちが集まる館という閉じた舞台と、小柄で率直なマリアの人物像が魅力。フィンランドの冬の森の冷たさが全編を包む。フィンランドの「推理の糸口賞」受賞作で、ガラスの鍵賞の候補にもなった（出版社の紹介より）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>〈マリア・カッリオ〉シリーズの邦訳第1作（原書では4作目）</dd></div>
@@ -954,13 +1058,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-mustamaki">
-          <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488010669" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/1066.jpg" alt="『処刑の丘』の書影（ティモ・サンドベリ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ティモ・サンドベリ</span></p>
-            <h3 class="nm-card__title">『処刑の丘』</h3>
-            <p class="nm-card__catch">内戦の傷が残る町で、警官は公正を貫けるか</p>
-            <div class="nm-tags"><span class="nm-tag">歴史・文化</span><span class="nm-tag">社会派</span><span class="nm-tag">警察小説</span></div>
-            <p class="nm-card__text">かつて虐殺の舞台となり〈黒が丘〉と呼ばれる場所で、男たちが「処刑」と称して一人の青年を銃殺する。警察は密造酒の取引をめぐる殺人として片づけようとするが、巡査ケッキは事件の陰に、まだ癒えない内戦の傷を見る。</p>
+          <div class="nm-card__top">
+            <a class="nm-card__cover" href="https://www.tsogen.co.jp/np/isbn/9784488010669" target="_blank" rel="noopener"><img src="https://www.tsogen.co.jp/img/cover_image_l/1066.jpg" alt="『処刑の丘』の書影（ティモ・サンドベリ）" loading="lazy" decoding="async" onerror="this.outerHTML='&lt;span class=&quot;no-cover&quot;&gt;書影&lt;br&gt;準備中&lt;/span&gt;';" /></a>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">ティモ・<wbr>サンドベリ</span></p>
+              <h3 class="nm-card__title">『処刑の丘』</h3>
+              <p class="nm-card__catch">内戦の傷が残る町で、警官は公正を貫けるか</p>
+              <div class="nm-tags"><span class="nm-tag">歴史・文化</span><span class="nm-tag">社会派</span><span class="nm-tag">警察小説</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>かつて虐殺の舞台となり〈黒が丘〉と呼ばれる場所で、男たちが「処刑」と称して一人の青年を銃殺する。警察は密造酒の取引をめぐる殺人として片づけようとするが、巡査ケッキは事件の陰に、まだ癒えない内戦の傷を見る。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>内戦に敗れた側の人々が鬱屈を抱えたまま暮らす町を舞台に、公正な捜査をしようとする警官の苦悩を描く歴史ミステリ。日本ではあまり知られていないフィンランド近代史に触れられる。「推理の糸口賞」受賞作（出版社の紹介より）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>単発作品として読める</dd></div>
@@ -970,13 +1078,17 @@
           </div>
         </article>
         <article class="nm-card" id="n-tappajan-nakoinen-mies">
-          <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">殺人者の顔をした男</span><span class="no-cover__rule"></span><span class="no-cover__author">マッティ・ロンカ</span><span class="no-cover__note">書影準備中</span></span></span>
-          <div class="nm-card__body">
-            <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">マッティ・ロンカ</span></p>
-            <h3 class="nm-card__title">『殺人者の顔をした男』</h3>
-            <p class="nm-card__catch">ロシアとフィンランドの境界を生きる男</p>
-            <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
-            <p class="nm-card__text">ロシアから移り住んだイングリア系フィンランド人のヴィクトルは、ヘルシンキで小さな事業を営みながら、同じ境遇の人々の暮らしを手助けしている。そんな彼が、古美術商から、行方のわからない妻を捜してほしいという報酬のよい依頼を受ける。</p>
+          <div class="nm-card__top">
+            <span class="nm-card__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">殺人者の顔をした男</span><span class="no-cover__rule"></span><span class="no-cover__author">マッティ・ロンカ</span><span class="no-cover__note">書影準備中</span></span></span>
+            <div class="nm-card__head">
+              <p class="nm-card__meta"><span class="nm-card__country">フィンランド</span><span class="nm-card__sep">｜</span><span class="nm-card__author">マッティ・<wbr>ロンカ</span></p>
+              <h3 class="nm-card__title">『殺人者の顔をした男』</h3>
+              <p class="nm-card__catch">ロシアとフィンランドの境界を生きる男</p>
+              <div class="nm-tags"><span class="nm-tag">犯罪スリラー</span><span class="nm-tag">社会派</span><span class="nm-tag">シリーズ第1作</span></div>
+            </div>
+          </div>
+          <div class="nm-card__bottom">
+            <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>ロシアから移り住んだイングリア系フィンランド人のヴィクトルは、ヘルシンキで小さな事業を営みながら、同じ境遇の人々の暮らしを手助けしている。そんな彼が、古美術商から、行方のわからない妻を捜してほしいという報酬のよい依頼を受ける。</p>
             <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>ロシアとフィンランド、二つの国のあいだを生きる主人公の目を通して、ヘルシンキの裏社会と移民の暮らしが描かれる。犯罪小説の緊張感と、境界に生きる人々へのまなざしが同居する。著者は2007年にガラスの鍵賞を受賞している（受賞作はシリーズの別作品）。</p>
             <dl class="nm-card__info">
               <div><dt>シリーズ</dt><dd>ヴィクトルを主人公とするシリーズの第1作</dd></div>
