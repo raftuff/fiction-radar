@@ -223,6 +223,27 @@
     .ed-latest { font-size: .9rem; line-height: 1.7; margin: 10px 0 12px; padding: 10px 14px; background: #e8eff0; border-radius: 10px; color: var(--ink); overflow-wrap: anywhere; }
     .ed-latest__label { font-family: var(--font-round); font-weight: 900; color: #176b75; }
     .ed-table tr { scroll-margin-top: 124px; }
+    .ed-order { font-family: var(--font-round); font-weight: 800; font-size: .84rem; color: #176b75; margin: 0 0 6px; }
+    .ed-order::before { content: "↓ "; }
+    .ed-author__ja { display: block; color: var(--ink); }
+    .ed-author__en { display: block; font-size: .76rem; color: #8a8378; margin-top: 1px; }
+    /* 書影でたどる歴代受賞作：PCは6作を横並び、SPは2列 */
+    .ed-mini { margin: 6px 0 30px; padding: 18px 18px 20px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; }
+    .art-content .ed-mini__head { font-family: var(--font-round); font-weight: 900; font-size: 1.08rem; margin: 0 0 4px; }
+    .ed-mini__lead { font-size: .86rem; color: var(--ink-soft); line-height: 1.7; margin: 0 0 14px; }
+    .ed-mini__list { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .ed-mini__card { display: flex; flex-direction: column; height: 100%; color: var(--ink); border-radius: 8px; transition: transform .15s; }
+    .ed-mini__card:hover { transform: translateY(-2px); }
+    .ed-mini__card:hover .ed-mini__title { color: var(--accent); }
+    .ed-mini__card:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+    .ed-mini__year { font-family: var(--font-round); font-weight: 900; font-size: 1.05rem; color: #176b75; line-height: 1.2; margin: 0 0 6px; }
+    /* 書影の枠を同じ縦横比にそろえ、表紙は切らずに枠の下端へ寄せる（作品名の位置をそろえるため） */
+    .ed-mini__cover { display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 2 / 3; margin: 0 0 8px; }
+    .ed-mini__cover img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 4px; box-shadow: 0 3px 10px rgba(60,45,30,.16); background: #f0ece3; }
+    .ed-mini__cover .no-cover { height: 100%; aspect-ratio: auto; }
+    .ed-mini__title { font-family: var(--font-round); font-weight: 900; font-size: .86rem; line-height: 1.45; overflow-wrap: anywhere; transition: color .15s; }
+    .ed-mini__author { font-size: .74rem; color: var(--ink-soft); line-height: 1.5; margin-top: 2px; overflow-wrap: anywhere; }
+    .ed-mini__label { align-self: flex-start; margin-top: 6px; font-size: .68rem; font-weight: 700; line-height: 1.45; color: #1f6f6c; background: #fff; border: 1px solid rgba(46,163,160,.4); border-radius: 6px; padding: 1px 6px; }
     /* 30選の作品カード：上段＝書影＋作品名・著者・受賞年・キャッチ・タグ、下段＝あらすじ以降を全幅で */
     .ed-card { padding: 26px 0; border-top: 1px solid var(--line); scroll-margin-top: 124px; }
     .ed-card:first-child, .ed-theme + .ed-card { border-top: 0; }
@@ -307,6 +328,9 @@
       .ed-card .nm-tags { gap: 4px; }
       .ed-card .nm-tag { font-size: .7rem; padding: 2px 8px; }
       .ed-chips a { min-height: 40px; }
+      .ed-mini { padding: 14px 14px 16px; }
+      .ed-mini__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
+      .ed-mini__cover { width: 78%; }
       .ed-theme { margin-top: 52px; font-size: 1.22rem; }
       /* 歴代受賞作：SPは受賞年ごとのカード（年 → 邦題 → 原題 → 著者） */
       .ed-table thead { display: none; }
@@ -402,8 +426,8 @@
 
 
       <h2 id="about">エドガー賞とは</h2>
-      <p>エドガー賞（エドガー・アラン・ポー賞）は、アメリカ探偵作家クラブ（Mystery Writers of America、MWA）が毎年贈るミステリの賞です。名前は、推理小説の祖とされるエドガー・アラン・ポーにちなみます。長編、新人の長編、ペーパーバック、短編などいくつもの部門があり、日本では「アメリカ探偵作家クラブ賞」「MWA賞」とも呼ばれます。</p>
-      <p>この記事で扱うのは、その中心となる最優秀長編賞（Best Novel）です。1954年から毎年1作が選ばれており、受賞年は授賞式が行われた年を指します。アメリカの賞ですが、受賞作にはイギリスの<a href="#e-spy-cold">『寒い国から帰ってきたスパイ』</a>や、スウェーデンの<a href="#e-laughing-policeman">『笑う警官』</a>も含まれます。</p>
+      <p>エドガー賞（エドガー・アラン・ポー賞）は、アメリカ探偵作家クラブ（Mystery Writers of America）が毎年贈る賞です。日本では「アメリカ探偵作家クラブ賞」「MWA賞」とも呼ばれます。名前はエドガー・アラン・ポーにちなみ、英国のCWAダガー賞と並ぶ、英語圏のミステリ・犯罪小説を代表する賞の一つです。</p>
+      <p>この記事で紹介する最優秀長編賞（Best Novel）は、1954年に始まりました。受賞作には、英国の<a href="#e-spy-cold">『寒い国から帰ってきたスパイ』</a>や、スウェーデンの<a href="#e-laughing-policeman">『笑う警官』</a>もあります。</p>
 
 
       <h2 id="best30">エドガー賞受賞作 おすすめ30選</h2>
@@ -818,7 +842,8 @@
           </div>
           <div class="ed-card__bottom">
             <p class="nm-card__text"><span class="nm-card__label">あらすじ</span>富豪たちを乗せたプライベートジェットが大西洋に墜落する。同乗していた画家のスコットは、乗客の幼い男の子とともに泳いで生還するが、やがて彼に疑いの目が向けられる。</p>
-            <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>何が起き、何が起きなかったのか。生存者の現在と、乗客一人ひとりの過去が交互に語られ、事故の背景が少しずつ浮かび上がります。過熱する報道の描写も鋭い、脚本家としても知られる著者のサスペンスです。</p>
+            <p class="nm-card__why"><span class="nm-card__label">読みどころ</span>何が起き、何が起きなかったのか。飛行機の墜落事故を起点に、生存者の現在と乗客一人ひとりの過去が交互に語られ、事故の背景が少しずつ浮かび上がります。過熱する報道の描写も鋭いサスペンスです。</p>
+            <p class="nm-card__why ed-card__aside">ちなみに、著者は『FARGO／ファーゴ』『レギオン』『エイリアン：アース』を手がけた、あのノア・ホーリーです。ドラマはどれもキテレツで強烈な印象を残す有名作品ですが、小説ではエドガー賞最優秀長編賞まで受賞しているという、才能あふれたクリエイターです。映画やドラマのホーリーファンにも必見の一冊です。</p>
             <dl class="nm-card__info">
               <div><dt>原題</dt><dd><i>Before the Fall</i>（2017年 最優秀長編賞）</dd></div>
               <div><dt>日本語版</dt><dd>ハヤカワ・ミステリ文庫（早川書房）上・下／川副智子 訳／2017年<br><span class="ed-note">※書影は早川書房公式サイトの電子書籍版ページのもの</span></dd></div>
@@ -1033,6 +1058,18 @@
       </div>
 
       <h2 id="winners">エドガー賞 最優秀長編賞 歴代受賞作一覧（1954〜2026年）</h2>
+      <section class="ed-mini" aria-labelledby="ed-mini-title">
+        <h3 class="ed-mini__head" id="ed-mini-title">書影でたどる歴代受賞作</h3>
+        <p class="ed-mini__lead">時代も作風も異なる6作を、受賞年の古い順に。気になった作品は、カードから紹介へ移動できます。</p>
+        <ol class="ed-mini__list">
+          <li><a class="ed-mini__card" href="#e-long-goodbye"><span class="ed-mini__year">1955</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610290.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『長いお別れ』</span><span class="ed-mini__author">レイモンド・チャンドラー</span><span class="ed-mini__label">私立探偵小説</span></a></li>
+          <li><a class="ed-mini__card" href="#e-day-of-the-jackal"><span class="ed-mini__year">1972</span><span class="ed-mini__cover"><img src="https://cdn.kdkw.jp/cover_500/322207/322207000620.webp" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『ジャッカルの日』</span><span class="ed-mini__author">フレデリック・フォーサイス</span><span class="ed-mini__label">暗殺スリラー</span></a></li>
+          <li><a class="ed-mini__card" href="#e-old-bones"><span class="ed-mini__year">1988</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610894.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『古い骨』</span><span class="ed-mini__author">アーロン・エルキンズ</span><span class="ed-mini__label">本格謎解き</span></a></li>
+          <li><a class="ed-mini__card" href="#e-sculptress"><span class="ed-mini__year">1994</span><span class="ed-mini__cover"><img src="https://www.tsogen.co.jp/img/cover_image_l/18714.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『女彫刻家』</span><span class="ed-mini__author">ミネット・ウォルターズ</span><span class="ed-mini__label">英国心理ミステリ</span></a></li>
+          <li><a class="ed-mini__card" href="#e-bluebird-bluebird"><span class="ed-mini__year">2018</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612615.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『ブルーバード、ブルーバード』</span><span class="ed-mini__author">アッティカ・ロック</span><span class="ed-mini__label">社会派犯罪小説</span></a></li>
+          <li><a class="ed-mini__card" href="#e-notes-on-an-execution"><span class="ed-mini__year">2023</span><span class="ed-mini__cover"><span class="no-cover">書影<br>準備中</span></span><span class="ed-mini__title">『死刑執行のノート』</span><span class="ed-mini__author">ダニヤ・クカフカ</span><span class="ed-mini__label">複数視点の犯罪小説</span></a></li>
+        </ol>
+      </section>
       <p>1954年の第1回から2026年までの受賞作を、新しい順にすべて掲載しました（全73作）。邦題が確認できた作品は72作です。おすすめ30選で紹介した作品は、邦題から紹介へ移動できます。</p>
       <nav class="ed-chips ed-chips--decade" aria-label="年代で移動">
         <ul>
@@ -1047,84 +1084,85 @@
         </ul>
       </nav>
       <p class="ed-latest"><span class="ed-latest__label">2026年受賞作</span>　<i lang="en">The Big Empty</i>（<span lang="en">Robert Crais</span>／邦訳未確認）</p>
+      <p class="ed-order">受賞年の新しい順</p>
       <div class="ed-wrap">
         <table class="ed-table">
           <caption class="ed-sr">エドガー賞 最優秀長編賞 歴代受賞作（1954〜2026年、受賞年の新しい順）</caption>
           <thead><tr><th scope="col">受賞年</th><th scope="col">原題</th><th scope="col">著者</th><th scope="col">邦題</th></tr></thead>
           <tbody>
-            <tr id="d2020s"><td class="ed-year">2026</td><td class="ed-orig" lang="en">The Big Empty</td><td class="ed-author">Robert Crais</td><td class="ed-ja"><span class="ed-unconf">邦訳未確認</span></td></tr>
-            <tr><td class="ed-year">2025</td><td class="ed-orig" lang="en">The In Crowd</td><td class="ed-author">Charlotte Vassell</td><td class="ed-ja"><a href="#e-in-crowd">『果てしない残響』</a><a class="ed-pick" href="#e-in-crowd">30選</a></td></tr>
-            <tr><td class="ed-year">2024</td><td class="ed-orig" lang="en">Flags on the Bayou</td><td class="ed-author">James Lee Burke</td><td class="ed-ja"><a href="#e-flags-on-the-bayou">『破れざる旗の下に』</a><a class="ed-pick" href="#e-flags-on-the-bayou">30選</a></td></tr>
-            <tr><td class="ed-year">2023</td><td class="ed-orig" lang="en">Notes on an Execution</td><td class="ed-author">Danya Kukafka</td><td class="ed-ja"><a href="#e-notes-on-an-execution">『死刑執行のノート』</a><a class="ed-pick" href="#e-notes-on-an-execution">30選</a></td></tr>
-            <tr><td class="ed-year">2022</td><td class="ed-orig" lang="en">Five Decembers</td><td class="ed-author">James Kestrel</td><td class="ed-ja"><a href="#e-five-decembers">『真珠湾の冬』</a><a class="ed-pick" href="#e-five-decembers">30選</a></td></tr>
-            <tr><td class="ed-year">2021</td><td class="ed-orig" lang="en">Djinn Patrol on the Purple Line</td><td class="ed-author">Deepa Anappara</td><td class="ed-ja"><a href="#e-djinn-patrol">『ブート・バザールの少年探偵』</a><a class="ed-pick" href="#e-djinn-patrol">30選</a></td></tr>
-            <tr><td class="ed-year">2020</td><td class="ed-orig" lang="en">The Stranger Diaries</td><td class="ed-author">Elly Griffiths</td><td class="ed-ja"><a href="#e-stranger-diaries">『見知らぬ人』</a><a class="ed-pick" href="#e-stranger-diaries">30選</a></td></tr>
-            <tr id="d2010s"><td class="ed-year">2019</td><td class="ed-orig" lang="en">Down the River Unto the Sea</td><td class="ed-author">Walter Mosley</td><td class="ed-ja"><a href="#e-down-the-river">『流れは、いつか海へと』</a><a class="ed-pick" href="#e-down-the-river">30選</a></td></tr>
-            <tr><td class="ed-year">2018</td><td class="ed-orig" lang="en">Bluebird, Bluebird</td><td class="ed-author">Attica Locke</td><td class="ed-ja"><a href="#e-bluebird-bluebird">『ブルーバード、ブルーバード』</a><a class="ed-pick" href="#e-bluebird-bluebird">30選</a></td></tr>
-            <tr><td class="ed-year">2017</td><td class="ed-orig" lang="en">Before the Fall</td><td class="ed-author">Noah Hawley</td><td class="ed-ja"><a href="#e-before-the-fall">『晩夏の墜落』</a><a class="ed-pick" href="#e-before-the-fall">30選</a></td></tr>
-            <tr><td class="ed-year">2016</td><td class="ed-orig" lang="en">Let Me Die in His Footsteps</td><td class="ed-author">Lori Roy</td><td class="ed-ja">『地中の記憶』</td></tr>
-            <tr><td class="ed-year">2015</td><td class="ed-orig" lang="en">Mr. Mercedes</td><td class="ed-author">Stephen King</td><td class="ed-ja"><a href="#e-mr-mercedes">『ミスター・メルセデス』</a><a class="ed-pick" href="#e-mr-mercedes">30選</a></td></tr>
-            <tr><td class="ed-year">2014</td><td class="ed-orig" lang="en">Ordinary Grace</td><td class="ed-author">William Kent Krueger</td><td class="ed-ja"><a href="#e-ordinary-grace">『ありふれた祈り』</a><a class="ed-pick" href="#e-ordinary-grace">30選</a></td></tr>
-            <tr><td class="ed-year">2013</td><td class="ed-orig" lang="en">Live by Night</td><td class="ed-author">Dennis Lehane</td><td class="ed-ja">『夜に生きる』</td></tr>
-            <tr><td class="ed-year">2012</td><td class="ed-orig" lang="en">Gone</td><td class="ed-author">Mo Hayder</td><td class="ed-ja">『喪失』</td></tr>
-            <tr><td class="ed-year">2011</td><td class="ed-orig" lang="en">The Lock Artist</td><td class="ed-author">Steve Hamilton</td><td class="ed-ja">『解錠師』</td></tr>
-            <tr><td class="ed-year">2010</td><td class="ed-orig" lang="en">The Last Child</td><td class="ed-author">John Hart</td><td class="ed-ja"><a href="#e-last-child">『ラスト・チャイルド』</a><a class="ed-pick" href="#e-last-child">30選</a></td></tr>
-            <tr id="d2000s"><td class="ed-year">2009</td><td class="ed-orig" lang="en">Blue Heaven</td><td class="ed-author">C. J. Box</td><td class="ed-ja">『ブルー・ヘヴン』</td></tr>
-            <tr><td class="ed-year">2008</td><td class="ed-orig" lang="en">Down River</td><td class="ed-author">John Hart</td><td class="ed-ja">『川は静かに流れ』</td></tr>
-            <tr><td class="ed-year">2007</td><td class="ed-orig" lang="en">The Janissary Tree</td><td class="ed-author">Jason Goodwin</td><td class="ed-ja"><a href="#e-janissary-tree">『イスタンブールの群狼』</a><a class="ed-pick" href="#e-janissary-tree">30選</a></td></tr>
-            <tr><td class="ed-year">2006</td><td class="ed-orig" lang="en">Citizen Vince</td><td class="ed-author">Jess Walter</td><td class="ed-ja">『市民ヴィンス』</td></tr>
-            <tr><td class="ed-year">2005</td><td class="ed-orig" lang="en">California Girl</td><td class="ed-author">T. Jefferson Parker</td><td class="ed-ja">『カリフォルニア・ガール』</td></tr>
-            <tr><td class="ed-year">2004</td><td class="ed-orig" lang="en">Resurrection Men</td><td class="ed-author">Ian Rankin</td><td class="ed-ja"><a href="#e-resurrection-men">『甦る男』</a><a class="ed-pick" href="#e-resurrection-men">30選</a></td></tr>
-            <tr><td class="ed-year">2003</td><td class="ed-orig" lang="en">Winter and Night</td><td class="ed-author">S. J. Rozan</td><td class="ed-ja"><a href="#e-winter-and-night">『冬そして夜』</a><a class="ed-pick" href="#e-winter-and-night">30選</a></td></tr>
-            <tr><td class="ed-year">2002</td><td class="ed-orig" lang="en">Silent Joe</td><td class="ed-author">T. Jefferson Parker</td><td class="ed-ja">『サイレント・ジョー』</td></tr>
-            <tr><td class="ed-year">2001</td><td class="ed-orig" lang="en">The Bottoms</td><td class="ed-author">Joe R. Lansdale</td><td class="ed-ja"><a href="#e-bottoms">『ボトムズ』</a><a class="ed-pick" href="#e-bottoms">30選</a></td></tr>
-            <tr><td class="ed-year">2000</td><td class="ed-orig" lang="en">Bones</td><td class="ed-author">Jan Burke</td><td class="ed-ja">『骨』</td></tr>
-            <tr id="d1990s"><td class="ed-year">1999</td><td class="ed-orig" lang="en">Mr. White&#x27;s Confession</td><td class="ed-author">Robert Clark</td><td class="ed-ja">『記憶なき殺人』</td></tr>
-            <tr><td class="ed-year">1998</td><td class="ed-orig" lang="en">Cimarron Rose</td><td class="ed-author">James Lee Burke</td><td class="ed-ja">『シマロン・ローズ』</td></tr>
-            <tr><td class="ed-year">1997</td><td class="ed-orig" lang="en">The Chatham School Affair</td><td class="ed-author">Thomas H. Cook</td><td class="ed-ja"><a href="#e-chatham-school">『緋色の記憶』</a><a class="ed-pick" href="#e-chatham-school">30選</a></td></tr>
-            <tr><td class="ed-year">1996</td><td class="ed-orig" lang="en">Come to Grief</td><td class="ed-author">Dick Francis</td><td class="ed-ja">『敵手』</td></tr>
-            <tr><td class="ed-year">1995</td><td class="ed-orig" lang="en">The Red Scream</td><td class="ed-author">Mary Willis Walker</td><td class="ed-ja">『処刑前夜』</td></tr>
-            <tr><td class="ed-year">1994</td><td class="ed-orig" lang="en">The Sculptress</td><td class="ed-author">Minette Walters</td><td class="ed-ja"><a href="#e-sculptress">『女彫刻家』</a><a class="ed-pick" href="#e-sculptress">30選</a></td></tr>
-            <tr><td class="ed-year">1993</td><td class="ed-orig" lang="en">Bootlegger&#x27;s Daughter</td><td class="ed-author">Margaret Maron</td><td class="ed-ja">『密造人の娘』</td></tr>
-            <tr><td class="ed-year">1992</td><td class="ed-orig" lang="en">A Dance at the Slaughterhouse</td><td class="ed-author">Lawrence Block</td><td class="ed-ja">『倒錯の舞踏』</td></tr>
-            <tr><td class="ed-year">1991</td><td class="ed-orig" lang="en">New Orleans Mourning</td><td class="ed-author">Julie Smith</td><td class="ed-ja">『ニューオーリンズの葬送』</td></tr>
-            <tr><td class="ed-year">1990</td><td class="ed-orig" lang="en">Black Cherry Blues</td><td class="ed-author">James Lee Burke</td><td class="ed-ja"><a href="#e-black-cherry-blues">『ブラック・チェリー・ブルース』</a><a class="ed-pick" href="#e-black-cherry-blues">30選</a></td></tr>
-            <tr id="d1980s"><td class="ed-year">1989</td><td class="ed-orig" lang="en">A Cold Red Sunrise</td><td class="ed-author">Stuart M. Kaminsky</td><td class="ed-ja">『ツンドラの殺意』</td></tr>
-            <tr><td class="ed-year">1988</td><td class="ed-orig" lang="en">Old Bones</td><td class="ed-author">Aaron Elkins</td><td class="ed-ja"><a href="#e-old-bones">『古い骨』</a><a class="ed-pick" href="#e-old-bones">30選</a></td></tr>
-            <tr><td class="ed-year">1987</td><td class="ed-orig" lang="en">A Dark-Adapted Eye</td><td class="ed-author">Barbara Vine</td><td class="ed-ja"><a href="#e-dark-adapted-eye">『死との抱擁』</a><a class="ed-pick" href="#e-dark-adapted-eye">30選</a></td></tr>
-            <tr><td class="ed-year">1986</td><td class="ed-orig" lang="en">The Suspect</td><td class="ed-author">L. R. Wright</td><td class="ed-ja">『容疑者』</td></tr>
-            <tr><td class="ed-year">1985</td><td class="ed-orig" lang="en">Briar Patch</td><td class="ed-author">Ross Thomas</td><td class="ed-ja">『女刑事の死』</td></tr>
-            <tr><td class="ed-year">1984</td><td class="ed-orig" lang="en">La Brava</td><td class="ed-author">Elmore Leonard</td><td class="ed-ja">『ラブラバ』</td></tr>
-            <tr><td class="ed-year">1983</td><td class="ed-orig" lang="en">Billingsgate Shoal</td><td class="ed-author">Rick Boyer</td><td class="ed-ja">『ケープ・コッド危険水域』</td></tr>
-            <tr><td class="ed-year">1982</td><td class="ed-orig" lang="en">Peregrine</td><td class="ed-author">William Bayer</td><td class="ed-ja">『キラーバード、急襲』</td></tr>
-            <tr><td class="ed-year">1981</td><td class="ed-orig" lang="en">Whip Hand</td><td class="ed-author">Dick Francis</td><td class="ed-ja">『利腕』</td></tr>
-            <tr><td class="ed-year">1980</td><td class="ed-orig" lang="en">The Rheingold Route</td><td class="ed-author">Arthur Maling</td><td class="ed-ja">『ラインゴルト特急の男』</td></tr>
-            <tr id="d1970s"><td class="ed-year">1979</td><td class="ed-orig" lang="en">The Eye of the Needle</td><td class="ed-author">Ken Follett</td><td class="ed-ja"><a href="#e-eye-of-the-needle">『針の眼』</a><a class="ed-pick" href="#e-eye-of-the-needle">30選</a></td></tr>
-            <tr><td class="ed-year">1978</td><td class="ed-orig" lang="en">Catch Me: Kill Me</td><td class="ed-author">William H. Hallahan</td><td class="ed-ja">『亡命詩人、雨に消ゆ』</td></tr>
-            <tr><td class="ed-year">1977</td><td class="ed-orig" lang="en">Promised Land</td><td class="ed-author">Robert B. Parker</td><td class="ed-ja"><a href="#e-promised-land">『約束の地』</a><a class="ed-pick" href="#e-promised-land">30選</a></td></tr>
-            <tr><td class="ed-year">1976</td><td class="ed-orig" lang="en">Hopscotch</td><td class="ed-author">Brian Garfield</td><td class="ed-ja">『ホップスコッチ』</td></tr>
-            <tr><td class="ed-year">1975</td><td class="ed-orig" lang="en">Peter&#x27;s Pence</td><td class="ed-author">Jon Cleary</td><td class="ed-ja">『法王の身代金』</td></tr>
-            <tr><td class="ed-year">1974</td><td class="ed-orig" lang="en">Dance Hall of the Dead</td><td class="ed-author">Tony Hillerman</td><td class="ed-ja"><a href="#e-dance-hall-of-the-dead">『死者の舞踏場』</a><a class="ed-pick" href="#e-dance-hall-of-the-dead">30選</a></td></tr>
-            <tr><td class="ed-year">1973</td><td class="ed-orig" lang="en">The Lingala Code</td><td class="ed-author">Warren Kiefer</td><td class="ed-ja">『リンガラ・コード』</td></tr>
-            <tr><td class="ed-year">1972</td><td class="ed-orig" lang="en">The Day of the Jackal</td><td class="ed-author">Frederick Forsyth</td><td class="ed-ja"><a href="#e-day-of-the-jackal">『ジャッカルの日』</a><a class="ed-pick" href="#e-day-of-the-jackal">30選</a></td></tr>
-            <tr><td class="ed-year">1971</td><td class="ed-orig" lang="en">The Laughing Policeman</td><td class="ed-author">Maj Sjöwall, Per Wahlöö</td><td class="ed-ja"><a href="#e-laughing-policeman">『笑う警官』</a><a class="ed-pick" href="#e-laughing-policeman">30選</a></td></tr>
-            <tr><td class="ed-year">1970</td><td class="ed-orig" lang="en">Forfeit</td><td class="ed-author">Dick Francis</td><td class="ed-ja">『罰金』</td></tr>
-            <tr id="d1960s"><td class="ed-year">1969</td><td class="ed-orig" lang="en">A Case of Need</td><td class="ed-author">Jeffery Hudson（Michael Crichton）</td><td class="ed-ja">『緊急の場合は』</td></tr>
-            <tr><td class="ed-year">1968</td><td class="ed-orig" lang="en">God Save the Mark</td><td class="ed-author">Donald E. Westlake</td><td class="ed-ja">『我輩はカモである』</td></tr>
-            <tr><td class="ed-year">1967</td><td class="ed-orig" lang="en">The King of the Rainy Country</td><td class="ed-author">Nicolas Freeling</td><td class="ed-ja">『雨の国の王者』</td></tr>
-            <tr><td class="ed-year">1966</td><td class="ed-orig" lang="en">The Quiller Memorandum</td><td class="ed-author">Adam Hall</td><td class="ed-ja">『不死鳥を倒せ』</td></tr>
-            <tr><td class="ed-year">1965</td><td class="ed-orig" lang="en">The Spy Who Came in from the Cold</td><td class="ed-author">John le Carré</td><td class="ed-ja"><a href="#e-spy-cold">『寒い国から帰ってきたスパイ』</a><a class="ed-pick" href="#e-spy-cold">30選</a></td></tr>
-            <tr><td class="ed-year">1964</td><td class="ed-orig" lang="en">The Light of Day</td><td class="ed-author">Eric Ambler</td><td class="ed-ja">『真昼の翳』</td></tr>
-            <tr><td class="ed-year">1963</td><td class="ed-orig" lang="en">Death and the Joyful Woman</td><td class="ed-author">Ellis Peters</td><td class="ed-ja">『死と陽気な女』</td></tr>
-            <tr><td class="ed-year">1962</td><td class="ed-orig" lang="en">Gideon&#x27;s Fire</td><td class="ed-author">J. J. Marric</td><td class="ed-ja">『ギデオンと放火魔』</td></tr>
-            <tr><td class="ed-year">1961</td><td class="ed-orig" lang="en">The Progress of a Crime</td><td class="ed-author">Julian Symons</td><td class="ed-ja">『犯罪の進行』</td></tr>
-            <tr><td class="ed-year">1960</td><td class="ed-orig" lang="en">The Hours Before Dawn</td><td class="ed-author">Celia Fremlin</td><td class="ed-ja"><a href="#e-hours-before-dawn">『夜明け前の時』</a><a class="ed-pick" href="#e-hours-before-dawn">30選</a></td></tr>
-            <tr id="d1950s"><td class="ed-year">1959</td><td class="ed-orig" lang="en">The Eighth Circle</td><td class="ed-author">Stanley Ellin</td><td class="ed-ja">『第八の地獄』</td></tr>
-            <tr><td class="ed-year">1958</td><td class="ed-orig" lang="en">Room to Swing</td><td class="ed-author">Ed Lacy</td><td class="ed-ja">『ゆがめられた昨日』</td></tr>
-            <tr><td class="ed-year">1957</td><td class="ed-orig" lang="en">A Dram of Poison</td><td class="ed-author">Charlotte Armstrong</td><td class="ed-ja">『毒薬の小壜』</td></tr>
-            <tr><td class="ed-year">1956</td><td class="ed-orig" lang="en">Beast in View</td><td class="ed-author">Margaret Millar</td><td class="ed-ja"><a href="#e-beast-in-view">『狙った獣』</a><a class="ed-pick" href="#e-beast-in-view">30選</a></td></tr>
-            <tr><td class="ed-year">1955</td><td class="ed-orig" lang="en">The Long Goodbye</td><td class="ed-author">Raymond Chandler</td><td class="ed-ja"><a href="#e-long-goodbye">『長いお別れ』</a><a class="ed-pick" href="#e-long-goodbye">30選</a></td></tr>
-            <tr><td class="ed-year">1954</td><td class="ed-orig" lang="en">Beat Not the Bones</td><td class="ed-author">Charlotte Jay</td><td class="ed-ja">『死の月』</td></tr>
+            <tr id="d2020s"><td class="ed-year">2026</td><td class="ed-orig" lang="en">The Big Empty</td><td class="ed-author"><span lang="en">Robert Crais</span></td><td class="ed-ja"><span class="ed-unconf">邦訳未確認</span></td></tr>
+            <tr><td class="ed-year">2025</td><td class="ed-orig" lang="en">The In Crowd</td><td class="ed-author"><span class="ed-author__ja">シャーロット・ヴァッセル</span><span class="ed-author__en" lang="en">Charlotte Vassell</span></td><td class="ed-ja"><a href="#e-in-crowd">『果てしない残響』</a><a class="ed-pick" href="#e-in-crowd">30選</a></td></tr>
+            <tr><td class="ed-year">2024</td><td class="ed-orig" lang="en">Flags on the Bayou</td><td class="ed-author"><span class="ed-author__ja">ジェイムズ・リー・バーク</span><span class="ed-author__en" lang="en">James Lee Burke</span></td><td class="ed-ja"><a href="#e-flags-on-the-bayou">『破れざる旗の下に』</a><a class="ed-pick" href="#e-flags-on-the-bayou">30選</a></td></tr>
+            <tr><td class="ed-year">2023</td><td class="ed-orig" lang="en">Notes on an Execution</td><td class="ed-author"><span class="ed-author__ja">ダニヤ・クカフカ</span><span class="ed-author__en" lang="en">Danya Kukafka</span></td><td class="ed-ja"><a href="#e-notes-on-an-execution">『死刑執行のノート』</a><a class="ed-pick" href="#e-notes-on-an-execution">30選</a></td></tr>
+            <tr><td class="ed-year">2022</td><td class="ed-orig" lang="en">Five Decembers</td><td class="ed-author"><span class="ed-author__ja">ジェイムズ・ケストレル</span><span class="ed-author__en" lang="en">James Kestrel</span></td><td class="ed-ja"><a href="#e-five-decembers">『真珠湾の冬』</a><a class="ed-pick" href="#e-five-decembers">30選</a></td></tr>
+            <tr><td class="ed-year">2021</td><td class="ed-orig" lang="en">Djinn Patrol on the Purple Line</td><td class="ed-author"><span class="ed-author__ja">ディーパ・アーナパーラ</span><span class="ed-author__en" lang="en">Deepa Anappara</span></td><td class="ed-ja"><a href="#e-djinn-patrol">『ブート・バザールの少年探偵』</a><a class="ed-pick" href="#e-djinn-patrol">30選</a></td></tr>
+            <tr><td class="ed-year">2020</td><td class="ed-orig" lang="en">The Stranger Diaries</td><td class="ed-author"><span class="ed-author__ja">エリー・グリフィス</span><span class="ed-author__en" lang="en">Elly Griffiths</span></td><td class="ed-ja"><a href="#e-stranger-diaries">『見知らぬ人』</a><a class="ed-pick" href="#e-stranger-diaries">30選</a></td></tr>
+            <tr id="d2010s"><td class="ed-year">2019</td><td class="ed-orig" lang="en">Down the River Unto the Sea</td><td class="ed-author"><span class="ed-author__ja">ウォルター・モズリイ</span><span class="ed-author__en" lang="en">Walter Mosley</span></td><td class="ed-ja"><a href="#e-down-the-river">『流れは、いつか海へと』</a><a class="ed-pick" href="#e-down-the-river">30選</a></td></tr>
+            <tr><td class="ed-year">2018</td><td class="ed-orig" lang="en">Bluebird, Bluebird</td><td class="ed-author"><span class="ed-author__ja">アッティカ・ロック</span><span class="ed-author__en" lang="en">Attica Locke</span></td><td class="ed-ja"><a href="#e-bluebird-bluebird">『ブルーバード、ブルーバード』</a><a class="ed-pick" href="#e-bluebird-bluebird">30選</a></td></tr>
+            <tr><td class="ed-year">2017</td><td class="ed-orig" lang="en">Before the Fall</td><td class="ed-author"><span class="ed-author__ja">ノア・ホーリー</span><span class="ed-author__en" lang="en">Noah Hawley</span></td><td class="ed-ja"><a href="#e-before-the-fall">『晩夏の墜落』</a><a class="ed-pick" href="#e-before-the-fall">30選</a></td></tr>
+            <tr><td class="ed-year">2016</td><td class="ed-orig" lang="en">Let Me Die in His Footsteps</td><td class="ed-author"><span class="ed-author__ja">ローリー・ロイ</span><span class="ed-author__en" lang="en">Lori Roy</span></td><td class="ed-ja">『地中の記憶』</td></tr>
+            <tr><td class="ed-year">2015</td><td class="ed-orig" lang="en">Mr. Mercedes</td><td class="ed-author"><span class="ed-author__ja">スティーヴン・キング</span><span class="ed-author__en" lang="en">Stephen King</span></td><td class="ed-ja"><a href="#e-mr-mercedes">『ミスター・メルセデス』</a><a class="ed-pick" href="#e-mr-mercedes">30選</a></td></tr>
+            <tr><td class="ed-year">2014</td><td class="ed-orig" lang="en">Ordinary Grace</td><td class="ed-author"><span class="ed-author__ja">ウィリアム・ケント・クルーガー</span><span class="ed-author__en" lang="en">William Kent Krueger</span></td><td class="ed-ja"><a href="#e-ordinary-grace">『ありふれた祈り』</a><a class="ed-pick" href="#e-ordinary-grace">30選</a></td></tr>
+            <tr><td class="ed-year">2013</td><td class="ed-orig" lang="en">Live by Night</td><td class="ed-author"><span class="ed-author__ja">デニス・ルヘイン</span><span class="ed-author__en" lang="en">Dennis Lehane</span></td><td class="ed-ja">『夜に生きる』</td></tr>
+            <tr><td class="ed-year">2012</td><td class="ed-orig" lang="en">Gone</td><td class="ed-author"><span class="ed-author__ja">モー・ヘイダー</span><span class="ed-author__en" lang="en">Mo Hayder</span></td><td class="ed-ja">『喪失』</td></tr>
+            <tr><td class="ed-year">2011</td><td class="ed-orig" lang="en">The Lock Artist</td><td class="ed-author"><span class="ed-author__ja">スティーヴ・ハミルトン</span><span class="ed-author__en" lang="en">Steve Hamilton</span></td><td class="ed-ja">『解錠師』</td></tr>
+            <tr><td class="ed-year">2010</td><td class="ed-orig" lang="en">The Last Child</td><td class="ed-author"><span class="ed-author__ja">ジョン・ハート</span><span class="ed-author__en" lang="en">John Hart</span></td><td class="ed-ja"><a href="#e-last-child">『ラスト・チャイルド』</a><a class="ed-pick" href="#e-last-child">30選</a></td></tr>
+            <tr id="d2000s"><td class="ed-year">2009</td><td class="ed-orig" lang="en">Blue Heaven</td><td class="ed-author"><span class="ed-author__ja">C・J・ボックス</span><span class="ed-author__en" lang="en">C. J. Box</span></td><td class="ed-ja">『ブルー・ヘヴン』</td></tr>
+            <tr><td class="ed-year">2008</td><td class="ed-orig" lang="en">Down River</td><td class="ed-author"><span class="ed-author__ja">ジョン・ハート</span><span class="ed-author__en" lang="en">John Hart</span></td><td class="ed-ja">『川は静かに流れ』</td></tr>
+            <tr><td class="ed-year">2007</td><td class="ed-orig" lang="en">The Janissary Tree</td><td class="ed-author"><span class="ed-author__ja">ジェイソン・グッドウィン</span><span class="ed-author__en" lang="en">Jason Goodwin</span></td><td class="ed-ja"><a href="#e-janissary-tree">『イスタンブールの群狼』</a><a class="ed-pick" href="#e-janissary-tree">30選</a></td></tr>
+            <tr><td class="ed-year">2006</td><td class="ed-orig" lang="en">Citizen Vince</td><td class="ed-author"><span class="ed-author__ja">ジェス・ウォルター</span><span class="ed-author__en" lang="en">Jess Walter</span></td><td class="ed-ja">『市民ヴィンス』</td></tr>
+            <tr><td class="ed-year">2005</td><td class="ed-orig" lang="en">California Girl</td><td class="ed-author"><span class="ed-author__ja">T・ジェファーソン・パーカー</span><span class="ed-author__en" lang="en">T. Jefferson Parker</span></td><td class="ed-ja">『カリフォルニア・ガール』</td></tr>
+            <tr><td class="ed-year">2004</td><td class="ed-orig" lang="en">Resurrection Men</td><td class="ed-author"><span class="ed-author__ja">イアン・ランキン</span><span class="ed-author__en" lang="en">Ian Rankin</span></td><td class="ed-ja"><a href="#e-resurrection-men">『甦る男』</a><a class="ed-pick" href="#e-resurrection-men">30選</a></td></tr>
+            <tr><td class="ed-year">2003</td><td class="ed-orig" lang="en">Winter and Night</td><td class="ed-author"><span class="ed-author__ja">S・J・ローザン</span><span class="ed-author__en" lang="en">S. J. Rozan</span></td><td class="ed-ja"><a href="#e-winter-and-night">『冬そして夜』</a><a class="ed-pick" href="#e-winter-and-night">30選</a></td></tr>
+            <tr><td class="ed-year">2002</td><td class="ed-orig" lang="en">Silent Joe</td><td class="ed-author"><span class="ed-author__ja">T・ジェファーソン・パーカー</span><span class="ed-author__en" lang="en">T. Jefferson Parker</span></td><td class="ed-ja">『サイレント・ジョー』</td></tr>
+            <tr><td class="ed-year">2001</td><td class="ed-orig" lang="en">The Bottoms</td><td class="ed-author"><span class="ed-author__ja">ジョー・R・ランズデール</span><span class="ed-author__en" lang="en">Joe R. Lansdale</span></td><td class="ed-ja"><a href="#e-bottoms">『ボトムズ』</a><a class="ed-pick" href="#e-bottoms">30選</a></td></tr>
+            <tr><td class="ed-year">2000</td><td class="ed-orig" lang="en">Bones</td><td class="ed-author"><span class="ed-author__ja">ジャン・バーク</span><span class="ed-author__en" lang="en">Jan Burke</span></td><td class="ed-ja">『骨』</td></tr>
+            <tr id="d1990s"><td class="ed-year">1999</td><td class="ed-orig" lang="en">Mr. White&#x27;s Confession</td><td class="ed-author"><span class="ed-author__ja">ロバート・クラーク</span><span class="ed-author__en" lang="en">Robert Clark</span></td><td class="ed-ja">『記憶なき殺人』</td></tr>
+            <tr><td class="ed-year">1998</td><td class="ed-orig" lang="en">Cimarron Rose</td><td class="ed-author"><span class="ed-author__ja">ジェイムズ・リー・バーク</span><span class="ed-author__en" lang="en">James Lee Burke</span></td><td class="ed-ja">『シマロン・ローズ』</td></tr>
+            <tr><td class="ed-year">1997</td><td class="ed-orig" lang="en">The Chatham School Affair</td><td class="ed-author"><span class="ed-author__ja">トマス・H・クック</span><span class="ed-author__en" lang="en">Thomas H. Cook</span></td><td class="ed-ja"><a href="#e-chatham-school">『緋色の記憶』</a><a class="ed-pick" href="#e-chatham-school">30選</a></td></tr>
+            <tr><td class="ed-year">1996</td><td class="ed-orig" lang="en">Come to Grief</td><td class="ed-author"><span class="ed-author__ja">ディック・フランシス</span><span class="ed-author__en" lang="en">Dick Francis</span></td><td class="ed-ja">『敵手』</td></tr>
+            <tr><td class="ed-year">1995</td><td class="ed-orig" lang="en">The Red Scream</td><td class="ed-author"><span class="ed-author__ja">M・W・ウォーカー</span><span class="ed-author__en" lang="en">Mary Willis Walker</span></td><td class="ed-ja">『処刑前夜』</td></tr>
+            <tr><td class="ed-year">1994</td><td class="ed-orig" lang="en">The Sculptress</td><td class="ed-author"><span class="ed-author__ja">ミネット・ウォルターズ</span><span class="ed-author__en" lang="en">Minette Walters</span></td><td class="ed-ja"><a href="#e-sculptress">『女彫刻家』</a><a class="ed-pick" href="#e-sculptress">30選</a></td></tr>
+            <tr><td class="ed-year">1993</td><td class="ed-orig" lang="en">Bootlegger&#x27;s Daughter</td><td class="ed-author"><span class="ed-author__ja">マーガレット・マロン</span><span class="ed-author__en" lang="en">Margaret Maron</span></td><td class="ed-ja">『密造人の娘』</td></tr>
+            <tr><td class="ed-year">1992</td><td class="ed-orig" lang="en">A Dance at the Slaughterhouse</td><td class="ed-author"><span class="ed-author__ja">ローレンス・ブロック</span><span class="ed-author__en" lang="en">Lawrence Block</span></td><td class="ed-ja">『倒錯の舞踏』</td></tr>
+            <tr><td class="ed-year">1991</td><td class="ed-orig" lang="en">New Orleans Mourning</td><td class="ed-author"><span class="ed-author__ja">ジュリー・スミス</span><span class="ed-author__en" lang="en">Julie Smith</span></td><td class="ed-ja">『ニューオーリンズの葬送』</td></tr>
+            <tr><td class="ed-year">1990</td><td class="ed-orig" lang="en">Black Cherry Blues</td><td class="ed-author"><span class="ed-author__ja">ジェイムズ・リー・バーク</span><span class="ed-author__en" lang="en">James Lee Burke</span></td><td class="ed-ja"><a href="#e-black-cherry-blues">『ブラック・チェリー・ブルース』</a><a class="ed-pick" href="#e-black-cherry-blues">30選</a></td></tr>
+            <tr id="d1980s"><td class="ed-year">1989</td><td class="ed-orig" lang="en">A Cold Red Sunrise</td><td class="ed-author"><span class="ed-author__ja">スチュアート・M・カミンスキー</span><span class="ed-author__en" lang="en">Stuart M. Kaminsky</span></td><td class="ed-ja">『ツンドラの殺意』</td></tr>
+            <tr><td class="ed-year">1988</td><td class="ed-orig" lang="en">Old Bones</td><td class="ed-author"><span class="ed-author__ja">アーロン・エルキンズ</span><span class="ed-author__en" lang="en">Aaron Elkins</span></td><td class="ed-ja"><a href="#e-old-bones">『古い骨』</a><a class="ed-pick" href="#e-old-bones">30選</a></td></tr>
+            <tr><td class="ed-year">1987</td><td class="ed-orig" lang="en">A Dark-Adapted Eye</td><td class="ed-author"><span class="ed-author__ja">バーバラ・ヴァイン</span><span class="ed-author__en" lang="en">Barbara Vine</span></td><td class="ed-ja"><a href="#e-dark-adapted-eye">『死との抱擁』</a><a class="ed-pick" href="#e-dark-adapted-eye">30選</a></td></tr>
+            <tr><td class="ed-year">1986</td><td class="ed-orig" lang="en">The Suspect</td><td class="ed-author"><span class="ed-author__ja">L・R・ライト</span><span class="ed-author__en" lang="en">L. R. Wright</span></td><td class="ed-ja">『容疑者』</td></tr>
+            <tr><td class="ed-year">1985</td><td class="ed-orig" lang="en">Briar Patch</td><td class="ed-author"><span class="ed-author__ja">ロス・トーマス</span><span class="ed-author__en" lang="en">Ross Thomas</span></td><td class="ed-ja">『女刑事の死』</td></tr>
+            <tr><td class="ed-year">1984</td><td class="ed-orig" lang="en">La Brava</td><td class="ed-author"><span class="ed-author__ja">エルモア・レナード</span><span class="ed-author__en" lang="en">Elmore Leonard</span></td><td class="ed-ja">『ラブラバ』</td></tr>
+            <tr><td class="ed-year">1983</td><td class="ed-orig" lang="en">Billingsgate Shoal</td><td class="ed-author"><span class="ed-author__ja">リック・ボイヤー</span><span class="ed-author__en" lang="en">Rick Boyer</span></td><td class="ed-ja">『ケープ・コッド危険水域』</td></tr>
+            <tr><td class="ed-year">1982</td><td class="ed-orig" lang="en">Peregrine</td><td class="ed-author"><span class="ed-author__ja">ウィリアム・ベイヤー</span><span class="ed-author__en" lang="en">William Bayer</span></td><td class="ed-ja">『キラーバード、急襲』</td></tr>
+            <tr><td class="ed-year">1981</td><td class="ed-orig" lang="en">Whip Hand</td><td class="ed-author"><span class="ed-author__ja">ディック・フランシス</span><span class="ed-author__en" lang="en">Dick Francis</span></td><td class="ed-ja">『利腕』</td></tr>
+            <tr><td class="ed-year">1980</td><td class="ed-orig" lang="en">The Rheingold Route</td><td class="ed-author"><span class="ed-author__ja">アーサー・メイリング</span><span class="ed-author__en" lang="en">Arthur Maling</span></td><td class="ed-ja">『ラインゴルト特急の男』</td></tr>
+            <tr id="d1970s"><td class="ed-year">1979</td><td class="ed-orig" lang="en">The Eye of the Needle</td><td class="ed-author"><span class="ed-author__ja">ケン・フォレット</span><span class="ed-author__en" lang="en">Ken Follett</span></td><td class="ed-ja"><a href="#e-eye-of-the-needle">『針の眼』</a><a class="ed-pick" href="#e-eye-of-the-needle">30選</a></td></tr>
+            <tr><td class="ed-year">1978</td><td class="ed-orig" lang="en">Catch Me: Kill Me</td><td class="ed-author"><span class="ed-author__ja">ウィリアム・H・ハラハン</span><span class="ed-author__en" lang="en">William H. Hallahan</span></td><td class="ed-ja">『亡命詩人、雨に消ゆ』</td></tr>
+            <tr><td class="ed-year">1977</td><td class="ed-orig" lang="en">Promised Land</td><td class="ed-author"><span class="ed-author__ja">ロバート・B・パーカー</span><span class="ed-author__en" lang="en">Robert B. Parker</span></td><td class="ed-ja"><a href="#e-promised-land">『約束の地』</a><a class="ed-pick" href="#e-promised-land">30選</a></td></tr>
+            <tr><td class="ed-year">1976</td><td class="ed-orig" lang="en">Hopscotch</td><td class="ed-author"><span class="ed-author__ja">ブライアン・ガーフィールド</span><span class="ed-author__en" lang="en">Brian Garfield</span></td><td class="ed-ja">『ホップスコッチ』</td></tr>
+            <tr><td class="ed-year">1975</td><td class="ed-orig" lang="en">Peter&#x27;s Pence</td><td class="ed-author"><span class="ed-author__ja">ジョン・クリアリー</span><span class="ed-author__en" lang="en">Jon Cleary</span></td><td class="ed-ja">『法王の身代金』</td></tr>
+            <tr><td class="ed-year">1974</td><td class="ed-orig" lang="en">Dance Hall of the Dead</td><td class="ed-author"><span class="ed-author__ja">トニイ・ヒラーマン</span><span class="ed-author__en" lang="en">Tony Hillerman</span></td><td class="ed-ja"><a href="#e-dance-hall-of-the-dead">『死者の舞踏場』</a><a class="ed-pick" href="#e-dance-hall-of-the-dead">30選</a></td></tr>
+            <tr><td class="ed-year">1973</td><td class="ed-orig" lang="en">The Lingala Code</td><td class="ed-author"><span class="ed-author__ja">ウォーレン・キーファー</span><span class="ed-author__en" lang="en">Warren Kiefer</span></td><td class="ed-ja">『リンガラ・コード』</td></tr>
+            <tr><td class="ed-year">1972</td><td class="ed-orig" lang="en">The Day of the Jackal</td><td class="ed-author"><span class="ed-author__ja">フレデリック・フォーサイス</span><span class="ed-author__en" lang="en">Frederick Forsyth</span></td><td class="ed-ja"><a href="#e-day-of-the-jackal">『ジャッカルの日』</a><a class="ed-pick" href="#e-day-of-the-jackal">30選</a></td></tr>
+            <tr><td class="ed-year">1971</td><td class="ed-orig" lang="en">The Laughing Policeman</td><td class="ed-author"><span class="ed-author__ja">マイ・シューヴァル＆ペール・ヴァールー</span><span class="ed-author__en" lang="en">Maj Sjöwall, Per Wahlöö</span></td><td class="ed-ja"><a href="#e-laughing-policeman">『笑う警官』</a><a class="ed-pick" href="#e-laughing-policeman">30選</a></td></tr>
+            <tr><td class="ed-year">1970</td><td class="ed-orig" lang="en">Forfeit</td><td class="ed-author"><span class="ed-author__ja">ディック・フランシス</span><span class="ed-author__en" lang="en">Dick Francis</span></td><td class="ed-ja">『罰金』</td></tr>
+            <tr id="d1960s"><td class="ed-year">1969</td><td class="ed-orig" lang="en">A Case of Need</td><td class="ed-author"><span class="ed-author__ja">ジェフリイ・ハドスン（マイクル・クライトン）</span><span class="ed-author__en" lang="en">Jeffery Hudson（Michael Crichton）</span></td><td class="ed-ja">『緊急の場合は』</td></tr>
+            <tr><td class="ed-year">1968</td><td class="ed-orig" lang="en">God Save the Mark</td><td class="ed-author"><span class="ed-author__ja">ドナルド・E・ウェストレイク</span><span class="ed-author__en" lang="en">Donald E. Westlake</span></td><td class="ed-ja">『我輩はカモである』</td></tr>
+            <tr><td class="ed-year">1967</td><td class="ed-orig" lang="en">The King of the Rainy Country</td><td class="ed-author"><span class="ed-author__ja">ニコラス・フリーリング</span><span class="ed-author__en" lang="en">Nicolas Freeling</span></td><td class="ed-ja">『雨の国の王者』</td></tr>
+            <tr><td class="ed-year">1966</td><td class="ed-orig" lang="en">The Quiller Memorandum</td><td class="ed-author"><span class="ed-author__ja">アダム・ホール</span><span class="ed-author__en" lang="en">Adam Hall</span></td><td class="ed-ja">『不死鳥を倒せ』</td></tr>
+            <tr><td class="ed-year">1965</td><td class="ed-orig" lang="en">The Spy Who Came in from the Cold</td><td class="ed-author"><span class="ed-author__ja">ジョン・ル・カレ</span><span class="ed-author__en" lang="en">John le Carré</span></td><td class="ed-ja"><a href="#e-spy-cold">『寒い国から帰ってきたスパイ』</a><a class="ed-pick" href="#e-spy-cold">30選</a></td></tr>
+            <tr><td class="ed-year">1964</td><td class="ed-orig" lang="en">The Light of Day</td><td class="ed-author"><span class="ed-author__ja">エリック・アンブラー</span><span class="ed-author__en" lang="en">Eric Ambler</span></td><td class="ed-ja">『真昼の翳』</td></tr>
+            <tr><td class="ed-year">1963</td><td class="ed-orig" lang="en">Death and the Joyful Woman</td><td class="ed-author"><span class="ed-author__ja">エリス・ピーターズ</span><span class="ed-author__en" lang="en">Ellis Peters</span></td><td class="ed-ja">『死と陽気な女』</td></tr>
+            <tr><td class="ed-year">1962</td><td class="ed-orig" lang="en">Gideon&#x27;s Fire</td><td class="ed-author"><span class="ed-author__ja">J・J・マリック</span><span class="ed-author__en" lang="en">J. J. Marric</span></td><td class="ed-ja">『ギデオンと放火魔』</td></tr>
+            <tr><td class="ed-year">1961</td><td class="ed-orig" lang="en">The Progress of a Crime</td><td class="ed-author"><span class="ed-author__ja">ジュリアン・シモンズ</span><span class="ed-author__en" lang="en">Julian Symons</span></td><td class="ed-ja">『犯罪の進行』</td></tr>
+            <tr><td class="ed-year">1960</td><td class="ed-orig" lang="en">The Hours Before Dawn</td><td class="ed-author"><span class="ed-author__ja">シーリア・フレムリン</span><span class="ed-author__en" lang="en">Celia Fremlin</span></td><td class="ed-ja"><a href="#e-hours-before-dawn">『夜明け前の時』</a><a class="ed-pick" href="#e-hours-before-dawn">30選</a></td></tr>
+            <tr id="d1950s"><td class="ed-year">1959</td><td class="ed-orig" lang="en">The Eighth Circle</td><td class="ed-author"><span class="ed-author__ja">スタンリイ・エリン</span><span class="ed-author__en" lang="en">Stanley Ellin</span></td><td class="ed-ja">『第八の地獄』</td></tr>
+            <tr><td class="ed-year">1958</td><td class="ed-orig" lang="en">Room to Swing</td><td class="ed-author"><span class="ed-author__ja">エド・レイシイ</span><span class="ed-author__en" lang="en">Ed Lacy</span></td><td class="ed-ja">『ゆがめられた昨日』</td></tr>
+            <tr><td class="ed-year">1957</td><td class="ed-orig" lang="en">A Dram of Poison</td><td class="ed-author"><span class="ed-author__ja">シャーロット・アームストロング</span><span class="ed-author__en" lang="en">Charlotte Armstrong</span></td><td class="ed-ja">『毒薬の小壜』</td></tr>
+            <tr><td class="ed-year">1956</td><td class="ed-orig" lang="en">Beast in View</td><td class="ed-author"><span class="ed-author__ja">マーガレット・ミラー</span><span class="ed-author__en" lang="en">Margaret Millar</span></td><td class="ed-ja"><a href="#e-beast-in-view">『狙った獣』</a><a class="ed-pick" href="#e-beast-in-view">30選</a></td></tr>
+            <tr><td class="ed-year">1955</td><td class="ed-orig" lang="en">The Long Goodbye</td><td class="ed-author"><span class="ed-author__ja">レイモンド・チャンドラー</span><span class="ed-author__en" lang="en">Raymond Chandler</span></td><td class="ed-ja"><a href="#e-long-goodbye">『長いお別れ』</a><a class="ed-pick" href="#e-long-goodbye">30選</a></td></tr>
+            <tr><td class="ed-year">1954</td><td class="ed-orig" lang="en">Beat Not the Bones</td><td class="ed-author"><span class="ed-author__ja">シャーロット・ジェイ</span><span class="ed-author__en" lang="en">Charlotte Jay</span></td><td class="ed-ja">『死の月』</td></tr>
           </tbody>
         </table>
       </div>
