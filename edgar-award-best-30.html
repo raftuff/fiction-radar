@@ -235,23 +235,6 @@
     .ed-latest__label { font-family: var(--font-round); font-weight: 900; color: #176b75; }
     .ed-order { font-family: var(--font-round); font-weight: 800; font-size: .84rem; color: #176b75; margin: 0 0 6px; }
     .ed-order::before { content: "↓ "; }
-    /* 書影でたどる歴代受賞作：PCは6作を横並び、SPは2列 */
-    .ed-mini { margin: 6px 0 30px; padding: 18px 18px 20px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; }
-    .art-content .ed-mini__head { font-family: var(--font-round); font-weight: 900; font-size: 1.08rem; margin: 0 0 4px; }
-    .ed-mini__lead { font-size: .86rem; color: var(--ink-soft); line-height: 1.7; margin: 0 0 14px; }
-    .ed-mini__list { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
-    .ed-mini__card { display: flex; flex-direction: column; height: 100%; color: var(--ink); border-radius: 8px; transition: transform .15s; }
-    .ed-mini__card:hover { transform: translateY(-2px); }
-    .ed-mini__card:hover .ed-mini__title { color: var(--accent); }
-    .ed-mini__card:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
-    .ed-mini__year { font-family: var(--font-round); font-weight: 900; font-size: 1.05rem; color: #176b75; line-height: 1.2; margin: 0 0 6px; }
-    /* 書影の枠を同じ縦横比にそろえ、表紙は切らずに枠の下端へ寄せる（作品名の位置をそろえるため） */
-    .ed-mini__cover { display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 2 / 3; margin: 0 0 8px; }
-    .ed-mini__cover img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 4px; box-shadow: 0 3px 10px rgba(60,45,30,.16); background: #f0ece3; }
-    .ed-mini__cover .no-cover { height: 100%; aspect-ratio: auto; }
-    .ed-mini__title { font-family: var(--font-round); font-weight: 900; font-size: .86rem; line-height: 1.45; overflow-wrap: anywhere; transition: color .15s; }
-    .ed-mini__author { font-size: .74rem; color: var(--ink-soft); line-height: 1.5; margin-top: 2px; overflow-wrap: anywhere; }
-    .ed-mini__label { align-self: flex-start; margin-top: 6px; font-size: .68rem; font-weight: 700; line-height: 1.45; color: #1f6f6c; background: #fff; border: 1px solid rgba(46,163,160,.4); border-radius: 6px; padding: 1px 6px; }
     /* 30選の作品カード：上段＝書影＋作品名・著者・受賞年・キャッチ・タグ、下段＝あらすじ以降を全幅で */
     .ed-card { padding: 26px 0; border-top: 1px solid var(--line); scroll-margin-top: 124px; }
     .ed-card:first-child, .ed-theme + .ed-card { border-top: 0; }
@@ -350,9 +333,6 @@
       .ed-card .nm-tags { gap: 4px; }
       .ed-card .nm-tag { font-size: .7rem; padding: 2px 8px; }
       .ed-chips a { min-height: 40px; }
-      .ed-mini { padding: 14px 14px 16px; }
-      .ed-mini__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
-      .ed-mini__cover { width: 78%; }
       .ed-theme { margin-top: 52px; font-size: 1.22rem; }
       .ed-wl__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
       .ed-wl__cover { width: 82%; }
@@ -1073,18 +1053,6 @@
         </article>
       </div>
 
-      <section class="ed-mini" aria-labelledby="ed-mini-title">
-        <h3 class="ed-mini__head" id="ed-mini-title">書影でたどる歴代受賞作</h3>
-        <p class="ed-mini__lead">時代も作風も異なる6作を、受賞年の古い順に。気になった作品は、カードから紹介へ移動できます。</p>
-        <ol class="ed-mini__list">
-          <li><a class="ed-mini__card" href="#e-long-goodbye"><span class="ed-mini__year">1955</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610290.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『長いお別れ』</span><span class="ed-mini__author">レイモンド・チャンドラー</span><span class="ed-mini__label">私立探偵小説</span></a></li>
-          <li><a class="ed-mini__card" href="#e-day-of-the-jackal"><span class="ed-mini__year">1972</span><span class="ed-mini__cover"><img src="https://cdn.kdkw.jp/cover_500/322207/322207000620.webp" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『ジャッカルの日』</span><span class="ed-mini__author">フレデリック・フォーサイス</span><span class="ed-mini__label">暗殺スリラー</span></a></li>
-          <li><a class="ed-mini__card" href="#e-old-bones"><span class="ed-mini__year">1988</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/610894.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『古い骨』</span><span class="ed-mini__author">アーロン・エルキンズ</span><span class="ed-mini__label">本格謎解き</span></a></li>
-          <li><a class="ed-mini__card" href="#e-sculptress"><span class="ed-mini__year">1994</span><span class="ed-mini__cover"><img src="https://www.tsogen.co.jp/img/cover_image_l/18714.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『女彫刻家』</span><span class="ed-mini__author">ミネット・ウォルターズ</span><span class="ed-mini__label">英国心理ミステリ</span></a></li>
-          <li><a class="ed-mini__card" href="#e-bluebird-bluebird"><span class="ed-mini__year">2018</span><span class="ed-mini__cover"><img src="https://www.hayakawa-online.co.jp/img/goods/L/612615.jpg" alt="" loading="lazy" decoding="async" /></span><span class="ed-mini__title">『ブルーバード、ブルーバード』</span><span class="ed-mini__author">アッティカ・ロック</span><span class="ed-mini__label">社会派犯罪小説</span></a></li>
-          <li><a class="ed-mini__card" href="#e-notes-on-an-execution"><span class="ed-mini__year">2023</span><span class="ed-mini__cover"><span class="no-cover" aria-hidden="true"><span class="no-cover__title">死刑執行のノート</span><span class="no-cover__rule"></span><span class="no-cover__author">ダニヤ・クカフカ</span><span class="no-cover__note">書影準備中</span></span></span><span class="ed-mini__title">『死刑執行のノート』</span><span class="ed-mini__author">ダニヤ・クカフカ</span><span class="ed-mini__label">複数視点の犯罪小説</span></a></li>
-        </ol>
-      </section>
       <h2 id="winners">エドガー賞 最優秀長編賞 歴代受賞作一覧（1954〜2026年）</h2>
       <p>1954年の第1回から2026年までの受賞作を、新しい順にすべて掲載しました（全73作）。邦題が確認できた作品は72作です。「30選」の印がある作品は、カードから作品紹介へ移動できます。</p>
       <nav class="ed-chips ed-chips--decade" aria-label="年代で移動">
