@@ -175,6 +175,8 @@
     .nm-card .nm-card__label { display: table; margin: 0 0 1px; } /* 本文の行間（上側の余白 約7px）と合わせて、見た目の間隔を6〜8pxに */
     /* 本文段落：PCは全角約40字で折り返し、左揃え。スマホは表示幅で自然に折り返す */
     .nm-card .nm-card__text, .nm-card .nm-card__why { max-inline-size: 40ic; text-align: start; }
+    /* 下段全体（書誌の枠・リンクを含む）も本文と同じ幅に。ic は下段の文字サイズ（本文と同じ17px）が基準 */
+    .nm-card .nm-card__bottom { font-size: 17px; max-inline-size: 40ic; }
     /* キャッチを最上段（書影の左端にそろえる）→ 中段（書影＋作品名・著者｜国・タグ）→ 下段 */
     .nm-card--v2 .nm-card__catch { font-size: 1.05rem; font-weight: 800; color: #4a4540; line-height: 1.5; margin: 0 0 10px; }
     .nm-card--v2 .nm-card__title { margin: 0 0 6px; }
@@ -329,6 +331,7 @@
       .nm-card__title .sp-br { display: inline; }
       .nm-card__catch { font-size: .86rem; line-height: 1.55; margin-bottom: 8px; }
       .nm-card--v2 .nm-card__catch { font-size: .95rem; margin-bottom: 8px; }
+      .nm-card .nm-card__bottom { font-size: 1rem; }
       .nm-card--v2 .nm-card__meta { margin-bottom: 8px; }
       .nm-card .nm-tags { gap: 4px; }
       .nm-card .nm-tag { font-size: .7rem; padding: 2px 8px; }
