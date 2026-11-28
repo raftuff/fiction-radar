@@ -263,7 +263,12 @@
     .art-content .ed-wl__head { font-family: var(--font-round); font-weight: 900; font-size: 1.12rem; color: #176b75; margin: 30px 0 14px; padding: 0 0 6px; border-bottom: 1px solid var(--accent-3); scroll-margin-top: 124px; }
     .art-content .ed-wl__head:first-child { margin-top: 10px; }
     .ed-wl__head span { font-size: .8rem; font-weight: 700; color: var(--ink-soft); margin-left: 6px; }
-    .ed-wl__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px 14px; margin: 0; padding: 0; list-style: none; }
+    .ed-wl__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0 -12px; padding: 0; list-style: none; }
+    /* うっすらしたグリッド線（カードの間だけに引く。外周には引かない） */
+    .ed-wl__list > li { padding: 16px 12px 18px; }
+    .ed-wl__list > li:nth-child(-n+5) { padding-top: 4px; }
+    .ed-wl__list > li:nth-child(n+6) { border-top: 1px solid #ece4d6; }
+    .ed-wl__list > li:not(:nth-child(5n+1)) { box-shadow: inset 1px 0 0 #ece4d6; } /* 縦線は幅を取らない影で（書影枠の幅・高さを全列でそろえるため） */
     .ed-wl__card { display: flex; flex-direction: column; height: 100%; color: var(--ink); border-radius: 8px; }
     a.ed-wl__card { transition: transform .15s; }
     a.ed-wl__card:hover { transform: translateY(-2px); }
@@ -336,7 +341,11 @@
       .ed-card .nm-tag { font-size: .7rem; padding: 2px 8px; }
       .ed-chips a { min-height: 40px; }
       .ed-theme { margin-top: 52px; font-size: 1.22rem; }
-      .ed-wl__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
+      .ed-wl__list { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 -10px; }
+      .ed-wl__list > li:nth-child(n) { padding: 14px 10px 16px; border-top: 0; box-shadow: none; }
+      .ed-wl__list > li:nth-child(-n+2) { padding-top: 4px; }
+      .ed-wl__list > li:nth-child(n+3) { border-top: 1px solid #ece4d6; }
+      .ed-wl__list > li:not(:nth-child(2n+1)) { box-shadow: inset 1px 0 0 #ece4d6; }
       .ed-wl__cover { width: 82%; }
       .ed-wl__title { font-size: .9rem; }
       .ed-wl__author { font-size: .78rem; }
